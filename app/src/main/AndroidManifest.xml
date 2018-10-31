@@ -30,11 +30,8 @@
             tools:ignore="DuplicateActivity" />
         <activity android:name=".Medarbejdere" />
         <activity android:name=".NewUserScreen" />
-        <activity
-            android:name=".ScrollingActivity"
-            android:label="@string/title_activity_scrolling" />
-        <activity android:name=".Test" />
-        <activity android:name=".Teeeeeeest"></activity>
+        <activity android:name=".Teeeeeeest" />
+        <activity android:name=".NewUserV2"></activity>
     </application>
 
 </manifest>
