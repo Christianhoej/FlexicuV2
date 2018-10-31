@@ -34,7 +34,8 @@
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling" />
         <activity android:name=".Test" />
-        <activity android:name=".Teeeeeeest"></activity>
+        <activity android:name=".Teeeeeeest" />
+        <activity android:name=".Medarbejder"></activity>
     </application>
 
 </manifest>
