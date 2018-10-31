@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".Medarbejdere">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/white"
+        tools:context=".Medarbejdere"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="204dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="182dp"
-        android:text="Dette er medarbejdere"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/white"/>
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/flexicu_logo"
+                android:layout_marginVertical="10dp"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:text="Medarbejdere"
+                android:textAlignment="center"
+                android:textSize="40sp" />
+
+            <Button
+                android:id="@+id/ny_medarbejder"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:background="@color/flex_blue"
+                android:fontFamily="sans-serif"
+                android:text="Tilføj ny medarbejder"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/medarbejder1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:background="@color/flex_green"
+                android:drawableLeft="@drawable/ic_menu_camera"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/white"
+                android:text="Søren Poulsen \nKøn: mand    Arbejdsområde: Smed"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>

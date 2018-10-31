@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Medarbejder">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_oplysninger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="Oplysninger"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/editText_navn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:ems="10"
+            android:hint="Navn"
+            android:inputType="textPersonName"
+            android:text="Søren Poulsen" />
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:text="søren@gmail.com" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText_tlf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Tlf."
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editText_cpr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="CPR-nummer"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_køn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:text="Køn"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBox_mand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:text="Mand"
+                android:textAlignment="textStart" />
+
+            <CheckBox
+                android:id="@+id/checkBox_kvinde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:text="Kvinde"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_arbejdsområder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Arbejdsområder"
+            android:layout_marginVertical="5dp"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinner_arbejdsområde"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView_arbejdsområder2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:text="Fødselsdato"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinner_fødselsdato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
