@@ -39,7 +39,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void openNewUserScreen(){
-        Intent intent = new Intent(this, NewUserScreen.class);
+        Intent intent = new Intent(this, NewUserV2.class);
         startActivity(intent);
     }
 
