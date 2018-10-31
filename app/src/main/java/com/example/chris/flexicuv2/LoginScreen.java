@@ -39,13 +39,13 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void openNewUserScreen(){
-        Intent intent = new Intent(this, NewUserScreen.class);
+        Intent intent = new Intent(this, NewUserV2.class);
         startActivity(intent);
     }
 
     @Override
     public void onClick(View v) {
-        boolean rightInput = true;
+      /*  boolean rightInput = true;
         // If the login button is pressed
         if(v.getId() == logIn.getId()){
             // If the email edittext is not empty
@@ -76,7 +76,15 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         // if the new user button is pressed
         else if(v.getId() == newUser.getId()){
             openNewUserScreen();
-        }
+        }*/
+
+      if(v.getId() == logIn.getId()){
+          openStartScreen();
+      }
+      else{
+          openNewUserScreen();
+      }
+
     }
 
 

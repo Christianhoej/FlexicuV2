@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".NewUserScreen">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/flexicu_logo" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opret bruger"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Virksomhedsoplysninger"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/companyCVR"
+                android:layout_width="91dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="CVR"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/companyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Virksomhedsnavn"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/companyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Adresse"
+            android:inputType="textPersonName" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/companyZipCode"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Postnr"
+                android:inputType="number" />
+
+
+            <TextView
+                android:id="@+id/companyCity"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:inputType="textPersonName"
+                android:text="By"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kontaktoplysninger"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/contactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Fulde navn"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/contactEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Privat email"
+            android:inputType="textPersonName" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/contactPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Tlf"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/contactTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Tittel"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log ind oplysninger"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/logOnEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="E-mail"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/logOnEmailRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Gentag e-mail"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/logOnPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Kodeord"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/logOnPasswordRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Gentag kodeord"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privatoplysninger"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.3" />
+
+            <CheckBox
+                android:id="@+id/checkPrivate"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Privat" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.2" />
+
+            <CheckBox
+                android:id="@+id/checkPublic"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Offentlig" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.3" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkFormalities"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Jeg har læst og forstået betingelserne">
+        </CheckBox>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.3" />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="#707070"
+                android:text="Annuller"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.3" />
+
+            <Button
+                android:id="@+id/createUserBtn"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#427d3c"
+                android:text="Opret bruger"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.3" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</ScrollView>
+
