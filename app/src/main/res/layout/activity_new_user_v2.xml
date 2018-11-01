@@ -234,7 +234,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:text="Jeg har læst og forstået betingelserne">
+            android:text="JA, jeg har læst, forstået og \naccepterer betingelserne">
         </CheckBox>
 
         <LinearLayout

@@ -87,7 +87,7 @@ public class NewUserV2 extends AppCompatActivity implements View.OnClickListener
         checkPublic = findViewById(R.id.checkPublic);
         checkPublic.setText("Offentlig");
         checkFormalities = findViewById(R.id.checkFormalities);
-        checkFormalities.setText("Jeg har læst og forstået betingelserne");
+        //checkFormalities.setText("JA, jeg har læst, forstået og accepterer betingelserne");
 
         createUserBtn = findViewById(R.id.createUserBtn);
         createUserBtn.setOnClickListener(this);
