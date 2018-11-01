@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Medarbejdere extends AppCompatActivity implements View.OnClickListener {
@@ -15,15 +16,17 @@ public class Medarbejdere extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medarbejdere);
 
-        TextView Søren = (TextView) findViewById(R.id.medarbejder1);
-        Søren.setOnClickListener(this);
+        LinearLayout søren = (LinearLayout) findViewById(R.id.søren_layout);
+        søren.setOnClickListener(this);
+       /* TextView Søren = (TextView) findViewById(R.id.medarbejder1);
+        Søren.setOnClickListener(this);*/
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.medarbejder1:
+            case R.id.søren_layout:
             openMedarbejder();
         }
 
