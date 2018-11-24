@@ -32,6 +32,7 @@ public class Startskaerm extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TestDB2 db = new TestDB2(getFilesDir());
     }
 
     @Override
