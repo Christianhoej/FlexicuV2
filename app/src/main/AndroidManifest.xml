@@ -33,8 +33,13 @@
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling" />
-        <activity android:name=".Teeeeeeest" />
-        <activity android:name=".Medarbejder"></activity>
+        <activity android:name=".Medarbejder" />
+        <activity
+            android:name=".Indlejninger"
+            android:label="@string/title_activity_indlejninger" />
+        <activity android:name=".Udlej" />
+        <activity android:name=".Lej" />
+        <activity android:name=".Indbakke"></activity>
     </application>
 
 </manifest>
