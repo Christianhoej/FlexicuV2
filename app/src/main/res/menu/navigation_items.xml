@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Hjem" />
+
+    <item
+        android:id="@+id/nav_lej"
+        android:icon="@drawable/ic_person_add_black_24dp"
+        android:title="Lej" />
+
+    <item
+        android:id="@+id/nav_udlej"
+        android:icon="@drawable/ic_transfer_within_a_station_black_24dp"
+        android:title="Udlej" />
+
+    <item
+        android:id="@+id/nav_indbakke"
+        android:icon="@drawable/ic_chat_black_24dp"
+        android:title="Indbakke" />
+
+
+</menu>
