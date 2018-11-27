@@ -46,7 +46,6 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         menuItem.setChecked(true);
          */
 
-
         //startskaermFrame = (FrameLayout) findViewById(R.id.startskaermFrame);
         startskaermNav = findViewById(R.id.startskaerm_nav);
         startskaermNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,7 +53,6 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        openSkaerm(Startskaerm.class);
                         return true;
                     case R.id.nav_udlej:
                         openSkaerm(Udlej.class);
@@ -115,7 +113,4 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 }
