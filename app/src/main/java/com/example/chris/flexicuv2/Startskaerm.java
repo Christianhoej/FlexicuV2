@@ -31,7 +31,6 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -46,6 +45,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
          */
+
 
         //startskaermFrame = (FrameLayout) findViewById(R.id.startskaermFrame);
         startskaermNav = findViewById(R.id.startskaerm_nav);
