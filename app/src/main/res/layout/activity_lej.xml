@@ -6,17 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Lej">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/startskaerm_nav"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/flex_green"
-        app:itemIconTint="@color/nav_item_colors"
-        app:itemTextColor="@color/nav_item_colors"
-        app:menu="@menu/navigation_items"
-        app:labelVisibilityMode="labeled">
-    </android.support.design.widget.BottomNavigationView>
+
+    <include layout="@layout/activity_startskaerm"/>
 
     <TextView
         android:layout_width="match_parent"
