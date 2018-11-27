@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.chris.flexicuv2.model.Test;
 import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -37,9 +38,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
         password = findViewById(R.id.passwordInput);
         password.setHint("Indtast adgangskode");
-
-
-
+        Test test = new Test();
     }
 
     public void openStartScreen(){
