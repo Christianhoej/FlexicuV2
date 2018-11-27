@@ -2,12 +2,23 @@ package com.example.chris.flexicuv2.model;
 
 public class Bruger {
     private String email;
-    private String fornavn;
-    private String efternavn;
+    private String navn;
     private String tlfnr;
     private String kodeord;
-    private String admin;
+    private boolean admin;
     private String titel;
+    private String brugerKey;
+
+
+    public String getBrugerKey() {
+        return brugerKey;
+    }
+
+    public void setBrugerKey(String brugerKey) {
+        this.brugerKey = brugerKey;
+    }
+
+
 
     public String getEmail() {
         return email;
@@ -17,20 +28,12 @@ public class Bruger {
         this.email = email;
     }
 
-    public String getFornavn() {
-        return fornavn;
+    public String getNavn() {
+        return navn;
     }
 
-    public void setFornavn(String fornavn) {
-        this.fornavn = fornavn;
-    }
-
-    public String getEfternavn() {
-        return efternavn;
-    }
-
-    public void setEfternavn(String efternavn) {
-        this.efternavn = efternavn;
+    public void setNavn(String navn) {
+        this.navn = navn;
     }
 
     public String getTlfnr() {
@@ -49,11 +52,11 @@ public class Bruger {
         this.kodeord = kodeord;
     }
 
-    public String getAdmin() {
+    public boolean isAdmin() {
         return admin;
     }
 
-    public void setAdmin(String admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
 

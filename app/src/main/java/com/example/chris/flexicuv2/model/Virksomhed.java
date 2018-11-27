@@ -1,14 +1,23 @@
 package com.example.chris.flexicuv2.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Virksomhed {
 
-    private String virksomhedID;
+    private String virksomhedCVR;
+    private String virksomhedKey;
     private String virksomhedsnavn, adresse, postnr;
     private ArrayList<Bruger> brugere = new ArrayList<Bruger>();
     private ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
+
+
+    public String getVirksomhedKey() {
+        return virksomhedKey;
+    }
+
+    public void setVirksomhedKey(String virksomhedKey) {
+        this.virksomhedKey = virksomhedKey;
+    }
 
 
     public void setVirksomhedsnavn(String virksomhedsnavn) {
@@ -19,12 +28,12 @@ public class Virksomhed {
         return virksomhedsnavn;
     }
 
-    public void setVirksomhedID(String virksomhedID) {
-        this.virksomhedID = virksomhedID;
+    public void setVirksomhedCVR(String virksomhedCVR) {
+        this.virksomhedCVR = virksomhedCVR;
     }
 
-    public String getVirksomhedID() {
-        return virksomhedID;
+    public String getVirksomhedCVR() {
+        return virksomhedCVR;
     }
 
     public void setAdresse(String adresse) {
@@ -58,4 +67,21 @@ public class Virksomhed {
     public void removeMedarbejdere(Medarbejder medarbejder){
         medarbejdere.remove(medarbejder);
     }
+
+    public ArrayList<Bruger> getBrugere() {
+        return brugere;
+    }
+
+    public void setBrugere(ArrayList<Bruger> brugere) {
+        this.brugere = brugere;
+    }
+
+    public ArrayList<Medarbejder> getMedarbejdere() {
+        return medarbejdere;
+    }
+
+    public void setMedarbejdere(ArrayList<Medarbejder> medarbejdere) {
+        this.medarbejdere = medarbejdere;
+    }
+
 }

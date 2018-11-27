@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.chris.flexicuv2">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -30,9 +30,6 @@
             tools:ignore="DuplicateActivity" />
         <activity android:name=".Medarbejdere" />
         <activity android:name=".NewUserV2" />
-        <activity
-            android:name=".ScrollingActivity"
-            android:label="@string/title_activity_scrolling" />
         <activity android:name=".Teeeeeeest" />
         <activity android:name=".Medarbejder" />
         <activity android:name=".TestDB"></activity>

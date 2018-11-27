@@ -85,14 +85,14 @@
                 android:inputType="number" />
 
 
-            <TextView
+            <EditText
                 android:id="@+id/companyCity"
                 android:layout_width="220dp"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:gravity="center_vertical"
                 android:inputType="textPersonName"
-                android:text="By"
+                android:hint="By"
                 android:textSize="18sp" />
         </LinearLayout>
 

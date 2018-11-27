@@ -1,5 +1,6 @@
 package com.example.chris.flexicuv2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,11 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
     private Button logIn;
@@ -31,6 +37,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
         password = findViewById(R.id.passwordInput);
         password.setHint("Indtast adgangskode");
+
+
+
     }
 
     public void openStartScreen(){
