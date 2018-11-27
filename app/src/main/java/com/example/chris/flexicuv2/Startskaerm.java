@@ -39,6 +39,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         /*
         Til at highlighte
         Menu menu = navigationView.getMenu();
