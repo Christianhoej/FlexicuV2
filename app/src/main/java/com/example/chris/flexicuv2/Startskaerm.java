@@ -12,19 +12,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-<<<<<<< HEAD:app/src/main/java/com/example/chris/flexicuv2/Startskaerm_akt.java
-=======
 
-import com.example.chris.flexicuv2.Medarbejdere.Medarbejdere;
->>>>>>> 2c3542bfa65595afaf952f0e7a19b3503ab99d2f:app/src/main/java/com/example/chris/flexicuv2/Startskaerm.java
 
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;
 import com.example.chris.flexicuv2.fragments.Indbakke_fragment;
-import com.example.chris.flexicuv2.fragments.Lej_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_lejede_Medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Udlej_Fragment;
 
-public class Startskaerm_akt extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView startskaermNav;
     private String valg;
@@ -68,7 +63,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-<<<<<<< HEAD:app/src/main/java/com/example/chris/flexicuv2/Startskaerm_akt.java
                         setTitle("Hjem");
                         Startskaerm_Udlejede_medarbejder_fragment fragmentUdlej = new Startskaerm_Udlejede_medarbejder_fragment();
                         Startskaerm_lejede_Medarbejdere_fragment fragmentLej = new Startskaerm_lejede_Medarbejdere_fragment();
@@ -78,8 +72,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
                         fragTrans_hjem.commit();
 
                         //openSkaerm(Startskaerm_akt.class);
-=======
->>>>>>> 2c3542bfa65595afaf952f0e7a19b3503ab99d2f:app/src/main/java/com/example/chris/flexicuv2/Startskaerm.java
                         return true;
                     case R.id.nav_udlej:
                         setTitle("Udlej");
@@ -90,12 +82,12 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
                        // openSkaerm(Udlej_akt.class);
                         return true;
                     case R.id.nav_lej:
-                        setTitle("Lej");
+                        /*setTitle("Lej");
                         Lej_fragment fragment2 = new Lej_fragment();
                         FragmentTransaction fragTrans_lej = getSupportFragmentManager().beginTransaction();
                         fragTrans_lej.replace(R.id.startskaermUdlejFrame, fragment2);
-                        fragTrans_lej.commit();
-                       // openSkaerm(Udlej_akt.class);
+                        fragTrans_lej.commit();*/
+                        openSkaerm(Udlej_akt.class);
                         return true;
                     case R.id.nav_indbakke:
                         setTitle("Indbakke");
@@ -114,7 +106,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
 
     public void openSkaerm(Class a){
         Intent intent = new Intent(this,a);
-
         startActivity(intent);
     }
 
@@ -139,7 +130,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         int id = item.getItemId();
 
         if (id == R.id.medarbejdere) {
-            openSkaerm(Medarbejdere_akt.class);
+            openSkaerm(Medarbejdere.class);
         } else if (id == R.id.søg) {
 
         } else if (id == R.id.indstillinger) {
