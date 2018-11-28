@@ -1,6 +1,6 @@
 package com.example.chris.flexicuv2.model;
 
-public class Medarbejder {
+public class Medarbejder implements Comparable<Medarbejder>{
     private String medarbejderID;
     private String navn;
     private String hjemmeAdresse;
@@ -9,6 +9,8 @@ public class Medarbejder {
     private String arbejdsPostnr;
     private int loen;
     private String tlfnr;
+    private String periode;
+    private String arbejdsomraade;
 
     public String getMedarbejderID() {
         return medarbejderID;
@@ -72,5 +74,26 @@ public class Medarbejder {
 
     public void setTlfnr(String tlfnr) {
         this.tlfnr = tlfnr;
+    }
+
+    public void setPeriode(String periode){
+        this.periode=periode;
+    }
+
+    public String getPeriode(){
+        return periode;
+    }
+
+    public String getArbejdsomraade() {
+        return arbejdsomraade;
+    }
+
+    public void setArbejdsomraade(String arbejdsomraade) {
+        this.arbejdsomraade = arbejdsomraade;
+    }
+
+    @Override
+    public int compareTo(Medarbejder o) {
+        return navn.compareToIgnoreCase(o.getNavn());
     }
 }

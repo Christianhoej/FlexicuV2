@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class Medarbejder extends AppCompatActivity {
+public class Medarbejder_akt extends AppCompatActivity {
 
     //Spinner arbejsområder;
     //Spinner dato;

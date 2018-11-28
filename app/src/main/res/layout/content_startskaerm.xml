@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Startskaerm"
+    tools:context=".Startskaerm_akt"
     >
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tools:showIn='@layout/activity_startskaerm'"
@@ -32,12 +32,25 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/startskaermFrame"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:id="@+id/startskaermUdlejFrame">
+        </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/startskaermUdlejFrame"
+            android:id="@+id/startskaermLejFrame">
+        </FrameLayout>
 
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/startskaermLejFrame"
+            android:id="@+id/startskaermAlleFrame">
         </FrameLayout>
 
     </RelativeLayout>

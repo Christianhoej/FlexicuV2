@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Medarbejdere extends AppCompatActivity implements View.OnClickListener {
+public class Medarbejdere_akt extends AppCompatActivity implements View.OnClickListener {
 
     TextView Søren;
 
@@ -33,7 +33,7 @@ public class Medarbejdere extends AppCompatActivity implements View.OnClickListe
     }
 
     private void openMedarbejder() {
-        Intent intent = new Intent(this, Medarbejder.class);
+        Intent intent = new Intent(this, Medarbejder_akt.class);
         startActivity(intent);
     }
 }

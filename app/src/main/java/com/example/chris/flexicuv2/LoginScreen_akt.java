@@ -1,22 +1,16 @@
 package com.example.chris.flexicuv2;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chris.flexicuv2.model.Test;
-import com.google.firebase.FirebaseApiNotAvailableException;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
+public class LoginScreen_akt extends AppCompatActivity implements View.OnClickListener {
     private Button logIn;
     private Button newUser;
     private EditText username;
@@ -42,12 +36,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void openStartScreen(){
-        Intent intent = new Intent(this, Startskaerm.class);
+        Intent intent = new Intent(this, Startskaerm_akt.class);
         startActivity(intent);
     }
 
     public void openNewUserScreen(){
-        Intent intent = new Intent(this, NewUserV2.class);
+        Intent intent = new Intent(this, NewUser_akt.class);
         startActivity(intent);
     }
 
