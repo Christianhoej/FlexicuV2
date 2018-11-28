@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class NewUserV2 extends AppCompatActivity implements View.OnClickListener{
+public class NewUser_akt extends AppCompatActivity implements View.OnClickListener{
     private EditText companyCVR, companyName, companyAddress, companyZipCode;
     private TextView companyCity;
     private EditText contactName, contactEmail, contactPhone, contactTitle;
@@ -131,7 +131,7 @@ public class NewUserV2 extends AppCompatActivity implements View.OnClickListener
     }
 
     public void openLoginScreen(){
-        Intent intent = new Intent(this, LoginScreen.class);
+        Intent intent = new Intent(this, LoginScreen_akt.class);
         startActivity(intent);
     }
 }

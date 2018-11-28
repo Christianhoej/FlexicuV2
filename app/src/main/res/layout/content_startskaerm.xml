@@ -22,36 +22,27 @@
             app:labelVisibilityMode="labeled">
         </android.support.design.widget.BottomNavigationView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tools:showIn='@layout/activity_startskaerm'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Udlejede medarbejdere"
-            android:layout_gravity=""
-            android:textSize="20dp"
-            />
-
-
-    </LinearLayout>
-
-
-    <!--
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/startskaermFrame"
-
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:id="@+id/startskaermUdlejFrame">
         </FrameLayout>
-    -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/startskaermUdlejFrame"
+            android:id="@+id/startskaermLejFrame">
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/startskaermLejFrame"
+            android:id="@+id/startskaermAlleFrame">
+        </FrameLayout>
+
     </RelativeLayout>

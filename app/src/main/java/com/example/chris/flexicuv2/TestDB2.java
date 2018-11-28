@@ -57,7 +57,7 @@ public class TestDB2 {
 
                 "CONSTRAINT fk_Medarbejder_Virksomhed " +
                     "FOREIGN KEY('MedarbejderID')" +
-                    "REFERENCES 'Medarbejder'('MedarbejderID'))");
+                    "REFERENCES Medarbejder_akt('MedarbejderID'))");
 
 
         db.execSQL("CREATE TABLE IF NOT EXISTS 'AftaleIndhold' (" +

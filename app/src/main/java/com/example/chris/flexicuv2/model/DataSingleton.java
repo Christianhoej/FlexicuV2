@@ -21,4 +21,5 @@ public class DataSingleton {
     public static DataSingleton getInstance(){
         return INSTANCE;
     }
+
 }
