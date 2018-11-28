@@ -3,18 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Lej_filtrer">
+    tools:context="Indlejninger.Lej_filtrer"
+    >
 
    <ScrollView
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <ImageView
+               android:layout_width="250dp"
+               android:layout_height="60dp"
+               android:layout_gravity="center"
+               android:background="@drawable/flexicu_logo"/>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="20dp"
+               android:text="Vælg ønskede arbejdsområde(r)"
+               android:layout_marginVertical="5dp"/>
+
+           <Indlejninger.MultiSelectionSpinner
+               android:id="@+id/input1"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="2dp"/>
+
+
+       <!--
        <android.support.v7.widget.RecyclerView
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:id="@+id/listRecyclerView"
            android:layout_marginVertical="20dp"/>
+        -->
 
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="20dp"
+           android:text="Hvornår mangler du arbejdskraft?"
+           android:layout_marginVertical="5dp"/>
+       <CalendarView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center">
+       </CalendarView>
+
+
+
+       </LinearLayout>
    </ScrollView>
 
 </FrameLayout>

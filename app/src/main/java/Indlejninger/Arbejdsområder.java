@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2;
+package Indlejninger;
 
 public class Arbejdsområder {
 

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Lej">
+    tools:context="Indlejninger.Lej"
+    android:background="@color/hvid"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -38,6 +40,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/filtrer_frame"></FrameLayout>
+        android:id="@+id/filtrer_frame"
 
-</FrameLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+    </FrameLayout>
+
+</RelativeLayout>

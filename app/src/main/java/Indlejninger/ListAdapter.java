@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2;
+package Indlejninger;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+
+import com.example.chris.flexicuv2.R;
 
 public class ListAdapter extends RecyclerView.Adapter{
 

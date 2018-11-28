@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2;
+package Medarbejdere;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.chris.flexicuv2.R;
 
 public class Medarbejdere extends AppCompatActivity implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2;
+package Indlejninger;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import com.example.chris.flexicuv2.R;
 
 public class Lej extends AppCompatActivity implements View.OnClickListener {
 
@@ -17,10 +19,13 @@ public class Lej extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lej);
+
+        filtrerFrame = (FrameLayout) findViewById(R.id.filtrer_frame);
+
         Button filtrer = (Button) findViewById(R.id.filtrer_knap);
         filtrer.setOnClickListener(this);
 
-        filtrerFrame = (FrameLayout) findViewById(R.id.filtrer_frame);
+
 
         filtrerFragment = new Lej_filtrer();
 
@@ -28,7 +33,7 @@ public class Lej extends AppCompatActivity implements View.OnClickListener {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        
+
         }
 
 
