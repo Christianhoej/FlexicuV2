@@ -1,4 +1,4 @@
-package Medarbejdere;
+package com.example.chris.flexicuv2.Medarbejdere;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

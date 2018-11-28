@@ -1,4 +1,4 @@
-package Indlejninger;
+package com.example.chris.flexicuv2.Indlejninger;
 
 /*
 Denne kode er taget fra
@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import java.util.Arrays;
 import java.util.LinkedList;

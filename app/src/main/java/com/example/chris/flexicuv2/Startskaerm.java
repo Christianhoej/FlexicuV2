@@ -15,8 +15,7 @@ import android.view.MenuItem;
 <<<<<<< HEAD:app/src/main/java/com/example/chris/flexicuv2/Startskaerm_akt.java
 =======
 
-import Indlejninger.Lej;
-import Medarbejdere.Medarbejdere;
+import com.example.chris.flexicuv2.Medarbejdere.Medarbejdere;
 >>>>>>> 2c3542bfa65595afaf952f0e7a19b3503ab99d2f:app/src/main/java/com/example/chris/flexicuv2/Startskaerm.java
 
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;

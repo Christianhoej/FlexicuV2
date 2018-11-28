@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Indlejninger.Lej_filtrer"
+    tools:context="com.example.chris.flexicuv2.Indlejninger.Lej_filtrer"
     >
 
    <ScrollView
@@ -28,7 +28,7 @@
                android:text="Vælg ønskede arbejdsområde(r)"
                android:layout_marginVertical="5dp"/>
 
-           <Indlejninger.MultiSelectionSpinner
+           <com.example.chris.flexicuv2.Indlejninger.MultiSelectionSpinner
                android:id="@+id/input1"
                android:layout_width="fill_parent"
                android:layout_height="wrap_content"

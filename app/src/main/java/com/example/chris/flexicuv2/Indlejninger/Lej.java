@@ -1,4 +1,4 @@
-package Indlejninger;
+package com.example.chris.flexicuv2.Indlejninger;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
