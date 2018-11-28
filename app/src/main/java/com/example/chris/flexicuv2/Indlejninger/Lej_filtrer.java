@@ -1,20 +1,15 @@
-package Indlejninger;
+package com.example.chris.flexicuv2.Indlejninger;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
-import Indlejninger.MultiSelectionSpinner;
 
 import com.example.chris.flexicuv2.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -36,7 +31,7 @@ public class Lej_filtrer extends Fragment {
         /*RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.listRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Indlejninger.ListAdapter listAdapter = new Indlejninger.ListAdapter();
+        com.example.chris.flexicuv2.Indlejninger.ListAdapter listAdapter = new com.example.chris.flexicuv2.Indlejninger.ListAdapter();
         recyclerView.setAdapter(listAdapter);*/
 
         String[] items = {"Håndværker", "Smed", "Lagermand"};

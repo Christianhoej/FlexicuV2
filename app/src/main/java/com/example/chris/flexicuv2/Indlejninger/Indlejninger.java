@@ -1,4 +1,4 @@
-package Indlejninger;
+package com.example.chris.flexicuv2.Indlejninger;
 
 import android.os.Bundle;
 import android.app.Activity;
