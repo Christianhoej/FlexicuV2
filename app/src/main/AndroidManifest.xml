@@ -28,7 +28,7 @@
         <activity
             android:name=".Startskaerm"
             tools:ignore="DuplicateActivity" />
-        <activity android:name=".Medarbejdere" />
+        <activity android:name="Medarbejdere.Medarbejdere" />
         <activity android:name=".NewUserV2" />
         <activity android:name=".Teeeeeeest" />
         <activity android:name=".Medarbejder" />
@@ -36,12 +36,12 @@
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling" />
-        <activity android:name=".Medarbejder" />
+        <activity android:name="Medarbejdere.Medarbejder" />
         <activity
-            android:name=".Indlejninger"
+            android:name="Indlejninger.Indlejninger"
             android:label="@string/title_activity_indlejninger" />
         <activity android:name=".Udlej" />
-        <activity android:name=".Lej" />
+        <activity android:name="Indlejninger.Lej" />
         <activity android:name=".Indbakke"></activity>
 
     </application>

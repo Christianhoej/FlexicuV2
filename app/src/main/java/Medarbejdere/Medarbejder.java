@@ -1,9 +1,11 @@
-package com.example.chris.flexicuv2;
+package Medarbejdere;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.example.chris.flexicuv2.R;
 
 public class Medarbejder extends AppCompatActivity {
 
