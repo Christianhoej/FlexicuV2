@@ -36,7 +36,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     }
 
     public void openStartScreen(){
-        Intent intent = new Intent(this, Startskaerm_akt.class);
+        Intent intent = new Intent(this, Startskaerm.class);
         startActivity(intent);
     }
 
