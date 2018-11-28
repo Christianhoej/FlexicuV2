@@ -12,6 +12,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+<<<<<<< HEAD:app/src/main/java/com/example/chris/flexicuv2/Startskaerm_akt.java
+=======
+
+import Indlejninger.Lej;
+import Medarbejdere.Medarbejdere;
+>>>>>>> 2c3542bfa65595afaf952f0e7a19b3503ab99d2f:app/src/main/java/com/example/chris/flexicuv2/Startskaerm.java
 
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;
 import com.example.chris.flexicuv2.fragments.Indbakke_fragment;
@@ -56,7 +62,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         menuItem.setChecked(true);
          */
 
-
         //startskaermFrame = (FrameLayout) findViewById(R.id.startskaermFrame);
         startskaermNav = findViewById(R.id.startskaerm_nav);
         startskaermNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,6 +69,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
+<<<<<<< HEAD:app/src/main/java/com/example/chris/flexicuv2/Startskaerm_akt.java
                         setTitle("Hjem");
                         Startskaerm_Udlejede_medarbejder_fragment fragmentUdlej = new Startskaerm_Udlejede_medarbejder_fragment();
                         Startskaerm_lejede_Medarbejdere_fragment fragmentLej = new Startskaerm_lejede_Medarbejdere_fragment();
@@ -73,6 +79,8 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
                         fragTrans_hjem.commit();
 
                         //openSkaerm(Startskaerm_akt.class);
+=======
+>>>>>>> 2c3542bfa65595afaf952f0e7a19b3503ab99d2f:app/src/main/java/com/example/chris/flexicuv2/Startskaerm.java
                         return true;
                     case R.id.nav_udlej:
                         setTitle("Udlej");
@@ -149,7 +157,4 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 }
