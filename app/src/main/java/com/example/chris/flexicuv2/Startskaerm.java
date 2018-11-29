@@ -41,6 +41,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
     Hjem_fragment fragmentHjem;
 
 
+
     Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
     Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
     Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
@@ -71,7 +72,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         setTitle("Virksomhedens navn");
 
         fjernFragmenter();
-        setFragment(fragmentHjem);
+        setFragment(fragmentHjem, "hjem");
 
         startskaermNav = findViewById(R.id.startskaerm_nav);
         startskaermNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -79,21 +80,32 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        fjernFragmenter();
-                        setFragment(fragmentHjem);
-
+                        //fragmentHjem = (Hjem_fragment) getSupportFragmentManager().findFragmentByTag("hjem");
+                        if(!(getSupportFragmentManager().findFragmentByTag("hjem") != null && getSupportFragmentManager().findFragmentByTag("hjem").isVisible())) {
+                            fjernFragmenter();
+                            setFragment(fragmentHjem, "hjem");
+                        }
                         return true;
                     case R.id.nav_udlej:
-                        fjernFragmenter();
-                        setFragment(fragmentUdlej);
+                       // fragmentUdlej = (Udlej_Fragment) getSupportFragmentManager().findFragmentByTag("udlej");
+                        if(!(getSupportFragmentManager().findFragmentByTag("udlej") != null && getSupportFragmentManager().findFragmentByTag("udlej").isVisible())) {
+                            fjernFragmenter();
+                            setFragment(fragmentUdlej, "udlej");
+                        }
                         return true;
                     case R.id.nav_lej:
-                        fjernFragmenter();
-                        setFragment(fragmentLej);
+                        //fragmentLej = (Lej_fragment) getSupportFragmentManager().findFragmentByTag("lej");
+                        if(!(getSupportFragmentManager().findFragmentByTag("lej") != null && getSupportFragmentManager().findFragmentByTag("lej").isVisible())) {
+                            fjernFragmenter();
+                            setFragment(fragmentLej, "lej");
+                        }
                         return true;
                     case R.id.nav_indbakke:
-                        fjernFragmenter();
-                        setFragment(fragmentIndbakke);
+                        //fragmentIndbakke = (Indbakke_fragment) getSupportFragmentManager().findFragmentByTag("indbakke");
+                        if(!(getSupportFragmentManager().findFragmentByTag("indbakke") != null && getSupportFragmentManager().findFragmentByTag("indbakke").isVisible())) {
+                            fjernFragmenter();
+                            setFragment(fragmentIndbakke, "indbakke");
+                        }
                         return true;
                     default:
                         return false;
@@ -117,10 +129,10 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, String tag) {
         startskaermFrame.removeAllViews();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.startskaerm_frame, fragment);
+        fragmentTransaction.replace(R.id.startskaerm_frame, fragment, tag);
         fragmentTransaction.commit();
     }
 

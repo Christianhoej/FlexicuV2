@@ -14,12 +14,12 @@ import com.example.chris.flexicuv2.model.Medarbejder;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<RecyclerViewAdapter_AlleMedarbejdere.ViewHolder>{
+public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter<RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder>{
 
     private ArrayList<Medarbejder> mMedarbejder;
     private Context mContext;
 
-    public RecyclerViewAdapter_AlleMedarbejdere(Context mContext, ArrayList<Medarbejder> mMedarbejder) {
+    public RecyclerViewAdapter_Ledig_Arbejdskraft(Context mContext, ArrayList<Medarbejder> mMedarbejder) {
         this.mMedarbejder = mMedarbejder;
         Collections.sort(mMedarbejder);
         this.mContext = mContext;
@@ -27,21 +27,21 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
 
     @NonNull
     @Override
-    public RecyclerViewAdapter_AlleMedarbejdere.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
-        view = LayoutInflater.from(mContext).inflate(R.layout.layout_listitem_allemedarbejdere,viewGroup,false);
+        view = LayoutInflater.from(mContext).inflate(R.layout.layout_listitem_ledig_arbejdskraft,viewGroup,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter_AlleMedarbejdere.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
+        String periode = "Periode: " + mMedarbejder.get(i).getPeriode();
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
         viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
+        viewHolder.periode.setText(mMedarbejder.get(i).getPeriode());
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -52,11 +52,13 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
         private TextView name;
         private TextView salary;
         private TextView workfield;
+        private TextView periode;
 
         public ViewHolder(View itemView){
             super(itemView);
             name = itemView.findViewById(R.id.medarbejderNavn);
             salary = itemView.findViewById(R.id.salary);
+            periode = itemView.findViewById(R.id.periode);
             workfield = itemView.findViewById(R.id.workfield);
         }
     }
