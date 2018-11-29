@@ -68,7 +68,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        setTitle("Hjem");
+        setTitle("Virksomhedens navn");
 
         fjernFragmenter();
         setFragment(fragmentHjem);
