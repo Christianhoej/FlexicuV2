@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Test;
@@ -34,7 +35,8 @@ public class Startskaerm_Udlejede_medarbejder_fragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_hjem_fragment, container, false);
         recyclerView = v.findViewById(R.id.lej_medarbejder_recyclerview);
-
+        TextView title = v.findViewById(R.id.statusAfMedarbejdere);
+        title.setText("Udlejede medarbejdere");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false));
         // Inflate the layout for this fragment
