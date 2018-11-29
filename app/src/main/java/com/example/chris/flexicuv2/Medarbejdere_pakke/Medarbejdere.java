@@ -31,7 +31,6 @@ public class Medarbejdere extends AppCompatActivity implements View.OnClickListe
             case R.id.søren_layout:
             openMedarbejder();
         }
-
     }
 
     private void openMedarbejder() {
