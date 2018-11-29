@@ -252,7 +252,7 @@
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_corners_green"
+                android:background="@drawable/rounded_corners_grey"
                 android:text="Annuller"
                 android:textColor="@color/white" />
 
@@ -266,7 +266,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_corners_grey"
+                android:background="@drawable/rounded_corners_green"
                 android:text="Opret bruger"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
