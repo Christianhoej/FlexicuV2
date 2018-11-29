@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        app:cardMaxElevation="2dp"
+        android:elevation="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/medarbejderNavn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Søren"
+                android:textSize="18dp"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Løn: 30.000"
+                android:layout_below="@+id/medarbejderNavn"/>
+            <TextView
+                android:id="@+id/workfield"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Smed"
+                android:layout_below="@+id/salary"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
