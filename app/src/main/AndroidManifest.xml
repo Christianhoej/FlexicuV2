@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginScreen"
+            android:name=".LoginScreen_akt"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,18 +29,13 @@
             android:name=".Startskaerm"
             tools:ignore="DuplicateActivity" />
         <activity android:name="Medarbejdere.Medarbejdere" />
-        <activity android:name=".NewUserV2" />
-        <activity android:name=".Teeeeeeest" />
+        <activity android:name=".NewUser_akt" />
         <activity android:name=".Medarbejder" />
         <activity android:name=".TestDB"></activity>
-        <activity
-            android:name=".ScrollingActivity"
-            android:label="@string/title_activity_scrolling" />
+
         <activity android:name="Medarbejdere.Medarbejder" />
-        <activity
-            android:name="Indlejninger.Indlejninger"
-            android:label="@string/title_activity_indlejninger" />
-        <activity android:name=".Udlej" />
+        <activity android:name="Indlejninger.Indlejninger" />
+        <activity android:name=".Udlej_akt" />
         <activity android:name="Indlejninger.Lej" />
         <activity android:name=".Indbakke"></activity>
 

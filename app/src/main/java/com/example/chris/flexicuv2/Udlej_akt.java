@@ -26,16 +26,16 @@ public class Udlej_akt extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        openSkaerm(Startskaerm_akt.class);
+                        openSkaerm(Startskaerm.class);
                         return true;
                     case R.id.nav_udlej:
                         openSkaerm(Udlej_akt.class);
                         return true;
                     case R.id.nav_lej:
-                        openSkaerm(Lej_akt.class);
+                        openSkaerm(Lej.class);
                         return true;
                     case R.id.nav_indbakke:
-                        openSkaerm(Indbakke_akt.class);
+                        openSkaerm(Indbakke.class);
                         return true;
                     default:
                         return false;
