@@ -33,12 +33,6 @@ import com.example.chris.flexicuv2.fragments.Udlej_Fragment;
 public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView startskaermNav;
-    private String valg;
-    //private FrameLayout startskaermFrame;
-    /*
-
-    FragmentManager fragMan;
-    FragmentTransaction fragTrans_hjem;*/
 
     private FrameLayout startskaermFrame;
     Udlej_Fragment fragmentUdlej;
@@ -65,12 +59,6 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         fragmentIndbakke = new Indbakke_fragment();
         fragmentHjem = new Hjem_fragment();
 
-        /*fragmentUdlejedeMed = new Startskaerm_Udlejede_medarbejder_fragment();
-        fragmentLejedeMed = new Startskaerm_lejede_Medarbejdere_fragment();
-        fragmentAlleMed = new Startskaerm_alle_medarbejdere_fragment();*/
-
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -85,58 +73,25 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         fjernFragmenter();
         setFragment(fragmentHjem);
 
-//        opretHjemFragmenter();
-        /*
-        Til at highlighte
-        Menu menu = navigationView.getMenu();
-        MenuItem menuItem = menu.getItem(1);
-        menuItem.setChecked(true);
-         */
-
-        //startskaermFrame = (FrameLayout) findViewById(R.id.startskaermFrame);
         startskaermNav = findViewById(R.id.startskaerm_nav);
         startskaermNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        /*setTitle("Hjem");
-                        fjernFragmenter();
-                        opretHjemFragmenter();
-
-                        //openSkaerm(Startskaerm_akt.class);*/
                         fjernFragmenter();
                         setFragment(fragmentHjem);
 
                         return true;
                     case R.id.nav_udlej:
-                        /*setTitle("Udlej");
-                        fjernFragmenter();
-                        Udlej_Fragment fragment1 = new Udlej_Fragment();
-                        FragmentTransaction fragTrans_udlej = getSupportFragmentManager().beginTransaction();
-                        fragTrans_udlej.replace(R.id.startskaermUdlejFrame, fragment1);
-                        fragTrans_udlej.commit();
-                       // openSkaerm(Udlej_akt.class);*/
                         fjernFragmenter();
                         setFragment(fragmentUdlej);
                         return true;
                     case R.id.nav_lej:
-                        /*setTitle("Lej");
-                        Lej_fragment fragment2 = new Lej_fragment();
-                        FragmentTransaction fragTrans_lej = getSupportFragmentManager().beginTransaction();
-                        fragTrans_lej.replace(R.id.startskaermUdlejFrame, fragment2);
-                        fragTrans_lej.commit();
-                        openSkaerm(Udlej_akt.class);*/
                         fjernFragmenter();
                         setFragment(fragmentLej);
                         return true;
                     case R.id.nav_indbakke:
-                        /*setTitle("Indbakke");
-                        Indbakke_fragment fragment3 = new Indbakke_fragment();
-                        FragmentTransaction fragTrans_indbakke = getSupportFragmentManager().beginTransaction();
-                        fragTrans_indbakke.replace(R.id.startskaermUdlejFrame, fragment3);
-                        fragTrans_indbakke.commit();
-                      //  openSkaerm(Indbakke_akt.class);*/
                         fjernFragmenter();
                         setFragment(fragmentIndbakke);
                         return true;
@@ -152,10 +107,6 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         startActivity(intent);
     }
 
-    /*public void openMedarbejdere(){
-        Intent intent = new Intent(this, Medarbejdere_akt.class);
-        startActivity(intent);
-    }*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -197,22 +148,8 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-/*
-    public void opretHjemFragmenter(){
-        fragmentUdlejedeMed = new Startskaerm_Udlejede_medarbejder_fragment();
-        fragmentLejedeMed = new Startskaerm_lejede_Medarbejdere_fragment();
-        fragmentAlleMed = new Startskaerm_alle_medarbejdere_fragment();
-        FragmentManager fragMan = getSupportFragmentManager();
-        FragmentTransaction fragTrans_hjem = fragMan.beginTransaction();
 
-        fragTrans_hjem.add(R.id.startskaermUdlejFrame, fragmentUdlejedeMed);
-        fragTrans_hjem.add(R.id.startskaermLejFrame, fragmentLejedeMed);
-        fragTrans_hjem.add(R.id.startskaermAlleFrame, fragmentAlleMed);
-        fragTrans_hjem.commit();
-    }
-*/
     public void fjernFragmenter(){
-
         for(Fragment fragment : getSupportFragmentManager().getFragments()){
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
