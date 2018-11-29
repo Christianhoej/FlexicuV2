@@ -6,11 +6,12 @@
     tools:context=".fragments.Startskaerm_Udlejede_medarbejder_fragment"
     android:orientation="vertical">
 
+
     <TextView
         android:id="@+id/statusAfMedarbejdere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Udlejede medarbejdere"
+        android:text=""
         android:textSize="20dp"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lej_medarbejder_recyclerview"

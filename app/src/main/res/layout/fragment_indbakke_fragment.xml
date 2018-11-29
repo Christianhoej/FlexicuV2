@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Indbakke_fragment">
+    tools:context=".fragments.Indbakke_fragment"
+    android:background="@color/hvid">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
