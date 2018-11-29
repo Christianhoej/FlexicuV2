@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 
+import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;
 import com.example.chris.flexicuv2.fragments.Lej_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;

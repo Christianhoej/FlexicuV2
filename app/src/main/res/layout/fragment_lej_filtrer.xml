@@ -16,9 +16,10 @@
            android:orientation="vertical">
 
            <ImageView
-               android:layout_width="250dp"
-               android:layout_height="60dp"
+               android:layout_width="210dp"
+               android:layout_height="50dp"
                android:layout_gravity="center"
+               android:layout_marginVertical="10dp"
                android:background="@drawable/flexicu_logo"/>
 
            <TextView
@@ -208,7 +209,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:inputType="number"
-                   android:id="@+id/min_løn"
+                   android:id="@+id/min_timepris"
                    android:gravity="center"
                    android:layout_weight="1"
                    android:hint="Min"/>
@@ -226,7 +227,7 @@
                    android:inputType="number"
                    android:layout_weight="1"
                    android:gravity="center"
-                   android:id="@+id/max_løn"
+                   android:id="@+id/max_timepris"
                    android:hint="Max"/>
            </LinearLayout>
 

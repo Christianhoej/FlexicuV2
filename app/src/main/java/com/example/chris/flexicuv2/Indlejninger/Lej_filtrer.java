@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.example.chris.flexicuv2.R;
 
@@ -24,21 +26,32 @@ public class Lej_filtrer extends Fragment {
         // Required empty public constructor
     }
 
+    EditText postnr;
+    EditText by;
+    EditText vej;
+    EditText nummer;
+    CheckBox ja_værktøj;
+    CheckBox nej_værktøj;
+    EditText min_timepris;
+    EditText max_timepris;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_lej_filtrer, container, false);
 
-        /*RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.listRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        com.example.chris.flexicuv2.Indlejninger.ListAdapter listAdapter = new com.example.chris.flexicuv2.Indlejninger.ListAdapter();
-        recyclerView.setAdapter(listAdapter);*/
-
-        String[] items = {"Håndværker", "Smed", "Lagermand"};
+        postnr = (EditText) v.findViewById(R.id.edit_postnr);
+        by = (EditText) v.findViewById(R.id.edit_by);
+        vej = (EditText) v.findViewById(R.id.edit_vej);
+        nummer = (EditText) v.findViewById(R.id.edit_nummer);
+        ja_værktøj = (CheckBox) v.findViewById(R.id.ja_værktøj);
+        nej_værktøj = (CheckBox) v.findViewById(R.id.nej_værktøj);
+        min_timepris = (EditText)v.findViewById(R.id.min_timepris);
+        max_timepris = (EditText) v.findViewById(R.id.max_timepris);
 
         MultiSelectionSpinner spinner=(MultiSelectionSpinner)v.findViewById(R.id.input1);
 
         List<String> list = new ArrayList<String>();
+        list.add("Vælg arbejdsområde");
         list.add("Håndværker");
         list.add("Smed");
         list.add("Lagermand");

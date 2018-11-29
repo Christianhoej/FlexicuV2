@@ -30,7 +30,11 @@
             tools:ignore="DuplicateActivity" />
         <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere" />
         <activity android:name=".NewUser_akt" />
+
         <activity android:name=".Medarbejder" />
+
+        <activity android:name=".TestDB"></activity>
+
 
         <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejder" />
         <activity
