@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView
+    <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/white"
         tools:context="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/medarbejdere_frame">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +47,7 @@
             <LinearLayout
                 android:id="@+id/søren_layout"
                 android:layout_width="250dp"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:orientation="vertical"
                 android:layout_marginVertical="10dp"
                 android:layout_gravity="center"
@@ -74,5 +75,11 @@
                     android:textColor="@color/white"
                     />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tiltest"
+                android:textSize="30dp"/>
         </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
