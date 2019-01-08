@@ -69,30 +69,38 @@
             android:textAllCaps="false"
             android:textSize="24sp" />
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="100">
 
-            <CheckBox
-                android:id="@+id/checkBox_mand"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="30"/>
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_weight="1"
+                android:id="@+id/radio_mand"
                 android:text="Mand"
-                android:textAlignment="textStart" />
+                android:layout_weight="20"
+                android:shadowColor="@color/flex_green"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="20"/>
 
-            <CheckBox
-                android:id="@+id/checkBox_kvinde"
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_weight="1"
+                android:id="@+id/radio_kvinde"
                 android:text="Kvinde"
-                android:textAlignment="textStart"
+                android:layout_weight="20"
+                android:shadowColor="@color/flex_green"
                 />
-        </LinearLayout>
+
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textView_arbejdsområder"
@@ -123,10 +131,11 @@
 
             <Spinner
                 android:id="@+id/fødselsår"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:foregroundGravity="center"
+                />
 
         <TextView
             android:id="@+id/textView_kommentar"
