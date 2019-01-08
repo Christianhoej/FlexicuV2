@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Medarbejdere_pakke.opret_medarbejder_fragment_1"
+    android:id="@+id/opret_medarbejder_frame_1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/textView_oplysninger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="Personlige oplysninger"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/editText_navn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="50dp"
+            android:ems="10"
+            android:hint="Navn"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:layout_marginBottom="50dp">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="30"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_mand"
+                android:text="Mand"
+                android:layout_weight="20"
+                android:shadowColor="@color/flex_green"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="20"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_kvinde"
+                android:text="Kvinde"
+                android:layout_weight="20"
+                android:shadowColor="@color/flex_green"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView_arbejdsområder2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="Fødselsår"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/fødselsår"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:foregroundGravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="5">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hvid"
+                android:background="@drawable/rounded_corners_grey"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Tilbage"
+                android:id="@+id/tilbage_medarbejdere1"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Næste"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_corners_green"
+                android:layout_gravity="center"
+                android:textColor="@color/hvid"
+                android:id="@+id/næste_medarbejdere"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
