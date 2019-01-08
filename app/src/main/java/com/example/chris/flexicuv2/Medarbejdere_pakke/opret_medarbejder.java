@@ -7,7 +7,7 @@ import android.widget.Spinner;
 
 import com.example.chris.flexicuv2.R;
 
-public class Medarbejder extends AppCompatActivity {
+public class opret_medarbejder extends AppCompatActivity {
 
     //Spinner arbejsområder;
     //Spinner dato;
@@ -15,7 +15,7 @@ public class Medarbejder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medarbejder);
+        setContentView(R.layout.activity_opret_medarbejder);
 
         //get the spinner from the xml.
         Spinner arbejdsområder = findViewById(R.id.spinner_arbejdsområde);
