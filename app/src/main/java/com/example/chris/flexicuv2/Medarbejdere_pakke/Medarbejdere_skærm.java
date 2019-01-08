@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 
-public class Medarbejdere extends AppCompatActivity implements View.OnClickListener {
+public class Medarbejdere_skærm extends AppCompatActivity implements View.OnClickListener {
 
     TextView Søren;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medarbejdere);
+        setContentView(R.layout.activity_medarbejdere_skærm);
 
         LinearLayout søren = (LinearLayout) findViewById(R.id.søren_layout);
         søren.setOnClickListener(this);
@@ -34,7 +34,7 @@ public class Medarbejdere extends AppCompatActivity implements View.OnClickListe
     }
 
     private void openMedarbejder() {
-        Intent intent = new Intent(this, Medarbejder.class);
+        Intent intent = new Intent(this, opret_medarbejder.class);
         startActivity(intent);
     }
 }

@@ -28,7 +28,7 @@
         <activity
             android:name=".Startskaerm"
             tools:ignore="DuplicateActivity" />
-        <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere" />
+        <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skærm" />
         <activity android:name=".NewUser_akt" />
 
         <activity android:name=".Medarbejder" />
@@ -36,7 +36,7 @@
         <activity android:name=".TestDB"></activity>
 
 
-        <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejder" />
+        <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.opret_medarbejder" />
         <activity
             android:name="com.example.chris.flexicuv2.Indlejninger.Indlejninger"
             android:label="@string/title_activity_indlejninger" />
