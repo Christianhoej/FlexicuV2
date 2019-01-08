@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 
-public class Medarbejdere_skærm extends AppCompatActivity implements View.OnClickListener {
+public class Medarbejdere_skaerm extends AppCompatActivity implements View.OnClickListener {
 
     TextView Søren;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medarbejdere_skærm);
+        setContentView(R.layout.activity_medarbejdere_skaerm);
 
         LinearLayout søren = (LinearLayout) findViewById(R.id.søren_layout);
         søren.setOnClickListener(this);

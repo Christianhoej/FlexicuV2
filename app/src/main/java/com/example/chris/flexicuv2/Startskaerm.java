@@ -21,7 +21,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 
-import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skærm;
+import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;
 import com.example.chris.flexicuv2.fragments.Lej_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;
@@ -143,7 +143,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         int id = item.getItemId();
 
         if (id == R.id.medarbejdere) {
-            openSkaerm(Medarbejdere_skærm.class);
+            openSkaerm(Medarbejdere_skaerm.class);
         } else if (id == R.id.søg) {
 
         } else if (id == R.id.indstillinger) {
