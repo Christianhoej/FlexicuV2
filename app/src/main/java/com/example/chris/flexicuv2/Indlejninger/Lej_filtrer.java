@@ -55,6 +55,7 @@ public class Lej_filtrer extends Fragment {
         list.add("Håndværker");
         list.add("Smed");
         list.add("Lagermand");
+        list.add("Elektriker");
         spinner.setItems(list);
 
         return v;
