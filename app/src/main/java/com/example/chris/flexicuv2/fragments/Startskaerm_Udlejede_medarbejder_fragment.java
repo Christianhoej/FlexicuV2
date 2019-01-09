@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.model.Test;
 
 
@@ -23,8 +24,10 @@ public class Startskaerm_Udlejede_medarbejder_fragment extends Fragment {
     View v;
     private RecyclerView recyclerView;
     private Test test;
+    private Singleton singleton;
 
     public Startskaerm_Udlejede_medarbejder_fragment() {
+
         // Required empty public constructor
     }
 
@@ -34,6 +37,7 @@ public class Startskaerm_Udlejede_medarbejder_fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_hjem_fragment, container, false);
+        singleton = Singleton.getInstance();
         recyclerView = v.findViewById(R.id.lej_medarbejder_recyclerview);
         TextView title = v.findViewById(R.id.statusAfMedarbejdere);
         title.setText("Udlejede medarbejdere");
@@ -41,11 +45,12 @@ public class Startskaerm_Udlejede_medarbejder_fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false));
         // Inflate the layout for this fragment
 
-        RecyclerViewAdapter_Udlej mAdapter_udlej = new RecyclerViewAdapter_Udlej(getContext(), test.getVirk().getMedarbejdere());
+        RecyclerViewAdapter_Udlej mAdapter_udlej = new RecyclerViewAdapter_Udlej(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter_udlej);
 
-        RecyclerViewAdapter_Lej mAdapter_lej = new RecyclerViewAdapter_Lej(getContext(), test.getVirk().getMedarbejdere());
+
+        RecyclerViewAdapter_Lej mAdapter_lej = new RecyclerViewAdapter_Lej(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter_lej);
 

@@ -36,11 +36,10 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
-        String periode = "Periode: " + mMedarbejder.get(i).getPeriode();
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
         viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
-        viewHolder.periode.setText(mMedarbejder.get(i).getPeriode());
+
     }
 
     @Override

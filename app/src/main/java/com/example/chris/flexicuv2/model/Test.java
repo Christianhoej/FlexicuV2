@@ -46,39 +46,28 @@ public class Test {
         bruger3.setAdmin(true);
         med1.setNavn("Oliver");
         med1.setLoen(100);
-        med1.setPeriode("1/12-1/1");
         med1.setArbejdsomraade("Smed");
         med2.setNavn("Adam");
         med2.setLoen(115);
-        med2.setPeriode("10/12-30/12");
         med2.setArbejdsomraade("Tømrer");
         med3.setNavn("Ahad");
         med3.setLoen(100);
-        med3.setPeriode("1/12-1/1");
         med3.setArbejdsomraade("Smed");
         med4.setNavn("Christian");
         med4.setLoen(100);
-        med4.setPeriode("1/12-1/1");
         med4.setArbejdsomraade("Smed");
         med5.setNavn("Janus");
         med5.setLoen(100);
-        med5.setPeriode("1/12-1/1");
         med5.setArbejdsomraade("Smed");
         med6.setNavn("Mohammed");
         med6.setLoen(100);
-        med6.setPeriode("1/12-1/1");
         med6.setArbejdsomraade("Smed");
         med7.setNavn("Sven-Erik");
         med7.setLoen(100);
-        med7.setPeriode("1/12-1/1");
         med7.setArbejdsomraade("Smed");
         med8.setNavn("kljdfsklgjsdfg");
         med8.setLoen(100);
-        med8.setPeriode("1/12-1/1");
         med8.setArbejdsomraade("Smed");
-        virk.addBruger(bruger1);
-        virk.addBruger(bruger2);
-        virk.addBruger(bruger3);
         virk.addMedarbejdere(med1);
         virk.addMedarbejdere(med2);
         virk.addMedarbejdere(med3);
@@ -108,17 +97,17 @@ public class Test {
         dbBruger.child("bruger").child(key2).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
 
 
-        String key3 = dbBruger.child("medarbejder").push().getKey();
-        dbBruger.child("medarbejder").child(key3).setValue(med1);
-        dbBruger.child("medarbejder").child(key3).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
+        String key3 = dbBruger.child("medarbejdere").push().getKey();
+        dbBruger.child("medarbejdere").child(key3).setValue(med1);
+        dbBruger.child("medarbejdere").child(key3).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
 
-        String key4 = dbBruger.child("medarbejder").push().getKey();
-        dbBruger.child("medarbejder").child(key4).setValue(med2);
-        dbBruger.child("medarbejder").child(key4).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
+        String key4 = dbBruger.child("medarbejdere").push().getKey();
+        dbBruger.child("medarbejdere").child(key4).setValue(med2);
+        dbBruger.child("medarbejdere").child(key4).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
 
-        String key5 = dbBruger.child("medarbejder").push().getKey();
-        dbBruger.child("medarbejder").child(key5).setValue(med3);
-        dbBruger.child("medarbejder").child(key5).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
+        String key5 = dbBruger.child("medarbejdere").push().getKey();
+        dbBruger.child("medarbejdere").child(key5).setValue(med3);
+        dbBruger.child("medarbejdere").child(key5).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
         bruger1.setBrugerKey("Key = " + dbBruger.getKey());
         System.out.println("index bruger 1: " + bruger1index);
         System.out.println("index bruger 2: " + bruger2index);*/
