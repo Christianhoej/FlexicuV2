@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.Indlejninger.Lej_filtrer;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.Startskaerm;
@@ -34,7 +35,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     Lej_filtrer filtrer_fragment;
     FrameLayout lej_frame;
     private RecyclerView recyclerView;
-    private Test test;
+    private DBManager test;
     private Singleton singleton;
 
     @Override
@@ -80,6 +81,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        test = new Test();
+        test = new DBManager();
     }
 }

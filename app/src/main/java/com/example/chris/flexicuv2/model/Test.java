@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Test {
 
-    private final DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
     private Virksomhed virk = new Virksomhed();
     private Bruger bruger1 = new Bruger();
     private Bruger bruger2 = new Bruger();
@@ -23,9 +23,9 @@ public class Test {
 
 
 
-    public Test(){
+    public Test() {
 
-        virk.setVirksomhedCVR("11223344");
+        virk.setVirksomhedCVR("112233441sdf");
         virk.setVirksomhedsnavn("Flexicu");
         virk.setAdresse("Anker Engelundsvej 1");
         virk.setPostnr("2800");
@@ -82,10 +82,8 @@ public class Test {
         mDatabase.child("virksomhed").child(virk.getVirksomhedCVR()).setValue(virk);
 
 
-        /*DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
 
-        int bruger1index = virk.getBrugere().indexOf(bruger1);
-        int bruger2index = virk.getBrugere().indexOf(bruger2);
 
 
         String key1 = dbBruger.child("bruger").push().getKey();
@@ -109,8 +107,8 @@ public class Test {
         dbBruger.child("medarbejdere").child(key5).setValue(med3);
         dbBruger.child("medarbejdere").child(key5).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
         bruger1.setBrugerKey("Key = " + dbBruger.getKey());
-        System.out.println("index bruger 1: " + bruger1index);
-        System.out.println("index bruger 2: " + bruger2index);*/
+        System.out.println("index bruger 1: ");
+        System.out.println("index bruger 2: ");
 
 
 

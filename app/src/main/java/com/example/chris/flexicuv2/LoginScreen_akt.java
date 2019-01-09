@@ -32,7 +32,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
         password = findViewById(R.id.passwordInput);
         password.setHint("Indtast adgangskode");
-        Test test = new Test();
+        DBManager test = new DBManager();
     }
 
     public void openStartScreen(){
