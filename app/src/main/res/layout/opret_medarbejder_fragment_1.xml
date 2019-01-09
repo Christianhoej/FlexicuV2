@@ -102,7 +102,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Tilbage"
-                android:id="@+id/tilbage_medarbejdere1"/>
+                android:id="@+id/tilbage_medarbejdere"/>
 
             <Space
                 android:layout_width="wrap_content"
