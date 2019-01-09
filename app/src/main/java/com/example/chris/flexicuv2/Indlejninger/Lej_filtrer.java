@@ -2,12 +2,14 @@ package com.example.chris.flexicuv2.Indlejninger;
 
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.example.chris.flexicuv2.R;
 
@@ -30,8 +32,8 @@ public class Lej_filtrer extends Fragment {
     EditText by;
     EditText vej;
     EditText nummer;
-    CheckBox ja_værktøj;
-    CheckBox nej_værktøj;
+    RadioButton ja_værktøj;
+    RadioButton nej_værktøj;
     EditText min_timepris;
     EditText max_timepris;
 
@@ -43,8 +45,8 @@ public class Lej_filtrer extends Fragment {
         by = (EditText) v.findViewById(R.id.edit_by);
         vej = (EditText) v.findViewById(R.id.edit_vej);
         nummer = (EditText) v.findViewById(R.id.edit_nummer);
-        ja_værktøj = (CheckBox) v.findViewById(R.id.ja_værktøj);
-        nej_værktøj = (CheckBox) v.findViewById(R.id.nej_værktøj);
+        ja_værktøj = (RadioButton) v.findViewById(R.id.ja_værktøj);
+        nej_værktøj = (RadioButton) v.findViewById(R.id.nej_værktøj);
         min_timepris = (EditText)v.findViewById(R.id.min_timepris);
         max_timepris = (EditText) v.findViewById(R.id.max_timepris);
 

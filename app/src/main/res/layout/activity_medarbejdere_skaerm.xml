@@ -81,5 +81,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tiltest"
                 android:textSize="30dp"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="vis popup"
+                android:id="@+id/vispopup"/>
         </LinearLayout>
     </FrameLayout>

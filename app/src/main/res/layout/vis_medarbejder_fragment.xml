@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/rounded_corners_green"
+    tools:context=".Medarbejdere_pakke.vis_medarbejder_fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/medarbejder_billede"
+                android:src="@drawable/rounded_corners_blue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hvilken medarbejder"
+                android:id="@+id/medarbejder_navn"
+                android:textSize="30dp"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medarbejder ID: "
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_ID"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Køn: "
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_køn"/>
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
