@@ -5,18 +5,17 @@ import java.util.ArrayList;
 public class Virksomhed {
 
     private String virksomhedCVR;
-    private String virksomhedKey;
+    private String virksomhedID;
     private String virksomhedsnavn, adresse, postnr;
-    private ArrayList<Bruger> brugere = new ArrayList<Bruger>();
-    private ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
+    private ArrayList<String> medarbejdere = new ArrayList<String>();
 
 
-    public String getVirksomhedKey() {
-        return virksomhedKey;
+    public String getVirksomhedID() {
+        return virksomhedID;
     }
 
-    public void setVirksomhedKey(String virksomhedKey) {
-        this.virksomhedKey = virksomhedKey;
+    public void setVirksomhedID(String virksomhedID) {
+        this.virksomhedID = virksomhedID;
     }
 
 
@@ -52,36 +51,22 @@ public class Virksomhed {
         return postnr;
     }
 
-    public void addBruger(Bruger bruger){
-        brugere.add(bruger);
-    }
-
-    public void removeBruger(Bruger bruger){
-        brugere.remove(bruger);
-    }
-
     public void addMedarbejdere(Medarbejder medarbejder){
-        medarbejdere.add(medarbejder);
+        medarbejdere.add(medarbejder.getMedarbejderID());
     }
 
     public void removeMedarbejdere(Medarbejder medarbejder){
         medarbejdere.remove(medarbejder);
     }
 
-    public ArrayList<Bruger> getBrugere() {
-        return brugere;
-    }
-
-    public void setBrugere(ArrayList<Bruger> brugere) {
-        this.brugere = brugere;
-    }
-
-    public ArrayList<Medarbejder> getMedarbejdere() {
+    public ArrayList<String> getMedarbejdere() {
         return medarbejdere;
     }
 
     public void setMedarbejdere(ArrayList<Medarbejder> medarbejdere) {
-        this.medarbejdere = medarbejdere;
+        for(int i = 0; i<medarbejdere.size(); i++){
+            this.medarbejdere.add(medarbejdere.get(i).getMedarbejderID());
+        }
     }
 
 }

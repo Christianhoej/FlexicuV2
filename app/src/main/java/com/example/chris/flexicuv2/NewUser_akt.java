@@ -106,15 +106,12 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
             bruger.setTitel(contactTitle.getText().toString());
             bruger.setTlfnr(contactPhone.getText().toString());
 
-            virksomhed.addBruger(bruger);
-
-
             mDatabase.child("virksomhed").child(virksomhed.getVirksomhedCVR()).setValue(virksomhed);
 
 
             DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
 
-            int brugerindex = virksomhed.getBrugere().indexOf(bruger);
+
 
             String key = dbBruger.child("bruger").push().getKey();
             dbBruger.child("bruger").child(key).setValue(bruger);
