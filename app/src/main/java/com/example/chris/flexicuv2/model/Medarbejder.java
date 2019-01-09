@@ -9,7 +9,6 @@ public class Medarbejder implements Comparable<Medarbejder>{
     private String arbejdsPostnr;
     private int loen;
     private String tlfnr;
-    private String periode;
     private String arbejdsomraade;
 
     public String getMedarbejderID() {
@@ -74,14 +73,6 @@ public class Medarbejder implements Comparable<Medarbejder>{
 
     public void setTlfnr(String tlfnr) {
         this.tlfnr = tlfnr;
-    }
-
-    public void setPeriode(String periode){
-        this.periode=periode;
-    }
-
-    public String getPeriode(){
-        return periode;
     }
 
     public String getArbejdsomraade() {

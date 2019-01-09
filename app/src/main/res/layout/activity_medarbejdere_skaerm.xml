@@ -39,7 +39,7 @@
                 android:layout_marginVertical="20dp"
                 android:background="@drawable/rounded_corners_blue"
                 android:fontFamily="sans-serif"
-                android:text="Tilføj ny medarbejder"
+                android:text="Tilføj ny medarbejdere"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
