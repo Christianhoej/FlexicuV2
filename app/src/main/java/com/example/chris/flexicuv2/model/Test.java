@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Test {
 
-    private final DatabaseReference mDatabase;
+    //private final DatabaseReference mDatabase;
     private Virksomhed virk = new Virksomhed();
     private Bruger bruger1 = new Bruger();
     private Bruger bruger2 = new Bruger();
@@ -24,7 +24,7 @@ public class Test {
 
 
     public Test(){
-
+/*
         virk.setVirksomhedCVR("11223344");
         virk.setVirksomhedsnavn("Flexicu");
         virk.setAdresse("Anker Engelundsvej 1");
@@ -91,7 +91,7 @@ public class Test {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("virksomhed").child(virk.getVirksomhedCVR()).setValue(virk);
-
+*/
 
         /*DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
 

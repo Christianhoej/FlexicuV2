@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2;
+package com.example.chris.flexicuv2.opret_bruger;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.login.LoginScreen_akt;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Virksomhed;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class NewUser_akt extends AppCompatActivity implements View.OnClickListener{
+public class NewUser_akt extends AppCompatActivity implements View.OnClickListener, NewUser_Presenter.UpdateNewUser{
     private EditText companyCVR, companyName, companyAddress, companyZipCode;
     private TextView companyCity;
     private EditText contactName, contactEmail, contactPhone, contactTitle;
@@ -133,5 +135,30 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
     public void openLoginScreen(){
         Intent intent = new Intent(this, LoginScreen_akt.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void updateVirksomhedsNavn(String vsh_navn) {
+
+    }
+
+    @Override
+    public void updateAdresse(String adresse) {
+
+    }
+
+    @Override
+    public void updatePostNr(String postNr) {
+
+    }
+
+    @Override
+    public void updateBy(String by) {
+
+    }
+
+    @Override
+    public void toastIfMissingOrWrongInformation(String displayedMessage) {
+
     }
 }

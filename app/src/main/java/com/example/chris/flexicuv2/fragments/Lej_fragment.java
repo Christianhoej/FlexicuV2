@@ -12,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.example.chris.flexicuv2.Indlejninger.Lej_filtrer;
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.Startskaerm;
 import com.example.chris.flexicuv2.model.Test;
 
 
