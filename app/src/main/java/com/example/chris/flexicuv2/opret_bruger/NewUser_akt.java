@@ -1,4 +1,6 @@
+
 package com.example.chris.flexicuv2.opret_bruger;
+
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +12,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.login.LoginScreen_akt;
+
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Virksomhed;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+
 public class NewUser_akt extends AppCompatActivity implements View.OnClickListener, NewUser_Presenter.UpdateNewUser{
+
     private EditText companyCVR, companyName, companyAddress, companyZipCode;
     private TextView companyCity;
     private EditText contactName, contactEmail, contactPhone, contactTitle;
@@ -108,7 +114,9 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
             bruger.setTitel(contactTitle.getText().toString());
             bruger.setTlfnr(contactPhone.getText().toString());
 
+
             virksomhed.addBruger(bruger);
+
 
 
             mDatabase.child("virksomhed").child(virksomhed.getVirksomhedCVR()).setValue(virksomhed);
@@ -116,7 +124,9 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
 
             DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
 
+
             int brugerindex = virksomhed.getBrugere().indexOf(bruger);
+
 
             String key = dbBruger.child("bruger").push().getKey();
             dbBruger.child("bruger").child(key).setValue(bruger);
@@ -161,4 +171,5 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
     public void toastIfMissingOrWrongInformation(String displayedMessage) {
 
     }
+
 }

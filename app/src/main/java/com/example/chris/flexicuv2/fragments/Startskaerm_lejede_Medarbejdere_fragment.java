@@ -11,15 +11,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.model.Test;
 
 public class Startskaerm_lejede_Medarbejdere_fragment extends Fragment {
 
-    View v;
+    private View v;
     private RecyclerView recyclerView;
     private Test test;
+    private Singleton singleton;
 
     public Startskaerm_lejede_Medarbejdere_fragment() {
+        singleton = Singleton.getInstance();
         // Required empty public constructor
     }
 
@@ -36,7 +39,7 @@ public class Startskaerm_lejede_Medarbejdere_fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false));
         // Inflate the layout for this fragment
 
-        RecyclerViewAdapter_Lej mAdapter = new RecyclerViewAdapter_Lej(getContext(), test.getVirk().getMedarbejdere());
+        RecyclerViewAdapter_Lej mAdapter = new RecyclerViewAdapter_Lej(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter);
 

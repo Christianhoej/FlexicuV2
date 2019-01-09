@@ -7,15 +7,15 @@
     android:layout_marginRight="20dp"
     android:layout_marginBottom="20dp"
     android:layout_marginTop="20dp"
-    android:background="@drawable/rounded_corners_green"
+    android:background="@drawable/flex_green_rektangel"
     tools:context=".Medarbejdere_pakke.vis_medarbejder_fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,37 +26,54 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/medarbejder_billede"
-                android:src="@drawable/rounded_corners_blue"/>
+                android:src="@drawable/blue_circle"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hvilken medarbejder"
+                android:text="Medarbejderens navn"
                 android:id="@+id/medarbejder_navn"
-                android:textSize="30dp"/>
-
-
+                android:textSize="30dp"
+                android:textColor="@color/grey"/>
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medarbejder ID: "
+            android:text="Medarbejder profession: "
             android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/medarbejder_ID"/>
+            android:textColor="@color/grey"
+            android:id="@+id/medarbejder_profession"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Køn: "
             android:textSize="20dp"
+            android:textColor="@color/grey"
             android:layout_marginTop="20dp"
             android:id="@+id/medarbejder_køn"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alder: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_alder"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_Email"/>
 
     </LinearLayout>
 
 </FrameLayout>
+

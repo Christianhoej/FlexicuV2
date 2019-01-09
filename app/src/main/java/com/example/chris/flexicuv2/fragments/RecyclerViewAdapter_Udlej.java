@@ -35,10 +35,9 @@ public class RecyclerViewAdapter_Udlej extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String periode = "Periode: " + mMedarbejder.get(i).getPeriode();
+
         String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
-        viewHolder.period.setText(periode);
         viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
     }

@@ -13,8 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.Indlejninger.Lej_filtrer;
 import com.example.chris.flexicuv2.R;
+
+import com.example.chris.flexicuv2.Startskaerm;
+import com.example.chris.flexicuv2.model.Singleton;
+
 import com.example.chris.flexicuv2.model.Test;
 
 
@@ -31,13 +36,15 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     Lej_filtrer filtrer_fragment;
     FrameLayout lej_frame;
     private RecyclerView recyclerView;
-    private Test test;
+    private DBManager test;
+    private Singleton singleton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lej_fragment, container, false);
 
+        singleton = Singleton.getInstance();
         filtrer_fragment = new Lej_filtrer();
         lej_frame = (FrameLayout) v.findViewById(R.id.lej_fragment_frame);
 
@@ -51,7 +58,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
         // Inflate the layout for this fragment
 
-        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext(), test.getVirk().getMedarbejdere());
+        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter);
 
@@ -75,6 +82,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        test = new Test();
+        test = new DBManager();
     }
 }

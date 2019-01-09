@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.model.Test;
 
 
@@ -19,9 +21,11 @@ public class Startskaerm_alle_medarbejdere_fragment extends Fragment {
 
     View v;
     private RecyclerView recyclerView;
-    private Test test;
+    private DBManager test;
+    private Singleton singleton;
 
     public Startskaerm_alle_medarbejdere_fragment() {
+        singleton = Singleton.getInstance();
         // Required empty public constructor
     }
 
@@ -33,13 +37,13 @@ public class Startskaerm_alle_medarbejdere_fragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_hjem_fragment, container, false);
         recyclerView = v.findViewById(R.id.lej_medarbejder_recyclerview);
         TextView title = v.findViewById(R.id.statusAfMedarbejdere);
-        title.setText("Alle medarbejdere");
+        title.setText("Mine ansatte");
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false));
         // Inflate the layout for this fragment
 
-        RecyclerViewAdapter_AlleMedarbejdere mAdapter = new RecyclerViewAdapter_AlleMedarbejdere(getContext(), test.getVirk().getMedarbejdere());
+        RecyclerViewAdapter_AlleMedarbejdere mAdapter = new RecyclerViewAdapter_AlleMedarbejdere(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter);
 
@@ -49,7 +53,7 @@ public class Startskaerm_alle_medarbejdere_fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        test = new Test();
+        test = new DBManager();
     }
 
 }

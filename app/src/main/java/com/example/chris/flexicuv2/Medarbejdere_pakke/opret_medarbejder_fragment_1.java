@@ -56,7 +56,7 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
         opretMedarbejderFragment2 = new opret_medarbejder_fragment_2();
         næste_medarbejdere = (Button) v.findViewById(R.id.næste_medarbejdere);
         næste_medarbejdere.setOnClickListener(this);
-        tilbage1 = (Button) v.findViewById(R.id.tilbage_medarbejdere1);
+        tilbage1 = (Button) v.findViewById(R.id.tilbage_medarbejdere);
         tilbage1.setOnClickListener(this);
 
         return v;
@@ -67,8 +67,10 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
         switch (v.getId()) {
             case R.id.næste_medarbejdere:
                 setFragment(opretMedarbejderFragment2);
-            case R.id.tilbage_medarbejdere1:
-
+                break;
+            case R.id.tilbage_medarbejdere:
+                getActivity().onBackPressed();
+                break;
         }
     }
 
