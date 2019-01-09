@@ -23,9 +23,11 @@ public class Test {
 
 
 
-    public Test() {
 
-        virk.setVirksomhedCVR("112233441sdf");
+    public Test(){
+/*
+        virk.setVirksomhedCVR("11223344");
+
         virk.setVirksomhedsnavn("Flexicu");
         virk.setAdresse("Anker Engelundsvej 1");
         virk.setPostnr("2800");
@@ -82,7 +84,9 @@ public class Test {
         mDatabase.child("virksomhed").child(virk.getVirksomhedCVR()).setValue(virk);
 
 
-        DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
+*/
+        /*DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
+
 
 
 
