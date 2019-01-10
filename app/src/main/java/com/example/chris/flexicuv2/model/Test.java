@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Test {
 
     //private final DatabaseReference mDatabase;
-    private Virksomhed virk = new Virksomhed();
+    private Bruger virk = new Bruger();
     private Bruger bruger1 = new Bruger();
     private Bruger bruger2 = new Bruger();
     private Bruger bruger3 = new Bruger();
@@ -118,7 +118,7 @@ public class Test {
         bruger1.setBrugerID("Key = " + dbBruger.getKey());
         System.out.println("index bruger 1: ");
         System.out.println("index bruger 2: ");
-
+*/
 
 
 
@@ -126,7 +126,7 @@ public class Test {
 
     }
 
-    public Virksomhed getVirk() {
+    public Bruger getVirk() {
         return virk;
     }
 }
