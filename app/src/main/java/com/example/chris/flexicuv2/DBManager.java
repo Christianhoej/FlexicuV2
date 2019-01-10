@@ -6,7 +6,6 @@ import android.provider.ContactsContract;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.model.Virksomhed;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
