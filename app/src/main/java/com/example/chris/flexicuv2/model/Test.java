@@ -3,8 +3,6 @@ package com.example.chris.flexicuv2.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 public class Test {
 
     private DatabaseReference mDatabase;
@@ -29,21 +27,19 @@ public class Test {
         virk.setVirksomhedsnavn("Flexicu");
         virk.setAdresse("Anker Engelundsvej 1");
         virk.setPostnr("2800");
-        bruger1.setNavn("Janus");
-        bruger1.setEmail("janus@janus.com");
+        bruger1.setBrugerensNavn("Janus");
+        bruger1.setBrugerEmail("janus@janus.com");
         bruger1.setTitel("Taber");
         bruger1.setTlfnr("34543265");
-        bruger1.setAdmin(false);
-        bruger2.setNavn("Gunn");
-        bruger2.setEmail("gunn@gunn.com");
+        bruger2.setBrugerensNavn("Gunn");
+        bruger2.setBrugerEmail("gunn@gunn.com");
         bruger2.setTitel("CEO");
         bruger2.setTlfnr("93912344");
-        bruger2.setAdmin(true);
-        bruger3.setNavn("Christian");
-        bruger3.setEmail("christian@christian.com");
+
+        bruger3.setBrugerensNavn("Christian");
+        bruger3.setBrugerEmail("christian@christian.com");
         bruger3.setTitel("CEO");
         bruger3.setTlfnr("34592034");
-        bruger3.setAdmin(true);
         med1.setNavn("Oliver");
         med1.setLoen(100);
         med1.setArbejdsomraade("Smed");
@@ -106,7 +102,7 @@ public class Test {
         String key5 = dbBruger.child("medarbejdere").push().getKey();
         dbBruger.child("medarbejdere").child(key5).setValue(med3);
         dbBruger.child("medarbejdere").child(key5).child("virksomhed").child(virk.getVirksomhedCVR()).setValue(true);
-        bruger1.setBrugerKey("Key = " + dbBruger.getKey());
+        bruger1.setBrugerID("Key = " + dbBruger.getKey());
         System.out.println("index bruger 1: ");
         System.out.println("index bruger 2: ");
 
