@@ -1,5 +1,6 @@
 package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,24 +17,29 @@ import com.example.chris.flexicuv2.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author Christian
+ * Fragment til den anden del af oprettelse af medarbejder.
+ * Inkluderer Email, tlf, arbejdsområde og kommentar
+ */
 public class opret_medarbejder_fragment_2 extends Fragment implements View.OnClickListener {
 
     public opret_medarbejder_fragment_2() {
 
     }
 
-    EditText medarbejder_email;
-    EditText medarbejder_tlf;
-    MultiSelectionSpinner arbejdsområde_spinner;
+    private EditText medarbejder_email;
+    private EditText medarbejder_tlf;
+    private MultiSelectionSpinner arbejdsområde_spinner;
 
-    FrameLayout medarbejdereFrame;
+    private FrameLayout medarbejdereFrame;
 
 
-    FrameLayout opret_medarbejder_1_Frame;
+    private FrameLayout opret_medarbejder_1_Frame;
     private opret_medarbejder_fragment_1 opretMedarbejderFragment1;
 
-    Button næste_medarbejdere2;
-    Button tilbage2;
+    private Button opret_medarbejder;
+    private Button tilbage2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,8 +59,8 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         //Fragmentet for opret medarbejder 1
         opretMedarbejderFragment1 = new opret_medarbejder_fragment_1();
 
-        næste_medarbejdere2 = (Button) v.findViewById(R.id.næste_medarbejdere2);
-        næste_medarbejdere2.setOnClickListener(this);
+        opret_medarbejder = (Button) v.findViewById(R.id.opret_medarbejder);
+        opret_medarbejder.setOnClickListener(this);
         tilbage2 = (Button) v.findViewById(R.id.tilbage_medarbejdere2);
         tilbage2.setOnClickListener(this);
 
@@ -65,9 +71,9 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.næste_medarbejdere2:
-                //getActivity().onBackPressed();
-                Toast.makeText(getContext(), "HURRA", Toast.LENGTH_SHORT).show();
+            case R.id.opret_medarbejder:
+                openSkaerm(Medarbejdere_skaerm.class);
+                Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tilbage_medarbejdere2:
                 getActivity().onBackPressed();
@@ -82,7 +88,13 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
-
+    public void openSkaerm(Class a){
+        Intent intent = new Intent(getActivity(),a);
+        startActivity(intent);
+    }
+    /**
+     * opretter spinner til valg af arbejdsområde
+     */
     public void opretSpinner(){
         List<String> arbejdsområde_liste = new ArrayList<String>();
         arbejdsområde_liste.add("Vælg arbejdsområde");

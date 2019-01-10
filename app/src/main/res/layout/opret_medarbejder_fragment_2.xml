@@ -106,12 +106,12 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Næste"
+                android:text="opret"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_corners_green"
+                android:background="@drawable/rounded_corners_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/hvid"
-                android:id="@+id/næste_medarbejdere2"/>
+                android:id="@+id/opret_medarbejder"/>
 
             <Space
                 android:layout_width="wrap_content"
