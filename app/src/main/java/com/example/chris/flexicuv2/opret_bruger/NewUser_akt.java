@@ -17,7 +17,6 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.login.LoginScreen_akt;
 
 import com.example.chris.flexicuv2.model.Bruger;
-import com.example.chris.flexicuv2.model.Virksomhed;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

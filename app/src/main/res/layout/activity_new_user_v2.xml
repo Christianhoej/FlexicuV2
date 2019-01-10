@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".NewUserScreen">
+    tools:context=".opret_bruger.NewUser_akt">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Fulde navn"
+            android:hint="Fulde brugerensNavn"
             android:inputType="textPersonName" />
 
         <EditText
@@ -118,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Privat email"
+            android:hint="Privat brugerEmail"
             android:inputType="textPersonName" />
 
         <LinearLayout

@@ -24,13 +24,13 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private EditText password;
 
 
-    LoginPresenter lp;
+    LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        lp = new LoginPresenter(this); //Evt. lav metode der kan sætte presenter på.
+        presenter = new LoginPresenter(this); //Evt. lav metode der kan sætte presenter på.
 
 
         setContentView(R.layout.activity_login_screen);
@@ -46,7 +46,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
         password = findViewById(R.id.passwordInput);
 
-        //password.setText(lp.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views
+        //password.setText(presenter.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views
         password.setHint("Indtast adgangskode");
         Test test = new Test();
 
@@ -98,6 +98,8 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         }*/
 
       if(v.getId() == logIn.getId()){
+          presenter.checkLoginCredentials(username.toString(), password.toString());
+
           openStartScreen();
       }
       else{
@@ -105,7 +107,6 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
       }
 
     }
-
 
 
     public boolean isEmpty(EditText text){
@@ -121,6 +122,16 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     @Override
     public String getPassword() {
         return password.getText().toString();
+    }
+
+    @Override
+    public void setErrorMsg(String error) {
+        password.setError(error);
+    }
+
+    @Override
+    public void setErrorMsgEmailNotFilled(String error){
+        username.setError(error);
     }
 
 

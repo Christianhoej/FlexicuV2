@@ -1,6 +1,7 @@
 package com.example.chris.flexicuv2.login;
 
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.chris.flexicuv2.model.Bruger;
 
@@ -18,14 +19,17 @@ public class LoginPresenter{
         this.pres = pres;
     }
     public String setText(){
-        return "Janus rules";
+        return "Gunn rules";
     }
-    public boolean checkLoginCredentials(String email, String password){
+    public void checkLoginCredentials(String email, String password){
         //TODO lav "et tjek" af login for at se om loginoplysinger er ok
+
+        pres.setErrorMsg("Fejl");
+        pres.setErrorMsgEmailNotFilled("Fejl");
         //find bruger med match, hvis det findes
         //find tilsvarende password
         // if password == fundne password
-        return true;
+        //return true;
         //else
         //return false;
     }
@@ -37,5 +41,9 @@ public class LoginPresenter{
     public interface UpdateLoginScreen{
         String getEmail();
         String getPassword();
+
+        public void setErrorMsg(String error);
+
+        public void setErrorMsgEmailNotFilled(String error);
     }
 }
