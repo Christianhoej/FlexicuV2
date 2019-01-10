@@ -1,8 +1,7 @@
 package com.example.chris.flexicuv2;
 
 import android.app.Activity;
-import android.app.Application;
-import android.provider.ContactsContract;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +30,9 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     private Singleton singleton;
     private Medarbejder med1 = new Medarbejder();
     private FirebaseAuth mAuth;
+    private static final String TAG = "EmailPassword";
+    private static boolean success;
+
 
     public DBManager() {
         singleton = Singleton.getInstance();
@@ -105,28 +107,54 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
 
     }
 
-    public void createAuth(Activity activity, String email, String password){
-
+    public boolean createUserAuth(final Context context, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        success = true;
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                   //         Log.d(TAG, "createUserWithEmail:success");
+                            Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
+                            success = true;
                         } else {
                             // If sign in fails, display a message to the user.
-                     //       Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                          //  Toast.makeText(activity.getBaseContext(), "Authentication failed.",
-                          //          Toast.LENGTH_SHORT).show();
-  //                          updateUI(null);
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(context, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            success = false;
                         }
 
                         // ...
                     }
                 });
+        return success;
+
+    }
+
+    public boolean signInAuth(final Context context, String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            //FirebaseUser user = mAuth.getCurrentUser();
+
+                            success = true;
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(context, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            success = false;
+                        }
+                    }
+                });
+        return success;
+
     }
 
 
