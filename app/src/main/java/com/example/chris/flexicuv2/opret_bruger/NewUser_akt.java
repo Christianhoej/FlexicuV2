@@ -5,12 +5,17 @@ package com.example.chris.flexicuv2.opret_bruger;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.chris.flexicuv2.R;
@@ -23,14 +28,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 
-public class NewUser_akt extends AppCompatActivity implements View.OnClickListener, NewUser_Presenter.UpdateNewUser{
+public class NewUser_akt extends AppCompatActivity implements View.OnClickListener, NewUser_Presenter.UpdateNewUser {
 
     private EditText companyCVR, companyName, companyAddress, companyZipCode;
     private TextView companyCity;
     private EditText contactName, contactEmail, contactPhone, contactTitle;
     private EditText username, usernameRepeated;
     private EditText password, passwordRepeated;
-    private CheckBox checkPrivate, checkPublic;
+    private RadioGroup radioOptions;
+    private RadioButton checkPrivate, checkPublic;
     private CheckBox checkFormalities;
     private Button createUserBtn;
     private Button cancelBtn;
@@ -38,60 +44,48 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
     private DatabaseReference mDatabase;
     private Bruger bruger;
 
+    NewUser_Presenter presenter;
+
     private HashMap<Integer, String> zipToCity = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_v2);
+
+        presenter = new NewUser_Presenter(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         virksomhed = new Bruger();
         bruger = new Bruger();
 
         companyCVR = findViewById(R.id.companyCVR);
-        companyCVR.setHint("CVR");
+        companyCVR.addTextChangedListener(CVRtextWatch);
         companyName = findViewById(R.id.companyName);
-        companyName.setHint("Virksomhedsnavn");
         companyAddress = findViewById(R.id.companyAddress);
-        companyAddress.setHint("Adresse");
         companyZipCode = findViewById(R.id.companyZipCode);
-        companyZipCode.setHint("Postnr");
 
         companyCity = findViewById(R.id.companyCity);
-        companyCity.setHint("By");
 
         contactName = findViewById(R.id.contactName);
-        contactName.setHint("Fulde navn");
-        contactEmail = findViewById(R.id.contactEmail);
-        contactEmail.setHint("E-mail");
         contactPhone = findViewById(R.id.contactPhone);
-        contactPhone.setHint("Tlf");
         contactTitle = findViewById(R.id.contactTitle);
-        contactTitle.setHint("Tittel");
 
         username = findViewById(R.id.logOnEmail);
-        username.setHint("E-mail");
         usernameRepeated = findViewById(R.id.logOnEmailRepeat);
-        usernameRepeated.setHint("Gentag e-mail");
         password = findViewById(R.id.logOnPassword);
-        password.setHint("Kodeord");
         passwordRepeated = findViewById(R.id.logOnPasswordRepeat);
-        passwordRepeated.setHint("Gentag kodeord");
 
+        radioOptions = findViewById(R.id.radio_options);
         checkPrivate = findViewById(R.id.checkPrivate);
-        checkPrivate.setText("Privat");
+
         checkPublic = findViewById(R.id.checkPublic);
-        checkPublic.setText("Offentlig");
         checkFormalities = findViewById(R.id.checkFormalities);
-        //checkFormalities.setText("JA, jeg har læst, forstået og accepterer betingelserne");
 
         createUserBtn = findViewById(R.id.createUserBtn);
         createUserBtn.setOnClickListener(this);
-        createUserBtn.setText("Opret bruger");
 
         cancelBtn = findViewById(R.id.cancelBtn);
         cancelBtn.setOnClickListener(this);
-        cancelBtn.setText("Annuller");
 
 
     }
@@ -99,40 +93,35 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == v.getId()) {
-            virksomhed.setVirksomhedsnavn(companyName.getText().toString());
-            virksomhed.setAdresse(companyAddress.getText().toString());
-            virksomhed.setPostnr(companyZipCode.getText().toString());
-            virksomhed.setVirksomhedCVR(companyCVR.getText().toString());
 
+        int selectedId = radioOptions.getCheckedRadioButtonId();
 
+        if(selectedId == R.id.checkPrivate)
+            selectedId = 1;
+        if(selectedId == R.id.checkPublic)
+            selectedId = 2;
 
-            bruger.setBrugerensNavn(contactName.getText().toString());
-            bruger.setBrugerEmail(contactEmail.getText().toString());
-            bruger.setTitel(contactTitle.getText().toString());
-            bruger.setTlfnr(contactPhone.getText().toString());
+        if (v.getId() == R.id.createUserBtn){
+            presenter.korrektudfyldtInformation(
+                    companyCVR.getText().toString(),
+                    companyName.getText().toString(),
+                    companyAddress.getText().toString(),
+                    companyZipCode.getText().toString(),
+                    companyCity.getText().toString(),
+                    contactName.getText().toString(),
+                    contactPhone.getText().toString(),
+                    contactTitle.getText().toString(),
+                    username.getText().toString(),
+                    usernameRepeated.getText().toString(),
+                    password.getText().toString(),
+                    passwordRepeated.getText().toString(),
+                    selectedId,
+                    checkFormalities.isChecked());
 
+        }
+        else{
 
-            //virksomhed.addBruger(bruger);
-
-
-
-            mDatabase.child("virksomhed").child(virksomhed.getVirksomhedCVR()).setValue(virksomhed);
-
-
-            DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
-
-
-            //int brugerindex = virksomhed.getBrugere().indexOf(bruger);
-
-
-            String key = dbBruger.child("bruger").push().getKey();
-            dbBruger.child("bruger").child(key).setValue(bruger);
-            dbBruger.child("bruger").child(key).child("virksomhed").child(virksomhed.getVirksomhedCVR()).setValue(true);
-
-            bruger.setBrugerID("Key = " + dbBruger.getKey());
-            System.out.println(bruger.getBrugerID());
-            openLoginScreen();
+            finish();
         }
     }
 
@@ -147,27 +136,119 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void updateVirksomhedsNavn(String vsh_navn) {
-
+    companyName.setText(vsh_navn);
     }
 
     @Override
     public void updateAdresse(String adresse) {
-
+        companyAddress.setText(adresse);
     }
 
     @Override
     public void updatePostNr(String postNr) {
-
+    companyZipCode.setText(postNr);
     }
 
     @Override
     public void updateBy(String by) {
+    companyCity.setText(by);
+    }
+
+    @Override
+    public void toastTilBrugerOprettet(String displayedMessage) {
+        Toast.makeText(this, displayedMessage,
+                Toast.LENGTH_LONG).show();    }
+
+    @Override
+    public void errorCVR(String errorMsg) {
+    companyCVR.setError(errorMsg);
+    }
+
+    @Override
+    public void errorVirksomhedsnavn(String errorMsg) {
+        companyName.setError(errorMsg);
+    }
+
+    @Override
+    public void errorAdresse(String errorMsg) {
+    companyAddress.setError(errorMsg);
+    }
+
+    @Override
+    public void errorBy(String errorMsg) {
+    companyCity.setError(errorMsg);
+    }
+
+    @Override
+    public void errorPostnr(String errorMsg) {
+        companyZipCode.setError(errorMsg);
 
     }
 
     @Override
-    public void toastIfMissingOrWrongInformation(String displayedMessage) {
-
+    public void errorNavn(String errorMsg) {
+        contactName.setError(errorMsg);
     }
+
+    @Override
+    public void errorTlf(String errorMsg) {
+        contactPhone.setError(errorMsg);
+    }
+
+    @Override
+    public void errorTitel(String errorMsg) {
+    contactTitle.setError(errorMsg);
+    }
+
+    @Override
+    public void errorEmailForm(String errorMsg) {
+        username.setError(errorMsg);
+    }
+
+    @Override
+    public void errorEmailMatches(String errorMsg) {
+        usernameRepeated.setError(errorMsg);
+    }
+
+    @Override
+    public void errorPasswordLength(String errorMsg) {
+        password.setError(errorMsg);
+    }
+
+    @Override
+    public void errorPasswordMatches(String errorMsg) {
+        passwordRepeated.setError(errorMsg);
+    }
+
+    @Override
+    public void errorPrivatoplysninger(String errorMsg) {
+        checkPublic.setError(errorMsg);
+    }
+
+    @Override
+    public void errorAcceptTerms(String errorMsg) {
+        checkFormalities.setError(errorMsg);
+    }
+
+    //Afsnit der "læser på ændring i edittexten for CVR"
+    private TextWatcher CVRtextWatch = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.length()==8){
+            presenter.hentVirksomhedsoplysninger(s.toString());
+
+        }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
 }

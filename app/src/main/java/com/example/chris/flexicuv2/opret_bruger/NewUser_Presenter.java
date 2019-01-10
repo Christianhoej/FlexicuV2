@@ -5,52 +5,149 @@ import android.util.Patterns;
 
 public class NewUser_Presenter {
     private UpdateNewUser updateNewUser;
+
+    private final String ERRORMSGCVR = "CVRFEJL";
+    private final String ERRORVIRKSOMHEDSNAVN="VSHNAVNFEJL";
+    private final String ERRORADRESSE = "ADRESSEFEJL";
+    private final String ERRORBY = "BYFEJL";
+
+    private final String ERRORNAVN = "NAVENFEJL";
+    private final String ERRORTLFNR = "TELEFONNUMMER";
+    private final String ERRORTITEL =  "TITELFEJL";
+
+    private final String ERROREMAILFORM = "EMAILFORMFEJL";
+    private final String ERROREMAILMATCHES = "EMAILMATCHESFEJL";
+    private final String ERRORPASSWORDLENGTH = "PASSWORDLENGTHFEJL";
+    private final String ERRORPASSWORDMATCHES = "PASSWORDMATCHESFEJL";
+    private final String ERRORPRIVATOPLYSNINGER = "PRIVATOPLYSNINGERFEJL"; //TODO behøves den? - Button kan deaktiveres indtil den er tjekket af
+    private final String ERRORACCEPTERVILKÅR = "ACCEPTERVILKÅRFEJL"; //TODO Behøves den?
+    private final String ERRORPOSTNR = "POSTNRFEJL";
+    private final String BRUGEROPRETTET = "Bruger oprettet";
+
+
+
     public NewUser_Presenter(UpdateNewUser updateNewUser){
     this.updateNewUser = updateNewUser;
     }
 
     /**
+     * Metoden skal anvendes til at kontrollere at alle informationer er blevet tastet "tilstrækkeligt ind".
      *
-     * @return true if the information passed is correctly entered
-     *          false if the information passed is not correctly entered
+     * @param CVR : virksomhedens cvr (8 cifre)
+     * @param Virksomhedsnavn : virksomhedens navn
+     * @param adresse : virksomhedens adresse
+     * @param postNr : virksomhedens postnr
+     * @param by : Virksomhedens by (tilhørende adresse)
+     * @param email1 Først email der tastes ind
+     * @param email2 anden email der tastes ind
+     * @param brugerensNavn : Navnet på brugeren
+     * @param brugerensTlf  : Brugerens tlf-nummer (8 cifre)
+     * @param brugerensTitel : brugerens titel (i virksomheden)
+     * @param password : Første password der indtastes
+     * @param password2 : Andet password der skal sikre brugeren har tastet rigtigt ind
+     * @param privatoplysninger -1 if nothing is chosen, 1 if private, 2 if public
+     * @param accepterbetingelser
+     * @return boolean true hvis alle informationer er blevet tastet godt nok ind.
      */
-    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr, String by, String email1, String email2, String password, String password2, String privatoplysninger, boolean accepterbetingelser){
-        boolean CVROK = checkCVR(CVR);
-        boolean vshOK = !Virksomhedsnavn.isEmpty();
-        boolean adresseOK = !adresse.isEmpty();
-        boolean postNrOK = checkPostNr(postNr);
-        boolean byOK = !by.isEmpty();
-        boolean email = Patterns.EMAIL_ADDRESS.matcher(email1).matches();
+    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr, String by,String brugerensNavn, String brugerensTlf, String brugerensTitel, String email1, String email2, String password, String password2, int privatoplysninger, boolean accepterbetingelser) {
+        int errors = 0;
 
 
-        return true;
-    }
-
-    //TODO - Metode kan lægges sammen med checkCVR()
-    private boolean checkPostNr(String postNr) {
-        if(postNr.length() == 4){
-            int ammNumbers = 0;
-        for (int i = 0; i < 4; i++) {
-            if (postNr.charAt(i) <= 9 && postNr.charAt(i) >= 0) {
-                ammNumbers++;
-            }
+        boolean CVROK = checkStringOnlyNumbersAndLength(CVR, 8);
+        if (!CVROK) {
+            updateNewUser.errorCVR(ERRORMSGCVR);
+            errors++;
         }
-        if(ammNumbers == 8)
-            return true;
-    }
+        boolean vshOK = !Virksomhedsnavn.isEmpty();
+        if (!vshOK) {
+            updateNewUser.errorVirksomhedsnavn(ERRORVIRKSOMHEDSNAVN);
+            errors++;
+        }
+        boolean adresseOK = !adresse.isEmpty();
+        if (!adresseOK) {
+            updateNewUser.errorAdresse(ERRORADRESSE);
+            errors++;
+        }
+        boolean postNrOK = checkStringOnlyNumbersAndLength(postNr, 4);
+        if (!postNrOK){
+            updateNewUser.errorPostnr(ERRORPOSTNR);
+        errors++;
+        }
+        boolean byOK = !by.isEmpty();
+        if(!byOK) {
+            updateNewUser.errorBy(ERRORBY);
+            errors++;
+        }
 
+
+         boolean navnOK = brugerensNavn.length()>0;
+        if (!navnOK){
+            updateNewUser.errorNavn(ERRORNAVN);
+            errors++;
+        }
+        boolean brugerensTlfOK = checkStringOnlyNumbersAndLength(brugerensTlf, 8);
+        if(!brugerensTlfOK){
+            updateNewUser.errorTlf(ERRORTLFNR);
+            errors++;
+        }
+        boolean brugerTitelOK = brugerensTitel.length()>0;
+        if(!brugerTitelOK){
+            updateNewUser.errorTitel(ERRORTITEL);
+        }
+
+
+        boolean emailOK = Patterns.EMAIL_ADDRESS.matcher(email1).matches();
+        if(!emailOK) {
+            updateNewUser.errorEmailForm(ERROREMAILFORM);
+            errors++;
+        }
+        boolean emailMatchesOK = email1.equals(email2);
+        if(!emailMatchesOK) {
+            updateNewUser.errorEmailMatches(ERROREMAILMATCHES);
+            errors++;
+        }
+        boolean passwordlengthOK = password.length() >= 8;
+        if(!passwordlengthOK) {
+            updateNewUser.errorPasswordLength(ERRORPASSWORDLENGTH);
+            errors++;
+        }
+        boolean passwordMatchesOK = password.equals(password2);
+        if(!passwordMatchesOK) {
+            updateNewUser.errorPasswordMatches(ERRORPASSWORDMATCHES);
+            errors++;
+        }
+
+        //TODO - Ingen check - Skal bare bruge værdien på privatoplysninger til at oprette (privat/offentlig)
+        /*boolean privatoplysningerOK = privatoplysninger == -1;
+        if(!privatoplysningerOK) {
+            updateNewUser.errorPrivatoplysninger(ERRORPRIVATOPLYSNINGER);
+            errors++;
+        }
+        */
+        //TODO Behøves denne? - Kan deaktivere "opret"-knappen i NewUser_akt
+        if(!accepterbetingelser) {
+            updateNewUser.errorAcceptTerms(ERRORACCEPTERVILKÅR);
+            errors++;
+        }
+
+        if (errors > 0 )
             return false;
+        else {
+        updateNewUser.toastTilBrugerOprettet(BRUGEROPRETTET);
+        //TODO Opret bruger og send til databasen
+        return true;
+        }
     }
 
-    private boolean checkCVR(String cvr) {
-        if(cvr.length() == 8) {
+    private boolean checkStringOnlyNumbersAndLength(String cvr, int stringlength) {
+        if(cvr.length() == stringlength) {
             int ammNumbers = 0;
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < stringlength; i++) {
                 if (cvr.charAt(i) <= 9 && cvr.charAt(i) >= 0) {
                 ammNumbers++;
                 }
             }
-            if(ammNumbers == 8)
+            if(ammNumbers == stringlength)
                 return true;
         }
 
@@ -72,15 +169,44 @@ public class NewUser_Presenter {
     }
 
     /**
+     * Metode skal hente CVR oplysningerne, virksomhedsnavn, virksomhedsadresse, by og postnr.
+     * @param CVR: 8 cifret cvr string
+     */
+    public void hentVirksomhedsoplysninger(String CVR) {
+    updateNewUser.updateAdresse("Dette er min adresse");
+    updateNewUser.updateVirksomhedsNavn("Janus Aps");
+    updateNewUser.updatePostNr("2800");
+    updateNewUser.updateBy("Herlev");
+    }
+
+    /**
      * Interfacet implementeres af NewUser_akt for at kunne opdatere viewet fra presenteren
      */
     interface UpdateNewUser{
+
         void updateVirksomhedsNavn(String vsh_navn);
         void updateAdresse(String adresse);
         void updatePostNr(String postNr);
         void updateBy(String by);
-        // Toast kan evt. erstattes af noget andet visuelt der fortæller brugeren hvor det går galt.
-        void toastIfMissingOrWrongInformation(String displayedMessage);
+
+        void toastTilBrugerOprettet(String displayedMessage);
+
+        void errorCVR(String errorMsg);
+        void errorVirksomhedsnavn(String errorMsg);
+        void errorAdresse(String errorMsg);
+        void errorBy(String errorMsg);
+        void errorPostnr(String errorMsg);
+
+        void errorNavn(String errorMsg);
+        void errorTlf(String errorMsg);
+        void errorTitel(String errorMsg);
+        void errorEmailForm(String errorMsg);
+        void errorEmailMatches(String errorMsg);
+        void errorPasswordLength(String errorMsg);
+        void errorPasswordMatches(String errorMsg);
+        void errorPrivatoplysninger(String errorMsg);
+        void errorAcceptTerms(String errorMsg);
+
 
 
 

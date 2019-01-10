@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+
             android:name="com.example.chris.flexicuv2.login.LoginScreen_akt"
+
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,10 +28,12 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name="com.example.chris.flexicuv2.StartSkærm.Startskaerm"
             tools:ignore="DuplicateActivity" />
         <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm" />
         <activity android:name="com.example.chris.flexicuv2.opret_bruger.NewUser_akt" />
+
 
         <activity android:name=".Medarbejder" />
 
