@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2;
+package com.example.chris.flexicuv2.StartSkærm;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import android.widget.FrameLayout;
 
 
 import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
+import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;
 import com.example.chris.flexicuv2.fragments.Lej_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;
@@ -30,7 +31,7 @@ import com.example.chris.flexicuv2.fragments.Startskaerm_alle_medarbejdere_fragm
 import com.example.chris.flexicuv2.fragments.Startskaerm_lejede_Medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Udlej_Fragment;
 
-public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, StartSkærmPresenter.UpdateStartskærm {
 
     private BottomNavigationView startskaermNav;
 
@@ -39,6 +40,8 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
     Lej_fragment fragmentLej;
     Indbakke_fragment fragmentIndbakke;
     Hjem_fragment fragmentHjem;
+
+    StartSkærmPresenter presenter;
 
 
 
@@ -50,6 +53,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startskaerm);
+        presenter = new StartSkærmPresenter(this);
 
         /**
          * Til at køre mellem fragments
@@ -165,5 +169,20 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         for(Fragment fragment : getSupportFragmentManager().getFragments()){
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
+    }
+
+    @Override
+    public void updateRecyclerView() {
+        //TODO hvordan recyclerview1 skal opdateres
+    }
+
+    @Override
+    public void updateRecyclerView2() {
+        //TODO hvordan recyclerview 2 skal opdateres
+    }
+
+    @Override
+    public void updateRecyclerView3() {
+        //TODO hvordan recyclerview 3 skal opdateres
     }
 }

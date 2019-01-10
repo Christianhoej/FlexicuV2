@@ -24,7 +24,7 @@ public class vis_medarbejder_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.vis_medarbejder_fragment, container, false);
+        return inflater.inflate(R.layout.vis_medarbejder_popup_fragment, container, false);
     }
 
 }

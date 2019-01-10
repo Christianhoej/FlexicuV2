@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.chris.flexicuv2.Indlejninger.Lej;
+import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 
 public class Udlej_akt extends AppCompatActivity {
 
