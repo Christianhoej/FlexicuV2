@@ -9,7 +9,7 @@ public class Singleton extends Activity {
     private static Singleton singleInstance;
     public static ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
     private static ArrayList<Medarbejder> lånteMedarbejdere = new ArrayList<Medarbejder>();
-    public static Virksomhed virksomhed;
+    public static Bruger bruger;
 
     private Singleton(){
 
@@ -19,7 +19,7 @@ public class Singleton extends Activity {
         if(singleInstance == null){
             singleInstance = new Singleton();
             medarbejdere = new ArrayList<>();
-            virksomhed = new Virksomhed();
+            bruger = new Bruger();
         }
         return singleInstance;
     }
@@ -40,12 +40,12 @@ public class Singleton extends Activity {
         Singleton.medarbejdere.remove(medarbejder);
     }
 
-    public static Virksomhed getVirksomhed() {
-        return virksomhed;
+    public static Bruger getBruger() {
+        return bruger;
     }
 
-    public static void setVirksomhed(Virksomhed virksomhed) {
-        Singleton.virksomhed = virksomhed;
+    public static void setBruger(Bruger bruger) {
+        Singleton.bruger = bruger;
     }
 
 }

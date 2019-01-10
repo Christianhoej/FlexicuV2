@@ -1,39 +1,40 @@
 package com.example.chris.flexicuv2.model;
 
+import java.util.ArrayList;
+
 public class Bruger {
-    private String email;
-    private String navn;
+    private String brugerEmail;
+    private String brugerensNavn;
     private String tlfnr;
-    private String kodeord;
-    private boolean admin;
     private String titel;
-    private String brugerKey;
+    private String brugerID;
+    private String virksomhedCVR;
+    private String virksomhedsnavn, adresse, postnr;
+    private ArrayList<String> medarbejderID = new ArrayList<String>();
 
 
-    public String getBrugerKey() {
-        return brugerKey;
+    public String getBrugerID() {
+        return brugerID;
     }
 
-    public void setBrugerKey(String brugerKey) {
-        this.brugerKey = brugerKey;
+    public void setBrugerID(String brugerID) {
+        this.brugerID = brugerID;
     }
 
-
-
-    public String getEmail() {
-        return email;
+    public String getBrugerEmail() {
+        return brugerEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBrugerEmail(String brugerEmail) {
+        this.brugerEmail = brugerEmail;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getBrugerensNavn() {
+        return brugerensNavn;
     }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
+    public void setBrugerensNavn(String brugerensNavn) {
+        this.brugerensNavn = brugerensNavn;
     }
 
     public String getTlfnr() {
@@ -44,27 +45,62 @@ public class Bruger {
         this.tlfnr = tlfnr;
     }
 
-    public String getKodeord() {
-        return kodeord;
-    }
-
-    public void setKodeord(String kodeord) {
-        this.kodeord = kodeord;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
     public String getTitel() {
         return titel;
     }
 
     public void setTitel(String titel) {
         this.titel = titel;
+    }
+
+    public void setVirksomhedsnavn(String virksomhedsnavn) {
+        this.virksomhedsnavn = virksomhedsnavn;
+    }
+
+    public String getVirksomhedsnavn() {
+        return virksomhedsnavn;
+    }
+
+    public void setVirksomhedCVR(String virksomhedCVR) {
+        this.virksomhedCVR = virksomhedCVR;
+    }
+
+    public String getVirksomhedCVR() {
+        return virksomhedCVR;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setPostnr(String postnr) {
+        this.postnr = postnr;
+    }
+
+    public String getPostnr() {
+        return postnr;
+    }
+
+    public void addMedarbejdere(Medarbejder medarbejder){
+        medarbejderID.add(medarbejder.getMedarbejderID());
+    }
+
+    public void removeMedarbejdere(Medarbejder medarbejder){
+        medarbejderID.remove(medarbejder);
+    }
+
+    public ArrayList<String> getMedarbejderID() {
+        return medarbejderID;
+    }
+
+    public void setMedarbejderID(ArrayList<Medarbejder> medarbejderID) {
+
+        for(int i = 0; i< medarbejderID.size(); i++){
+            this.medarbejderID.add(medarbejderID.get(i).getMedarbejderID());
+        }
     }
 }
