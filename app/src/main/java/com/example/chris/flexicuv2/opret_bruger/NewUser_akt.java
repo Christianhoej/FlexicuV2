@@ -35,7 +35,7 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
     private CheckBox checkFormalities;
     private Button createUserBtn;
     private Button cancelBtn;
-    private Virksomhed virksomhed;
+    private Bruger virksomhed;
     private DatabaseReference mDatabase;
     private Bruger bruger;
 
@@ -46,7 +46,7 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_new_user_v2);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        virksomhed = new Virksomhed();
+        virksomhed = new Bruger();
         bruger = new Bruger();
 
         companyCVR = findViewById(R.id.companyCVR);
@@ -108,14 +108,13 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
 
 
 
-            bruger.setAdmin(true);
-            bruger.setNavn(contactName.getText().toString());
-            bruger.setEmail(contactEmail.getText().toString());
+            bruger.setBrugerensNavn(contactName.getText().toString());
+            bruger.setBrugerEmail(contactEmail.getText().toString());
             bruger.setTitel(contactTitle.getText().toString());
             bruger.setTlfnr(contactPhone.getText().toString());
 
 
-            virksomhed.addBruger(bruger);
+            //virksomhed.addBruger(bruger);
 
 
 
@@ -125,15 +124,15 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
             DatabaseReference dbBruger = FirebaseDatabase.getInstance().getReference();
 
 
-            int brugerindex = virksomhed.getBrugere().indexOf(bruger);
+            //int brugerindex = virksomhed.getBrugere().indexOf(bruger);
 
 
             String key = dbBruger.child("bruger").push().getKey();
             dbBruger.child("bruger").child(key).setValue(bruger);
             dbBruger.child("bruger").child(key).child("virksomhed").child(virksomhed.getVirksomhedCVR()).setValue(true);
 
-            bruger.setBrugerKey("Key = " + dbBruger.getKey());
-            System.out.println(bruger.getBrugerKey());
+            bruger.setBrugerID("Key = " + dbBruger.getKey());
+            System.out.println(bruger.getBrugerID());
             openLoginScreen();
         }
     }

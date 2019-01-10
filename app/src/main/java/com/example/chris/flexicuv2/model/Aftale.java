@@ -7,8 +7,8 @@ public class Aftale {
     private int aftaleID;
     private boolean helePeriode;
     private int minDage;
-    private Virksomhed udlejer;
-    private Virksomhed lejer;
+    private Bruger udlejer;
+    private Bruger lejer;
     private Medarbejder medarbejder;
     private ArrayList<AftaleIndhold> aftaleIndhold = new ArrayList<AftaleIndhold>();
 
@@ -36,19 +36,19 @@ public class Aftale {
         this.minDage = minDage;
     }
 
-    public Virksomhed getUdlejer() {
+    public Bruger getUdlejer() {
         return udlejer;
     }
 
-    public void setUdlejer(Virksomhed udlejer) {
+    public void setUdlejer(Bruger udlejer) {
         this.udlejer = udlejer;
     }
 
-    public Virksomhed getLejer() {
+    public Bruger getLejer() {
         return lejer;
     }
 
-    public void setLejer(Virksomhed lejer) {
+    public void setLejer(Bruger lejer) {
         this.lejer = lejer;
     }
 
