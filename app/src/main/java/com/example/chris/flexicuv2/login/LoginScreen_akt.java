@@ -24,13 +24,13 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private EditText password;
 
 
-    LoginPresenter lp;
+    LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        lp = new LoginPresenter(this); //Evt. lav metode der kan sætte presenter på.
+        presenter = new LoginPresenter(this); //Evt. lav metode der kan sætte presenter på.
 
 
         setContentView(R.layout.activity_login_screen);
@@ -43,11 +43,13 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
         username = findViewById(R.id.emailInput);
         username.setHint("Indtast email");
+        username.setText("gunn@test.dk");
 
         password = findViewById(R.id.passwordInput);
 
-        //password.setText(lp.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views
+        //password.setText(presenter.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views
         password.setHint("Indtast adgangskode");
+        password.setText("123qwe");
         Test test = new Test();
 
     }
@@ -64,7 +66,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-      /*  boolean rightInput = true;
+       /* boolean rightInput = true;
         // If the login button is pressed
         if(v.getId() == logIn.getId()){
             // If the email edittext is not empty
@@ -98,18 +100,14 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         }*/
 
       if(v.getId() == logIn.getId()){
-          openStartScreen();
+          if(presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this)){
+              openStartScreen();
+          }
       }
       else{
           openNewUserScreen();
       }
 
-    }
-
-
-
-    public boolean isEmpty(EditText text){
-        return TextUtils.isEmpty(text.getText().toString());
     }
 
 
@@ -121,6 +119,16 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     @Override
     public String getPassword() {
         return password.getText().toString();
+    }
+
+    @Override
+    public void setErrorMsgPassword(String error) {
+        password.setError(error);
+    }
+
+    @Override
+    public void setErrorMsgEmail(String error){
+        username.setError(error);
     }
 
 

@@ -1,14 +1,18 @@
 package com.example.chris.flexicuv2.Indlejninger;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 
 import com.example.chris.flexicuv2.R;
@@ -62,6 +66,9 @@ public class Lej_filtrer extends Fragment {
 
         return v;
     }
+
+
+
 
 
 

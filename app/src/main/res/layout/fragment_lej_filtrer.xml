@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/flex_green_rektangel"
     tools:context="com.example.chris.flexicuv2.Indlejninger.Lej_filtrer"
     >
 
@@ -13,7 +18,8 @@
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:orientation="vertical">
+           android:orientation="vertical"
+           android:layout_marginLeft="5dp">
 
            <ImageView
                android:layout_width="210dp"
@@ -282,8 +288,6 @@
            </LinearLayout>
 
        </LinearLayout>
-
-
 
    </ScrollView>
 

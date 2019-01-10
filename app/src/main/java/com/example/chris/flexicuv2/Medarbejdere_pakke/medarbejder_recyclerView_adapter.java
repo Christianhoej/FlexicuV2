@@ -7,12 +7,16 @@ package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +26,7 @@ import com.example.chris.flexicuv2.fragments.RecyclerViewAdapter_AlleMedarbejder
 
 import java.util.ArrayList;
 
-public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medarbejder_recyclerView_adapter.ViewHolder>{
+public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medarbejder_recyclerView_adapter.ViewHolder> {
 
     private static final String TAG = "recyclerView_adapter";
 
@@ -73,17 +77,51 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on" + mMedarbejderNavn.get(i));
 
-                Toast.makeText(mContext, mMedarbejderNavn.get(i), Toast.LENGTH_SHORT).show();
+                /*Medarbejdere_skaerm medarbejdere_skaerm = new Medarbejdere_skaerm();
+                medarbejdere_skaerm.onButtonShowPopupWindowClick(v);*/
+                onButtonShowPopupWindowClick(v);
+                //Toast.makeText(mContext, mMedarbejderNavn.get(i), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
+    /**
+     * https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
+     * @param view
+     */
+    public void onButtonShowPopupWindowClick(View view) {
+        //tilPopUp = (View) findViewById(R.id.tilPopUp);
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.vis_medarbejder_popup_fragment, null);
+
+        // create the popup window
+        int width = 1000;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        /*// dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });*/
+    }
+
+
+
     @Override
     public int getItemCount() {
         return mMedarbejderNavn.size();
     }
-
 
     /**
      * Indre klasse
@@ -101,10 +139,9 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
             medarbejder_navn = itemView.findViewById(R.id.medarbejder_navn_recycler);
             medarbejder_arbejdsområde = itemView.findViewById(R.id.arbejdsområde_recycler);
             medarbejder_recyclerview_listitems = itemView.findViewById(R.id.medarbejder_recyclerview_listitems);
-
-
-
         }
     }
+
+
 
 }
