@@ -9,6 +9,8 @@
     <color name="hvid_trans">#80ffffff</color>
     <color name="hvid">#FFFFFF</color>
     <color name="grey">#8c8c8c</color>
+    <color name="red">#ff4d4d</color>
+
 
 
 </resources>

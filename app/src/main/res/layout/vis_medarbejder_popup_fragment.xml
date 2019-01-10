@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medarbejder profession: "
+            android:text="Arbejdsområde: "
             android:textSize="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/grey"
@@ -72,6 +72,14 @@
             android:textColor="@color/grey"
             android:layout_marginTop="20dp"
             android:id="@+id/medarbejder_Email"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rediger"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corners_red"/>
 
     </LinearLayout>
 
