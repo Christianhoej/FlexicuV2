@@ -1,9 +1,12 @@
 package com.example.chris.flexicuv2.opret_bruger;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Patterns;
 
 import com.example.chris.flexicuv2.DBManager;
+
+import java.util.Map;
 
 public class NewUser_Presenter {
     private UpdateNewUser updateNewUser;
@@ -26,6 +29,10 @@ public class NewUser_Presenter {
     private final String ERRORPOSTNR = "POSTNRFEJL";
     private final String BRUGEROPRETTET = "Bruger oprettet";
     private DBManager dbManager;
+    private AsyncHentCVR async = new AsyncHentCVR();
+    private String cvr;
+    Map<String, String> map;
+    CVR_Opslag cvr_opslag;
 
 
 
@@ -178,10 +185,44 @@ public class NewUser_Presenter {
      * @param CVR: 8 cifret cvr string
      */
     public void hentVirksomhedsoplysninger(String CVR) {
-        updateNewUser.updateAdresse("Dette er min adresse");
-        updateNewUser.updateVirksomhedsNavn("Janus Aps");
-        updateNewUser.updatePostNr("2800");
-        updateNewUser.updateBy("Herlev");
+        //TODO må ikke være i main thread
+        //cvr = CVR;
+        System.out.println("Her kommer jeg"); //TODO
+        async.execute();
+/*        cvr_opslag = new CVR_Opslag();
+        map = cvr_opslag.getResult(CVR);
+
+        updateNewUser.updateAdresse(map.get(cvr_opslag.getAdresseString()));
+        updateNewUser.updateVirksomhedsNavn(map.get(cvr_opslag.getVirksomhedsNavnString()));
+        updateNewUser.updatePostNr(map.get(cvr_opslag.getPostNrString()));
+        updateNewUser.updateBy(map.get(cvr_opslag.getByString()));
+*/
+    }
+
+    private class AsyncHentCVR extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... param) {
+            try {
+                cvr_opslag = new CVR_Opslag();
+                System.out.println("her er jeg også!!!!!!!!!!!!!!!");//TODO
+               map = cvr_opslag.getResult(NewUser_Presenter.this.cvr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            System.out.println(map.get(cvr_opslag.getAdresseString()) + "Jeg kan finde den!");
+            updateNewUser.updateAdresse(map.get(cvr_opslag.getAdresseString()));
+            updateNewUser.updateVirksomhedsNavn(map.get(cvr_opslag.getVirksomhedsNavnString()));
+            updateNewUser.updatePostNr(map.get(cvr_opslag.getPostNrString()));
+            updateNewUser.updateBy(map.get(cvr_opslag.getByString()));
+        }
     }
 
     /**
