@@ -107,7 +107,7 @@ public class LoginPresenter{
                     }
                 });*/
 
-        boolean success1 = dbManager.signInAuth(context,email,password);
+      /*  boolean success1 = dbManager.signInAuth(context,email,password);
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -115,8 +115,8 @@ public class LoginPresenter{
         }
         System.out.println(success1);
         return success1;
-
-
+*/
+        return true;
         //find bruger med match, hvis det findes
         //find tilsvarende password
         // if password == fundne password

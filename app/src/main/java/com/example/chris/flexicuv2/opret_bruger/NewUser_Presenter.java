@@ -3,6 +3,8 @@ package com.example.chris.flexicuv2.opret_bruger;
 import android.content.Context;
 import android.util.Patterns;
 
+import com.example.chris.flexicuv2.DBManager;
+
 public class NewUser_Presenter {
     private UpdateNewUser updateNewUser;
 
@@ -23,11 +25,13 @@ public class NewUser_Presenter {
     private final String ERRORACCEPTERVILKÅR = "ACCEPTERVILKÅRFEJL"; //TODO Behøves den?
     private final String ERRORPOSTNR = "POSTNRFEJL";
     private final String BRUGEROPRETTET = "Bruger oprettet";
+    private DBManager dbManager;
 
 
 
     public NewUser_Presenter(UpdateNewUser updateNewUser){
-    this.updateNewUser = updateNewUser;
+        this.updateNewUser = updateNewUser;
+        dbManager = new DBManager();
     }
 
     /**
@@ -47,9 +51,10 @@ public class NewUser_Presenter {
      * @param password2 : Andet password der skal sikre brugeren har tastet rigtigt ind
      * @param privatoplysninger -1 if nothing is chosen, 1 if private, 2 if public
      * @param accepterbetingelser
+     * @param context :
      * @return boolean true hvis alle informationer er blevet tastet godt nok ind.
      */
-    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr, String by,String brugerensNavn, String brugerensTlf, String brugerensTitel, String email1, String email2, String password, String password2, int privatoplysninger, boolean accepterbetingelser) {
+    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr, String by,String brugerensNavn, String brugerensTlf, String brugerensTitel, String email1, String email2, String password, String password2, int privatoplysninger, boolean accepterbetingelser, Context context) {
         int errors = 0;
 
 
@@ -106,7 +111,7 @@ public class NewUser_Presenter {
             updateNewUser.errorEmailMatches(ERROREMAILMATCHES);
             errors++;
         }
-        boolean passwordlengthOK = password.length() >= 8;
+        boolean passwordlengthOK = password.length() >= 6;
         if(!passwordlengthOK) {
             updateNewUser.errorPasswordLength(ERRORPASSWORDLENGTH);
             errors++;
@@ -133,9 +138,9 @@ public class NewUser_Presenter {
         if (errors > 0 )
             return false;
         else {
-        updateNewUser.toastTilBrugerOprettet(BRUGEROPRETTET);
-        //TODO Opret bruger og send til databasen
-        return true;
+           // updateNewUser.toastTilBrugerOprettet(BRUGEROPRETTET);
+            //dbManager.createUserAuth(context, email1, password);
+            return true;
         }
     }
 
@@ -143,7 +148,7 @@ public class NewUser_Presenter {
         if(cvr.length() == stringlength) {
             int ammNumbers = 0;
             for (int i = 0; i < stringlength; i++) {
-                if (cvr.charAt(i) <= 9 && cvr.charAt(i) >= 0) {
+                if (cvr.charAt(i) <= '9' && cvr.charAt(i) >= '0') {
                 ammNumbers++;
                 }
             }
@@ -173,10 +178,10 @@ public class NewUser_Presenter {
      * @param CVR: 8 cifret cvr string
      */
     public void hentVirksomhedsoplysninger(String CVR) {
-    updateNewUser.updateAdresse("Dette er min adresse");
-    updateNewUser.updateVirksomhedsNavn("Janus Aps");
-    updateNewUser.updatePostNr("2800");
-    updateNewUser.updateBy("Herlev");
+        updateNewUser.updateAdresse("Dette er min adresse");
+        updateNewUser.updateVirksomhedsNavn("Janus Aps");
+        updateNewUser.updatePostNr("2800");
+        updateNewUser.updateBy("Herlev");
     }
 
     /**
