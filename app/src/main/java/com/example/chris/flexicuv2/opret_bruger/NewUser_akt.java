@@ -67,13 +67,20 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
         companyCity = findViewById(R.id.companyCity);
 
         contactName = findViewById(R.id.contactName);
+        contactName.setText("Gunn");
         contactPhone = findViewById(R.id.contactPhone);
+        contactPhone.setText("11111111");
         contactTitle = findViewById(R.id.contactTitle);
+        contactTitle.setText("CEO");
 
         username = findViewById(R.id.logOnEmail);
+        username.setText("123@123.dk");
         usernameRepeated = findViewById(R.id.logOnEmailRepeat);
+        usernameRepeated.setText("123@123.dk");
         password = findViewById(R.id.logOnPassword);
+        password.setText("123123");
         passwordRepeated = findViewById(R.id.logOnPasswordRepeat);
+        passwordRepeated.setText("123123");
 
         radioOptions = findViewById(R.id.radio_options);
         checkPrivate = findViewById(R.id.checkPrivate);
@@ -102,7 +109,7 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
             selectedId = 2;
 
         if (v.getId() == R.id.createUserBtn){
-            presenter.korrektudfyldtInformation(
+            if(presenter.korrektudfyldtInformation(
                     companyCVR.getText().toString(),
                     companyName.getText().toString(),
                     companyAddress.getText().toString(),
@@ -116,7 +123,10 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
                     password.getText().toString(),
                     passwordRepeated.getText().toString(),
                     selectedId,
-                    checkFormalities.isChecked());
+                    checkFormalities.isChecked(),
+                    this)){
+                finish();
+            }
 
         }
         else{
@@ -239,10 +249,9 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (s.length()==8){
-            presenter.hentVirksomhedsoplysninger(s.toString());
-
-        }
+            if (s.length()==8){
+                presenter.hentVirksomhedsoplysninger(s.toString());
+            }
         }
 
         @Override

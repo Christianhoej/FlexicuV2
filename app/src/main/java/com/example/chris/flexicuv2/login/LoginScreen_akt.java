@@ -50,7 +50,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         //password.setText(presenter.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views
         password.setHint("Indtast adgangskode");
         password.setText("123qwe");
-        Test test = new Test();
+        //Test test = new Test();
 
     }
 
@@ -100,6 +100,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         }*/
 
       if(v.getId() == logIn.getId()){
+          setProgressBarIndeterminateVisibility(true);
           if(presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this)){
               openStartScreen();
           }
