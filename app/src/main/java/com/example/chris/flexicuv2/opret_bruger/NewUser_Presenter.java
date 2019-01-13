@@ -61,7 +61,10 @@ public class NewUser_Presenter {
      * @param context :
      * @return boolean true hvis alle informationer er blevet tastet godt nok ind.
      */
-    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr, String by,String brugerensNavn, String brugerensTlf, String brugerensTitel, String email1, String email2, String password, String password2, int privatoplysninger, boolean accepterbetingelser, Context context) {
+    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr,
+                                      String by,String brugerensNavn, String brugerensTlf, String brugerensTitel,
+                                      String email1, String email2, String password, String password2,
+                                      int privatoplysninger, boolean accepterbetingelser, Context context) {
         int errors = 0;
 
 
