@@ -67,7 +67,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter);
-        setUpspinner(v);
+        //setUpspinner(v);
 
         return v;
     }
@@ -93,7 +93,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         test = new DBManager();
     }
 
-
+/*
     public void setUpspinner(View v){
         MultiSelectionSpinner spinner=(MultiSelectionSpinner) v.findViewById(R.id.input1);
 
@@ -104,7 +104,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         list.add("Lagermand");
         list.add("Elektriker");
         spinner.setItems(list);
-    }
+    }*/
     /**
      * Metode til at vise et popupvindue af medarbejderen, med flere informationer om medarbejderen.
      * Udarbejdet med inspiration fra:

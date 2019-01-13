@@ -22,6 +22,7 @@ import java.util.List;
 
 
 /**
+ * @Author Christian
  * A simple {@link Fragment} subclass.
  */
 public class Lej_filtrer extends Fragment {
@@ -32,14 +33,15 @@ public class Lej_filtrer extends Fragment {
         // Required empty public constructor
     }
 
-    EditText postnr;
-    EditText by;
-    EditText vej;
-    EditText nummer;
-    RadioButton ja_værktøj;
-    RadioButton nej_værktøj;
-    EditText min_timepris;
-    EditText max_timepris;
+    private EditText postnr;
+    private EditText by;
+    private EditText vej;
+    private EditText nummer;
+    private RadioButton ja_værktøj;
+    private RadioButton nej_værktøj;
+    private EditText min_timepris;
+    private EditText max_timepris;
+    private MultiSelectionSpinner arbejdsområder_spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,18 +55,21 @@ public class Lej_filtrer extends Fragment {
         nej_værktøj = (RadioButton) v.findViewById(R.id.nej_værktøj);
         min_timepris = (EditText)v.findViewById(R.id.min_timepris);
         max_timepris = (EditText) v.findViewById(R.id.max_timepris);
+        arbejdsområder_spinner = (MultiSelectionSpinner)v.findViewById(R.id.filtrer_arbejdsområder);
 
-        MultiSelectionSpinner spinner=(MultiSelectionSpinner)v.findViewById(R.id.input1);
 
-        List<String> list = new ArrayList<String>();
-        list.add("Vælg arbejdsområde");
-        list.add("Håndværker");
-        list.add("Smed");
-        list.add("Lagermand");
-        list.add("Elektriker");
-        spinner.setItems(list);
-
+        opretSpinner();
         return v;
+    }
+
+    public void opretSpinner(){
+        List<String> arbejdsområde_listen = new ArrayList<String>();
+        arbejdsområde_listen.add("Vælg arbejdsområde");
+        arbejdsområde_listen.add("Håndværker");
+        arbejdsområde_listen.add("Smed");
+        arbejdsområde_listen.add("Lagermand");
+        arbejdsområde_listen.add("Elektriker");
+        arbejdsområder_spinner.setItems(arbejdsområde_listen);
     }
 
 
