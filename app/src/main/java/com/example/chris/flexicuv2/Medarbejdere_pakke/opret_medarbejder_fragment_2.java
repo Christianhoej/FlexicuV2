@@ -24,20 +24,14 @@ import java.util.List;
  */
 public class opret_medarbejder_fragment_2 extends Fragment implements View.OnClickListener {
 
-    public opret_medarbejder_fragment_2() {
-
-    }
+    public opret_medarbejder_fragment_2() {}
 
     private EditText medarbejder_email;
     private EditText medarbejder_tlf;
     private MultiSelectionSpinner arbejdsområde_spinner;
-
     private FrameLayout medarbejdereFrame;
-
-
     private FrameLayout opret_medarbejder_1_Frame;
     private opret_medarbejder_fragment_1 opretMedarbejderFragment1;
-
     private Button opret_medarbejder;
     private Button tilbage2;
 
@@ -45,15 +39,12 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.opret_medarbejder_fragment_2, container, false);
 
-        //Edit texts
         medarbejder_email = (EditText) v.findViewById(R.id.editText_email);
         medarbejder_tlf = (EditText) v.findViewById(R.id.editText_tlf);
 
-        //Spinnere
         arbejdsområde_spinner=(MultiSelectionSpinner) v.findViewById(R.id.arbejdsområde);
 
         medarbejdereFrame = (FrameLayout) v.findViewById(R.id.opret_medarbejder_frame_1);
-
         //Frame Layoutet for opret medarbejder 1
         opret_medarbejder_1_Frame = (FrameLayout) v.findViewById(R.id.opret_medarbejder_frame_1);
         //Fragmentet for opret medarbejder 1
@@ -104,7 +95,4 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         arbejdsområde_liste.add("Elektriker");
         arbejdsområde_spinner.setItems(arbejdsområde_liste);
     }
-
-
-
 }
