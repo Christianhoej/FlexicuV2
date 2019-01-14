@@ -9,12 +9,17 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 
+import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 import com.example.chris.flexicuv2.model.Test;
+import com.example.chris.flexicuv2.opret_bruger.New_user_fragment_1;
+import com.example.chris.flexicuv2.opret_bruger.TilFragmenter;
 
 public class LoginScreen_akt extends AppCompatActivity implements View.OnClickListener, LoginPresenter.UpdateLoginScreen {
 
@@ -23,6 +28,13 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private EditText username;
     private EditText password;
 
+    private New_user_fragment_1 new_user_fragment_1;
+    private FrameLayout loginFrame;
+    private FrameLayout tilFragmenter;
+
+    private DBManager dbManager;
+
+
 
     LoginPresenter presenter;
 
@@ -30,7 +42,8 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new LoginPresenter(this); //Evt. lav metode der kan sætte presenter på.
+        presenter = new LoginPresenter(this, this); //Evt. lav metode der kan sætte presenter på.
+        dbManager = new DBManager();
 
 
         setContentView(R.layout.activity_login_screen);
@@ -52,65 +65,48 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         password.setText("123qwe");
         //Test test = new Test();
 
-    }
+        loginFrame = findViewById(R.id.login_frame);
+        new_user_fragment_1= new New_user_fragment_1();
+        tilFragmenter = (FrameLayout) findViewById(R.id.tilFragmenter_frame);
 
-    public void openStartScreen(){
-        Intent intent = new Intent(this, Startskaerm.class);
-        startActivity(intent);
     }
 
     public void openNewUserScreen(){
         Intent intent = new Intent(this, NewUser_akt.class);
+
         startActivity(intent);
     }
 
     @Override
     public void onClick(View v) {
-       /* boolean rightInput = true;
-        // If the login button is pressed
-        if(v.getId() == logIn.getId()){
-            // If the email edittext is not empty
-            if(!isEmpty(username)){
-                // If the email is not the format of an email
-                if(!Patterns.EMAIL_ADDRESS.matcher(username.getText().toString()).matches()){
-                    username.setError("Den indtastede email adresse eksisterer ikke");
-                    rightInput = false;
-                }
-                else{
-                    // if password is empty
-                    if(isEmpty(password)) {
-                        password.setError("Du skal indtaste et password");
-                        rightInput = false;
-                    }
-                }
-            }
-            else{
-                username.setError("Du skal indtaste en email adresse");
-                rightInput = false;
-            }
-
-            // if all conditions above is met, open startscreen
-            if(rightInput) {
-                openStartScreen();
-            }
-        }
-        // if the new user button is pressed
-        else if(v.getId() == newUser.getId()){
-            openNewUserScreen();
-        }*/
-
       if(v.getId() == logIn.getId()){
-          setProgressBarIndeterminateVisibility(true);
-          if(presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this)){
-              openStartScreen();
-          }
+          presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
+
       }
       else{
-          openNewUserScreen();
-      }
+          openFragmenterAktivitet();
+          //setFragment(new_user_fragment_1);
 
+          //openNewUserScreen();
+      }
     }
 
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+            //openloginScreen();
+            //getSupportFragmentManager().popBackStackImmediate();
+            this.getSupportFragmentManager().popBackStack();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+    public void openFragmenterAktivitet(){
+        Intent intent = new Intent(this, TilFragmenter.class);
+        startActivity(intent);
+    }
 
     @Override
     public String getEmail() {
@@ -132,5 +128,17 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         username.setError(error);
     }
 
+
+    public void setFragment(android.support.v4.app.Fragment fragment) {
+        //loginFrame.setVisibility(View.INVISIBLE);
+        //loginFrame.removeAllViews();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.tilFragmenter_frame, fragment);
+
+        //fragmentTransaction.addToBackStack(null);
+        //this.getSupportFragmentManager().popBackStack();
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
 
 }

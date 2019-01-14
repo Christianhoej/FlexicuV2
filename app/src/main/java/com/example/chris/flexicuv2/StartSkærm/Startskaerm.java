@@ -19,8 +19,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 
+import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;
@@ -30,34 +32,40 @@ import com.example.chris.flexicuv2.fragments.Indbakke_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_alle_medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_lejede_Medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Udlej_Fragment;
+import com.example.chris.flexicuv2.model.Singleton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, StartSkærmPresenter.UpdateStartskærm {
 
     private BottomNavigationView startskaermNav;
 
     private FrameLayout startskaermFrame;
-    Udlej_Fragment fragmentUdlej;
-    Lej_fragment fragmentLej;
-    Indbakke_fragment fragmentIndbakke;
-    Hjem_fragment fragmentHjem;
+    private Udlej_Fragment fragmentUdlej;
+    private Lej_fragment fragmentLej;
+    private Indbakke_fragment fragmentIndbakke;
+    private Hjem_fragment fragmentHjem;
 
-    StartSkærmPresenter presenter;
+    private StartSkærmPresenter presenter;
+    private FirebaseAuth mAuth;
 
-
-
-    Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
-    Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
-    Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
+    private Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
+    private Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
+    private Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
+    private DBManager dbManager;
+    private Singleton singleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startskaerm);
         presenter = new StartSkærmPresenter(this);
-
+        //dbManager = new DBManager();
+        //dbManager.readBruger();
+        singleton = Singleton.getInstance();
         /**
          * Til at køre mellem fragments
          */
+
         startskaermFrame = (FrameLayout) findViewById(R.id.startskaerm_frame);
         fragmentUdlej = new Udlej_Fragment();
         fragmentLej = new Lej_fragment();
@@ -70,6 +78,9 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        TextView drawer_top = findViewById(R.id.left_menu_title);
+        //drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
