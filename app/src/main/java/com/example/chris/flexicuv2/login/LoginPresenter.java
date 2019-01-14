@@ -107,16 +107,16 @@ public class LoginPresenter{
                     }
                 });*/
 
-      /*  boolean success1 = dbManager.signInAuth(context,email,password);
-        try {
+        boolean success1 = dbManager.signInAuth(context,email,password);
+        /*try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         System.out.println(success1);
         return success1;
-*/
-        return true;
+
+        //return true;
         //find bruger med match, hvis det findes
         //find tilsvarende password
         // if password == fundne password
