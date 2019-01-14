@@ -44,9 +44,9 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
 
     //Billeder skal implementeres på en måde
     public medarbejder_recyclerView_adapter(Context mContext /*ArrayList<String> mMedarbjderBilleder,*/ /*ArrayList<String> mMedarbejderNavn, ArrayList<String> mMedarbejderArbejdsområde*/) {
-        //this.mMedarbjderBilleder = mMedarbjderBilleder;
-       // this.mMedarbejderNavn = mMedarbejderNavn;
-       // this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
+        this.mMedarbjderBilleder = mMedarbjderBilleder;
+        this.mMedarbejderNavn = mMedarbejderNavn;
+        this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
         this.mContext = mContext;
         singleton = Singleton.getInstance();
     }

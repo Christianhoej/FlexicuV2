@@ -81,7 +81,7 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
                 if(altOK) {
                     //TODO Lav en ordentlig navigation
                     dbManager.createMedarbejder(singleton.midlertidigMedarbejder);
-                    singleton.getBruger().addMedarbejdere(singleton.midlertidigMedarbejder);
+                    //singleton.getBruger().addMedarbejdere(singleton.midlertidigMedarbejder);
                     singleton.midlertidigMedarbejder=null;
 
                     Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
