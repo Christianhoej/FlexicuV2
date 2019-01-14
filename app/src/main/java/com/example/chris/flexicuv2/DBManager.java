@@ -37,7 +37,9 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     private Medarbejder med1 = new Medarbejder();
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
-    private static boolean success;
+    private static Integer success;
+    private static Context mContext;
+    private static String email, password;
 
 
     public DBManager() {
@@ -113,99 +115,50 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
 
     }
 
-    public boolean createUserAuth(final Context context, final String email, final String password) {
+    public void createUserAuth(final Context context, final String email, final String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        success = 1;
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            Toast.makeText(context, "Bruger oprettet",
+                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            success = 1;
+                            } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(context, "Bruger kunne ikke oprettes",
+                                    Toast.LENGTH_SHORT).show();
+                            success = 0;
+                            }
+                    }
 
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object... arg0) {
-                try {
-                    mAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    success = true;
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "createUserWithEmail:success");
-                                        Toast.makeText(context, "Bruger oprettet",
-                                                Toast.LENGTH_SHORT).show();
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        success = true;
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(context, "Bruger kunne ikke oprettes",
-                                                Toast.LENGTH_SHORT).show();
-                                        success = false;
-                                    }
-                                }
-                            });
-                    return success;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return e;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Object success) {
-                if((boolean) success) {
-                    context.startActivity(new Intent(context, LoginScreen_akt.class));
-                }
-
-            }
-        }.execute();
-
-        return success;
-
+                });
     }
 
-    public boolean signInAuth(final Context context, final String email, final String password){
-
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object... arg0) {
-                try {
-                    mAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "signInWithEmail:success");
-                                        //FirebaseUser user = mAuth.getCurrentUser();
-
-                                        success = true;
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(context, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                        success = false;
-                                    }
-                                }
-                            });
-                    return success;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return e;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Object success) {
-                System.out.println(success);
-                if((boolean) success) {
-                    context.startActivity(new Intent(context, Startskaerm.class));
-                }
-
-            }
-        }.execute();
-
-        return success;
-
-
+    public void signInAuth(final Context mContext, final String email, final String password){
+        this.mContext = mContext;
+        this.email = email;
+        this.password = password;
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            mContext.startActivity(new Intent(mContext, Startskaerm.class));
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(mContext, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
-
-
 }

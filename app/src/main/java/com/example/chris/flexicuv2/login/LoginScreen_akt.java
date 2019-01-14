@@ -35,7 +35,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new LoginPresenter(this); //Evt. lav metode der kan sætte presenter på.
+        presenter = new LoginPresenter(this, this); //Evt. lav metode der kan sætte presenter på.
 
 
         setContentView(R.layout.activity_login_screen);
@@ -62,11 +62,6 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    public void openStartScreen(){
-        Intent intent = new Intent(this, Startskaerm.class);
-        startActivity(intent);
-    }
-
     public void openNewUserScreen(){
         Intent intent = new Intent(this, NewUser_akt.class);
         startActivity(intent);
@@ -74,51 +69,14 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-       /* boolean rightInput = true;
-        // If the login button is pressed
-        if(v.getId() == logIn.getId()){
-            // If the email edittext is not empty
-            if(!isEmpty(username)){
-                // If the email is not the format of an email
-                if(!Patterns.EMAIL_ADDRESS.matcher(username.getText().toString()).matches()){
-                    username.setError("Den indtastede email adresse eksisterer ikke");
-                    rightInput = false;
-                }
-                else{
-                    // if password is empty
-                    if(isEmpty(password)) {
-                        password.setError("Du skal indtaste et password");
-                        rightInput = false;
-                    }
-                }
-            }
-            else{
-                username.setError("Du skal indtaste en email adresse");
-                rightInput = false;
-            }
-
-            // if all conditions above is met, open startscreen
-            if(rightInput) {
-                openStartScreen();
-            }
-        }
-        // if the new user button is pressed
-        else if(v.getId() == newUser.getId()){
-            openNewUserScreen();
-        }*/
-
       if(v.getId() == logIn.getId()){
-          setProgressBarIndeterminateVisibility(true);
-          if(presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this)){
-              openStartScreen();
-          }
+          presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
       }
       else{
           setFragment(new_user_fragment_1);
 
           //openNewUserScreen();
       }
-
     }
 
     @Override

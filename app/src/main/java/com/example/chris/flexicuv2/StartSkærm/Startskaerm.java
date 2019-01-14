@@ -30,24 +30,24 @@ import com.example.chris.flexicuv2.fragments.Indbakke_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_alle_medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_lejede_Medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Udlej_Fragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, StartSkærmPresenter.UpdateStartskærm {
 
     private BottomNavigationView startskaermNav;
 
     private FrameLayout startskaermFrame;
-    Udlej_Fragment fragmentUdlej;
-    Lej_fragment fragmentLej;
-    Indbakke_fragment fragmentIndbakke;
-    Hjem_fragment fragmentHjem;
+    private Udlej_Fragment fragmentUdlej;
+    private Lej_fragment fragmentLej;
+    private Indbakke_fragment fragmentIndbakke;
+    private Hjem_fragment fragmentHjem;
 
-    StartSkærmPresenter presenter;
+    private StartSkærmPresenter presenter;
+    private FirebaseAuth mAuth;
 
-
-
-    Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
-    Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
-    Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
+    private Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
+    private Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
+    private Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +58,22 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         /**
          * Til at køre mellem fragments
          */
+
         startskaermFrame = (FrameLayout) findViewById(R.id.startskaerm_frame);
         fragmentUdlej = new Udlej_Fragment();
         fragmentLej = new Lej_fragment();
         fragmentIndbakke = new Indbakke_fragment();
         fragmentHjem = new Hjem_fragment();
 
+        mAuth = FirebaseAuth.getInstance();
+        System.out.println(mAuth.getUid() + "!!!!!!!!!!!!!!!!!1");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        System.out.println();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("Virksomhedens navn");
