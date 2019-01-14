@@ -60,9 +60,12 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     public void createMedarbejder(Medarbejder medarbejder) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        String uid = mAuth.getUid();
+        singleton.getBruger().addMedarbejdere(medarbejder);
+        String uid = mAuth.getCurrentUser().getUid();
+        System.out.println("uid: " + uid);
         String medKey = ref.child(MEDARBEJDER).push().getKey();
         medarbejder.setMedarbejderID(medKey);
+        System.out.println("medarbejderkey: " + medKey);
         ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
 
         ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
