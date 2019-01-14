@@ -110,7 +110,6 @@ public class NewUser_Presenter {
             updateNewUser.errorTitel(ERRORTITEL);
         }
 
-
         boolean emailOK = Patterns.EMAIL_ADDRESS.matcher(email1).matches();
         if(!emailOK) {
             updateNewUser.errorEmailForm(ERROREMAILFORM);
@@ -148,8 +147,8 @@ public class NewUser_Presenter {
         if (errors > 0 )
             return false;
         else {
-           // updateNewUser.toastTilBrugerOprettet(BRUGEROPRETTET);
-            //dbManager.createUserAuth(context, email1, password);
+            updateNewUser.toastTilBrugerOprettet(BRUGEROPRETTET);
+            dbManager.createUserAuth(context, email1, password);
             return true;
         }
     }
