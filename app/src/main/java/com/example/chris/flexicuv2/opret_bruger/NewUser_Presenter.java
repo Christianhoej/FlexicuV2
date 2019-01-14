@@ -29,7 +29,7 @@ public class NewUser_Presenter {
     private final String ERRORPOSTNR = "POSTNRFEJL";
     private final String BRUGEROPRETTET = "Bruger oprettet";
     private DBManager dbManager;
-    private AsyncHentCVR async = new AsyncHentCVR();
+    private AsyncHentCVR async;
     private String cvr;
     Map<String, String> map;
     CVR_Opslag cvr_opslag;
@@ -189,8 +189,9 @@ public class NewUser_Presenter {
      */
     public void hentVirksomhedsoplysninger(String CVR) {
         //TODO må ikke være i main thread
-        //cvr = CVR;
+        cvr = CVR;
         System.out.println("Her kommer jeg"); //TODO
+        async = new AsyncHentCVR();
         async.execute();
 /*        cvr_opslag = new CVR_Opslag();
         map = cvr_opslag.getResult(CVR);
