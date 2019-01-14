@@ -10,7 +10,7 @@ public class Singleton extends Activity {
     public static ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
     private static ArrayList<Medarbejder> lånteMedarbejdere = new ArrayList<Medarbejder>();
     public static Bruger bruger;
-    public static Medarbejder midlertidigMedarbejder = new Medarbejder();
+    public static Medarbejder midlertidigMedarbejder;
 
     private Singleton(){
 

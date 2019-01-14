@@ -94,7 +94,7 @@ public class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClic
     private void fyldRecyclerView(View v){
         Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.medarbejder_recyclerview);
-        adapter = new medarbejder_recyclerView_adapter(getContext(), navneTest, arbejdsområderTest);
+        adapter = new medarbejder_recyclerView_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

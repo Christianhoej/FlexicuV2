@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ import java.util.ArrayList;
     private opret_medarbejder_fragment_2 opretMedarbejderFragment2;
     private Button næste_medarbejdere;
     private Button tilbage1;
-
+    ArrayAdapter<String> adapter_år;
     private RadioGroup radioGroupKoen;
 
     private RadioButton radio_mand;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
     opretMedarbejder_presenter opretMedarbejder_presenter;
 
     private Opret_Medarbejdere_Fragment1_Presenter presenter;
+    private Singleton singleton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,8 +66,11 @@ import java.util.ArrayList;
         radio_kvinde =  v.findViewById(R.id.radio_kvinde);
 
 
+
+
         opretSpinner(v);
 
+        presenter.udfyldFelter();
         return v;
     }
 
@@ -136,9 +141,7 @@ import java.util.ArrayList;
 
     @Override
     public void errorNavn(String errorMsg) {
-
         medarbejder_navn.setError(errorMsg);
-
     }
 
     @Override
@@ -151,6 +154,33 @@ import java.util.ArrayList;
     @Override
     public void errorFødselsår(String errorMsg) {
         ((TextView)fødselsår_spinner.getSelectedView()).setError(errorMsg);
+    }
+
+    @Override
+    public void setNavn(String navn) {
+        medarbejder_navn.setText(navn);
+    }
+
+    @Override
+    public void setKøn(String køn) {
+        if(køn.equals("kvinde")){
+            radio_kvinde.setChecked(true);
+            radio_mand.setChecked(false);
+        }
+        else if(køn.equals("mand")){
+            radio_mand.setChecked(true);
+            radio_kvinde.setChecked(false);
+        }
+        else {
+            radio_kvinde.setChecked(false);
+            radio_mand.setChecked(false);
+        }
+    }
+
+    @Override
+    public void setFødselsår(String fødselsår) {
+        ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)fødselsår_spinner.getAdapter();
+        fødselsår_spinner.setSelection(array_spinner.getPosition(fødselsår));
     }
 
     @Override

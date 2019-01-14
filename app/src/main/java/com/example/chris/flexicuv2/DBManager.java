@@ -60,12 +60,12 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     public void createMedarbejder(Medarbejder medarbejder) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-
+        String uid = mAuth.getUid();
         String medKey = ref.child(MEDARBEJDER).push().getKey();
         medarbejder.setMedarbejderID(medKey);
         ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
 
-        ref.child(BRUGER).child(singleton.getBruger().getBrugerID()).child(MEDARBEJDER).setValue(medKey);
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
     }
 
     public void updateBruger(Bruger bruger) {
@@ -91,10 +91,14 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Bruger bruger = snapshot.getValue(Bruger.class);
-                }
+
+               // for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    bruger = dataSnapshot.getValue(Bruger.class);
+                    System.out.println("Bruger er sat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                //}
                 singleton.setBruger(bruger);
+
+
             }
 
             @Override
@@ -115,10 +119,11 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
         ref.equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Medarbejder medarbejder = new Medarbejder();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
+                    medarbejder = snapshot.getValue(Medarbejder.class);
                 }
-                singleton.setBruger(bruger);
+                singleton.getBruger().addMedarbejdere(medarbejder);
             }
 
             @Override

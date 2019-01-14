@@ -2,19 +2,22 @@ package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
 import android.util.Patterns;
 
+import com.example.chris.flexicuv2.model.Singleton;
+
 public class Opret_Medarbejdere_Fragment2_Presenter {
 
 
     private final String ERROREMAIL="EMAILFEJL";
     private final String ERRORTLF="TLFFEJL";
     private final String ERRORARBEJDSOMRåDER="ARBEJDSOMRÅDERFEJL";
-
-    UpdateOpretMedarbejderFrag frag;
+    private Singleton singleton;
+    private UpdateOpretMedarbejderFrag frag;
 
 
 
     public Opret_Medarbejdere_Fragment2_Presenter(UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag){
         frag = updateOpretMedarbejderFrag;
+        singleton = Singleton.getInstance();
     }
 
 
@@ -44,6 +47,9 @@ public class Opret_Medarbejdere_Fragment2_Presenter {
             return false;
         else{
             // TODO dbManager skal oprette medarbejderen
+            singleton.midlertidigMedarbejder.setEmail(email);
+            singleton.midlertidigMedarbejder.setTlfnr(tlf);
+            singleton.midlertidigMedarbejder.setArbejdsomraade(arbejdsområder);
             return true;
         }
     }
@@ -68,6 +74,9 @@ public class Opret_Medarbejdere_Fragment2_Presenter {
         void errorEmail(String errorMsg);
         void errorTlf(String errorMsg);
         void errorArbejdsområder(String errorMsg);
+        void setEmail(String email);
+        void setTlf(String tlf);
+        void setArbejdsområde(String arbejdsområde);
     }
 
 }
