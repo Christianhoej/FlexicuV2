@@ -54,6 +54,7 @@ public class LoginPresenter{
                     dbManager.signInAuth(context, email, password);
                     /*AsyncCheckLogIn async = new AsyncCheckLogIn();
                     async.execute();*/
+                    return true;
                 }
 
             }
@@ -63,8 +64,6 @@ public class LoginPresenter{
             pres.setErrorMsgEmail(EMAIL_EMPTY);
             return false;
         }
-
-        return true;
 
     }
 

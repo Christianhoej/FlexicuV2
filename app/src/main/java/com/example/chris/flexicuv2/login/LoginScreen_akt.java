@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 
+import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
@@ -27,6 +29,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     private New_user_fragment_1 new_user_fragment_1;
     private FrameLayout loginFrame;
+    private DBManager dbManager;
 
 
     LoginPresenter presenter;
@@ -36,6 +39,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
 
         presenter = new LoginPresenter(this, this); //Evt. lav metode der kan sætte presenter på.
+        dbManager = new DBManager();
 
 
         setContentView(R.layout.activity_login_screen);
@@ -64,6 +68,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     public void openNewUserScreen(){
         Intent intent = new Intent(this, NewUser_akt.class);
+
         startActivity(intent);
     }
 
@@ -71,6 +76,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
       if(v.getId() == logIn.getId()){
           presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
+
       }
       else{
           setFragment(new_user_fragment_1);

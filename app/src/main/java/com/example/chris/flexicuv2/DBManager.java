@@ -96,14 +96,18 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     }
 
     public void readBruger(){
+        String uid = mAuth.getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(BRUGER);
+        DatabaseReference ref = database.getReference(BRUGER).child(uid);
 
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Bruger bruger = snapshot.getValue(Bruger.class);
+                }
+                singleton.setBruger(bruger);
             }
 
             @Override
@@ -126,7 +130,8 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(context, "Bruger oprettet",
                                     Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            readBruger();
+                            mContext.startActivity(new Intent(mContext, LoginScreen_akt.class));
                             success = 1;
                             } else {
                             // If sign in fails, display a message to the user.
