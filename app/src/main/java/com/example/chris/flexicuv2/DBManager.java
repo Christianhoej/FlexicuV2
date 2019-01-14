@@ -142,7 +142,6 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(context, "Bruger oprettet",
                                     Toast.LENGTH_SHORT).show();
-                            readBruger();
                             success = 1;
                             } else {
                             // If sign in fails, display a message to the user.
@@ -167,6 +166,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
+                            readBruger();
                             mContext.startActivity(new Intent(mContext, Startskaerm.class));
                         } else {
                             // If sign in fails, display a message to the user.
