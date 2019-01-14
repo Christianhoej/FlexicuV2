@@ -172,7 +172,7 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
     @Override
     public void onClick(View v) {
         setFragment(new_user_fragment_2);
-        /*switch (v.getId()) {
+        switch (v.getId()) {
             case R.id.cancelBtn:
                 getActivity().onBackPressed();
 
@@ -195,7 +195,7 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
                     //TODO der skal laves en fejlmeddelse
                     Toast.makeText(getContext(), "Indtast venligst alle oplysningerne", Toast.LENGTH_LONG).show();
                 break;
-        }*/
+        }
     }
     public void setFragment(android.support.v4.app.Fragment fragment) {
         //loginFrame.removeAllViews();

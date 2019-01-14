@@ -11,6 +11,8 @@ public class Medarbejder implements Comparable<Medarbejder>{
     private String tlfnr;
     private String arbejdsomraade;
     private String virksomhedsID;
+    private String køn;
+    private int fødselsår;
 
     public String getMedarbejderID() {
         return medarbejderID;
@@ -95,5 +97,21 @@ public class Medarbejder implements Comparable<Medarbejder>{
 
     public void setVirksomhedsID(String virksomhedsID) {
         this.virksomhedsID = virksomhedsID;
+    }
+
+    public String getKøn() {
+        return køn;
+    }
+
+    public void setKøn(String køn) {
+        this.køn = køn;
+    }
+
+    public int getFødselsår() {
+        return fødselsår;
+    }
+
+    public void setFødselsår(int fødselsår) {
+        this.fødselsår = fødselsår;
     }
 }

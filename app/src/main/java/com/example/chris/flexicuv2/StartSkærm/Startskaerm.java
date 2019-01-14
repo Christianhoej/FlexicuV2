@@ -80,7 +80,7 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
         TextView drawer_top = findViewById(R.id.left_menu_title);
-        //drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
+//        drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

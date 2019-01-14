@@ -87,6 +87,9 @@ public class NewUser_Presenter_Frag2 {
             return false;
         else {
             singleton.getBruger().setEmail(email1);
+            System.out.println("1: " + singleton.getBruger().getVirksomhedsnavn());
+            System.out.println("2: " + singleton.getBruger().getBrugerensNavn());
+            System.out.println("3: " + singleton.getBruger().getAdresse());
             dbManager.createUserAuth(context, email1, password);
             dbManager.createBruger(singleton.getBruger());
             return true;
