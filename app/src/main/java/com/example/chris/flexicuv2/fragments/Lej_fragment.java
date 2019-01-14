@@ -25,7 +25,6 @@ import com.example.chris.flexicuv2.R;
 //import com.example.chris.flexicuv2.Startskaerm;
 import com.example.chris.flexicuv2.model.Singleton;
 
-import com.example.chris.flexicuv2.model.Test;
 
 import java.util.ArrayList;
 import java.util.List;

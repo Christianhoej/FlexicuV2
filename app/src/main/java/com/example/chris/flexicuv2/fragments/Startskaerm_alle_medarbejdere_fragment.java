@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.model.Test;
 
 
 public class Startskaerm_alle_medarbejdere_fragment extends Fragment {

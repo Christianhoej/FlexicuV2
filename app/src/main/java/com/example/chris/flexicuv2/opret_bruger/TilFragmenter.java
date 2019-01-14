@@ -26,7 +26,20 @@ public class TilFragmenter extends AppCompatActivity{
 
         //fragmentTransaction.addToBackStack(null);
         //this.getSupportFragmentManager().popBackStack();
-        fragmentTransaction.addToBackStack("fragment");
+        //fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
+    /*@Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+            //openloginScreen();
+            //getSupportFragmentManager().popBackStackImmediate();
+            this.getSupportFragmentManager().popBackStack();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+*/
 }

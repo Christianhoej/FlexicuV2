@@ -17,7 +17,6 @@ import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
-import com.example.chris.flexicuv2.model.Test;
 import com.example.chris.flexicuv2.opret_bruger.New_user_fragment_1;
 import com.example.chris.flexicuv2.opret_bruger.TilFragmenter;
 
@@ -63,7 +62,6 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         //password.setText(presenter.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views
         password.setHint("Indtast adgangskode");
         password.setText("123qwe");
-        //Test test = new Test();
 
         loginFrame = findViewById(R.id.login_frame);
         new_user_fragment_1= new New_user_fragment_1();
