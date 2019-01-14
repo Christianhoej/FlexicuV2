@@ -83,9 +83,6 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
         new_user_fragment_2 = new New_user_fragment_2();
         loginScreen_akt = new LoginScreen_akt();
 
-
-        //TODO der skal tilføjes de to knapper "tilbage" og "næste"
-
         return v;
     }
     public boolean isEmpty(EditText text) {
@@ -174,11 +171,9 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        setFragment(new_user_fragment_2);
+        /*switch (v.getId()) {
             case R.id.cancelBtn:
-                //TODO Der skal gås tilbage. Backstack skal løses.
-                //loginFrame.setVisibility(View.VISIBLE);
-                //getFragmentManager().popBackStackImmediate();
                 getActivity().onBackPressed();
 
                 break;
@@ -200,12 +195,12 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
                     //TODO der skal laves en fejlmeddelse
                     Toast.makeText(getContext(), "Indtast venligst alle oplysningerne", Toast.LENGTH_LONG).show();
                 break;
-        }
+        }*/
     }
     public void setFragment(android.support.v4.app.Fragment fragment) {
         //loginFrame.removeAllViews();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.login_frame, fragment);
+        fragmentTransaction.replace(R.id.tilFragmenter_frame, fragment);
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
