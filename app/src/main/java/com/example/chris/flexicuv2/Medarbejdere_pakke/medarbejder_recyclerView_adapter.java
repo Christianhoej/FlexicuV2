@@ -5,10 +5,13 @@ package com.example.chris.flexicuv2.Medarbejdere_pakke;
  * https://www.youtube.com/watch?v=Vyqz_-sJGFk
  */
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,6 +28,7 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.RecyclerViewAdapter_AlleMedarbejdere;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medarbejder_recyclerView_adapter.ViewHolder> {
 
@@ -43,6 +47,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
         this.mContext = mContext;
     }
+
 
     /**
      * ViewHolder metode. Ansvarlig for at inflate View'et
@@ -96,11 +101,21 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.vis_medarbejder_popup_fragment, null);
 
+        //get width
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        ((Activity)mContext).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int width = displaymetrics.widthPixels;
+
         // create the popup window
-        int width = 1000;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
+
+
+        //popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+
+        //final PopupWindow popupWindowt = new PopupWindow();
+        popupWindow.setContentView(popupView);
 
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
@@ -122,6 +137,32 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     public int getItemCount() {
         return mMedarbejderNavn.size();
     }
+
+    /**
+     * Metode der skal anvendes til at "fylde" viewet når der oprettes nye medarbejdere
+     * @param navn
+     * @param område
+     */
+    public void medarbejderTilføjet(String navn, String område) {
+        mMedarbejderNavn.add(navn);
+        mMedarbejderArbejdsområde.add(område);
+        //if (mMedarbejderNavn != null && mMedarbejderNavn.size() > 0) {
+        ArrayList<String> temp1 = new ArrayList<>();
+        for(String s : mMedarbejderNavn){
+            temp1.add(s);
+        }
+        ArrayList<String> temp2 = new ArrayList<>();
+        for(String s : mMedarbejderArbejdsområde){
+            temp2.add(s);
+        }
+        mMedarbejderArbejdsområde.clear();
+        mMedarbejderNavn.clear();
+        mMedarbejderArbejdsområde = temp2;
+        mMedarbejderNavn = temp1;
+
+            notifyDataSetChanged();
+        }
+
 
     /**
      * Indre klasse
