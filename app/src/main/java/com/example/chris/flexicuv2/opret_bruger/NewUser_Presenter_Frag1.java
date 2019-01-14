@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.util.Patterns;
 
 import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.model.Bruger;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.Map;
 
@@ -26,21 +28,23 @@ public class NewUser_Presenter_Frag1 {
     private DBManager dbManager;
     private AsyncHentCVR async;
     private String cvr;
-    Map<String, String> map;
-    CVR_Opslag cvr_opslag;
+    private Map<String, String> map;
+    private CVR_Opslag cvr_opslag;
+    private Singleton singleton;
 
 
 
     public NewUser_Presenter_Frag1(NewUser_Presenter_Frag1.UpdateNewUser_Frag1 updateNewUser){
         this.updateNewUser = updateNewUser;
         dbManager = new DBManager();
+        singleton = Singleton.getInstance();
     }
 
     /**
      * Metoden skal anvendes til at kontrollere at alle informationer er blevet tastet "tilstrækkeligt ind".
      *
      * @param CVR : virksomhedens cvr (8 cifre)
-     * @param Virksomhedsnavn : virksomhedens navn
+     * @param virksomhedsnavn : virksomhedens navn
      * @param adresse : virksomhedens adresse
      * @param postNr : virksomhedens postnr
      * @param by : Virksomhedens by (tilhørende adresse)
@@ -50,7 +54,7 @@ public class NewUser_Presenter_Frag1 {
      * @param context :
      * @return boolean true hvis alle informationer er blevet tastet godt nok ind.
      */
-    boolean korrektudfyldtInformation(String CVR, String Virksomhedsnavn, String adresse, String postNr,
+    boolean korrektudfyldtInformation(String CVR, String virksomhedsnavn, String adresse, String postNr,
                                       String by,String brugerensNavn, String brugerensTlf,
                                       String brugerensTitel, Context context) {
         int errors = 0;
@@ -60,7 +64,7 @@ public class NewUser_Presenter_Frag1 {
             updateNewUser.errorCVR(ERRORMSGCVR);
             errors++;
         }
-        boolean vshOK = !Virksomhedsnavn.isEmpty();
+        boolean vshOK = !virksomhedsnavn.isEmpty();
         if (!vshOK) {
             updateNewUser.errorVirksomhedsnavn(ERRORVIRKSOMHEDSNAVN);
             errors++;
@@ -99,7 +103,15 @@ public class NewUser_Presenter_Frag1 {
         if (errors > 0 )
             return false;
         else {
-            //TODO der bør måske være en else her
+            singleton.setBruger(new Bruger());
+            singleton.getBruger().setVirksomhedCVR(CVR);
+            singleton.getBruger().setVirksomhedsnavn(virksomhedsnavn);
+            singleton.getBruger().setAdresse(adresse);
+            singleton.getBruger().setPostnr(postNr);
+            singleton.getBruger().setBy(by);
+            singleton.getBruger().setBrugerensNavn(brugerensNavn);
+            singleton.getBruger().setTlfnr(brugerensTlf);
+            singleton.getBruger().setTitel(brugerensTitel);
             return true;
         }
     }

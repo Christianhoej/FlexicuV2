@@ -32,6 +32,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
 
     private final String MEDARBEJDER = "medarbejder";
     private final String BRUGER = "bruger";
+    private final String VIRKSOMHEDSID = "virksomhedsID";
     private Bruger bruger;
     private Singleton singleton;
     private Medarbejder med1 = new Medarbejder();
@@ -45,20 +46,6 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     public DBManager() {
         singleton = Singleton.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        bruger = new Bruger();
-        bruger.setVirksomhedCVR("11223344æljlkj");
-        bruger.setVirksomhedsnavn("Flexicu");
-        bruger.setAdresse("Anker Engelundsvej 1");
-        bruger.setPostnr("2800");
-        singleton.setBruger(bruger);
-        med1.setNavn("Oliver");
-        med1.setLoen(100);
-        med1.setArbejdsomraade("Smed");
-
-        singleton.addMedarbejder(med1);
-        createBruger(bruger);
-        createMedarbejder(med1);
-
     }
 
     public void createBruger(Bruger bruger) {
@@ -114,10 +101,35 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
+
         });
-
-
     }
+
+    public void readMedarbejdere(){
+        String uid = mAuth.getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(MEDARBEJDER).child(VIRKSOMHEDSID);
+
+
+        ref.equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
+                }
+                singleton.setBruger(bruger);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+
+        });
+    }
+
 
     public void createUserAuth(final Context context, final String email, final String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -131,7 +143,6 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                             Toast.makeText(context, "Bruger oprettet",
                                     Toast.LENGTH_SHORT).show();
                             readBruger();
-                            mContext.startActivity(new Intent(mContext, LoginScreen_akt.class));
                             success = 1;
                             } else {
                             // If sign in fails, display a message to the user.

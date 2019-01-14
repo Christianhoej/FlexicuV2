@@ -10,6 +10,7 @@ public class Medarbejder implements Comparable<Medarbejder>{
     private int loen;
     private String tlfnr;
     private String arbejdsomraade;
+    private String virksomhedsID;
 
     public String getMedarbejderID() {
         return medarbejderID;
@@ -86,5 +87,13 @@ public class Medarbejder implements Comparable<Medarbejder>{
     @Override
     public int compareTo(Medarbejder o) {
         return navn.compareToIgnoreCase(o.getNavn());
+    }
+
+    public String getVirksomhedsID() {
+        return virksomhedsID;
+    }
+
+    public void setVirksomhedsID(String virksomhedsID) {
+        this.virksomhedsID = virksomhedsID;
     }
 }

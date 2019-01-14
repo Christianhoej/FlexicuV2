@@ -12,13 +12,11 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.model.Test;
 
 public class Startskaerm_lejede_Medarbejdere_fragment extends Fragment {
 
     private View v;
     private RecyclerView recyclerView;
-    private Test test;
     private Singleton singleton;
 
     public Startskaerm_lejede_Medarbejdere_fragment() {
@@ -49,6 +47,5 @@ public class Startskaerm_lejede_Medarbejdere_fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        test = new Test();
     }
 }

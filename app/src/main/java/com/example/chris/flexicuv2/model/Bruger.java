@@ -3,12 +3,13 @@ package com.example.chris.flexicuv2.model;
 import java.util.ArrayList;
 
 public class Bruger {
-    private String brugerEmail;
+    private String email;
     private String brugerensNavn;
     private String tlfnr;
     private String titel;
     private String brugerID;
     private String virksomhedCVR;
+    private String by;
     private String virksomhedsnavn, adresse, postnr;
     private ArrayList<String> medarbejderID = new ArrayList<String>();
 
@@ -21,12 +22,12 @@ public class Bruger {
         this.brugerID = brugerID;
     }
 
-    public String getBrugerEmail() {
-        return brugerEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBrugerEmail(String brugerEmail) {
-        this.brugerEmail = brugerEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getBrugerensNavn() {
@@ -102,5 +103,13 @@ public class Bruger {
         for(int i = 0; i< medarbejderID.size(); i++){
             this.medarbejderID.add(medarbejderID.get(i).getMedarbejderID());
         }
+    }
+
+    public String getBy() {
+        return by;
+    }
+
+    public void setBy(String by) {
+        this.by = by;
     }
 }

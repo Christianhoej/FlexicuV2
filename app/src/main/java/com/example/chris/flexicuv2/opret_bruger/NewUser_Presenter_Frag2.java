@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Patterns;
 
 import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.Map;
 
@@ -21,14 +22,16 @@ public class NewUser_Presenter_Frag2 {
     private final String BRUGEROPRETTET = "Bruger oprettet";
     private DBManager dbManager;
     private String cvr;
-    Map<String, String> map;
-    CVR_Opslag cvr_opslag;
+    private Map<String, String> map;
+    private CVR_Opslag cvr_opslag;
+    private Singleton singleton;
 
 
 
     public NewUser_Presenter_Frag2(NewUser_Presenter_Frag2.UpdateNewUser_Frag2 updateNewUser){
         this.updateNewUser = updateNewUser;
         dbManager = new DBManager();
+        singleton = Singleton.getInstance();
     }
 
     /**
@@ -83,8 +86,9 @@ public class NewUser_Presenter_Frag2 {
         if (errors > 0 )
             return false;
         else {
-            updateNewUser.toastTilBrugerOprettet(BRUGEROPRETTET);
+            singleton.getBruger().setEmail(email1);
             dbManager.createUserAuth(context, email1, password);
+            dbManager.createBruger(singleton.getBruger());
             return true;
         }
     }
