@@ -39,7 +39,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="100"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="50dp"
+            android:id="@+id/radio_køn">
 
             <Space
                 android:layout_width="0dp"

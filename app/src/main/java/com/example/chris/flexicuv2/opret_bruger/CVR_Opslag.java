@@ -55,8 +55,9 @@ public class CVR_Opslag {
      */
     public Map<String, String> getResult(String text) {
         try {
-            System.setProperty("http.agent", "mit projekt");
+            System.setProperty("Flexicu test", "Flexicu V2");
             getString = new URL("http://cvrapi.dk/api?search=" +  text +  "&country=dk&format=xml");
+            System.out.println(getString);
         } catch (MalformedURLException e) {
             System.out.println(111);
             e.printStackTrace();
@@ -95,7 +96,7 @@ public class CVR_Opslag {
         d.getDocumentElement().normalize();
 
         Node n = d.getFirstChild(); //TODO print: INVALID_UA
-        System.out.println(n.getFirstChild().getTextContent());
+        System.out.println(n/*.getFirstChild()*/.getTextContent() + " KFKFKFKFKFKF");
 
         if(n.getNodeType() == Node.ELEMENT_NODE) {
 
