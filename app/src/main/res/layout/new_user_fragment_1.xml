@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".opret_bruger.new_user_fragment_1"
-    android:id="@+id/new_user_frame_1">
+    tools:context=".opret_bruger.New_user_fragment_1"
+    android:id="@+id/new_user_frame_1"
+    android:background="@color/hvid">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:id="@+id/layout1"
+        android:background="@color/hvid"
         >
 
     <ImageView
@@ -20,7 +22,7 @@
         android:layout_gravity="center"
         android:background="@drawable/flexicu_logo"
         android:layout_marginTop="10dp"/>
-
+<!--
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
@@ -29,7 +31,7 @@
         android:textAlignment="center"
         android:textSize="30sp"
         android:layout_marginTop="20dp"/>
-
+-->
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
@@ -40,31 +42,23 @@
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="10dp">
-
         <EditText
             android:id="@+id/companyCVR"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="CVR"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/companyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:hint="Virksomhedsnavn"
-            android:inputType="textPersonName" />
+            android:hint="Indtast CVR"
+            android:textAlignment="center"
+            android:inputType="number"
+            android:layout_gravity="center"/>
 
-    </LinearLayout>
+    <EditText
+        android:id="@+id/companyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Virksomhedsnavn"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/companyAddress"
@@ -108,7 +102,8 @@
             android:text="Kontaktoplysninger"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/contactName"
@@ -138,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Tittel"
+                android:hint="Titel"
                 android:inputType="textPersonName" />
         </LinearLayout>
     </LinearLayout>
@@ -156,7 +151,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/tilbage_medarbejdere"
+            android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -171,7 +166,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/næste_medarbejdere"
+            android:id="@+id/createUserBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

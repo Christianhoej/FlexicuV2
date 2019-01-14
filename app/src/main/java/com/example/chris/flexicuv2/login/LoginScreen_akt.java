@@ -9,12 +9,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 
 import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 import com.example.chris.flexicuv2.model.Test;
+import com.example.chris.flexicuv2.opret_bruger.New_user_fragment_1;
 
 public class LoginScreen_akt extends AppCompatActivity implements View.OnClickListener, LoginPresenter.UpdateLoginScreen {
 
@@ -22,6 +24,9 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private Button newUser;
     private EditText username;
     private EditText password;
+
+    private New_user_fragment_1 new_user_fragment_1;
+    private FrameLayout loginFrame;
 
 
     LoginPresenter presenter;
@@ -52,6 +57,9 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         password.setText("123qwe");
         //Test test = new Test();
 
+        loginFrame = findViewById(R.id.login_frame);
+        new_user_fragment_1= new New_user_fragment_1();
+
     }
 
     public void openNewUserScreen(){
@@ -65,10 +73,28 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
           presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
       }
       else{
-          openNewUserScreen();
+          setFragment(new_user_fragment_1);
+
+          //openNewUserScreen();
       }
     }
 
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+            //openloginScreen();
+            //getSupportFragmentManager().popBackStackImmediate();
+            this.getSupportFragmentManager().popBackStack();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+    public void openloginScreen(){
+        Intent intent = new Intent(this, LoginScreen_akt.class);
+        startActivity(intent);
+    }
 
     @Override
     public String getEmail() {
@@ -90,5 +116,17 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         username.setError(error);
     }
 
+
+    public void setFragment(android.support.v4.app.Fragment fragment) {
+        //loginFrame.setVisibility(View.INVISIBLE);
+        //loginFrame.removeAllViews();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.login_frame, fragment);
+
+        //fragmentTransaction.addToBackStack(null);
+        //this.getSupportFragmentManager().popBackStack();
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
 
 }
