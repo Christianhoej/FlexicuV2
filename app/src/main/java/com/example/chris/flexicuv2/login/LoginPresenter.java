@@ -1,24 +1,13 @@
 package com.example.chris.flexicuv2.login;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.chris.flexicuv2.DBManager;
-import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
-import com.example.chris.flexicuv2.model.Bruger;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * @author Janus
@@ -33,17 +22,21 @@ public class LoginPresenter{
     private final String EMAIL_EMPTY = "Der skal indtastest en email";
     private DBManager dbManager;
     private static final String TAG = "EmailPassword";
+    private Context mContext;
+    private String email, password;
 
-    public LoginPresenter(UpdateLoginScreen pres){
+    public LoginPresenter(UpdateLoginScreen pres, Context mContext){
         this.pres = pres;
         dbManager = new DBManager();
+        this.mContext = mContext;
     }
     public String setText(){
         return "Gunn rules";
     }
     public boolean checkLoginCredentials(String email, String password, final Context context){
         //TODO lav "et tjek" af login for at se om loginoplysinger er ok
-
+        this.email = email;
+        this.password = password;
         // If the email is not empty
         if(!TextUtils.isEmpty(email)){
             // If the email is not the format of an email
@@ -57,6 +50,11 @@ public class LoginPresenter{
                     pres.setErrorMsgPassword(PASSWORD_EMPTY);
                     return false;
                 }
+                else{
+                    dbManager.signInAuth(context, email, password);
+                    /*AsyncCheckLogIn async = new AsyncCheckLogIn();
+                    async.execute();*/
+                }
 
             }
 
@@ -65,65 +63,33 @@ public class LoginPresenter{
             pres.setErrorMsgEmail(EMAIL_EMPTY);
             return false;
         }
-/*
-       mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        success = true;
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            success = true;
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(context, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            success = false;
-                        }
 
-                        // ...
-                    }
-                });
-*/
-/*        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            success = true;
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(context, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            success = false;
-                        }
-                    }
-                });*/
-
-      /*  boolean success1 = dbManager.signInAuth(context,email,password);
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(success1);
-        return success1;
-*/
         return true;
-        //find bruger med match, hvis det findes
-        //find tilsvarende password
-        // if password == fundne password
-        //return true;
-        //else
-        //return false;
     }
+
+    private class AsyncCheckLogIn extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... param) {
+            dbManager.signInAuth(mContext,email, password);
+
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer i ) {
+            super.onPostExecute(i);
+
+            if(i.equals(1)){
+                mContext.startActivity(new Intent(mContext, LoginScreen_akt.class));
+            }
+            else {
+
+            }
+
+        }
+    }
+
 
 
 
