@@ -3,6 +3,7 @@ package com.example.chris.flexicuv2.Medarbejdere_pakke;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +86,8 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
                     singleton.midlertidigMedarbejder=null;
 
                     Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
+                    getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getActivity().recreate();
                 }
                 break;
             case R.id.tilbage_medarbejdere2:
