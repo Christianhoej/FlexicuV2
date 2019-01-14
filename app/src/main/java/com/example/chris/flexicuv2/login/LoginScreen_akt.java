@@ -19,6 +19,7 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 import com.example.chris.flexicuv2.model.Test;
 import com.example.chris.flexicuv2.opret_bruger.New_user_fragment_1;
+import com.example.chris.flexicuv2.opret_bruger.TilFragmenter;
 
 public class LoginScreen_akt extends AppCompatActivity implements View.OnClickListener, LoginPresenter.UpdateLoginScreen {
 
@@ -29,7 +30,10 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     private New_user_fragment_1 new_user_fragment_1;
     private FrameLayout loginFrame;
+    private FrameLayout tilFragmenter;
+
     private DBManager dbManager;
+
 
 
     LoginPresenter presenter;
@@ -63,6 +67,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
         loginFrame = findViewById(R.id.login_frame);
         new_user_fragment_1= new New_user_fragment_1();
+        tilFragmenter = (FrameLayout) findViewById(R.id.tilFragmenter_frame);
 
     }
 
@@ -79,7 +84,8 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
       }
       else{
-          setFragment(new_user_fragment_1);
+          openFragmenterAktivitet();
+          //setFragment(new_user_fragment_1);
 
           //openNewUserScreen();
       }
@@ -97,8 +103,8 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
             getSupportFragmentManager().popBackStack();
         }
     }
-    public void openloginScreen(){
-        Intent intent = new Intent(this, LoginScreen_akt.class);
+    public void openFragmenterAktivitet(){
+        Intent intent = new Intent(this, TilFragmenter.class);
         startActivity(intent);
     }
 
@@ -127,7 +133,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         //loginFrame.setVisibility(View.INVISIBLE);
         //loginFrame.removeAllViews();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.login_frame, fragment);
+        fragmentTransaction.replace(R.id.tilFragmenter_frame, fragment);
 
         //fragmentTransaction.addToBackStack(null);
         //this.getSupportFragmentManager().popBackStack();

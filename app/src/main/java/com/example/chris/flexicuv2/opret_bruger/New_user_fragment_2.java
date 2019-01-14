@@ -4,7 +4,9 @@ package com.example.chris.flexicuv2.opret_bruger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,22 +99,34 @@ public class New_user_fragment_2 extends Fragment implements NewUser_Presenter_F
         if(selectedId == R.id.checkPublic)
             selectedId = 2;
 
-        if (v.getId() == R.id.createUserBtn){
+        if (v.getId() == R.id.createUserBtn2){
             if(presenter.korrektudfyldtInformation(
                     username.getText().toString(),
                     usernameRepeated.getText().toString(),
                     password.getText().toString(),
                     passwordRepeated.getText().toString(),
-                    selectedId,
-                    checkFormalities.isChecked(),
+                    selectedId, checkFormalities.isChecked(),
                     getContext())){
                 //finish();
+                /*FragmentManager fm = getFragmentManager(); // or 'getSupportFragmentManager();'
+                int count = fm.getBackStackEntryCount();
+                for(int i = 0; i < count; ++i) {
+                    fm.popBackStack();
+                }*/
+                /*FragmentManager fm = getFragmentManager();
+                if (fm.getBackStackEntryCount() > 0) {
+                    fm.popBackStackImmediate();
+                } else {
+
+                }*/
+                //getActivity().getSupportFragmentManager().popBackStackImmediate();
+                //getFragmentManager().popBackStackImmediate();
+                getActivity().finish();
             }
 
         }
-        else{
-
-            //finish();
+        if(v.getId() == R.id.cancelBtn2){
+            getActivity().onBackPressed();
         }
     }
 
