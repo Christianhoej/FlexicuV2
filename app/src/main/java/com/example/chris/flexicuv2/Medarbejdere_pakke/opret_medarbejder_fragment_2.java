@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chris.flexicuv2.Indlejninger.MultiSelectionSpinner;
@@ -22,9 +23,8 @@ import java.util.List;
  * Fragment til den anden del af oprettelse af medarbejder.
  * Inkluderer Email, tlf, arbejdsområde og kommentar
  */
-public class opret_medarbejder_fragment_2 extends Fragment implements View.OnClickListener {
+public class opret_medarbejder_fragment_2 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment2_Presenter.UpdateOpretMedarbejderFrag {
 
-    public opret_medarbejder_fragment_2() {}
 
     private EditText medarbejder_email;
     private EditText medarbejder_tlf;
@@ -34,10 +34,15 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     private opret_medarbejder_fragment_1 opretMedarbejderFragment1;
     private Button opret_medarbejder;
     private Button tilbage2;
+    private Opret_Medarbejdere_Fragment2_Presenter presenter;
+
+    //public opret_medarbejder_fragment_2() {}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.opret_medarbejder_fragment_2, container, false);
+        presenter = new Opret_Medarbejdere_Fragment2_Presenter(this);
 
         medarbejder_email = (EditText) v.findViewById(R.id.editText_email);
         medarbejder_tlf = (EditText) v.findViewById(R.id.editText_tlf);
@@ -63,13 +68,34 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.opret_medarbejder:
-                openSkaerm(Medarbejdere_skaerm.class);
-                Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
+                boolean altOK = presenter.korrektUdfyldtInformationFrag2(medarbejder_email.getText().toString(),medarbejder_tlf.getText().toString(),getArbejdsområde());
+
+                if(altOK) {
+                    //TODO Lav en ordentlig navigation
+
+                    Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
+
+                }
                 break;
             case R.id.tilbage_medarbejdere2:
+                //TODO evt. "pop" backstack
                 getActivity().onBackPressed();
                 break;
         }
+    }
+    /**
+     * Metoden henter valgte værdi i spinner
+     * @return -1 hvis intet er valgt, else return chosen item of fødsels_spinner
+     */
+    private String getArbejdsområde() {
+        String arb;
+        if(!arbejdsområde_spinner.getSelectedItem().toString().equals("Vælg arbejdsområde") ) {
+            arb = arbejdsområde_spinner.getSelectedItem().toString();
+            return arb;
+        } else  {
+            return null;
+        }
+
     }
 
     public void setFragment(android.support.v4.app.Fragment fragment) {
@@ -79,10 +105,7 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
-    public void openSkaerm(Class a){
-        Intent intent = new Intent(getActivity(),a);
-        startActivity(intent);
-    }
+
     /**
      * opretter spinner til valg af arbejdsområde
      */
@@ -94,5 +117,20 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         arbejdsområde_liste.add("Lagermand");
         arbejdsområde_liste.add("Elektriker");
         arbejdsområde_spinner.setItems(arbejdsområde_liste);
+    }
+
+    @Override
+    public void errorEmail(String errorMsg) {
+        medarbejder_email.setError(errorMsg);
+    }
+
+    @Override
+    public void errorTlf(String errorMsg) {
+        medarbejder_tlf.setError(errorMsg);
+    }
+
+    @Override
+    public void errorArbejdsområder(String errorMsg) {
+        ((TextView)arbejdsområde_spinner.getSelectedView()).setError(errorMsg);
     }
 }

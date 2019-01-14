@@ -37,6 +37,8 @@ public class Medarbejdere_skaerm extends AppCompatActivity implements View.OnCli
     private FrameLayout medarbejdereFrame;
     private opret_medarbejder_fragment_1 opretMedarbejderFragment1;
     private RecyclerView recyclerView;
+    private Opret_Medarbejdere_Fragment1_Presenter presenter1;
+    private Opret_Medarbejdere_Fragment2_Presenter presenter2;
 
     //Til en test
     private ArrayList<String > navneTest = new ArrayList<>();
@@ -52,7 +54,8 @@ public class Medarbejdere_skaerm extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_medarbejdere_skaerm);
         Log.d(TAG, "onCreate: started");
 
-        recyclerView = (RecyclerView) findViewById(R.id.medarbejder_recyclerview);
+
+        recyclerView =  findViewById(R.id.medarbejder_recyclerview);
         recyclerView.setOnClickListener(this);
 
         //Til test
@@ -62,12 +65,12 @@ public class Medarbejdere_skaerm extends AppCompatActivity implements View.OnCli
         arbejdsområderTest.add("Håndværker");
         //Til test færdigt
 
-        opretMedarbejdereKnap = (Button) findViewById(R.id.opret_medarbejder_knap);
+        opretMedarbejdereKnap = findViewById(R.id.opret_medarbejder_knap);
         opretMedarbejdereKnap.setOnClickListener(this);
 
         //Test af recyclerview
         opretMedarbejderFragment1 = new opret_medarbejder_fragment_1();
-        medarbejdereFrame = (FrameLayout) findViewById(R.id.medarbejdere_frame);
+        medarbejdereFrame = findViewById(R.id.medarbejdere_frame);
         fyldRecyclerView();
     }
 
@@ -100,7 +103,7 @@ public class Medarbejdere_skaerm extends AppCompatActivity implements View.OnCli
         medarbejdereFrame.removeAllViews();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.medarbejdere_frame, fragment);
-        //fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 }
