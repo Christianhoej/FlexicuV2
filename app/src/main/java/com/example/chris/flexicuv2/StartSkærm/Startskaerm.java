@@ -19,8 +19,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 
+import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;
@@ -30,6 +32,7 @@ import com.example.chris.flexicuv2.fragments.Indbakke_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_alle_medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_lejede_Medarbejdere_fragment;
 import com.example.chris.flexicuv2.fragments.Udlej_Fragment;
+import com.example.chris.flexicuv2.model.Singleton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Startskaerm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, StartSkærmPresenter.UpdateStartskærm {
@@ -48,13 +51,17 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
     private Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
     private Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
     private Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
+    private DBManager dbManager;
+    private Singleton singleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startskaerm);
         presenter = new StartSkærmPresenter(this);
-
+        //dbManager = new DBManager();
+        //dbManager.readBruger();
+        singleton = Singleton.getInstance();
         /**
          * Til at køre mellem fragments
          */
@@ -65,15 +72,16 @@ public class Startskaerm extends AppCompatActivity implements NavigationView.OnN
         fragmentIndbakke = new Indbakke_fragment();
         fragmentHjem = new Hjem_fragment();
 
-        mAuth = FirebaseAuth.getInstance();
-        System.out.println(mAuth.getUid() + "!!!!!!!!!!!!!!!!!1");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        System.out.println();
+
+        TextView drawer_top = findViewById(R.id.left_menu_title);
+        //drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("Virksomhedens navn");

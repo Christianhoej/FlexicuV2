@@ -22,6 +22,7 @@
         app:srcCompat="@drawable/logo_hvid_skrift"/>
 
     <TextView
+        android:id="@+id/left_menu_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
