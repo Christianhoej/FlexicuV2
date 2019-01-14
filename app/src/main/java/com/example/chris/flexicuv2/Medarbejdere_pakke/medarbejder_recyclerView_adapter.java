@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.RecyclerViewAdapter_AlleMedarbejdere;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +39,16 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     private ArrayList<String> mMedarbejderNavn = new ArrayList<>();
     private ArrayList<String> mMedarbejderArbejdsområde = new ArrayList<>();
     private Context mContext;
+    private Singleton singleton;
 
 
     //Billeder skal implementeres på en måde
-    public medarbejder_recyclerView_adapter(Context mContext, /*ArrayList<String> mMedarbjderBilleder,*/ ArrayList<String> mMedarbejderNavn, ArrayList<String> mMedarbejderArbejdsområde) {
+    public medarbejder_recyclerView_adapter(Context mContext /*ArrayList<String> mMedarbjderBilleder,*/ /*ArrayList<String> mMedarbejderNavn, ArrayList<String> mMedarbejderArbejdsområde*/) {
         //this.mMedarbjderBilleder = mMedarbjderBilleder;
-        this.mMedarbejderNavn = mMedarbejderNavn;
-        this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
+       // this.mMedarbejderNavn = mMedarbejderNavn;
+       // this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
         this.mContext = mContext;
+        singleton = Singleton.getInstance();
     }
 
 
@@ -76,11 +79,13 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
 
         viewHolder.medarbejder_navn.setText(mMedarbejderNavn.get(i));
         viewHolder.medarbejder_arbejdsområde.setText(mMedarbejderArbejdsområde.get(i));
+       //viewHolder.medarbejder_navn.setText(singleton.getMedarbejdere().get(i).getNavn());
+       //viewHolder.medarbejder_arbejdsområde.setText(singleton.getMedarbejdere().get(i).getArbejdsomraade());
 
         viewHolder.medarbejder_recyclerview_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on" + mMedarbejderNavn.get(i));
+                Log.d(TAG, "onClick: clicked on" + singleton.getMedarbejdere().get(i).getNavn());
 
                 /*Medarbejdere_skaerm medarbejdere_skaerm = new Medarbejdere_skaerm();
                 medarbejdere_skaerm.onButtonShowPopupWindowClick(v);*/
@@ -136,6 +141,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     @Override
     public int getItemCount() {
         return mMedarbejderNavn.size();
+        //return singleton.getMedarbejdere().size();
     }
 
     /**
@@ -144,6 +150,11 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
      * @param område
      */
     public void medarbejderTilføjet(String navn, String område) {
+
+       /* if(getItemCount()<singleton.getMedarbejdere().size()){
+            notifyDataSetChanged();
+        }*/
+
         mMedarbejderNavn.add(navn);
         mMedarbejderArbejdsområde.add(område);
         //if (mMedarbejderNavn != null && mMedarbejderNavn.size() > 0) {

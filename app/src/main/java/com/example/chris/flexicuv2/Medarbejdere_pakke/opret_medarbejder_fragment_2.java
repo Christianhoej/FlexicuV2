@@ -6,14 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.Indlejninger.MultiSelectionSpinner;
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     private Button opret_medarbejder;
     private Button tilbage2;
     private Opret_Medarbejdere_Fragment2_Presenter presenter;
+    private Singleton singleton;
+    private DBManager dbManager;
 
     //public opret_medarbejder_fragment_2() {}
 
@@ -43,6 +48,9 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.opret_medarbejder_fragment_2, container, false);
         presenter = new Opret_Medarbejdere_Fragment2_Presenter(this);
+
+        singleton = Singleton.getInstance();
+        dbManager = new DBManager();
 
         medarbejder_email = (EditText) v.findViewById(R.id.editText_email);
         medarbejder_tlf = (EditText) v.findViewById(R.id.editText_tlf);
@@ -72,9 +80,12 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
 
                 if(altOK) {
                     //TODO Lav en ordentlig navigation
+                    dbManager.createMedarbejder(singleton.midlertidigMedarbejder);
+                    singleton.getBruger().addMedarbejdere(singleton.midlertidigMedarbejder);
+                    singleton.midlertidigMedarbejder=null;
 
                     Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
-
+                    getActivity().finish();
                 }
                 break;
             case R.id.tilbage_medarbejdere2:
@@ -133,4 +144,22 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     public void errorArbejdsområder(String errorMsg) {
         ((TextView)arbejdsområde_spinner.getSelectedView()).setError(errorMsg);
     }
+
+    @Override
+    public void setEmail(String email) {
+        medarbejder_email.setText(email);
+    }
+
+    @Override
+    public void setTlf(String tlf) {
+        medarbejder_tlf.setText(tlf);
+    }
+
+    @Override
+    public void setArbejdsområde(String arbejdsområde) {
+        ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)arbejdsområde_spinner.getAdapter();
+        arbejdsområde_spinner.setSelection(array_spinner.getPosition(arbejdsområde));
+    }
+
+
 }
