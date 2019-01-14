@@ -3,14 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".opret_bruger.new_user_fragment_2"
-    android:id="@+id/new_user_frame_2">
+    tools:context=".opret_bruger.New_user_fragment_2"
+    android:id="@+id/new_user_frame_2"
+    android:background="@color/hvid"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/layout2">
+        android:id="@+id/layout2"
+        >
 
         <ImageView
             android:id="@+id/imageView2"
@@ -138,7 +141,7 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/tilbage_medarbejdere"
+            android:id="@+id/cancelBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -153,13 +156,13 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/næste_medarbejdere"
+            android:id="@+id/createUserBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/rounded_corners_green"
-            android:text="Næste"
+            android:background="@drawable/rounded_corners_blue"
+            android:text="opret"
             android:textColor="@color/hvid" />
 
         <Space

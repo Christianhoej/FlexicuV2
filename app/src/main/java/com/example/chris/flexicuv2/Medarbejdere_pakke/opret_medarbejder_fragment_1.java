@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- */
-public class opret_medarbejder_fragment_1 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment1_Presenter.UpdateOpretMedarbejderFrag, RadioGroup.OnCheckedChangeListener {
+ */public class opret_medarbejder_fragment_1 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment1_Presenter.UpdateOpretMedarbejderFrag, RadioGroup.OnCheckedChangeListener {
+
     public opret_medarbejder_fragment_1() {
     }
 
@@ -33,9 +33,12 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
     private opret_medarbejder_fragment_2 opretMedarbejderFragment2;
     private Button næste_medarbejdere;
     private Button tilbage1;
+
     private RadioGroup radioGroupKoen;
+
     private RadioButton radio_mand;
     private RadioButton radio_kvinde;
+    opretMedarbejder_presenter opretMedarbejder_presenter;
 
     private Opret_Medarbejdere_Fragment1_Presenter presenter;
 
@@ -43,8 +46,10 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         presenter = new Opret_Medarbejdere_Fragment1_Presenter(this);
         View v = inflater.inflate(R.layout.opret_medarbejder_fragment_1, container, false);
+
         radioGroupKoen = v.findViewById(R.id.radio_køn);
         radioGroupKoen.setOnCheckedChangeListener(this);
+
         fødselsår_spinner = v.findViewById(R.id.fødselsår);
         medarbejder_navn =  v.findViewById(R.id.editText_navn);
         //Bemærk denne er anderledes fra sidste side
@@ -54,8 +59,10 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
         næste_medarbejdere.setOnClickListener(this);
         tilbage1 =  v.findViewById(R.id.tilbage_medarbejdere);
         tilbage1.setOnClickListener(this);
+
         radio_mand =  v.findViewById(R.id.radio_mand);
         radio_kvinde =  v.findViewById(R.id.radio_kvinde);
+
 
         opretSpinner(v);
 
@@ -66,10 +73,12 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.næste_medarbejdere:
+
                 boolean altOK = presenter.korrektUdfyldtInformationFrag1(medarbejder_navn.getText().toString(),getGender(), getBirthYearChosen());
 
                 if(altOK)
                 setFragment(opretMedarbejderFragment2);
+
                 break;
             case R.id.tilbage_medarbejdere:
                 //TODO ordentlig navigation
@@ -77,6 +86,7 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
                 getActivity().recreate();
                 //getActivity().onBackPressed();
                 break;
+
         }
     }
 
@@ -126,11 +136,14 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
 
     @Override
     public void errorNavn(String errorMsg) {
+
         medarbejder_navn.setError(errorMsg);
+
     }
 
     @Override
     public void errorKøn(String errorMsg) {
+
         if (!radio_kvinde.isChecked() && !radio_mand.isChecked())
     radio_kvinde.setError(errorMsg);
     }
@@ -148,3 +161,4 @@ public class opret_medarbejder_fragment_1 extends Fragment implements View.OnCli
     //TODO Gemme en "lokal instans" af den medarbejder man er ved at oprette på singleton objekt
     //TODO indsætte værdierne fra medarbejderne i de valgte felter igen.
 }
+

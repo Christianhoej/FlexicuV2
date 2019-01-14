@@ -55,7 +55,7 @@ public class CVR_Opslag {
      */
     public Map<String, String> getResult(String text) {
         try {
-            System.setProperty("Flexicu test", "Flexicu V2");
+            System.setProperty("Flexicu test1", "Flexicu V2");
             getString = new URL("http://cvrapi.dk/api?search=" +  text +  "&country=dk&format=xml");
             System.out.println(getString);
         } catch (MalformedURLException e) {
