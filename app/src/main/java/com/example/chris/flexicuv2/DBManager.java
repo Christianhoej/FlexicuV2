@@ -33,9 +33,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     private final String MEDARBEJDER = "medarbejder";
     private final String BRUGER = "bruger";
     private final String VIRKSOMHEDSID = "virksomhedsID";
-    private Bruger bruger;
     private Singleton singleton;
-    private Medarbejder med1 = new Medarbejder();
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
     private static Integer success;
@@ -52,7 +50,6 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         String virkKey = mAuth.getCurrentUser().getUid();
-        //String virkKey = ref.child(BRUGER).push().getKey();
         bruger.setBrugerID(virkKey);
         ref.child(BRUGER).child(virkKey).setValue(bruger);
     }
@@ -62,15 +59,13 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
         DatabaseReference ref = database.getReference();
 
         String uid = mAuth.getCurrentUser().getUid();
-
+        medarbejder.setVirksomhedsID(uid);
         String medKey = ref.child(MEDARBEJDER).push().getKey();
         medarbejder.setMedarbejderID(medKey);
-        System.out.println("medarbejderkey: " + medKey);
-        System.out.println("uid: " + uid);
         ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
 
         ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.getBruger().addMedarbejdere(medarbejder);
+        singleton.addMedarbejder(medarbejder);
     }
 
     public void updateBruger(Bruger bruger) {
@@ -88,19 +83,15 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     }
 
     public void readBruger(){
-        String uid = mAuth.getUid();
+        String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(BRUGER).child(uid);
-
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-               // for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    bruger = dataSnapshot.getValue(Bruger.class);
-                    System.out.println("Bruger er sat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //}
+                Bruger bruger = dataSnapshot.getValue(Bruger.class);
+                System.out.println("Bruger er sat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 singleton.setBruger(bruger);
                 readMedarbejdere();
 
@@ -116,20 +107,28 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     }
 
     public void readMedarbejdere(){
-        String uid = mAuth.getUid();
+        String uid = mAuth.getCurrentUser().getUid();
+        System.out.println("uid: " + uid);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(MEDARBEJDER).child(VIRKSOMHEDSID);
+        DatabaseReference ref = database.getReference(MEDARBEJDER);
 
 
-        ref.equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Medarbejder medarbejder = new Medarbejder();
+                System.out.println("datasnapshot length: " + dataSnapshot.getChildrenCount());
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    medarbejder = snapshot.getValue(Medarbejder.class);
+                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
+                    singleton.addMedarbejder(medarbejder);
+                    System.out.println("HENTET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    System.out.println("Medarbejder navn: " + medarbejder.getNavn());
+                    System.out.println("Medarbejder fødselsår: " + medarbejder.getFødselsår());
+                    System.out.println("Medarbejder arbejdsområde: " + medarbejder.getArbejdsomraade());
                 }
-                singleton.getBruger().addMedarbejdere(medarbejder);
-                mContext.startActivity(new Intent(mContext, Startskaerm.class));
+
+                Intent intent = new Intent(mContext, Startskaerm.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                mContext.startActivity(intent);
             }
 
             @Override
@@ -147,19 +146,19 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                 .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        success = 1;
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(context, "Bruger oprettet",
                                     Toast.LENGTH_SHORT).show();
-                            success = 1;
-                            } else {
+                            singleton.userID = mAuth.getCurrentUser().getUid();
+                            System.out.println(singleton.userID);
+                            }
+                            else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(context, "Bruger kunne ikke oprettes",
                                     Toast.LENGTH_SHORT).show();
-                            success = 0;
                             }
                     }
 

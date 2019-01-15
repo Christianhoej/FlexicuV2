@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -31,6 +32,7 @@ import com.example.chris.flexicuv2.fragments.RecyclerViewAdapter_AlleMedarbejder
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medarbejder_recyclerView_adapter.ViewHolder> {
@@ -38,17 +40,17 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     private static final String TAG = "recyclerView_adapter";
 
     private ArrayList<String> mMedarbjderBilleder = new ArrayList<>();
-    private ArrayList<String> mMedarbejderNavn = new ArrayList<>();
-    private ArrayList<String> mMedarbejderArbejdsområde = new ArrayList<>();
+    //private ArrayList<String> mMedarbejderNavn = new ArrayList<>();
+    //private ArrayList<String> mMedarbejderArbejdsområde = new ArrayList<>();
     private Context mContext;
     private Singleton singleton;
 
 
     //Billeder skal implementeres på en måde
     public medarbejder_recyclerView_adapter(Context mContext/*ArrayList<String> mMedarbjderBilleder,*//* ArrayList<String> mMedarbejderNavn, ArrayList<String> mMedarbejderArbejdsområde*/) {
-        this.mMedarbjderBilleder = mMedarbjderBilleder;
-        this.mMedarbejderNavn = mMedarbejderNavn;
-        this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
+        //this.mMedarbjderBilleder = mMedarbjderBilleder;
+        //this.mMedarbejderNavn = mMedarbejderNavn;
+        //this.mMedarbejderArbejdsområde = mMedarbejderArbejdsområde;
         this.mContext = mContext;
         singleton = Singleton.getInstance();
     }
@@ -79,10 +81,10 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
                 .asBitmap()
                 .load(mMedarbjderBilleder.get(i)) */
 
-        viewHolder.medarbejder_navn.setText(mMedarbejderNavn.get(i));
-        viewHolder.medarbejder_arbejdsområde.setText(mMedarbejderArbejdsområde.get(i));
-       //viewHolder.medarbejder_navn.setText(singleton.getMedarbejdere().get(i).getNavn());
-       //viewHolder.medarbejder_arbejdsområde.setText(singleton.getMedarbejdere().get(i).getArbejdsomraade());
+        //viewHolder.medarbejder_navn.setText(mMedarbejderNavn.get(i));
+        //viewHolder.medarbejder_arbejdsområde.setText(mMedarbejderArbejdsområde.get(i));
+        viewHolder.medarbejder_navn.setText(singleton.getMedarbejdere().get(i).getNavn());
+        viewHolder.medarbejder_arbejdsområde.setText(singleton.getMedarbejdere().get(i).getArbejdsomraade());
 
         viewHolder.medarbejder_recyclerview_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +93,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
 
                 /*Medarbejdere_skaerm medarbejdere_skaerm = new Medarbejdere_skaerm();
                 medarbejdere_skaerm.onButtonShowPopupWindowClick(v);*/
-                onButtonShowPopupWindowClick(v);
+                onButtonShowPopupWindowClick(v, i);
                 //Toast.makeText(mContext, mMedarbejderNavn.get(i), Toast.LENGTH_SHORT).show();
             }
         });
@@ -102,12 +104,34 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
      * https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
      * @param view
      */
-    public void onButtonShowPopupWindowClick(View view) {
+    public void onButtonShowPopupWindowClick(View view, int i) {
         //tilPopUp = (View) findViewById(R.id.tilPopUp);
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.vis_medarbejder_popup_fragment, null);
 
+        TextView navn = popupView.findViewById(R.id.medarbejder_navn);
+        navn.setText("Navn: " + singleton.getMedarbejdere().get(i).getNavn());
+
+        TextView arbejdsområde = popupView.findViewById(R.id.medarbejder_arbejdsområde);
+        arbejdsområde.setText("Arbejdsområde: " + singleton.getMedarbejdere().get(i).getArbejdsomraade());
+
+        TextView køn = popupView.findViewById(R.id.medarbejder_køn);
+        køn.setText("Køn: " + singleton.getMedarbejdere().get(i).getKøn());
+
+        TextView email = popupView.findViewById(R.id.medarbejder_email);
+        email.setText("Email: " + singleton.getMedarbejdere().get(i).getEmail());
+
+        TextView alder = popupView.findViewById(R.id.medarbejder_alder);
+        alder.setText("Alder: " + (Calendar.getInstance().get(Calendar.YEAR)-singleton.getMedarbejdere().get(i).getFødselsår()) + " år");
+
+        final Button rediger = popupView.findViewById(R.id.rediger);
+        rediger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rediger.setText("YIHA");
+            }
+        });
         //get width
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity)mContext).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -117,8 +141,6 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
-
-
         //popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
 
         //final PopupWindow popupWindowt = new PopupWindow();
@@ -128,7 +150,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
+      //  popupWindow.setOutsideTouchable(true);
         /*// dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -143,8 +165,8 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
 
     @Override
     public int getItemCount() {
-        return mMedarbejderNavn.size();
-        //return singleton.getMedarbejdere().size();
+        //return mMedarbejderNavn.size();
+        return singleton.getMedarbejdere().size();
     }
 
     /**
@@ -154,11 +176,11 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
      */
     public void medarbejderTilføjet(String navn, String område) {
 
-       /* if(getItemCount()<singleton.getMedarbejdere().size()){
+        if(getItemCount()<singleton.getMedarbejdere().size()){
             notifyDataSetChanged();
-        }*/
+        }
 
-        mMedarbejderNavn.add(navn);
+        /*mMedarbejderNavn.add(navn);
         mMedarbejderArbejdsområde.add(område);
         //if (mMedarbejderNavn != null && mMedarbejderNavn.size() > 0) {
         ArrayList<String> temp1 = new ArrayList<>();
@@ -174,7 +196,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         mMedarbejderArbejdsområde = temp2;
         mMedarbejderNavn = temp1;
 
-            notifyDataSetChanged();
+            notifyDataSetChanged();*/
         }
 
 

@@ -64,6 +64,7 @@ public class Opret_Medarbejdere_Fragment1_Presenter {
             singleton.midlertidigMedarbejder.setKøn(køn);
             singleton.midlertidigMedarbejder.setFødselsår(fødselsår);
 
+
             return true;
         }
     }
