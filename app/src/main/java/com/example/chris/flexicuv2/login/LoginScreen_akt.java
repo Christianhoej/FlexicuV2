@@ -44,6 +44,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private DBManager dbManager;
 
     private FrameLayout tilAnimation;
+    private FrameLayout flex_roter;
 
 
 
@@ -82,6 +83,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         new_user_fragment_1= new New_user_fragment_1();
         tilFragmenter = (FrameLayout) findViewById(R.id.tilFragmenter_frame);
 
+
     }
 
     public void openNewUserScreen(){
@@ -96,6 +98,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
           boolean erOK = presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
           if(erOK) {
               //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
+              //loginFrame.setAlpha();
               setAnimation(loading_screen);
           }
       }
