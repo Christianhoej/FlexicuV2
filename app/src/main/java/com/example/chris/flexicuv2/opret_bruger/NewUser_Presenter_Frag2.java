@@ -27,7 +27,6 @@ public class NewUser_Presenter_Frag2 {
     private Singleton singleton;
 
 
-
     public NewUser_Presenter_Frag2(NewUser_Presenter_Frag2.UpdateNewUser_Frag2 updateNewUser){
         this.updateNewUser = updateNewUser;
         dbManager = new DBManager();
@@ -86,12 +85,13 @@ public class NewUser_Presenter_Frag2 {
         if (errors > 0 )
             return false;
         else {
-            singleton.getBruger().setEmail(email1);
-            System.out.println("1: " + singleton.getBruger().getVirksomhedsnavn());
-            System.out.println("2: " + singleton.getBruger().getBrugerensNavn());
-            System.out.println("3: " + singleton.getBruger().getAdresse());
+            singleton.midlertidigBruger.setEmail(email1);
+            System.out.println("1: " + singleton.midlertidigBruger.getVirksomhedsnavn());
+            System.out.println("2: " + singleton.midlertidigBruger.getBrugerensNavn());
+            System.out.println("3: " + singleton.midlertidigBruger.getAdresse());
             dbManager.createUserAuth(context, email1, password);
-            dbManager.createBruger(singleton.getBruger());
+            dbManager.createBruger(singleton.midlertidigBruger);
+            setMidlertidigBruger(email1, privatoplysninger);
             return true;
         }
     }
@@ -137,6 +137,29 @@ public class NewUser_Presenter_Frag2 {
         void errorPasswordMatches(String errorMsg);
         void errorAcceptTerms(String errorMsg);
         void errorPrivatoplysninger(String errorMsg);
+
+        void setEmail(String email);
+        //void setKodeord(String kodeord);
+        void setPrivatoplysninger(int privatoplysninger);
+
+    }
+
+    public void setMidlertidigBruger(String email/*, String kodeord*/, int privatoplysninger){
+        singleton.midlertidigBruger.setEmail(email);
+        //singleton.midlertidigBruger.setKodeord(kodeord);
+        singleton.midlertidigBruger.setPrivatoplysninger(privatoplysninger);
+    }
+
+    public void udfyldFelter(){
+        if(singleton.midlertidigBruger.getEmail() != null ) {
+            updateNewUser.setEmail(singleton.midlertidigBruger.getEmail());
+        }
+        /*if(singleton.midlertidigBruger.getKodeord() != null) {
+            frag.setKodeord(singleton.midlertidigBruger.getKodeord());
+        }*/
+        if(singleton.midlertidigBruger.getPrivatoplysninger() ==2){
+            updateNewUser.setPrivatoplysninger(singleton.midlertidigBruger.getPrivatoplysninger());
+        }
     }
 }
 

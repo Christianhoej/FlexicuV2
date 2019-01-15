@@ -11,7 +11,19 @@ public class Bruger {
     private String virksomhedCVR;
     private String by;
     private String virksomhedsnavn, adresse, postnr;
+
+    public int getPrivatoplysninger() {
+        return privatoplysninger;
+    }
+
+    public void setPrivatoplysninger(int privatoplysninger) {
+        this.privatoplysninger = privatoplysninger;
+    }
+
+    private int privatoplysninger;
     private ArrayList<String> medarbejderID = new ArrayList<String>();
+
+    //TODO opret kodeord og privatoplysninger
 
 
     public String getBrugerID() {

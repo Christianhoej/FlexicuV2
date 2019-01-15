@@ -65,9 +65,6 @@ import java.util.ArrayList;
         radio_mand =  v.findViewById(R.id.radio_mand);
         radio_kvinde =  v.findViewById(R.id.radio_kvinde);
 
-
-
-
         opretSpinner(v);
 
         presenter.udfyldFelter();

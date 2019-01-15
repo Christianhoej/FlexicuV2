@@ -103,15 +103,17 @@ public class NewUser_Presenter_Frag1 {
         if (errors > 0 )
             return false;
         else {
-            singleton.setBruger(new Bruger());
-            singleton.getBruger().setVirksomhedCVR(CVR);
-            singleton.getBruger().setVirksomhedsnavn(virksomhedsnavn);
-            singleton.getBruger().setAdresse(adresse);
-            singleton.getBruger().setPostnr(postNr);
-            singleton.getBruger().setBy(by);
-            singleton.getBruger().setBrugerensNavn(brugerensNavn);
-            singleton.getBruger().setTlfnr(brugerensTlf);
-            singleton.getBruger().setTitel(brugerensTitel);
+            if(singleton.midlertidigBruger==null){
+                singleton.midlertidigBruger= new Bruger();
+            }
+            singleton.midlertidigBruger.setVirksomhedCVR(CVR);
+            singleton.midlertidigBruger.setVirksomhedsnavn(virksomhedsnavn);
+            singleton.midlertidigBruger.setAdresse(adresse);
+            singleton.midlertidigBruger.setPostnr(postNr);
+            singleton.midlertidigBruger.setBy(by);
+            singleton.midlertidigBruger.setBrugerensNavn(brugerensNavn);
+            singleton.midlertidigBruger.setTlfnr(brugerensTlf);
+            singleton.midlertidigBruger.setTitel(brugerensTitel);
             return true;
         }
     }
