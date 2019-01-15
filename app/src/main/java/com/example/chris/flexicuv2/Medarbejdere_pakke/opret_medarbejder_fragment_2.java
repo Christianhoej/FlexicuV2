@@ -70,6 +70,7 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         tilbage2.setOnClickListener(this);
 
         opretSpinner();
+        presenter.udfyldFelter();
         return v;
     }
 
@@ -92,6 +93,7 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
                 break;
             case R.id.tilbage_medarbejdere2:
                 //TODO evt. "pop" backstack
+                presenter.setMidlertidigMedarbejder(medarbejder_email.getText().toString(), medarbejder_tlf.getText().toString(), getArbejdsområde());
                 getActivity().onBackPressed();
                 break;
         }

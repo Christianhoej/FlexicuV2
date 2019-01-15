@@ -57,10 +57,13 @@ public class Opret_Medarbejdere_Fragment1_Presenter {
         if(errors>0)
             return false;
         else{
-            singleton.midlertidigMedarbejder = new Medarbejder();
+            if(singleton.midlertidigMedarbejder==null) {
+                singleton.midlertidigMedarbejder = new Medarbejder();
+            }
             singleton.midlertidigMedarbejder.setNavn(navn);
             singleton.midlertidigMedarbejder.setKøn(køn);
             singleton.midlertidigMedarbejder.setFødselsår(fødselsår);
+
             return true;
         }
     }

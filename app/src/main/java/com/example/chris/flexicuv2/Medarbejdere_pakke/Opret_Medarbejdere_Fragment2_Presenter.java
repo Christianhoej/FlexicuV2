@@ -47,11 +47,15 @@ public class Opret_Medarbejdere_Fragment2_Presenter {
             return false;
         else{
             // TODO dbManager skal oprette medarbejderen
-            singleton.midlertidigMedarbejder.setEmail(email);
-            singleton.midlertidigMedarbejder.setTlfnr(tlf);
-            singleton.midlertidigMedarbejder.setArbejdsomraade(arbejdsområder);
+            setMidlertidigMedarbejder(email, tlf, arbejdsområder);
             return true;
         }
+    }
+
+    public void setMidlertidigMedarbejder(String email, String tlf, String arbejdsområder){
+        singleton.midlertidigMedarbejder.setEmail(email);
+        singleton.midlertidigMedarbejder.setTlfnr(tlf);
+        singleton.midlertidigMedarbejder.setArbejdsomraade(arbejdsområder);
     }
 
     private boolean checkStringOnlyNumbersAndLength(String cvr, int stringlength) {
@@ -77,6 +81,18 @@ public class Opret_Medarbejdere_Fragment2_Presenter {
         void setEmail(String email);
         void setTlf(String tlf);
         void setArbejdsområde(String arbejdsområde);
+    }
+
+    public void udfyldFelter(){
+        if(singleton.midlertidigMedarbejder.getEmail() != null ) {
+            frag.setEmail(singleton.midlertidigMedarbejder.getEmail());
+        }
+        if(singleton.midlertidigMedarbejder.getTlfnr() != null) {
+            frag.setTlf(singleton.midlertidigMedarbejder.getTlfnr());
+        }
+        if(singleton.midlertidigMedarbejder.getArbejdsomraade() != null){
+            frag.setArbejdsområde(singleton.midlertidigMedarbejder.getArbejdsomraade());
+        }
     }
 
 }
