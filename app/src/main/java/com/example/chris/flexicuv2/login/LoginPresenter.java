@@ -52,6 +52,7 @@ public class LoginPresenter{
                 }
                 else{
                     dbManager.signInAuth(context, email, password);
+
                     /*AsyncCheckLogIn async = new AsyncCheckLogIn();
                     async.execute();*/
                     return true;

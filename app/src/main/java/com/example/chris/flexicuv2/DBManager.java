@@ -60,7 +60,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
     public void createMedarbejder(Medarbejder medarbejder) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        singleton.getBruger().addMedarbejdere(medarbejder);
+
         String uid = mAuth.getCurrentUser().getUid();
 
         String medKey = ref.child(MEDARBEJDER).push().getKey();
@@ -70,6 +70,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
         ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
 
         ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.getBruger().addMedarbejdere(medarbejder);
     }
 
     public void updateBruger(Bruger bruger) {
@@ -101,7 +102,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                     System.out.println("Bruger er sat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 //}
                 singleton.setBruger(bruger);
-
+                readMedarbejdere();
 
             }
 
@@ -128,6 +129,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                     medarbejder = snapshot.getValue(Medarbejder.class);
                 }
                 singleton.getBruger().addMedarbejdere(medarbejder);
+                mContext.startActivity(new Intent(mContext, Startskaerm.class));
             }
 
             @Override
@@ -176,7 +178,7 @@ public class DBManager extends NewUser_akt implements View.OnClickListener{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             readBruger();
-                            mContext.startActivity(new Intent(mContext, Startskaerm.class));
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
