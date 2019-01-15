@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -171,11 +172,10 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
 
     @Override
     public void onClick(View v) {
-        setFragment(new_user_fragment_2);
         switch (v.getId()) {
             case R.id.cancelBtn:
+                //getActivity().finish();
                 getActivity().onBackPressed();
-
                 break;
             case R.id.createUserBtn:
                 if (presenter.korrektudfyldtInformation(
