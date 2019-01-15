@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -42,6 +43,10 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
     private DBManager dbManager;
 
+    private FrameLayout tilAnimation;
+
+
+
 
 
     LoginPresenter presenter;
@@ -55,6 +60,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
         loading_screen = new Loading_Screen();
         setContentView(R.layout.activity_login_screen);
+        tilAnimation = (FrameLayout) findViewById(R.id.tilAnimation);
 
         logIn = findViewById(R.id.logInBtn);
         logIn.setOnClickListener(this);
@@ -90,7 +96,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
           boolean erOK = presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
           if(erOK) {
               //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
-              //setFragment(loading_screen);
+              setAnimation(loading_screen);
           }
       }
       else{
@@ -137,7 +143,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void setErrorMsgEmail(String error){
         username.setError(error);
     }
-
+/*
     @Override
     public void setLoadingScreen(String message) {
 
@@ -158,12 +164,24 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         popupWindow.showAtLocation(logIn, Gravity.CENTER, 0, 0);
     }
 
-
+*/
     public void setFragment(android.support.v4.app.Fragment fragment) {
         //loginFrame.setVisibility(View.INVISIBLE);
         //loginFrame.removeAllViews();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.tilFragmenter_frame, fragment);
+
+        //fragmentTransaction.addToBackStack(null);
+        //this.getSupportFragmentManager().popBackStack();
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
+
+    public void setAnimation(android.support.v4.app.Fragment fragment) {
+        //loginFrame.setVisibility(View.INVISIBLE);
+        //loginFrame.removeAllViews();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.tilAnimation, fragment);
 
         //fragmentTransaction.addToBackStack(null);
         //this.getSupportFragmentManager().popBackStack();

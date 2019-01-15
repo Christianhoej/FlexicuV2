@@ -52,7 +52,7 @@ public class LoginPresenter{
                     return false;
                 }
                 else{
-                    pres.setLoadingScreen("Henter oplysninger...");
+                    //pres.setLoadingScreen("Henter oplysninger...");
                     dbManager.signInAuth(context, email, password);
 
                     /*AsyncCheckLogIn async = new AsyncCheckLogIn();
@@ -88,6 +88,6 @@ public class LoginPresenter{
         void setErrorMsgPassword(String error);
 
         void setErrorMsgEmail(String error);
-        void setLoadingScreen(String message);
+        //void setLoadingScreen(String message);
     }
 }
