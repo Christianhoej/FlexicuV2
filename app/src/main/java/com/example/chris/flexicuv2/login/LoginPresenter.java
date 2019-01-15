@@ -1,5 +1,6 @@
 package com.example.chris.flexicuv2.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -51,8 +52,8 @@ public class LoginPresenter{
                     return false;
                 }
                 else{
+                    ProgressDialog dialog = ProgressDialog.show(context, "", "Loading. Please wait");
                     dbManager.signInAuth(context, email, password);
-
                     /*AsyncCheckLogIn async = new AsyncCheckLogIn();
                     async.execute();*/
                     return true;

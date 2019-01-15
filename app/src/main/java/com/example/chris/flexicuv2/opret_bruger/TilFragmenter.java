@@ -12,7 +12,7 @@ public class TilFragmenter extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_til_fragmenter_opretBruger);
+        setContentView(R.layout.activity_til_fragmenter_opret_bruger);
         new_user_fragment_1 = new New_user_fragment_1();
 
         setFragment(new_user_fragment_1);

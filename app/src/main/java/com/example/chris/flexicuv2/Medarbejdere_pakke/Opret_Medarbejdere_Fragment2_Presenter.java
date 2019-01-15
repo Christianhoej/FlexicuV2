@@ -18,6 +18,9 @@ public class Opret_Medarbejdere_Fragment2_Presenter {
     public Opret_Medarbejdere_Fragment2_Presenter(UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag){
         frag = updateOpretMedarbejderFrag;
         singleton = Singleton.getInstance();
+        System.out.println("NAVN: " + singleton.midlertidigMedarbejder.getNavn());
+        System.out.println("KØN: " + singleton.midlertidigMedarbejder.getKøn());
+        System.out.println("Fødselsår: " + singleton.midlertidigMedarbejder.getFødselsår());
     }
 
 

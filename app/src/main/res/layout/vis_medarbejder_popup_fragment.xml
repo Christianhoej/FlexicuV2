@@ -2,6 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginVertical="15dp"
     android:layout_height="wrap_content"
     android:background="@drawable/flex_green_rektangel"
     tools:context=".Medarbejdere_pakke.vis_medarbejder_fragment">
@@ -40,7 +42,7 @@
             android:textSize="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/grey"
-            android:id="@+id/medarbejder_profession"/>
+            android:id="@+id/medarbejder_arbejdsområde"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +69,7 @@
             android:textSize="20dp"
             android:textColor="@color/grey"
             android:layout_marginTop="20dp"
-            android:id="@+id/medarbejder_Email"/>
+            android:id="@+id/medarbejder_email"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -75,6 +77,7 @@
             android:text="Rediger"
             android:layout_marginTop="50dp"
             android:layout_gravity="center"
+            android:id="@+id/rediger"
             android:background="@drawable/rounded_corners_red"/>
 
     </LinearLayout>
