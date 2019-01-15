@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.login.LoginPresenter;
 
 public class TilFragmenter extends AppCompatActivity{
 
@@ -13,7 +12,7 @@ public class TilFragmenter extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_til_fragmenter);
+        setContentView(R.layout.activity_til_fragmenter_opretBruger);
         new_user_fragment_1 = new New_user_fragment_1();
 
         setFragment(new_user_fragment_1);

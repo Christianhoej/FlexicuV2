@@ -47,6 +47,7 @@ public class Lej_filtrer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_lej_filtrer, container, false);
 
+        arbejdsområder_spinner = (MultiSelectionSpinner)v.findViewById(R.id.filtrer_arbejdsområder);
         postnr = (EditText) v.findViewById(R.id.edit_postnr);
         by = (EditText) v.findViewById(R.id.edit_by);
         vej = (EditText) v.findViewById(R.id.edit_vej);
@@ -55,8 +56,6 @@ public class Lej_filtrer extends Fragment {
         nej_værktøj = (RadioButton) v.findViewById(R.id.nej_værktøj);
         min_timepris = (EditText)v.findViewById(R.id.min_timepris);
         max_timepris = (EditText) v.findViewById(R.id.max_timepris);
-        arbejdsområder_spinner = (MultiSelectionSpinner)v.findViewById(R.id.filtrer_arbejdsområder);
-
 
         opretSpinner();
         return v;
