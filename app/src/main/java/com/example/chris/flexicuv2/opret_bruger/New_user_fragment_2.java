@@ -82,7 +82,7 @@ public class New_user_fragment_2 extends Fragment implements NewUser_Presenter_F
         cancelBtn2 = v.findViewById(R.id.cancelBtn2);
         cancelBtn2.setOnClickListener(this);
 
-
+        presenter.udfyldFelter();
 
 
         return v;
@@ -121,12 +121,14 @@ public class New_user_fragment_2 extends Fragment implements NewUser_Presenter_F
                 }*/
                 //getActivity().getSupportFragmentManager().popBackStackImmediate();
                 //getFragmentManager().popBackStackImmediate();
+                //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getActivity().finish();
             }
 
         }
         if(v.getId() == R.id.cancelBtn2){
             getActivity().onBackPressed();
+            presenter.setMidlertidigBruger(username.getText().toString(), selectedId);
         }
     }
 
@@ -172,6 +174,26 @@ public class New_user_fragment_2 extends Fragment implements NewUser_Presenter_F
     @Override
     public void errorAcceptTerms(String errorMsg) {
         checkFormalities.setError(errorMsg);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        username.setText(email);
+    }
+
+    /*@Override
+    public void setKodeord(String kodeord) {
+
+    }*/
+
+    @Override
+    public void setPrivatoplysninger(int privatoplysninger) {
+        if(privatoplysninger==1){
+            checkPrivate.setChecked(true);
+        }
+        else{
+            checkPublic.setChecked(true);
+        }
     }
 
 }

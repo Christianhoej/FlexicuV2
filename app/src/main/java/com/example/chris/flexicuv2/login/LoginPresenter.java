@@ -34,6 +34,7 @@ public class LoginPresenter{
     public String setText(){
         return "Gunn rules";
     }
+
     public boolean checkLoginCredentials(String email, String password, final Context context){
         //TODO lav "et tjek" af login for at se om loginoplysinger er ok
         this.email = email;
@@ -52,7 +53,8 @@ public class LoginPresenter{
                     return false;
                 }
                 else{
-                    ProgressDialog dialog = ProgressDialog.show(context, "", "Loading. Please wait");
+
+                    //pres.setLoadingScreen("Henter oplysninger...");
                     dbManager.signInAuth(context, email, password);
                     /*AsyncCheckLogIn async = new AsyncCheckLogIn();
                     async.execute();*/
@@ -69,28 +71,8 @@ public class LoginPresenter{
 
     }
 
-    private class AsyncCheckLogIn extends AsyncTask<Void, Void, Integer> {
 
-        @Override
-        protected Integer doInBackground(Void... param) {
-            dbManager.signInAuth(mContext,email, password);
 
-            return 0;
-        }
-
-        @Override
-        protected void onPostExecute(Integer i ) {
-            super.onPostExecute(i);
-
-            if(i.equals(1)){
-                mContext.startActivity(new Intent(mContext, LoginScreen_akt.class));
-            }
-            else {
-
-            }
-
-        }
-    }
 
 
 
@@ -99,12 +81,14 @@ public class LoginPresenter{
      * Interfacet implementeres for at give
      * LoginPresenter mulighed for at opdatere viewet, da metoderne skal implementeres lokalt
      */
-    public interface UpdateLoginScreen{
+    public interface UpdateLoginScreen {
         String getEmail();
+
         String getPassword();
 
-        public void setErrorMsgPassword(String error);
+        void setErrorMsgPassword(String error);
 
-        public void setErrorMsgEmail(String error);
+        void setErrorMsgEmail(String error);
+        //void setLoadingScreen(String message);
     }
 }

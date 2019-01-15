@@ -2,17 +2,26 @@
 package com.example.chris.flexicuv2.login;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 
 import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.loadingscreen.Loading_Screen;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
@@ -28,10 +37,15 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private EditText password;
 
     private New_user_fragment_1 new_user_fragment_1;
+    private Loading_Screen loading_screen;
     private FrameLayout loginFrame;
     private FrameLayout tilFragmenter;
 
     private DBManager dbManager;
+
+    private FrameLayout tilAnimation;
+
+
 
 
 
@@ -44,8 +58,9 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         presenter = new LoginPresenter(this, this); //Evt. lav metode der kan sætte presenter på.
         dbManager = new DBManager();
 
-
+        loading_screen = new Loading_Screen();
         setContentView(R.layout.activity_login_screen);
+        tilAnimation = (FrameLayout) findViewById(R.id.tilAnimation);
 
         logIn = findViewById(R.id.logInBtn);
         logIn.setOnClickListener(this);
@@ -78,8 +93,11 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
       if(v.getId() == logIn.getId()){
-          presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
-
+          boolean erOK = presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
+          if(erOK) {
+              //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
+              setAnimation(loading_screen);
+          }
       }
       else{
           openFragmenterAktivitet();
@@ -125,8 +143,28 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void setErrorMsgEmail(String error){
         username.setError(error);
     }
+/*
+    @Override
+    public void setLoadingScreen(String message) {
 
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.fragment_loading__screen, null);
 
+        //get width
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int width = displaymetrics.widthPixels;
+
+        // create the popup window
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = false; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
+        popupWindow.setContentView(popupView);
+
+        popupWindow.showAtLocation(logIn, Gravity.CENTER, 0, 0);
+    }
+
+*/
     public void setFragment(android.support.v4.app.Fragment fragment) {
         //loginFrame.setVisibility(View.INVISIBLE);
         //loginFrame.removeAllViews();
@@ -138,5 +176,18 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
+
+    public void setAnimation(android.support.v4.app.Fragment fragment) {
+        //loginFrame.setVisibility(View.INVISIBLE);
+        //loginFrame.removeAllViews();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.tilAnimation, fragment);
+
+        //fragmentTransaction.addToBackStack(null);
+        //this.getSupportFragmentManager().popBackStack();
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
+
 
 }
