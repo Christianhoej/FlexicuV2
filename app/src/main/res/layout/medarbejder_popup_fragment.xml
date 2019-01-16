@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginVertical="15dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/flex_green_rektangel"
+    tools:context=".medarbejdere.vis_medarbejder_fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/medarbejder_billede"
+                android:src="@drawable/blue_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medarbejderens navn"
+                android:id="@+id/medarbejder_navn"
+                android:textSize="30dp"
+                android:textColor="@color/grey"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arbejdsområde: "
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/grey"
+            android:id="@+id/medarbejder_arbejdsområde"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Køn: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_køn"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alder: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_alder"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_email"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rediger"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:id="@+id/rediger"
+            android:background="@drawable/rounded_corners_red"/>
+
+    </LinearLayout>
+
+</FrameLayout>
+

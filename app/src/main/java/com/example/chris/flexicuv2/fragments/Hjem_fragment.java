@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.startskaerm.Startskaerm_Udlejede_medarbejder_fragment;
+import com.example.chris.flexicuv2.startskaerm.Startskaerm_alle_medarbejdere_fragment;
+import com.example.chris.flexicuv2.startskaerm.Startskaerm_lejede_Medarbejdere_fragment;
 
 public class Hjem_fragment extends Fragment {
 
@@ -22,7 +25,7 @@ public class Hjem_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_hjem_fragment, container, false);
+        View v = inflater.inflate(R.layout.startskaerm_recyclerview, container, false);
 
         fragmentUdlejedeMed = new Startskaerm_Udlejede_medarbejder_fragment();
         fragmentLejedeMed = new Startskaerm_lejede_Medarbejdere_fragment();
