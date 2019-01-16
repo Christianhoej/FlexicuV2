@@ -59,11 +59,11 @@ public class NewUser_Presenter_Frag1 {
                                       String brugerensTitel, Context context) {
         int errors = 0;
 
-        /*boolean CVROK = checkStringOnlyNumbersAndLength(CVR, 8);
+        boolean CVROK = checkStringOnlyNumbersAndLength(CVR, 8);
         if (!CVROK) {
             updateNewUser.errorCVR(ERRORMSGCVR);
             errors++;
-        }*/
+        }
         boolean vshOK = !virksomhedsnavn.isEmpty();
         if (!vshOK) {
             updateNewUser.errorVirksomhedsnavn(ERRORVIRKSOMHEDSNAVN);

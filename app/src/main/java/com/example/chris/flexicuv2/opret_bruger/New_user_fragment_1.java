@@ -92,22 +92,27 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
 
     @Override
     public void updateVirksomhedsNavn(String vsh_navn) {
+        companyName.setError(null);
         companyName.setText(vsh_navn);
+
     }
 
     @Override
     public void updateAdresse(String adresse) {
         companyAddress.setText(adresse);
+        companyAddress.setError(null);
     }
 
     @Override
     public void updatePostNr(String postNr) {
         companyZipCode.setText(postNr);
+        companyZipCode.setError(null);
     }
 
     @Override
     public void updateBy(String by) {
         companyCity.setText(by);
+        companyCity.setError(null);
     }
 
     @Override
@@ -161,6 +166,24 @@ public class New_user_fragment_1 extends Fragment implements NewUser_Presenter_F
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (s.length() == 8) {
                 presenter.hentVirksomhedsoplysninger(s.toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+    private TextWatcher udfyldtTextWatch = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (s.length() >0) {
+
             }
         }
 
