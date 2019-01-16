@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2.medarbejdere;
+package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
 
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.chris.flexicuv2.R;
 
@@ -41,7 +42,7 @@ public class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.medarbejder_skaerm_fragment, container, false);
+        View v = inflater.inflate(R.layout.medarbejder__skaerm_fragment, container, false);
         Log.d(TAG, "onCreate: started");
 
 
@@ -71,6 +72,9 @@ public class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClic
         switch (v.getId()) {
             case R.id.opret_medarbejder_knap:
                 //TODO test af at opdatere recyclerviewet med "nye medarbejdere" Bør sættes på sidste fragment Eller viewt bør opdateres med et
+                 //String s1 ="Janus rules";
+                //String s2 = "ALT";
+                //adapter.medarbejderTilføjet(s1,s2);
                 setFragment(opretMedarbejderFragment1);
                 break;
         }

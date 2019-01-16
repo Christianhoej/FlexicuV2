@@ -3,19 +3,24 @@ package com.example.chris.flexicuv2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
-import com.example.chris.flexicuv2.startskaerm.Startskaerm;
+import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
+import com.example.chris.flexicuv2.login.LoginScreen_akt;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
+import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -23,7 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DBManager{
+public class DBManager extends NewUser_akt implements View.OnClickListener{
 
     private final String MEDARBEJDER = "medarbejder";
     private final String BRUGER = "bruger";
@@ -31,6 +36,7 @@ public class DBManager{
     private Singleton singleton;
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
+    private static Integer success;
     private static Context mContext;
     private static String email, password;
 
@@ -102,6 +108,7 @@ public class DBManager{
 
     public void readMedarbejdere(){
         String uid = mAuth.getCurrentUser().getUid();
+        System.out.println("uid: " + uid);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(MEDARBEJDER);
 
@@ -109,9 +116,14 @@ public class DBManager{
         ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("datasnapshot length: " + dataSnapshot.getChildrenCount());
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
                     singleton.addMedarbejder(medarbejder);
+                    System.out.println("HENTET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    System.out.println("Medarbejder navn: " + medarbejder.getNavn());
+                    System.out.println("Medarbejder fødselsår: " + medarbejder.getFødselsår());
+                    System.out.println("Medarbejder arbejdsområde: " + medarbejder.getArbejdsomraade());
                 }
 
                 Intent intent = new Intent(mContext, Startskaerm.class);
