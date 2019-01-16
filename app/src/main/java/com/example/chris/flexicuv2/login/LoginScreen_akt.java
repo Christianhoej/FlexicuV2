@@ -2,32 +2,20 @@
 package com.example.chris.flexicuv2.login;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 
 import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.loadingscreen.Loading_Screen;
-import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
-import com.example.chris.flexicuv2.opret_bruger.New_user_fragment_1;
-import com.example.chris.flexicuv2.opret_bruger.TilFragmenter;
+import com.example.chris.flexicuv2.opret_bruger.Opret_Bruger_Fragment_1;
+import com.example.chris.flexicuv2.opret_bruger.Opret_Bruger_Activity;
 
 public class LoginScreen_akt extends AppCompatActivity implements View.OnClickListener, LoginPresenter.UpdateLoginScreen {
 
@@ -36,7 +24,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private EditText username;
     private EditText password;
 
-    private New_user_fragment_1 new_user_fragment_1;
+    private Opret_Bruger_Fragment_1 new_user_fragment_1;
     private Loading_Screen loading_screen;
     private FrameLayout loginFrame;
     private FrameLayout tilFragmenter;
@@ -60,7 +48,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         dbManager = new DBManager();
 
         loading_screen = new Loading_Screen();
-        setContentView(R.layout.activity_login_screen);
+        setContentView(R.layout.login_screen_activity);
         tilAnimation = (FrameLayout) findViewById(R.id.tilAnimation);
 
         logIn = findViewById(R.id.logInBtn);
@@ -80,16 +68,10 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         password.setText("123123");
 
         loginFrame = findViewById(R.id.login_frame);
-        new_user_fragment_1= new New_user_fragment_1();
+        new_user_fragment_1= new Opret_Bruger_Fragment_1();
         tilFragmenter = (FrameLayout) findViewById(R.id.tilFragmenter_frame);
 
 
-    }
-
-    public void openNewUserScreen(){
-        Intent intent = new Intent(this, NewUser_akt.class);
-
-        startActivity(intent);
     }
 
     @Override
@@ -104,7 +86,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
       }
       else{
           openFragmenterAktivitet();
-          //setFragment(new_user_fragment_1);
+          //setFragment(opret_bruger_fragment_1);
 
           //openNewUserScreen();
       }
@@ -123,7 +105,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         }
     }
     public void openFragmenterAktivitet(){
-        Intent intent = new Intent(this, TilFragmenter.class);
+        Intent intent = new Intent(this, Opret_Bruger_Activity.class);
         startActivity(intent);
     }
 
@@ -151,7 +133,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void setLoadingScreen(String message) {
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.fragment_loading__screen, null);
+        View popupView = inflater.inflate(R.layout.loading_screen_fragment, null);
 
         //get width
         DisplayMetrics displaymetrics = new DisplayMetrics();

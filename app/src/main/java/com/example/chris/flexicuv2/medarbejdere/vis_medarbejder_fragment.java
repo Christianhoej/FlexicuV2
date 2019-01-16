@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2.fragments;
+package com.example.chris.flexicuv2.medarbejdere;
 
 
 import android.os.Bundle;
@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 
 import com.example.chris.flexicuv2.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Udlej_Fragment extends Fragment {
+public class vis_medarbejder_fragment extends Fragment {
 
 
-    public Udlej_Fragment() {
+    public vis_medarbejder_fragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +24,7 @@ public class Udlej_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.udlej_startskaerm_fragment, container, false);
+        return inflater.inflate(R.layout.medarbejder_popup_fragment, container, false);
     }
 
 }

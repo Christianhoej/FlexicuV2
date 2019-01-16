@@ -25,7 +25,7 @@ public class Indbakke_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_indbakke_fragment, container, false);
+        return inflater.inflate(R.layout.indbakke_startskaerm_fragment, container, false);
     }
 
 }

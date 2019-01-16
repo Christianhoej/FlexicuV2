@@ -67,10 +67,13 @@ public class Bruger {
     }
 
     public void setVirksomhedsnavn(String virksomhedsnavn) {
+        System.out.println(virksomhedsnavn);
         this.virksomhedsnavn = virksomhedsnavn;
     }
 
     public String getVirksomhedsnavn() {
+
+        System.out.println(virksomhedsnavn);
         return virksomhedsnavn;
     }
 
