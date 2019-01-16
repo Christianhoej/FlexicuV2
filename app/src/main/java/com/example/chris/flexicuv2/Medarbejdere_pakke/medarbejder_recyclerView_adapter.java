@@ -91,8 +91,6 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on" + singleton.getMedarbejdere().get(i).getNavn());
 
-                /*Medarbejdere_skaerm medarbejdere_skaerm = new Medarbejdere_skaerm();
-                medarbejdere_skaerm.onButtonShowPopupWindowClick(v);*/
                 onButtonShowPopupWindowClick(v, i);
                 //Toast.makeText(mContext, mMedarbejderNavn.get(i), Toast.LENGTH_SHORT).show();
             }
