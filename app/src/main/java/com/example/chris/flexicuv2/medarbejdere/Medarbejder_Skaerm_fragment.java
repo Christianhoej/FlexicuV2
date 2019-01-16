@@ -71,9 +71,6 @@ public class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClic
         switch (v.getId()) {
             case R.id.opret_medarbejder_knap:
                 //TODO test af at opdatere recyclerviewet med "nye medarbejdere" Bør sættes på sidste fragment Eller viewt bør opdateres med et
-                 /*String s1 ="Janus rules";
-                String s2 = "ALT";
-                adapter.medarbejderTilføjet(s1,s2);*/
                 setFragment(opretMedarbejderFragment1);
                 break;
         }

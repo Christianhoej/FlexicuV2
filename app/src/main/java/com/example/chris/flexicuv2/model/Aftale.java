@@ -13,6 +13,8 @@ public class Aftale {
     private String endDato;
     private int pris;
     private String kommentar;
+    private boolean egetVærktøj;
+
 
     public boolean isEgetVærktøj() {
         return egetVærktøj;
@@ -21,8 +23,6 @@ public class Aftale {
     public void setEgetVærktøj(boolean egetVærktøj) {
         this.egetVærktøj = egetVærktøj;
     }
-
-    private boolean egetVærktøj;
 
     public int getAftaleID() {
         return aftaleID;

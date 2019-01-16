@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -28,6 +29,7 @@ import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medarbejder_recyclerView_adapter.ViewHolder> {
 
@@ -85,8 +87,6 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on" + singleton.getMedarbejdere().get(i).getNavn());
 
-                /*Medarbejdere_skaerm medarbejdere_skaerm = new Medarbejdere_skaerm();
-                medarbejdere_skaerm.onButtonShowPopupWindowClick(v);*/
                 onButtonShowPopupWindowClick(v, i);
                 //Toast.makeText(mContext, mMedarbejderNavn.get(i), Toast.LENGTH_SHORT).show();
             }
