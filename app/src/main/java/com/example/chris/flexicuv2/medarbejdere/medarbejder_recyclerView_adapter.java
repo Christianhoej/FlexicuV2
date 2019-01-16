@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2.medarbejdere;
+package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
 /*
  *Udarbejdet med inspiration fra denne video:
@@ -8,8 +8,10 @@ package com.example.chris.flexicuv2.medarbejdere;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -23,8 +25,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.fragments.RecyclerViewAdapter_AlleMedarbejdere;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
@@ -61,7 +65,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.medarbejdere_listitems, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.medarbejdere_recyclerview_listitems, viewGroup, false);
         //Objekt ViewHolder klassen nedenfor, der tager vores view som er oprettet ud fra designet af recyclerViewet
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -102,7 +106,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         //tilPopUp = (View) findViewById(R.id.tilPopUp);
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.medarbejder_popup_fragment, null);
+        View popupView = inflater.inflate(R.layout.vis_medarbejder_popup_fragment, null);
 
         TextView navn = popupView.findViewById(R.id.medarbejder_navn);
         navn.setText("Navn: " + singleton.getMedarbejdere().get(i).getNavn());
