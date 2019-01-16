@@ -148,7 +148,6 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
     public void updateVirksomhedsNavn(String vsh_navn) {
     companyName.setText(vsh_navn);
     }
-
     @Override
     public void updateAdresse(String adresse) {
         companyAddress.setText(adresse);
@@ -161,7 +160,7 @@ public class NewUser_akt extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void updateBy(String by) {
-    companyCity.setText(by);
+        companyCity.setText(by);
     }
 
     @Override

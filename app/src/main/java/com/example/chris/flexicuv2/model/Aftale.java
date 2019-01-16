@@ -5,12 +5,24 @@ import java.util.ArrayList;
 public class Aftale {
 
     private int aftaleID;
-    private boolean helePeriode;
-    private int minDage;
     private Bruger udlejer;
     private Bruger lejer;
     private Medarbejder medarbejder;
-    private ArrayList<AftaleIndhold> aftaleIndhold = new ArrayList<AftaleIndhold>();
+    private int status;
+    private String startDato;
+    private String endDato;
+    private int pris;
+    private String kommentar;
+
+    public boolean isEgetVærktøj() {
+        return egetVærktøj;
+    }
+
+    public void setEgetVærktøj(boolean egetVærktøj) {
+        this.egetVærktøj = egetVærktøj;
+    }
+
+    private boolean egetVærktøj;
 
     public int getAftaleID() {
         return aftaleID;
@@ -18,22 +30,6 @@ public class Aftale {
 
     public void setAftaleID(int aftaleID) {
         this.aftaleID = aftaleID;
-    }
-
-    public boolean isHelePeriode() {
-        return helePeriode;
-    }
-
-    public void setHelePeriode(boolean helePeriode) {
-        this.helePeriode = helePeriode;
-    }
-
-    public int getMinDage() {
-        return minDage;
-    }
-
-    public void setMinDage(int minDage) {
-        this.minDage = minDage;
     }
 
     public Bruger getUdlejer() {
@@ -59,9 +55,45 @@ public class Aftale {
     public void setMedarbejder(Medarbejder medarbejder) {
         this.medarbejder = medarbejder;
     }
+    
+    public int getStatus() {
+        return status;
+    }
 
-    public void addAftaleIndhold(AftaleIndhold aftaleIndhold){
-        this.aftaleIndhold.add(aftaleIndhold);
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getStartDato() {
+        return startDato;
+    }
+
+    public void setStartDato(String startDato) {
+        this.startDato = startDato;
+    }
+
+    public String getEndDato() {
+        return endDato;
+    }
+
+    public void setEndDato(String endDato) {
+        this.endDato = endDato;
+    }
+
+    public int getPris() {
+        return pris;
+    }
+
+    public void setPris(int pris) {
+        this.pris = pris;
+    }
+
+    public String getKommentar() {
+        return kommentar;
+    }
+
+    public void setKommentar(String kommentar) {
+        this.kommentar = kommentar;
     }
 
 }
