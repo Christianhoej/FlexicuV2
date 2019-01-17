@@ -16,7 +16,7 @@
             android:text="Dette er afsluttede"
             android:textSize="24dp"
             android:gravity="center"
-            android:id="@+id/tv"/>
+            android:id="@+id/tv_afsluttede"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_marginVertical="5dp"

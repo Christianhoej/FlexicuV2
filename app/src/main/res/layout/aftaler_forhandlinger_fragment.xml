@@ -5,12 +5,28 @@
     android:layout_height="match_parent"
     tools:context=".fragments.aftaler_forhandlinger_fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Dette er forhandlinger"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dette er afsluttede"
         android:textSize="24dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:id="@+id/tv_forhandlinger"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginVertical="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:id="@+id/forhandlinger_recyclerview"
+        android:layout_gravity="center">
+    </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
 
 </FrameLayout>
