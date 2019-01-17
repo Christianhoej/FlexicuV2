@@ -31,7 +31,7 @@ import java.util.ArrayList;
  */
 public class Medarbejdere_skaerm extends AppCompatActivity {
     private FrameLayout medarbejdereFrame;
-    Medarbejder_Skaerm_fragment fragment;
+    com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejder_Skaerm_fragment fragment;
 
 
     //Til test færdigt
@@ -44,7 +44,7 @@ public class Medarbejdere_skaerm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medarbejdere_skaerm);
         medarbejdereFrame = findViewById(R.id.medarbejdere_frame);
-        fragment = new Medarbejder_Skaerm_fragment();
+        fragment = new com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejder_Skaerm_fragment();
         setFragment(fragment);
     }
 
