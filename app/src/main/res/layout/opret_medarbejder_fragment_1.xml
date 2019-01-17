@@ -26,7 +26,7 @@
             android:id="@+id/editText_navn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="50dp"
+            android:layout_marginVertical="10dp"
             android:ems="10"
             android:hint="Navn"
             android:inputType="textPersonName"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="100"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:id="@+id/radio_køn">
 
             <Space
@@ -84,6 +84,48 @@
             android:textAlignment="center"
             android:foregroundGravity="center"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresse"
+            android:textSize="24sp"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vejnavn"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:inputType="text"
+            android:id="@+id/adresse_vejnavn" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/adresse_nummer"
+                android:hint="Nr."
+                android:layout_weight="1"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/adresse_postnummer"
+                android:hint="Post Nr."
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -9,7 +9,8 @@
         android:title="Forhandlinger" />
     <item
         android:id="@+id/indbakke_nuværende"
-        android:title="Nuværende" />
+        android:title="Nuværende"
+        />
 
     <item
         android:id="@+id/indbakke_afsluttede"
