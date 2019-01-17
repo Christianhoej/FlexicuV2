@@ -41,7 +41,6 @@
             android:id="@+id/medarbejder_recyclerview"
             android:layout_gravity="center"
             android:layout_marginTop="0dp">
-
         </android.support.v7.widget.RecyclerView>
 
         <Button
