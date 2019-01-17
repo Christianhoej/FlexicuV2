@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 
 import com.example.chris.flexicuv2.R;
 
@@ -25,6 +26,7 @@ public class Forhandling extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.forhandling_fragment, container, false);
+
     return v;
     }
 
