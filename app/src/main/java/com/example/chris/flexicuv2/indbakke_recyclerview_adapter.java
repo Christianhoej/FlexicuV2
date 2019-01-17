@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import com.example.chris.flexicuv2.Medarbejdere_pakke.medarbejder_recyclerView_adapter;
 
 public class indbakke_recyclerview_adapter extends RecyclerView.Adapter<indbakke_recyclerview_adapter.ViewHolder>{
 
