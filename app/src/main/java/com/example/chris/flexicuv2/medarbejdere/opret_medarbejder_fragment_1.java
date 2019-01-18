@@ -1,13 +1,17 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
+
+package com.example.chris.flexicuv2.medarbejdere;
+
 
 
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

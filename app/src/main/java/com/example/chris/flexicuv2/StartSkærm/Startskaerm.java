@@ -23,10 +23,10 @@ import android.widget.TextView;
 
 
 import com.example.chris.flexicuv2.DBManager;
-import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
+import com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;
-import com.example.chris.flexicuv2.fragments.Lej_fragment;
+import com.example.chris.flexicuv2.lej.Lej_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_Udlejede_medarbejder_fragment;
 import com.example.chris.flexicuv2.fragments.Indbakke_fragment;
 import com.example.chris.flexicuv2.fragments.Startskaerm_alle_medarbejdere_fragment;

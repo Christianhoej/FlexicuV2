@@ -1,6 +1,7 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
-import android.content.Intent;
+package com.example.chris.flexicuv2.medarbejdere;
+
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -167,3 +168,4 @@ public class opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
 
 
 }
+

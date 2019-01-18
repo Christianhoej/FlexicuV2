@@ -31,13 +31,13 @@
 
             android:name="com.example.chris.flexicuv2.StartSkærm.Startskaerm"
             tools:ignore="DuplicateActivity" />
-        <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm" />
+        <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm" />
         <activity android:name="com.example.chris.flexicuv2.opret_bruger.NewUser_akt" />
 
         <activity android:name=".opret_bruger.TilFragmenter"/>
         <activity android:name=".Medarbejder" />
 
-        <activity android:name="com.example.chris.flexicuv2.Medarbejdere_pakke.opret_medarbejder" />
+        <activity android:name="com.example.chris.flexicuv2.medarbejdere.opret_medarbejder" />
         <activity
             android:name="com.example.chris.flexicuv2.Indlejninger.Indlejninger"
             android:label="@string/title_activity_indlejninger" />

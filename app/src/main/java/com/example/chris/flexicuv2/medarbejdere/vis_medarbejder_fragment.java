@@ -1,4 +1,6 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
+
+package com.example.chris.flexicuv2.medarbejdere;
+
 
 
 import android.os.Bundle;
