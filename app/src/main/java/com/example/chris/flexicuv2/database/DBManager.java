@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
@@ -28,6 +29,8 @@ public class DBManager {
     private final String MEDARBEJDER = "medarbejder";
     private final String BRUGER = "bruger";
     private final String VIRKSOMHEDSID = "virksomhedsID";
+    private final String AFTALE = "aftale";
+    private final String LEDIG = "ledig";
     private Singleton singleton;
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
@@ -115,6 +118,52 @@ public class DBManager {
                     Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
                     singleton.addMedarbejder(medarbejder);
                 }
+                readAlleUdlej();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void createUdlej(Aftale udlej){
+        //TestAfAftalerDB testAfAftalerDB = new TestAfAftalerDB();
+        //Aftale udlej = testAfAftalerDB.getUdlej();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+
+        String udlejID = ref.child(LEDIG).push().getKey();
+        udlej.setAftaleID(udlejID);
+
+        ref.child(LEDIG).child(udlejID).setValue(udlej);
+    }
+
+    public void updateUdlej(Aftale udlej){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(MEDARBEJDER).child(udlej.getAftaleID()).setValue(udlej);
+    }
+
+    public void readAlleUdlej(){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(LEDIG);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String uid = mAuth.getCurrentUser().getUid();
+                System.out.println("dataSnapshot: " + dataSnapshot.getChildrenCount());
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Aftale udlej = snapshot.getValue(Aftale.class);
+
+                   // if(!udlej.getUdlejer().getBrugerID().equals(uid)){
+                        singleton.addMedarbejderTilUdlejning(udlej.getMedarbejder());
+                   // }
+                }
                 signInSuccess.userSignInSuccess(true);
             }
 
@@ -181,6 +230,8 @@ public class DBManager {
             }
         });
     }
+
+
 
     public interface CreateUserSuccess {
         void userCreateSuccess(boolean success);

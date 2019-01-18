@@ -92,7 +92,7 @@ public class Opret_Medarbejdere_Fragment1_Presenter {
             singleton.midlertidigMedarbejder.setKøn(køn);
             singleton.midlertidigMedarbejder.setFødselsår(fødselsår);
             singleton.midlertidigMedarbejder.setVejnavn(vejnavn);
-            singleton.midlertidigMedarbejder.setNummer(nummer);
+            singleton.midlertidigMedarbejder.setHusnummer(nummer);
             singleton.midlertidigMedarbejder.setPostnr(postnr);
             //singleton.midlertidigMedarbejder.setLatitude(latitude);
             //singleton.midlertidigMedarbejder.setLongitude(longitude);
@@ -121,7 +121,7 @@ public class Opret_Medarbejdere_Fragment1_Presenter {
             updateOpretMedarbejderFrag.setKøn(singleton.midlertidigMedarbejder.getKøn());
             updateOpretMedarbejderFrag.setNavn(singleton.midlertidigMedarbejder.getNavn());
             updateOpretMedarbejderFrag.setVejnavn(singleton.midlertidigMedarbejder.getVejnavn());
-            updateOpretMedarbejderFrag.setNummer(singleton.midlertidigMedarbejder.getNummer());
+            updateOpretMedarbejderFrag.setNummer(singleton.midlertidigMedarbejder.getHusnummer());
             updateOpretMedarbejderFrag.setPostnr(singleton.midlertidigMedarbejder.getPostnr());
         }
     }

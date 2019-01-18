@@ -3,11 +3,6 @@ package com.example.chris.flexicuv2.model;
 public class Medarbejder implements Comparable<Medarbejder>{
     private String medarbejderID;
     private String navn;
-    private String hjemmeAdresse;
-    private String hjemmePostnr;
-    private String ardejdsAdresse;
-    private String arbejdsPostnr;
-    private int loen;
     private String tlfnr;
     private String arbejdsomraade;
     private String virksomhedsID;
@@ -15,10 +10,19 @@ public class Medarbejder implements Comparable<Medarbejder>{
     private int fødselsår;
     private String email;
     private String vejnavn;
-    private String nummer;
+    private String husnummer;
     private String postnr;
     private String latitude;
     private String longitude;
+    private int løn;
+
+    public int getLoen() {
+        return løn;
+    }
+
+    public void setLoen(int løn) {
+        this.løn = løn;
+    }
 
     public String getVejnavn() {
         return vejnavn;
@@ -28,12 +32,12 @@ public class Medarbejder implements Comparable<Medarbejder>{
         this.vejnavn = vejnavn;
     }
 
-    public String getNummer() {
-        return nummer;
+    public String getHusnummer() {
+        return husnummer;
     }
 
-    public void setNummer(String nummer) {
-        this.nummer = nummer;
+    public void setHusnummer(String husnummer) {
+        this.husnummer = husnummer;
     }
 
     public String getPostnr() {
@@ -74,46 +78,6 @@ public class Medarbejder implements Comparable<Medarbejder>{
 
     public void setNavn(String navn) {
         this.navn = navn;
-    }
-
-    public String getHjemmeAdresse() {
-        return hjemmeAdresse;
-    }
-
-    public void setHjemmeAdresse(String hjemmeAdresse) {
-        this.hjemmeAdresse = hjemmeAdresse;
-    }
-
-    public String getHjemmePostnr() {
-        return hjemmePostnr;
-    }
-
-    public void setHjemmePostnr(String hjemmePostnr) {
-        this.hjemmePostnr = hjemmePostnr;
-    }
-
-    public String getArdejdsAdresse() {
-        return ardejdsAdresse;
-    }
-
-    public void setArdejdsAdresse(String ardejdsAdresse) {
-        this.ardejdsAdresse = ardejdsAdresse;
-    }
-
-    public String getArbejdsPostnr() {
-        return arbejdsPostnr;
-    }
-
-    public void setArbejdsPostnr(String arbejdsPostnr) {
-        this.arbejdsPostnr = arbejdsPostnr;
-    }
-
-    public int getLoen() {
-        return loen;
-    }
-
-    public void setLoen(int loen) {
-        this.loen = loen;
     }
 
     public String getTlfnr() {
