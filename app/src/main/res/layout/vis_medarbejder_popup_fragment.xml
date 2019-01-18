@@ -71,6 +71,15 @@
             android:layout_marginTop="20dp"
             android:id="@+id/medarbejder_email"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresse: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/medarbejder_adresse"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -16,6 +16,7 @@ public class indbakke_recyclerview_adapter extends RecyclerView.Adapter<indbakke
 
     private Context mContext;
 
+    //TODO konstruktøren skal self have flere input når net er klar.
     public indbakke_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
     }

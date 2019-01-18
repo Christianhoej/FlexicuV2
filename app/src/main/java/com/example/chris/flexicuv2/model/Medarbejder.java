@@ -14,6 +14,51 @@ public class Medarbejder implements Comparable<Medarbejder>{
     private String køn;
     private int fødselsår;
     private String email;
+    private String vejnavn;
+    private String nummer;
+    private String postnr;
+    private String latitude;
+    private String longitude;
+
+    public String getVejnavn() {
+        return vejnavn;
+    }
+
+    public void setVejnavn(String vejnavn) {
+        this.vejnavn = vejnavn;
+    }
+
+    public String getNummer() {
+        return nummer;
+    }
+
+    public void setNummer(String nummer) {
+        this.nummer = nummer;
+    }
+
+    public String getPostnr() {
+        return postnr;
+    }
+
+    public void setPostnr(String postnr) {
+        this.postnr = postnr;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public String getMedarbejderID() {
         return medarbejderID;
