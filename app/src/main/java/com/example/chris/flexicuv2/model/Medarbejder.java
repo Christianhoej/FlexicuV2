@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.model;
 
+import java.util.Calendar;
+
 public class Medarbejder implements Comparable<Medarbejder>{
     private String medarbejderID;
     private String navn;
@@ -131,5 +133,12 @@ public class Medarbejder implements Comparable<Medarbejder>{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String toString() {
+        int alder = Calendar.getInstance().get(Calendar.YEAR)- fødselsår;
+        if (alder != 0)
+        return  navn + ", " + alder + " år, " + arbejdsomraade;
+        else return navn;
     }
 }
