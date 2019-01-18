@@ -71,78 +71,6 @@ public class DBManager {
 
         ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
         singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
-
-        uid = mAuth.getCurrentUser().getUid();
-        medarbejder.setVirksomhedsID(uid);
-        medKey = ref.child(MEDARBEJDER).push().getKey();
-        medarbejder.setMedarbejderID(medKey);
-        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
-
-        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
-        singleton.addMedarbejder(medarbejder);
     }
 
     public void updateBruger(Bruger bruger) {
@@ -182,7 +110,7 @@ public class DBManager {
         String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(MEDARBEJDER);
-
+        System.out.println("UID: " + uid);
         ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -204,9 +132,10 @@ public class DBManager {
     public void createUdlej(Aftale udlej){
         //TestAfAftalerDB testAfAftalerDB = new TestAfAftalerDB();
         //Aftale udlej = testAfAftalerDB.getUdlej();
+        String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-
+        udlej.getMedarbejder().setVirksomhedsID(uid);
         String udlejID = ref.child(LEDIG).push().getKey();
         udlej.setAftaleID(udlejID);
 

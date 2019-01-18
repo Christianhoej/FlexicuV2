@@ -15,7 +15,7 @@ import com.example.chris.flexicuv2.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Medarbejder_popup_fragment extends Fragment implements View.OnClickListener {
+public class Medarbejder_popup_fragment extends Fragment {
 
 
     public Medarbejder_popup_fragment() {
@@ -32,15 +32,6 @@ public class Medarbejder_popup_fragment extends Fragment implements View.OnClick
 
         View v = inflater.inflate(R.layout.medarbejder_popup_fragment, container, false);
 
-        tilbage = v.findViewById(R.id.rediger);
-        tilbage.setOnClickListener(this);
-
-
         return v;
-    }
-
-    @Override
-    public void onClick(View v) {
-        getActivity().onBackPressed();
     }
 }
