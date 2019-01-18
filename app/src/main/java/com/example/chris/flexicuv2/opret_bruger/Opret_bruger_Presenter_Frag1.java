@@ -3,7 +3,7 @@ package com.example.chris.flexicuv2.opret_bruger;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.chris.flexicuv2.DB.DBManager;
+import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Singleton;
 

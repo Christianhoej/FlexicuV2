@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartSkærm.udlej.Udlej_Fragment"
+    tools:context=".startskærm.udlej.Udlej_Fragment"
     android:background="@color/hvid"
     android:id="@+id/udlej_fragment_frame">
 
