@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 import com.example.chris.flexicuv2.Indlejninger.MultiSelectionSpinner;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;

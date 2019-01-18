@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 
