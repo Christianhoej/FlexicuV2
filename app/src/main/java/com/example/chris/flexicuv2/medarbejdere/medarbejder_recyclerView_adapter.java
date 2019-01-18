@@ -1,17 +1,15 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
+package com.example.chris.flexicuv2.medarbejdere;
 
-/*
- *Udarbejdet med inspiration fra denne video:
- * https://www.youtube.com/watch?v=Vyqz_-sJGFk
+/**
+ * setFragment metode
+ * @param fragment
  */
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,20 +18,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.fragments.RecyclerViewAdapter_AlleMedarbejdere;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 
 public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medarbejder_recyclerView_adapter.ViewHolder> {
 
@@ -75,11 +72,11 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        /*Kan implementere Glide for en bedre oplevelse
+            /*Kan implementere Glide for en bedre oplevelse
 
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mMedarbjderBilleder.get(i)) */
+            Glide.with(mContext)
+                    .asBitmap()
+                    .load(mMedarbjderBilleder.get(i)) */
 
         //viewHolder.medarbejder_navn.setText(mMedarbejderNavn.get(i));
         //viewHolder.medarbejder_arbejdsområde.setText(mMedarbejderArbejdsområde.get(i));
@@ -105,7 +102,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
     public void onButtonShowPopupWindowClick(View view, int i) {
         //tilPopUp = (View) findViewById(R.id.tilPopUp);
         // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.vis_medarbejder_popup_fragment, null);
 
         TextView navn = popupView.findViewById(R.id.medarbejder_navn);
@@ -122,6 +119,9 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
 
         TextView alder = popupView.findViewById(R.id.medarbejder_alder);
         alder.setText("Alder: " + (Calendar.getInstance().get(Calendar.YEAR)-singleton.getMedarbejdere().get(i).getFødselsår()) + " år");
+
+        TextView adresse = popupView.findViewById(R.id.medarbejder_adresse);
+        adresse.setText("Adresse: " + singleton.getMedarbejdere().get(i).getVejnavn() + " " + singleton.getMedarbejdere().get(i).getNummer() + ", " + singleton.getMedarbejdere().get(i).getPostnr());
 
         final Button rediger = popupView.findViewById(R.id.rediger);
         rediger.setOnClickListener(new View.OnClickListener() {
@@ -148,15 +148,15 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-      //  popupWindow.setOutsideTouchable(true);
-        /*// dismiss the popup window when touched
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                return true;
-            }
-        });*/
+        //  popupWindow.setOutsideTouchable(true);
+            /*// dismiss the popup window when touched
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+            });*/
     }
 
 
@@ -178,24 +178,24 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
             notifyDataSetChanged();
         }
 
-        /*mMedarbejderNavn.add(navn);
-        mMedarbejderArbejdsområde.add(område);
-        //if (mMedarbejderNavn != null && mMedarbejderNavn.size() > 0) {
-        ArrayList<String> temp1 = new ArrayList<>();
-        for(String s : mMedarbejderNavn){
-            temp1.add(s);
-        }
-        ArrayList<String> temp2 = new ArrayList<>();
-        for(String s : mMedarbejderArbejdsområde){
-            temp2.add(s);
-        }
-        mMedarbejderArbejdsområde.clear();
-        mMedarbejderNavn.clear();
-        mMedarbejderArbejdsområde = temp2;
-        mMedarbejderNavn = temp1;
+            /*mMedarbejderNavn.add(navn);
+            mMedarbejderArbejdsområde.add(område);
+            //if (mMedarbejderNavn != null && mMedarbejderNavn.size() > 0) {
+            ArrayList<String> temp1 = new ArrayList<>();
+            for(String s : mMedarbejderNavn){
+                temp1.add(s);
+            }
+            ArrayList<String> temp2 = new ArrayList<>();
+            for(String s : mMedarbejderArbejdsområde){
+                temp2.add(s);
+            }
+            mMedarbejderArbejdsområde.clear();
+            mMedarbejderNavn.clear();
+            mMedarbejderArbejdsområde = temp2;
+            mMedarbejderNavn = temp1;
 
-            notifyDataSetChanged();*/
-        }
+                notifyDataSetChanged();*/
+    }
 
 
     /**

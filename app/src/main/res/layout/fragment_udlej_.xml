@@ -7,10 +7,36 @@
     android:background="@color/hvid"
     android:id="@+id/udlej_fragment_frame">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="adresse"
+        android:layout_gravity="center"
+        android:id="@+id/adresse_felt"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:text="testKnap"
+        android:id="@+id/testKnap"/>
+</LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Dette er udlej" />
+        android:text="Dette er udlej"
+        android:textSize="24dp"
+        android:id="@+id/denne"
+        android:layout_marginVertical="200dp"/>
+
+
+
+
+
 
 </FrameLayout>

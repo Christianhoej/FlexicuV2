@@ -1,5 +1,4 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
-
+package com.example.chris.flexicuv2.medarbejdere;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,16 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
+import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
+import com.example.chris.flexicuv2.Medarbejdere_pakke.opret_medarbejder_fragment_1;
 import com.example.chris.flexicuv2.R;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClickListener {
+public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "Medarbejdere_skaerm";
 
@@ -72,14 +69,14 @@ public class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClic
         switch (v.getId()) {
             case R.id.opret_medarbejder_knap:
                 //TODO test af at opdatere recyclerviewet med "nye medarbejdere" Bør sættes på sidste fragment Eller viewt bør opdateres med et
-                 //String s1 ="Janus rules";
+                //String s1 ="Janus rules";
                 //String s2 = "ALT";
                 //adapter.medarbejderTilføjet(s1,s2);
                 setFragment(opretMedarbejderFragment1);
                 break;
         }
     }
-    public void setFragment(android.support.v4.app.Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         //medarbejdereFrame.removeAllViews();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.medarbejdere_frame, fragment);

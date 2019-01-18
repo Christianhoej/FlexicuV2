@@ -11,8 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+
+import com.example.chris.flexicuv2.medarbejdere.medarbejder_recyclerView_adapter;
+
+
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.indbakke_recyclerview_adapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +29,6 @@ public class aftaler_afsluttede_fragment extends Fragment implements View.OnClic
     private RecyclerView recyclerView;
     indbakke_recyclerview_adapter adapter;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.aftaler_afsluttede_fragment, container, false);
@@ -31,18 +36,21 @@ public class aftaler_afsluttede_fragment extends Fragment implements View.OnClic
         recyclerView = (RecyclerView) v.findViewById(R.id.afsluttede_recyclerview);
         recyclerView.setOnClickListener(this);
 
+
+
+
+        fyldRecyclerView(v);
         return v;
     }
 
     @Override
     public void onClick(View v) {
-
     }
 
     private void fyldRecyclerView(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.afsluttede_recyclerview);
-        adapter = new indbakke_recyclerview_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
+        adapter = new indbakke_recyclerview_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

@@ -1,8 +1,13 @@
 package com.example.chris.flexicuv2.Medarbejdere_pakke;
 
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +23,9 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -44,6 +51,10 @@ import java.util.ArrayList;
     private Opret_Medarbejdere_Fragment1_Presenter presenter;
     private Singleton singleton;
 
+    private EditText mVejnavn;
+    private EditText mNummer;
+    private EditText mPostNr;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         presenter = new Opret_Medarbejdere_Fragment1_Presenter(this);
@@ -65,21 +76,71 @@ import java.util.ArrayList;
         radio_mand =  v.findViewById(R.id.radio_mand);
         radio_kvinde =  v.findViewById(R.id.radio_kvinde);
 
+        mVejnavn = v.findViewById(R.id.adresse_vejnavn);
+        mNummer = v.findViewById(R.id.adresse_nummer);
+        mPostNr = v.findViewById(R.id.adresse_postnummer);
+
+
+
+
         opretSpinner(v);
 
         presenter.udfyldFelter();
         return v;
     }
 
+    /*public void geolocate(View v) throws IOException {
+        //TODO der skal tjekkes for om info er korrekt
+        String vejnavn = mVejnavn.getText().toString();
+        String nummer = mNummer.getText().toString();
+        String postnr = mPostNr.getText().toString();
+
+        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
+
+        Geocoder gc = new Geocoder(getContext());
+        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
+        Address add = list.get(0);
+        String lokation = add.getLocality();
+
+        double lat = add.getLatitude();
+        double lng = add.getLongitude();
+    }*/
+
+    public void goelocate(View v) throws IOException {
+        String vejnavn = mVejnavn.getText().toString();
+        String nummer = mNummer.getText().toString();
+        String postnr = mPostNr.getText().toString();
+
+        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
+
+        Geocoder gc = new Geocoder(getContext());
+        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
+        Address add = list.get(0);
+        String lokation = add.getLocality();
+
+        singleton.midlertidigMedarbejder.setLatitude(Double.toString(add.getLatitude()));
+        singleton.midlertidigMedarbejder.setLongitude(Double.toString(add.getLongitude()));
+
+
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.næste_medarbejdere:
+                boolean altOK = presenter.korrektUdfyldtInformationFrag1(medarbejder_navn.getText().toString(),getGender(), getBirthYearChosen(), mVejnavn.getText().toString(), mNummer.getText().toString(), mPostNr.getText().toString());
+                if(altOK){
+                    setFragment(opretMedarbejderFragment2);
+                    try {
+                        goelocate(v);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(singleton.midlertidigMedarbejder.getLatitude() + " " + singleton.midlertidigMedarbejder.getLongitude());
+                }
 
-                boolean altOK = presenter.korrektUdfyldtInformationFrag1(medarbejder_navn.getText().toString(),getGender(), getBirthYearChosen());
 
-                if(altOK)
-                setFragment(opretMedarbejderFragment2);
 
                 break;
             case R.id.tilbage_medarbejdere:
@@ -104,7 +165,6 @@ import java.util.ArrayList;
         } else  {
             return -1;
         }
-
     }
 
     private String getGender() {
@@ -154,6 +214,21 @@ import java.util.ArrayList;
     }
 
     @Override
+    public void errorVejnavn(String errorMsg) {
+        mVejnavn.setError(errorMsg);
+    }
+
+    @Override
+    public void errorNummer(String errorMsg) {
+        mNummer.setError(errorMsg);
+    }
+
+    @Override
+    public void errorPostnr(String errorMsg) {
+        mPostNr.setError(errorMsg);
+    }
+
+    @Override
     public void setNavn(String navn) {
         medarbejder_navn.setText(navn);
     }
@@ -181,11 +256,39 @@ import java.util.ArrayList;
     }
 
     @Override
+    public void setVejnavn(String vejnavn) {
+        mVejnavn.setText(vejnavn);
+    }
+
+    @Override
+    public void setNummer(String nummer) {
+        mNummer.setText(nummer);
+    }
+
+    @Override
+    public void setPostnr(String postnr) {
+        mPostNr.setText(postnr);
+    }
+
+    //TODO Hvad skal der lige gøres med disse to
+    @Override
+    public void setLatitude(String latitude) {
+
+    }
+
+    @Override
+    public void setLongitude(String longitude) {
+
+    }
+
+    @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         radio_kvinde.setError(null);
 
     }
     //TODO Gemme en "lokal instans" af den medarbejder man er ved at oprette på singleton objekt
     //TODO indsætte værdierne fra medarbejderne i de valgte felter igen.
+
+
 }
 
