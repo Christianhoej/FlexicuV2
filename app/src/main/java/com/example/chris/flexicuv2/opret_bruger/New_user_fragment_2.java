@@ -107,22 +107,6 @@ public class New_user_fragment_2 extends Fragment implements NewUser_Presenter_F
                     passwordRepeated.getText().toString(),
                     selectedId, checkFormalities.isChecked(),
                     getContext())){
-                //finish();
-                /*FragmentManager fm = getFragmentManager(); // or 'getSupportFragmentManager();'
-                int count = fm.getBackStackEntryCount();
-                for(int i = 0; i < count; ++i) {
-                    fm.popBackStack();
-                }*/
-                /*FragmentManager fm = getFragmentManager();
-                if (fm.getBackStackEntryCount() > 0) {
-                    fm.popBackStackImmediate();
-                } else {
-
-                }*/
-                //getActivity().getSupportFragmentManager().popBackStackImmediate();
-                //getFragmentManager().popBackStackImmediate();
-                //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                getActivity().finish();
             }
 
         }
@@ -142,9 +126,20 @@ public class New_user_fragment_2 extends Fragment implements NewUser_Presenter_F
     }
 
     @Override
-    public void toastTilBrugerOprettet(String displayedMessage) {
+    public void newUserSuccess(String displayedMessage, boolean success) {
+
+        if(success){
+            Toast.makeText(getContext(), displayedMessage,
+                    Toast.LENGTH_LONG).show();
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void newUserFailed(String displayedMessage) {
         Toast.makeText(getContext(), displayedMessage,
-                Toast.LENGTH_LONG).show();    }
+                Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void errorEmailForm(String errorMsg) {

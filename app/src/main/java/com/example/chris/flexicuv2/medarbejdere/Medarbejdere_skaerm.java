@@ -1,3 +1,4 @@
+
 package com.example.chris.flexicuv2.medarbejdere;
 
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.widget.FrameLayout;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.udlej.Udlejning;
 
+
 /**
  *@Author Christian
  * Aktivitet til at se alle ens medarbejdere.
@@ -15,7 +17,9 @@ import com.example.chris.flexicuv2.udlej.Udlejning;
  */
 public class Medarbejdere_skaerm extends AppCompatActivity {
     private FrameLayout medarbejdereFrame;
+
     Medarbejder_Skaerm_fragment fragment;
+
     Udlejning ud;
 
 
@@ -30,7 +34,9 @@ public class Medarbejdere_skaerm extends AppCompatActivity {
         setContentView(R.layout.activity_medarbejdere_skaerm);
 
         medarbejdereFrame = findViewById(R.id.medarbejdere_frame);
+
         fragment = new Medarbejder_Skaerm_fragment();
+
         ud = new Udlejning();
         //setFragment(fragment);
         setFragment(ud);

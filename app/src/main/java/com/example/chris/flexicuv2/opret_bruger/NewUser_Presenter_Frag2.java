@@ -1,15 +1,14 @@
 package com.example.chris.flexicuv2.opret_bruger;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Patterns;
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.Map;
 
-public class NewUser_Presenter_Frag2 {
+public class NewUser_Presenter_Frag2 implements  com.example.chris.flexicuv2.DB.DBManager.CreateUserSuccess {
 
     private NewUser_Presenter_Frag2.UpdateNewUser_Frag2 updateNewUser;
 
@@ -30,6 +29,7 @@ public class NewUser_Presenter_Frag2 {
     public NewUser_Presenter_Frag2(NewUser_Presenter_Frag2.UpdateNewUser_Frag2 updateNewUser){
         this.updateNewUser = updateNewUser;
         dbManager = new DBManager();
+        dbManager.setCreateUserSuccess(this);
         singleton = Singleton.getInstance();
     }
 
@@ -125,12 +125,28 @@ public class NewUser_Presenter_Frag2 {
 
     }
 
+    @Override
+    public void userCreateSuccess(boolean success) {
+        if(success){
+            updateNewUser.newUserSuccess("Bruger er oprettet", success);
+        }
+        else{
+            updateNewUser.newUserSuccess("Bruger er ikke oprettet", success);
+        }
+    }
+
+    @Override
+    public void failureMesssage(String message) {
+        updateNewUser.newUserFailed(message);
+    }
+
     /**
      * Interfacet implementeres af NewUser_Frag2 for at kunne opdatere viewet fra presenteren
      */
     interface UpdateNewUser_Frag2{
 
-        void toastTilBrugerOprettet(String displayedMessage);
+        void newUserSuccess(String displayedMessage, boolean success);
+        void newUserFailed(String displayedMessage);
         void errorEmailForm(String errorMsg);
         void errorEmailMatches(String errorMsg);
         void errorPasswordLength(String errorMsg);

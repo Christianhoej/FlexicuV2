@@ -1,14 +1,12 @@
 package com.example.chris.flexicuv2.login;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.widget.Toast;
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
+import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 
 /**
  * @author Janus
@@ -16,7 +14,7 @@ import com.example.chris.flexicuv2.DBManager;
  * opdatere loginviewet
  * og agere "mellemmand" mellem modeller/data og viewet
  */
-public class LoginPresenter{
+public class LoginPresenter implements DBManager.SignInSuccess{
     private UpdateLoginScreen pres;
     private final String EMAIL_NOT_VALI_DMSG = "Den indtastede email adresse er ikke en email adresse";
     private final String PASSWORD_EMPTY = "Der skal indtastest et password";
@@ -30,6 +28,7 @@ public class LoginPresenter{
         this.pres = pres;
         dbManager = new DBManager();
         this.mContext = mContext;
+        dbManager.setSignInSuccess(this);
     }
     public String setText(){
         return "Gunn rules";
@@ -56,6 +55,7 @@ public class LoginPresenter{
 
                     //pres.setLoadingScreen("Henter oplysninger...");
                     dbManager.signInAuth(context, email, password);
+
                     /*AsyncCheckLogIn async = new AsyncCheckLogIn();
                     async.execute();*/
                     return true;
@@ -71,10 +71,16 @@ public class LoginPresenter{
 
     }
 
+    @Override
+    public void userSignInSuccess(boolean success) {
+        pres.loginSuccess(success);
 
+    }
 
-
-
+    @Override
+    public void failureMesssage(String message) {
+        pres.loginErrorMessage(message);
+    }
 
 
     /**
@@ -89,6 +95,9 @@ public class LoginPresenter{
         void setErrorMsgPassword(String error);
 
         void setErrorMsgEmail(String error);
+        void loginSuccess(boolean success);
+        void loginErrorMessage(String string);
+
         //void setLoadingScreen(String message);
     }
 }
