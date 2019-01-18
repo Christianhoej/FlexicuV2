@@ -20,6 +20,7 @@
             android:name="com.example.chris.flexicuv2.login.LoginScreen_akt"
 
             android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-
             android:name="com.example.chris.flexicuv2.startskærm.Startskaerm_akt"
+            android:screenOrientation="sensorPortrait"
             tools:ignore="DuplicateActivity" />
-        <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt" />
+        <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt"
+            android:screenOrientation="sensorPortrait"/>
 
-        <activity android:name=".opret_bruger.Opret_bruger_akt"/>
+        <activity android:name=".opret_bruger.Opret_bruger_akt"
+            android:screenOrientation="sensorPortrait"/>
 
     </application>
 

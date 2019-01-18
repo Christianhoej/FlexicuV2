@@ -128,10 +128,35 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
     public void opretSpinner(){
         List<String> arbejdsområde_liste = new ArrayList<String>();
         arbejdsområde_liste.add("Vælg arbejdsområde");
-        arbejdsområde_liste.add("Håndværker");
-        arbejdsområde_liste.add("Smed");
-        arbejdsområde_liste.add("Lagermand");
+        arbejdsområde_liste.add("Arbejdsmand");
+        arbejdsområde_liste.add("Butiksekspedition");
+        arbejdsområde_liste.add("Chauffør - over 3,5 ton");
+        arbejdsområde_liste.add("Chauffør - under 3,5 ton");
+        arbejdsområde_liste.add("Ejendomsservice");
         arbejdsområde_liste.add("Elektriker");
+        arbejdsområde_liste.add("Film og TV");
+        arbejdsområde_liste.add("Flyttemand");
+        arbejdsområde_liste.add("HR");
+        arbejdsområde_liste.add("IT");
+        arbejdsområde_liste.add("Jura");
+        arbejdsområde_liste.add("Kantinearbejde");
+        arbejdsområde_liste.add("Kontor- og sekretærarbejde");
+        arbejdsområde_liste.add("Lager");
+        arbejdsområde_liste.add("Maler");
+        arbejdsområde_liste.add("Maskinfører");
+        arbejdsområde_liste.add("Murer");
+        arbejdsområde_liste.add("Online marketing");
+        arbejdsområde_liste.add("Rengøring");
+        arbejdsområde_liste.add("Smed");
+        arbejdsområde_liste.add("Svejsning");
+        arbejdsområde_liste.add("Telemarketing");
+        arbejdsområde_liste.add("Tjener");
+        arbejdsområde_liste.add("Tolk");
+        arbejdsområde_liste.add("Tømrer");
+        arbejdsområde_liste.add("VVS");
+        arbejdsområde_liste.add("Økonomi");
+
+
         arbejdsområde_spinner.setItems(arbejdsområde_liste);
     }
 

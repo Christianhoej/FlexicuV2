@@ -71,6 +71,78 @@ public class DBManager {
 
         ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
         singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
+
+        uid = mAuth.getCurrentUser().getUid();
+        medarbejder.setVirksomhedsID(uid);
+        medKey = ref.child(MEDARBEJDER).push().getKey();
+        medarbejder.setMedarbejderID(medKey);
+        ref.child(MEDARBEJDER).child(medKey).setValue(medarbejder);
+
+        ref.child(BRUGER).child(uid).child(MEDARBEJDER).child(medKey).setValue(medKey);
+        singleton.addMedarbejder(medarbejder);
     }
 
     public void updateBruger(Bruger bruger) {
