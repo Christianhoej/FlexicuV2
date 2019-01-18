@@ -4,13 +4,14 @@
 
 
 
-    <item
-        android:id="@+id/indbakke_forhandlinger"
-        android:title="Forhandlinger" />
+
     <item
         android:id="@+id/indbakke_nuværende"
         android:title="Nuværende"
         />
+    <item
+        android:id="@+id/indbakke_forhandlinger"
+        android:title="Forhandlinger" />
 
     <item
         android:id="@+id/indbakke_afsluttede"

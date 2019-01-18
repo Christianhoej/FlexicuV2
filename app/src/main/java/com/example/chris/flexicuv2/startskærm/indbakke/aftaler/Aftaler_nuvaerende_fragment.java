@@ -26,7 +26,7 @@ public class Aftaler_nuvaerende_fragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.aftaler_nuvaerende_fragment, container, false);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.forhandlinger_recyclerview);
+        recyclerView = (RecyclerView) v.findViewById(R.id.nuværende_recyclerview);
         recyclerView.setOnClickListener(this);
 
         fyldRecyclerView(v);
@@ -41,7 +41,7 @@ public class Aftaler_nuvaerende_fragment extends Fragment implements View.OnClic
     }
     private void fyldRecyclerView(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
-        RecyclerView recyclerView = v.findViewById(R.id.afsluttede_recyclerview);
+        recyclerView = v.findViewById(R.id.nuværende_recyclerview);
         adapter = new Aftaler_recyclerview_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
