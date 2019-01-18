@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startskærm.udlej.Udlejning_Janus">
+    tools:context=".startskærm.udlej.Udlejning_Janus"
+    android:background="@color/hvid">
 
     <LinearLayout
         android:layout_width="match_parent"

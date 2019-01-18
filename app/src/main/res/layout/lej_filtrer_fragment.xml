@@ -7,7 +7,7 @@
     android:layout_marginRight="0dp"
     android:layout_marginBottom="0dp"
     android:layout_marginTop="0dp"
-    android:background="@drawable/flex_green_rektangel"
+    android:background="@color/hvid"
     tools:context="com.example.chris.flexicuv2.startskærm.lej.Lej_filtrer_fragment"
     >
 
@@ -27,6 +27,16 @@
                android:layout_gravity="center"
                android:layout_marginVertical="10dp"
                android:background="@drawable/flexicu_logo"/>
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Nulstil"
+               android:layout_weight="1"
+               android:id="@+id/nulstil_knap"
+               android:background="@drawable/rounded_corners_red"
+               android:layout_gravity="left"
+               android:textColor="@color/hvid"/>
 
            <TextView
                android:layout_width="wrap_content"
@@ -261,6 +271,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:textColor="@color/hvid"
+               android:id="@+id/annuller_knap"
                android:background="@drawable/rounded_corners_grey"
                android:layout_gravity="center"
                android:layout_weight="1"
@@ -275,6 +286,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Anvend"
+               android:id="@+id/anvend_knap"
                android:layout_weight="1"
                android:background="@drawable/rounded_corners_blue"
                android:layout_gravity="center"

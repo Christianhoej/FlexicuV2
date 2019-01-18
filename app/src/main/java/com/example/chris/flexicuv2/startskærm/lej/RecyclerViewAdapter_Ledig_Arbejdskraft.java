@@ -44,6 +44,7 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
 
     }
 
+
     @Override
     public int getItemCount() {
         if(singleton.getMedarbejdereTilUdlejning()!=null){

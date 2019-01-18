@@ -62,8 +62,6 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         opretSpinner(medarbejderSpinner);
         medarbejderSpinner.setOnItemSelectedListener(this);
 
-
-
         startdatoET = v.findViewById(R.id.udlejning_startdato_textview1);
         startdatoET.setOnClickListener(this);
         slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);

@@ -2,22 +2,27 @@ package com.example.chris.flexicuv2.startskærm.indbakke.aftaler;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling;
 
 
-public class Aftaler_recyclerview_adapter extends RecyclerView.Adapter<Aftaler_recyclerview_adapter.ViewHolder>{
+public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forhandling_recyclerview_adapter.ViewHolder>{
 
     private Context mContext;
+    private Forhandling forhandlingFragment;
 
     //TODO konstruktøren skal self have flere input når net er klar.
-    public Aftaler_recyclerview_adapter(Context mContext) {
+    public Forhandling_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -26,12 +31,13 @@ public class Aftaler_recyclerview_adapter extends RecyclerView.Adapter<Aftaler_r
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.aftaler_recyclerview_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
+        forhandlingFragment = new Forhandling();
         return holder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull Aftaler_recyclerview_adapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull Forhandling_recyclerview_adapter.ViewHolder viewHolder, int i) {
         //TODO setText
 
         //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
@@ -40,8 +46,17 @@ public class Aftaler_recyclerview_adapter extends RecyclerView.Adapter<Aftaler_r
             @Override
             public void onClick(View v) {
                 //TODO her skal fragmentet med hele aftalen vises.
+                setFragment(forhandlingFragment);
             }
         });
+    }
+
+    public void setFragment(Fragment fragment) {
+        //startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
     }
 
     @Override
