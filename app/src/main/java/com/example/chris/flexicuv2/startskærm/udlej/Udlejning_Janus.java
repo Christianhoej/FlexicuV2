@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Scroller;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -66,9 +68,16 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         startdatoET.setOnClickListener(this);
         slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);
         slutdatoET.setOnClickListener(this);
+        
         timeprisET = v.findViewById(R.id.udlejning_timepris_textview1);
         timeprisET.addTextChangedListener(prisTextWatch);
         kommentarET = v.findViewById(R.id.udlejning_kommentar_edittext);
+
+        kommentarET.setScroller(new Scroller(getActivity()));
+        kommentarET.setMaxLines(3);
+        kommentarET.setVerticalScrollBarEnabled(true);
+        kommentarET.setMovementMethod(new ScrollingMovementMethod());
+
         antalArbejdsdage_TV = v.findViewById(R.id.udlejning_redigerbar_antal_arbejdsdage_textview1);
         subtotalen_TV = v.findViewById(R.id.udlejning_subtotalen_excl_flexicuspris_textview1);
         flexicugebyr_TV = v.findViewById(R.id.udlejning_flexicu_pris_textview);
