@@ -1,6 +1,4 @@
-
-package com.example.chris.flexicuv2.medarbejdere;
-
+package com.example.chris.flexicuv2.StartSkærm.indbakke.forhandling;
 
 
 import android.os.Bundle;
@@ -14,10 +12,10 @@ import com.example.chris.flexicuv2.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class vis_medarbejder_fragment extends Fragment {
+public class Forhandling extends Fragment {
 
 
-    public vis_medarbejder_fragment() {
+    public Forhandling() {
         // Required empty public constructor
     }
 
@@ -26,7 +24,9 @@ public class vis_medarbejder_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.medarbejder_popup_fragment, container, false);
+        View v = inflater.inflate(R.layout.forhandling_fragment, container, false);
+
+    return v;
     }
 
 }

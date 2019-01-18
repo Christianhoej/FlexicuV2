@@ -3,7 +3,6 @@ package com.example.chris.flexicuv2.loadingscreen;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class Loading_Screen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_loading__screen, container, false);
+        View v = inflater.inflate(R.layout.loading_screen_fragment, container, false);
 
         // Inflate the layout for this fragment
 

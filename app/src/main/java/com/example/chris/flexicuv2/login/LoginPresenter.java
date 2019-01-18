@@ -1,12 +1,10 @@
 package com.example.chris.flexicuv2.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.example.chris.flexicuv2.DB.DBManager;
-import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 
 /**
  * @author Janus

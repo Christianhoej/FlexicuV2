@@ -47,7 +47,7 @@
             android:textAlignment="center"
             android:textSize="24sp" />
 
-        <com.example.chris.flexicuv2.Indlejninger.MultiSelectionSpinner
+        <com.example.chris.flexicuv2.hjælpeklasser.MultiSelectionSpinner
             android:id="@+id/arbejdsområde"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
