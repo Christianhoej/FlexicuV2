@@ -36,6 +36,7 @@ import java.util.Calendar;
  */
 public class Medarbejdere_skaerm extends AppCompatActivity {
     private FrameLayout medarbejdereFrame;
+
     opret_medarbejder_fragment_1.Medarbejder_Skaerm_fragment fragment;
     Udlejning ud;
 

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.example.chris.flexicuv2.medarbejdere.medarbejder_recyclerView_adapter;
 
+
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.indbakke_recyclerview_adapter;
 
