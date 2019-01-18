@@ -16,7 +16,7 @@ public class TestAfAftalerDB {
 
     public Aftale getUdlej(){
         singleton.midlertidigMedarbejder = new Medarbejder();
-        singleton.midlertidigMedarbejder.setVirksomhedsID(singleton.getBruger().getBrugerID());
+      //  singleton.midlertidigMedarbejder.setVirksomhedsID(singleton.getBruger().getBrugerID());
         singleton.midlertidigMedarbejder.setArbejdsomraade("Smed");
         singleton.midlertidigMedarbejder.setTlfnr("93911123");
         singleton.midlertidigMedarbejder.setEmail("gunn@gunn.dk");

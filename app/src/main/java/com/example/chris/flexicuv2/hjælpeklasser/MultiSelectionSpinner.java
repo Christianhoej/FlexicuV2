@@ -93,13 +93,20 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
     }
 
     public void setSelection(String[] selection) {
+        System.out.println("tjek");
         for (String cell : selection) {
             for (int j = 0; j < _items.length; ++j) {
+                System.out.println("items: " + _items[j] + ", selection: " + cell);
                 if (_items[j].equals(cell)) {
+                    System.out.println("YIHAAAAA");
                     mSelection[j] = true;
+                    break;
                 }
             }
         }
+        simple_adapter.clear();
+        simple_adapter.add(buildSelectedItemString());
+
     }
 
     public void setSelection(List<String> selection) {

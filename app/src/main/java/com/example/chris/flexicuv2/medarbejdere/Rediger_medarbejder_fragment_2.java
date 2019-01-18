@@ -21,6 +21,7 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
  * Fragment til den anden del af oprettelse af medarbejder.
  * Inkluderer Email, tlf, arbejdsområde og kommentar
  */
-public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment2_Presenter.UpdateOpretMedarbejderFrag {
+public class Rediger_medarbejder_fragment_2 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment2_Presenter.UpdateOpretMedarbejderFrag {
 
 
     private EditText medarbejder_email;
@@ -191,7 +192,6 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         System.out.println(arbejdsområde);
         for(int i=0; i<array.length; i++){
             array[i] =array[i].trim();
-
         }
         arbejdsområde_spinner.setSelection(array);
     }

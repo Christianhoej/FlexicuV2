@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
     //private ArrayList<String> mMedarbejderArbejdsområde = new ArrayList<>();
     private Context mContext;
     private Singleton singleton;
+    private Rediger_medarbejder_fragment_1 rediger_medarbejder_fragment_1;
 
 
     //Billeder skal implementeres på en måde
@@ -71,7 +73,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
-
+        singleton.midlertidigMedarbejder=null;
             /*Kan implementere Glide for en bedre oplevelse
 
             Glide.with(mContext)
@@ -99,11 +101,11 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
      * https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
      * @param view
      */
-    public void onButtonShowPopupWindowClick(View view, int i) {
+    public void onButtonShowPopupWindowClick(View view, final int i) {
         //tilPopUp = (View) findViewById(R.id.tilPopUp);
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.medarbejder_popup_fragment, null);
+        final View popupView = inflater.inflate(R.layout.medarbejder_popup_fragment, null);
 
         TextView navn = popupView.findViewById(R.id.medarbejder_navn);
         navn.setText("Navn: " + singleton.getMedarbejdere().get(i).getNavn());
@@ -123,13 +125,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
         TextView adresse = popupView.findViewById(R.id.medarbejder_adresse);
         adresse.setText("Adresse: " + singleton.getMedarbejdere().get(i).getVejnavn() + " " + singleton.getMedarbejdere().get(i).getHusnummer() + ", " + singleton.getMedarbejdere().get(i).getPostnr());
 
-        final Button rediger = popupView.findViewById(R.id.rediger);
-        /*rediger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rediger.setText("YIHA");
-            }
-        });*/
+
         //get width
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity)mContext).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -157,8 +153,26 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
                     return true;
                 }
             });*/
+        final Button rediger = popupView.findViewById(R.id.rediger);
+        rediger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rediger_medarbejder_fragment_1 = new Rediger_medarbejder_fragment_1();
+                setFragment(rediger_medarbejder_fragment_1);
+                singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i);
+                popupWindow.dismiss();
+            }
+        });
     }
 
+
+    public void setFragment(android.support.v4.app.Fragment fragment) {
+        //medarbejdereFrame.removeAllViews();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.medarbejdere_frame, fragment);
+        //fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
 
 
     @Override
