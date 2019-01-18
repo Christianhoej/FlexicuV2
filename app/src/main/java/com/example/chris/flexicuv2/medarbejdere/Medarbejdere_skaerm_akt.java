@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.StartSkærm.udlej.Udlejning_Janus;
+import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_Janus;
 
 
 /**

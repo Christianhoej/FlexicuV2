@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-import com.example.chris.flexicuv2.DB.DBManager;
+import com.example.chris.flexicuv2.database.DBManager;
 
 /**
  * @author Janus

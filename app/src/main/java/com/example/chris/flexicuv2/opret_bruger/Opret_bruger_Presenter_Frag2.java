@@ -3,12 +3,12 @@ package com.example.chris.flexicuv2.opret_bruger;
 import android.content.Context;
 import android.util.Patterns;
 
-import com.example.chris.flexicuv2.DB.DBManager;
+import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.Map;
 
-public class Opret_bruger_Presenter_Frag2 implements  com.example.chris.flexicuv2.DB.DBManager.CreateUserSuccess {
+public class Opret_bruger_Presenter_Frag2 implements  com.example.chris.flexicuv2.database.DBManager.CreateUserSuccess {
 
     private Opret_bruger_Presenter_Frag2.UpdateNewUser_Frag2 updateNewUser;
 

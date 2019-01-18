@@ -8,7 +8,7 @@
     android:layout_marginBottom="0dp"
     android:layout_marginTop="0dp"
     android:background="@drawable/flex_green_rektangel"
-    tools:context="com.example.chris.flexicuv2.StartSkærm.lej.Lej_filtrer_fragment"
+    tools:context="com.example.chris.flexicuv2.startskærm.lej.Lej_filtrer_fragment"
     >
 
    <ScrollView

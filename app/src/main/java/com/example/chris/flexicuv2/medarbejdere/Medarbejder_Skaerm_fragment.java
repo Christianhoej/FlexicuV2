@@ -21,9 +21,9 @@ public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnCli
     private Button opretMedarbejdereKnap;
 
     //private FrameLayout medarbejdereFrame;
-    private opret_medarbejder_fragment_1 opretMedarbejderFragment1;
+    private Opret_medarbejder_fragment_1 opretMedarbejderFragment1;
     private RecyclerView recyclerView;
-    medarbejder_recyclerView_adapter adapter;
+    Medarbejder_recyclerView_adapter adapter;
 
 
     //Til en test
@@ -57,7 +57,7 @@ public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnCli
         opretMedarbejdereKnap.setOnClickListener(this);
 
         //Test af recyclerview
-        opretMedarbejderFragment1 = new opret_medarbejder_fragment_1();
+        opretMedarbejderFragment1 = new Opret_medarbejder_fragment_1();
         //medarbejdereFrame = v.findViewById(R.id.medarbejdere_frame);
         fyldRecyclerView(v);
         return v;
@@ -89,7 +89,7 @@ public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnCli
     private void fyldRecyclerView(View v){
         Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.medarbejder_recyclerview);
-        adapter = new medarbejder_recyclerView_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
+        adapter = new Medarbejder_recyclerView_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

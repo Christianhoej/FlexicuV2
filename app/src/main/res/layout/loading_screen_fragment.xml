@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center_vertical"
     android:id="@+id/flex_roter"
-    tools:context=".loadingscreen.Loading_Screen"
+    tools:context=".loadingscreen.Loading_screen"
     >
 
 

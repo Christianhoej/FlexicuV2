@@ -12,9 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
-import com.example.chris.flexicuv2.DB.DBManager;
-import com.example.chris.flexicuv2.StartSkærm.Startskaerm_akt;
-import com.example.chris.flexicuv2.loadingscreen.Loading_Screen;
+import com.example.chris.flexicuv2.database.DBManager;
+import com.example.chris.flexicuv2.startskærm.Startskaerm_akt;
+import com.example.chris.flexicuv2.loadingscreen.Loading_screen;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.opret_bruger.Opret_bruger_fragment_1;
 import com.example.chris.flexicuv2.opret_bruger.Opret_bruger_akt;
@@ -27,7 +27,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private EditText password;
 
     private Opret_bruger_fragment_1 new_user_fragment_1;
-    private Loading_Screen loading_screen;
+    private Loading_screen loading_screen;
     private FrameLayout loginFrame;
     private FrameLayout tilFragmenter;
 
@@ -45,7 +45,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         presenter = new LoginPresenter(this, this); //Evt. lav metode der kan sætte presenter på.
         dbManager = new DBManager();
 
-        loading_screen = new Loading_Screen();
+        loading_screen = new Loading_screen();
         setContentView(R.layout.login_screen_akt);
         tilAnimation = (FrameLayout) findViewById(R.id.tilAnimation);
 
