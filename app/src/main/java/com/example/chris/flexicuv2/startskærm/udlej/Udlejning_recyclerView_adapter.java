@@ -5,6 +5,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -32,7 +36,9 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
     private Context mContext;
     private Singleton singleton;
     private static final String TAG = "recyclerView_adapter";
-    private Udlejning_Janus udlejning_af_medarbejder;
+    private android.app.Fragment udlejning_af_medarbejder;
+    FrameLayout udlejning_fragment_frame;
+    FrameLayout startskærmFrameTilDiverse;
 
     public Udlejning_recyclerView_adapter(Context mContext) {
         this.mContext = mContext;
@@ -51,6 +57,8 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.medarbejdere_recyclerview_listitems, viewGroup, false);
         //Objekt ViewHolder klassen nedenfor, der tager vores view som er oprettet ud fra designet af recyclerViewet
         Udlejning_recyclerView_adapter.ViewHolder holder = new Udlejning_recyclerView_adapter.ViewHolder(view);
+        udlejning_fragment_frame = viewGroup.findViewById(R.id.udlej_fragment_frame);
+        startskærmFrameTilDiverse = viewGroup.findViewById(R.id.startskærm_frame_til_diverse);
         return holder;
     }
 
@@ -86,17 +94,21 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
     public void valgAfMedarbejder(View view, int i) {
         //TODO Her var engang popup-vinduet, men i stedet skal janus's side åbnes.og data skal føres med.
-        udlejning_af_medarbejder = new Udlejning_Janus();
-        TextView udlejer = view.findViewById(R.id.udlejer_navn_textview);
-        udlejer.setText("Her skal firmaets navn stå :)");
-
-        /*
+        udlejning_af_medarbejder = new android.app.Fragment();
         Spinner medarbejder = view.findViewById(R.id.udlejning_medarbejder_spinner);
-        medarbejder.setSelection(singleton.getMedarbejdere().get(i));
-        */
+        //medarbejder.setSelection(singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i))+1);
+         setFragment(udlejning_af_medarbejder);
+
+    }
 
 
-
+    public void setFragment(android.app.Fragment fragment) {
+        //startskærmFrameTilDiverse.removeAllViews();
+        android.app.FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        fragmentTransaction.addToBackStack("fragment");
+        System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
+        fragmentTransaction.commit();
     }
 
 

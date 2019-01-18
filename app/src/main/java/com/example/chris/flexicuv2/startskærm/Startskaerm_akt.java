@@ -56,6 +56,8 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
     private Singleton singleton;
     private TestAfAftalerDB test;
 
+    private FrameLayout startskærmFrameTilDiverse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,8 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         fragmentLej = new Lej_fragment();
         fragmentIndbakke = new Indbakke_fragment();
         fragmentHjem = new Hjem_fragment();
+
+        startskærmFrameTilDiverse = findViewById(R.id.startskærm_frame_til_diverse);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -124,12 +124,12 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
         adresse.setText("Adresse: " + singleton.getMedarbejdere().get(i).getVejnavn() + " " + singleton.getMedarbejdere().get(i).getHusnummer() + ", " + singleton.getMedarbejdere().get(i).getPostnr());
 
         final Button rediger = popupView.findViewById(R.id.rediger);
-        rediger.setOnClickListener(new View.OnClickListener() {
+        /*rediger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rediger.setText("YIHA");
             }
-        });
+        });*/
         //get width
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity)mContext).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);

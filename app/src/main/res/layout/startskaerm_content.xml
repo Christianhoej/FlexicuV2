@@ -56,5 +56,11 @@
             android:layout_alignParentTop="true">
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/startskærm_frame_til_diverse">
+        </FrameLayout>
+
 
 </RelativeLayout>
