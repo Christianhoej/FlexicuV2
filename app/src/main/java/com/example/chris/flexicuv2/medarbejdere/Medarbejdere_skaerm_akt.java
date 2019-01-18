@@ -20,6 +20,7 @@ public class Medarbejdere_skaerm_akt extends AppCompatActivity {
 
     Medarbejder_Skaerm_fragment fragment;
 
+
     Udlejning_Janus ud;
 
 
