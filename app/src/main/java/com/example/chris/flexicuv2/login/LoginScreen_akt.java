@@ -2,30 +2,21 @@
 package com.example.chris.flexicuv2.login;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.Toast;
 
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
+import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 import com.example.chris.flexicuv2.loadingscreen.Loading_Screen;
-import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.opret_bruger.NewUser_akt;
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.StartSkærm.Startskaerm;
 import com.example.chris.flexicuv2.opret_bruger.New_user_fragment_1;
 import com.example.chris.flexicuv2.opret_bruger.TilFragmenter;
 
@@ -46,11 +37,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private FrameLayout tilAnimation;
     private FrameLayout flex_roter;
 
-
-
-
-
-    LoginPresenter presenter;
+    private LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +112,25 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void openFragmenterAktivitet(){
         Intent intent = new Intent(this, TilFragmenter.class);
         startActivity(intent);
+    }
+
+    public void openStartskaerm(){
+        Intent intent = new Intent(this, Startskaerm.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void loginSuccess(boolean success) {
+        if(success){
+            openStartskaerm();
+        }
+    }
+
+    @Override
+    public void loginErrorMessage(String message) {
+        Toast.makeText(this, message,
+                Toast.LENGTH_LONG).show();
     }
 
     @Override

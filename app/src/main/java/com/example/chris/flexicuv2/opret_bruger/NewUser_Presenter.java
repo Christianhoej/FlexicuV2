@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Patterns;
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 
 import java.util.Map;
 
