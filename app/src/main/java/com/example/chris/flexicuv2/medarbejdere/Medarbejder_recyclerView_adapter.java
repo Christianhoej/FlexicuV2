@@ -121,7 +121,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
         alder.setText("Alder: " + (Calendar.getInstance().get(Calendar.YEAR)-singleton.getMedarbejdere().get(i).getFødselsår()) + " år");
 
         TextView adresse = popupView.findViewById(R.id.medarbejder_adresse);
-        adresse.setText("Adresse: " + singleton.getMedarbejdere().get(i).getVejnavn() + " " + singleton.getMedarbejdere().get(i).getNummer() + ", " + singleton.getMedarbejdere().get(i).getPostnr());
+        adresse.setText("Adresse: " + singleton.getMedarbejdere().get(i).getVejnavn() + " " + singleton.getMedarbejdere().get(i).getHusnummer() + ", " + singleton.getMedarbejdere().get(i).getPostnr());
 
         final Button rediger = popupView.findViewById(R.id.rediger);
         rediger.setOnClickListener(new View.OnClickListener() {

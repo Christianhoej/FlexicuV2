@@ -58,7 +58,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         //TODO skal ikke tage egne medarbejdere, men
-        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext(), singleton.getMedarbejdere());
+        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext());
 
         recyclerView.setAdapter(mAdapter);
         //setUpspinner(v);

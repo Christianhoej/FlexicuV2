@@ -7,12 +7,13 @@ import java.util.ArrayList;
 public class Singleton extends Activity {
 
     private static Singleton singleInstance;
-    public static ArrayList<Medarbejder> medarbejdere = new ArrayList<Medarbejder>();
+    public static ArrayList<Medarbejder> medarbejdere;
     private static ArrayList<Medarbejder> lånteMedarbejdere = new ArrayList<Medarbejder>();
     public static Bruger bruger;
     public static Medarbejder midlertidigMedarbejder;
     public static String userID;
     public static Bruger midlertidigBruger;
+    public static ArrayList<Medarbejder> medarbejdereTilUdlejning;
 
 
     private Singleton(){
@@ -23,9 +24,26 @@ public class Singleton extends Activity {
         if(singleInstance == null){
             singleInstance = new Singleton();
             medarbejdere = new ArrayList<>();
+            medarbejdereTilUdlejning = new ArrayList<>();
             bruger = new Bruger();
         }
         return singleInstance;
+    }
+
+    public static ArrayList<Medarbejder> getMedarbejdereTilUdlejning() {
+        return medarbejdereTilUdlejning;
+    }
+
+    public static void setMedarbejdereTilUdlejning(ArrayList<Medarbejder> medarbejdereTilUdlejning) {
+        Singleton.medarbejdereTilUdlejning = medarbejdereTilUdlejning;
+    }
+
+    public static void addMedarbejderTilUdlejning(Medarbejder medarbejderUdlejning){
+        Singleton.medarbejdereTilUdlejning.add(medarbejderUdlejning);
+    }
+
+    public static void removeMedarbejderTilUdlejning(Medarbejder medarbejderUdlejning){
+        Singleton.medarbejdereTilUdlejning.remove(medarbejderUdlejning);
     }
 
     public static ArrayList<Medarbejder> getMedarbejdere() {

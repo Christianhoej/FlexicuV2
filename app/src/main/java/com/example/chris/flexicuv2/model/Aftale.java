@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Aftale {
 
-    private int aftaleID;
+    private String aftaleID;
     private Bruger udlejer;
     private Bruger lejer;
     private Medarbejder medarbejder;
@@ -24,11 +24,11 @@ public class Aftale {
         this.egetVærktøj = egetVærktøj;
     }
 
-    public int getAftaleID() {
+    public String getAftaleID() {
         return aftaleID;
     }
 
-    public void setAftaleID(int aftaleID) {
+    public void setAftaleID(String aftaleID) {
         this.aftaleID = aftaleID;
     }
 
