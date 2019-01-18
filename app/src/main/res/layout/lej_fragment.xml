@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StartSkærm.lej.Lej_fragment"
+    android:background="@color/hvid"
+    android:id="@+id/lej_fragment_frame"
+    android:layout_marginVertical="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Filtrer"
+        android:background="@drawable/rounded_corners_green"
+        android:id="@+id/filtrer_knap"
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Opret søgeagent"
+            android:background="@drawable/rounded_corners_blue"
+            android:id="@+id/søgeagent"
+            android:textColor="@color/white"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ledig_arbejdskraft_recyclerview"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/søgeagent"
+            android:orientation="vertical"/>
+
+
+    </RelativeLayout>
+</FrameLayout>

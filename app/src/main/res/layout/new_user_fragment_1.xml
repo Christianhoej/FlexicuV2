@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".opret_bruger.New_user_fragment_1"
+    tools:context=".opret_bruger.Opret_bruger_fragment_1"
     android:id="@+id/new_user_frame_1"
     android:background="@color/hvid">
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "Medarbejdere_skaerm";
+    private static final String TAG = "Medarbejdere_skaerm_akt";
 
     private Button opretMedarbejdereKnap;
 
@@ -37,7 +37,7 @@ public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.medarbejder__skaerm_fragment, container, false);
+        View v = inflater.inflate(R.layout.medarbejdere_skaerm_fragment, container, false);
         Log.d(TAG, "onCreate: started");
 
 

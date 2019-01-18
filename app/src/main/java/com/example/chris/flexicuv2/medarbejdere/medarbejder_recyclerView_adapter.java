@@ -103,7 +103,7 @@ public class medarbejder_recyclerView_adapter extends RecyclerView.Adapter<medar
         //tilPopUp = (View) findViewById(R.id.tilPopUp);
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.vis_medarbejder_popup_fragment, null);
+        View popupView = inflater.inflate(R.layout.medarbejder_popup_fragment, null);
 
         TextView navn = popupView.findViewById(R.id.medarbejder_navn);
         navn.setText("Navn: " + singleton.getMedarbejdere().get(i).getNavn());

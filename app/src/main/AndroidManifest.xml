@@ -29,21 +29,11 @@
         </activity>
         <activity
 
-            android:name="com.example.chris.flexicuv2.StartSkærm.Startskaerm"
+            android:name="com.example.chris.flexicuv2.StartSkærm.Startskaerm_akt"
             tools:ignore="DuplicateActivity" />
-        <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm" />
-        <activity android:name="com.example.chris.flexicuv2.opret_bruger.NewUser_akt" />
+        <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt" />
 
-        <activity android:name=".opret_bruger.TilFragmenter"/>
-        <activity android:name=".Medarbejder" />
-
-        <activity android:name="com.example.chris.flexicuv2.medarbejdere.opret_medarbejder" />
-        <activity
-            android:name="com.example.chris.flexicuv2.Indlejninger.Indlejninger"
-            android:label="@string/title_activity_indlejninger" />
-        <activity android:name=".Udlej_akt" />
-        <activity android:name="com.example.chris.flexicuv2.Indlejninger.Lej" />
-
+        <activity android:name=".opret_bruger.Opret_bruger_akt"/>
 
     </application>
 
