@@ -19,7 +19,7 @@ public class Aftaler_ledige_fragment extends Fragment implements View.OnClickLis
     public Aftaler_ledige_fragment() {}
 
     private RecyclerView recyclerView;
-    Aftaler_recyclerview_adapter adapter;
+    Ledige_recyclerview_adapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class Aftaler_ledige_fragment extends Fragment implements View.OnClickLis
     private void fyldRecyclerView(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.ledige_recyclerview);
-        adapter = new Aftaler_recyclerview_adapter(getContext());
+        adapter = new Ledige_recyclerview_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

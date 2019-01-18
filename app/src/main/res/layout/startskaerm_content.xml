@@ -8,8 +8,6 @@
     tools:context=".startskærm.Startskaerm_akt"
     >
 
-
-
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/startskaerm_nav"
             android:layout_width="match_parent"
@@ -56,11 +54,7 @@
             android:layout_alignParentTop="true">
         </FrameLayout>
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/startskærm_frame_til_diverse">
-        </FrameLayout>
+
 
 
 </RelativeLayout>

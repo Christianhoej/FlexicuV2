@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejder_recyclerView_adapter;
 import com.example.chris.flexicuv2.model.Singleton;
+import com.example.chris.flexicuv2.startskærm.Startskaerm_akt;
 
 import java.util.Calendar;
 
@@ -36,9 +37,10 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
     private Context mContext;
     private Singleton singleton;
     private static final String TAG = "recyclerView_adapter";
-    private android.app.Fragment udlejning_af_medarbejder;
+    private Udlejning_Janus udlejning_af_medarbejder;
     FrameLayout udlejning_fragment_frame;
     FrameLayout startskærmFrameTilDiverse;
+    private Spinner medarbejder_spinner;
 
     public Udlejning_recyclerView_adapter(Context mContext) {
         this.mContext = mContext;
@@ -81,7 +83,8 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
         viewHolder.medarbejder_recyclerview_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on" + singleton.getMedarbejdere().get(i).getNavn());
+                Log.d(TAG, "onClick: clicked on " + singleton.getMedarbejdere().get(i).getNavn());
+                System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ:  " + singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i))+1);
 
                 valgAfMedarbejder(v,i);
                 //onButtonShowPopupWindowClick(v, i);
@@ -93,25 +96,25 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
 
     public void valgAfMedarbejder(View view, int i) {
-        //TODO Her var engang popup-vinduet, men i stedet skal janus's side åbnes.og data skal føres med.
-        udlejning_af_medarbejder = new android.app.Fragment();
-        Spinner medarbejder = view.findViewById(R.id.udlejning_medarbejder_spinner);
-        //medarbejder.setSelection(singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i))+1);
-         setFragment(udlejning_af_medarbejder);
+
+        udlejning_af_medarbejder = new Udlejning_Janus();
+        medarbejder_spinner = view.findViewById(R.id.udlejning_medarbejder_spinner);
+        //TODO navnet skal føres med videre.
+        //singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i);
+        //medarbejder_spinner.setSelection(singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i)));
+
+        setFragment(udlejning_af_medarbejder);
 
     }
 
 
-    public void setFragment(android.app.Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         //startskærmFrameTilDiverse.removeAllViews();
-        android.app.FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
         fragmentTransaction.addToBackStack("fragment");
-        System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
         fragmentTransaction.commit();
     }
-
-
 
     @Override
     public int getItemCount() {

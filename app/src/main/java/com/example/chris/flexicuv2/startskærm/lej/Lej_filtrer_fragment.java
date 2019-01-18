@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * @Author Christian
  * A simple {@link Fragment} subclass.
  */
-public class Lej_filtrer_fragment extends Fragment {
+public class Lej_filtrer_fragment extends Fragment implements View.OnClickListener {
 
     ArrayList<String> valgte_arbejdsområder = new ArrayList<>();
     //String[] arbejdsområder = {"Lagermand"};
@@ -37,6 +38,9 @@ public class Lej_filtrer_fragment extends Fragment {
     private EditText min_timepris;
     private EditText max_timepris;
     private MultiSelectionSpinner arbejdsområder_spinner;
+    private Button anvend;
+    private Button annuller;
+    private Button nulstil;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +55,12 @@ public class Lej_filtrer_fragment extends Fragment {
         nej_værktøj = (RadioButton) v.findViewById(R.id.nej_værktøj);
         min_timepris = (EditText)v.findViewById(R.id.min_timepris);
         max_timepris = (EditText) v.findViewById(R.id.max_timepris);
+        anvend = v.findViewById(R.id.anvend_knap);
+        anvend.setOnClickListener(this);
+        annuller = v.findViewById(R.id.annuller_knap);
+        annuller.setOnClickListener(this);
+        nulstil = v.findViewById(R.id.nulstil_knap);
+        nulstil.setOnClickListener(this);
 
         opretSpinner();
         return v;
@@ -67,11 +77,17 @@ public class Lej_filtrer_fragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.anvend_knap:
+                //TODO Hvad skal knapperne gøre
+                break;
+            case R.id.annuller_knap:
+                break;
+            case R.id.nulstil_knap:
+                break;
+        }
 
-
-
-
-
-
-
+    }
 }
