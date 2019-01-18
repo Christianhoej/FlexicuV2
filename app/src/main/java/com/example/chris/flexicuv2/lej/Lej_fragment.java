@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 import com.example.chris.flexicuv2.Indlejninger.Lej_filtrer;
 import com.example.chris.flexicuv2.R;
 

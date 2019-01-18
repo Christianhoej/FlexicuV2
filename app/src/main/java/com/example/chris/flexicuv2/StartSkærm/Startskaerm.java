@@ -22,7 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.fragments.Hjem_fragment;

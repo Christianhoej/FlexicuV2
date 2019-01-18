@@ -2,7 +2,7 @@
 package com.example.chris.flexicuv2.medarbejdere;
 
 
-import com.example.chris.flexicuv2.DBManager;
+import com.example.chris.flexicuv2.DB.DBManager;
 
 /**
  * @Author
