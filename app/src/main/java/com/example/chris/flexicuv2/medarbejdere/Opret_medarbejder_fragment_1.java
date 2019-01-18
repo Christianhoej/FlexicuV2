@@ -25,6 +25,7 @@ import com.example.chris.flexicuv2.model.Singleton;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -60,6 +61,7 @@ import java.util.List;
         presenter = new Opret_Medarbejdere_Fragment1_Presenter(this);
         View v = inflater.inflate(R.layout.opret_medarbejder_fragment_1, container, false);
 
+        singleton.midlertidigMedarbejder = null;
         radioGroupKoen = v.findViewById(R.id.radio_køn);
         radioGroupKoen.setOnCheckedChangeListener(this);
 
@@ -178,7 +180,7 @@ import java.util.List;
     public void opretSpinner(View v){
         ArrayList<String> år= new ArrayList<>();
         år.add("Vælg fødselsår");
-        for (Integer i=2004; i>1940; i--) {
+        for (Integer i = ((Calendar.getInstance().get(Calendar.YEAR)-18)); i>((Calendar.getInstance().get(Calendar.YEAR)-90)); i--) {
             år.add(i.toString());
         }
         ArrayAdapter<String> adapter_år = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, år);

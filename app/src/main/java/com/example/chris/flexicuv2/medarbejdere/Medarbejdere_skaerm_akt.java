@@ -38,8 +38,8 @@ public class Medarbejdere_skaerm_akt extends AppCompatActivity {
         fragment = new Medarbejder_Skaerm_fragment();
 
         ud = new Udlejning_Janus();
-        //setFragment(fragment);
-        setFragment(ud);
+        setFragment(fragment);
+        //setFragment(ud);
     }
 
     public void setFragment(android.support.v4.app.Fragment fragment) {

@@ -8,12 +8,14 @@ import com.example.chris.flexicuv2.model.Singleton;
 public class Opret_Medarbejdere_Fragment1_Presenter {
 
     private UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag;
-    private final String ERRORNAVN="NAVNFEJL";
-    private final String ERRORKØN="KØNFEJL";
-    private final String ERRORFØDSELSÅR="FØDSELSÅRFEJL";
-    private final String ERRORVEJNAVN="VEJNAVNFEJL";
-    private final String ERRORNUMMER="NUMMERFEJL";
-    private final String ERRORPOSTNR="POSTNRFEJL";
+    private final String ERRORNAVN="Du skal indtaste et navn";
+    private final String ERRORKØN="Du skal vælge et køn";
+    private final String ERRORFØDSELSÅR="Du skal vælge et fødselsår";
+    private final String ERRORVEJNAVN="Du skal indtaste et vejnavn";
+    private final String ERRORNUMMER="Du skal indtaste et husnummer";
+    private final String ERRORPOSTNR="Du skal indtaste et postnummer";
+    private final String ERRORPOSTNR1 = "Postnummeret skal være 4 tal";
+    private final String ERRORNUMMER1 = "Husnummeret skal være mellem 1 og 4 tal";
     private Singleton singleton;
 
     public Opret_Medarbejdere_Fragment1_Presenter(UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag){
@@ -72,9 +74,23 @@ public class Opret_Medarbejdere_Fragment1_Presenter {
             errors++;
         }
 
-        boolean postnrOK = checkStringOnlyNumbersAndLength(postnr, 4);
-        if (!postnrOK) {
+        if(nummer.isEmpty()){
+            updateOpretMedarbejderFrag.errorNummer(ERRORNUMMER);
+            errors++;
+        }
+        else if(nummer.length()<1 || nummer.length()>4){
+            updateOpretMedarbejderFrag.errorNummer(ERRORNUMMER1);
+            errors++;
+        }
+
+
+
+        if(postnr.isEmpty()) {
             updateOpretMedarbejderFrag.errorPostnr(ERRORPOSTNR);
+            errors++;
+        }
+        else if (!checkStringOnlyNumbersAndLength(postnr, 4)){
+            updateOpretMedarbejderFrag.errorPostnr(ERRORPOSTNR1);
             errors++;
         }
 
