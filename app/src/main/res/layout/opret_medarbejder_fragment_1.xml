@@ -96,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Vejnavn"
+            android:digits="abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ"
             android:layout_gravity="center"
             android:textSize="20dp"
             android:inputType="text"
@@ -123,9 +124,6 @@
                 android:layout_weight="1"/>
 
         </LinearLayout>
-
-
-
 
         <LinearLayout
             android:layout_width="match_parent"

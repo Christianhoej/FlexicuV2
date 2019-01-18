@@ -80,9 +80,6 @@ import java.util.List;
         mNummer = v.findViewById(R.id.adresse_nummer);
         mPostNr = v.findViewById(R.id.adresse_postnummer);
 
-
-
-
         opretSpinner(v);
 
         presenter.udfyldFelter();
@@ -137,7 +134,7 @@ import java.util.List;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println(singleton.midlertidigMedarbejder.getLatitude() + " " + singleton.midlertidigMedarbejder.getLongitude());
+                    System.out.println("lat: " + singleton.midlertidigMedarbejder.getLatitude() + "\nLong: " + singleton.midlertidigMedarbejder.getLongitude());
                 }
 
 

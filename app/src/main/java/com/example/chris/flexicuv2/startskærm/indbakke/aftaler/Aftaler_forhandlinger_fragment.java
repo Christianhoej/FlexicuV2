@@ -38,7 +38,7 @@ public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnC
 
     private void fyldRecyclerView(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
-        RecyclerView recyclerView = v.findViewById(R.id.afsluttede_recyclerview);
+        RecyclerView recyclerView = v.findViewById(R.id.forhandlinger_recyclerview);
         adapter = new Aftaler_recyclerview_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
