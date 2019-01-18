@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2.fragments;
+package com.example.chris.flexicuv2.lej;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -39,6 +39,8 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
         viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
+
+
 
     }
 
