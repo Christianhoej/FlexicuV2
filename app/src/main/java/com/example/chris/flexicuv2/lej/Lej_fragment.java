@@ -1,11 +1,10 @@
-package com.example.chris.flexicuv2.fragments;
+package com.example.chris.flexicuv2.lej;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -19,15 +18,10 @@ import android.widget.PopupWindow;
 
 import com.example.chris.flexicuv2.DBManager;
 import com.example.chris.flexicuv2.Indlejninger.Lej_filtrer;
-import com.example.chris.flexicuv2.Indlejninger.MultiSelectionSpinner;
 import com.example.chris.flexicuv2.R;
 
 //import com.example.chris.flexicuv2.Startskaerm;
 import com.example.chris.flexicuv2.model.Singleton;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -60,9 +54,11 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
 
         recyclerView = v.findViewById(R.id.ledig_arbejdskraft_recyclerview);
 
+        //TODO nødvendig?
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
         // Inflate the layout for this fragment
 
+        //TODO skal ikke tage egne medarbejdere, men
         RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext(), singleton.getMedarbejdere());
 
         recyclerView.setAdapter(mAdapter);
@@ -92,18 +88,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         test = new DBManager();
     }
 
-/*
-    public void setUpspinner(View v){
-        MultiSelectionSpinner spinner=(MultiSelectionSpinner) v.findViewById(R.id.input1);
-
-        List<String> list = new ArrayList<String>();
-        list.add("Vælg arbejdsområde");
-        list.add("Håndværker");
-        list.add("Smed");
-        list.add("Lagermand");
-        list.add("Elektriker");
-        spinner.setItems(list);
-    }*/
     /**
      * Metode til at vise et popupvindue af medarbejderen, med flere informationer om medarbejderen.
      * Udarbejdet med inspiration fra:

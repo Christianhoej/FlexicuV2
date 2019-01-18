@@ -23,7 +23,7 @@
             android:id="@+id/udlejning_udlejer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="1dp"
+            android:layout_marginVertical="5dp"
 
             android:orientation="horizontal">
 
@@ -42,31 +42,6 @@
         </LinearLayout>
 
 
-
-        <LinearLayout
-            android:id="@+id/udlejning_medarbejdervalgt_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-
-                android:text="Medarbejder:" />
-
-            <Spinner
-                android:id="@+id/udlejning_medarbejder_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -78,11 +53,18 @@
                 android:id="@+id/udlejning_punktnavn_sublayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginVertical="2dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:text="Medarbejder:" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,33 +145,38 @@
             <LinearLayout
                 android:id="@+id/udlejning_redigerbare_felter_layout"
                 android:layout_width="wrap_content"
+                android:layout_marginVertical="2dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <Spinner
+                    android:id="@+id/udlejning_medarbejder_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
                 <TextView
-                    android:id="@+id/udlejning_rediger_navn_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="lejer_navn" />
-
-                <EditText
                     android:id="@+id/udlejning_startdato_textview1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:inputType="date" />
+                    android:background="@drawable/flex_graa_rektangel"
+                    android:inputType="date"
+                    android:text=" dd / mm / yyyy "/>
 
-                <EditText
+                <TextView
                     android:id="@+id/udlejning_slutdato_textview"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:inputType="date" />
+                    android:background="@drawable/flex_graa_rektangel"
+                    android:inputType="date"
+                    android:text=" dd / mm / yyyy "/>
+
 
                 <TextView
                     android:id="@+id/udlejning_redigerbar_antal_arbejdsdage_textview1"
@@ -260,6 +247,7 @@
 
 
             <EditText
+                android:id="@+id/udlejning_kommentar_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -276,6 +264,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
 
@@ -290,7 +279,7 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/udlejning_send_eller_accepter_tilbud_button"
+                android:id="@+id/udlejning_udlej_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Opret \nmedarbejderudbud" />
