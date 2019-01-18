@@ -1,4 +1,4 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
+package com.example.chris.flexicuv2.medarbejdere;
 
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;

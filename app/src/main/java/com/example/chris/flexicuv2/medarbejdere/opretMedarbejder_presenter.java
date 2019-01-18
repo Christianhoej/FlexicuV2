@@ -1,6 +1,4 @@
-package com.example.chris.flexicuv2.Medarbejdere_pakke;
-
-import android.util.Patterns;
+package com.example.chris.flexicuv2.medarbejdere;
 
 import com.example.chris.flexicuv2.DBManager;
 

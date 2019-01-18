@@ -6,7 +6,7 @@
     android:layout_marginVertical="15dp"
     android:layout_height="wrap_content"
     android:background="@drawable/flex_green_rektangel"
-    tools:context=".Medarbejdere_pakke.vis_medarbejder_fragment">
+    tools:context=".medarbejdere.vis_medarbejder_fragment">
 
     <LinearLayout
         android:layout_width="match_parent"

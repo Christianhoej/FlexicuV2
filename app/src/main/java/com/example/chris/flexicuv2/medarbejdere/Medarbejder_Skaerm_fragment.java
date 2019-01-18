@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.chris.flexicuv2.Medarbejdere_pakke.Medarbejdere_skaerm;
-import com.example.chris.flexicuv2.Medarbejdere_pakke.opret_medarbejder_fragment_1;
 import com.example.chris.flexicuv2.R;
 
 import java.util.ArrayList;
