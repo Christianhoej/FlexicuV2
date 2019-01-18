@@ -10,24 +10,18 @@
         android:id="@+id/søren_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="left"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginHorizontal="3dp"
+        android:background="@drawable/flex_green_rektangel"
         android:layout_marginVertical="5dp"
+
         >
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/blue_circle"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/medarbejder_billede_recycler"/>
-
         <LinearLayout
-            android:layout_width="225dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/flex_green_rektangel"
             android:layout_marginLeft="5dp"
             >
 
@@ -51,15 +45,20 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"/>
         </LinearLayout>
-
-
-
-
-
-
-
-            />
+<!--
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/flex_green"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="140dp"
+            >
+        </View>
+-->
     </LinearLayout>
+
+
+
 
 
 </RelativeLayout>

@@ -5,6 +5,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.medarbejdere.Medarbejder_recyclerView_adapter;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,47 +31,35 @@ public class Udlej_Fragment extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
 
-    private Button testKnap;
-    private EditText adresse;
-    private TextView denne;
+    private RecyclerView recyclerView;
+    Udlejning_recyclerView_adapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_udlej_, container, false);
+        //TODO husk lige at ændre navnet her
+        View v = inflater.inflate(R.layout.udlejning_fragment_den_rigtige, container, false);
 
-        testKnap = v.findViewById(R.id.testKnap);
-        adresse = v.findViewById(R.id.adresse_felt);
-        denne = v.findViewById(R.id.denne);
+        recyclerView =  v.findViewById(R.id.udlejning_recyclerview);
+        recyclerView.setOnClickListener(this);
 
-        testKnap.setOnClickListener(this);
 
+        fyldRecyclerView(v);
 
 
 
         return v;
     }
 
-    public void geolocate(View v) throws IOException{
-        String adresse2 = adresse.getText().toString();
-
-        Geocoder gc = new Geocoder(getContext());
-        List<Address> list = gc.getFromLocationName(adresse2,1);
-        Address add = list.get(0);
-        String lokation = add.getLocality();
-
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
-
-        denne.setText("Latitude: " + lat + "\nLongitude: " + lng);
-
+    private void fyldRecyclerView(View v){
+        //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
+        RecyclerView recyclerView = v.findViewById(R.id.udlejning_recyclerview);
+        adapter = new Udlejning_recyclerView_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
     public void onClick(View v) {
-        try {
-            geolocate(v);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 }
