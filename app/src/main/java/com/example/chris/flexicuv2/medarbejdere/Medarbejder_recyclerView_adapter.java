@@ -187,28 +187,9 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
      * @param område
      */
     public void medarbejderTilføjet(String navn, String område) {
-
         if(getItemCount()<singleton.getMedarbejdere().size()){
             notifyDataSetChanged();
         }
-
-            /*mMedarbejderNavn.add(navn);
-            mMedarbejderArbejdsområde.add(område);
-            //if (mMedarbejderNavn != null && mMedarbejderNavn.size() > 0) {
-            ArrayList<String> temp1 = new ArrayList<>();
-            for(String s : mMedarbejderNavn){
-                temp1.add(s);
-            }
-            ArrayList<String> temp2 = new ArrayList<>();
-            for(String s : mMedarbejderArbejdsområde){
-                temp2.add(s);
-            }
-            mMedarbejderArbejdsområde.clear();
-            mMedarbejderNavn.clear();
-            mMedarbejderArbejdsområde = temp2;
-            mMedarbejderNavn = temp1;
-
-                notifyDataSetChanged();*/
     }
 
 

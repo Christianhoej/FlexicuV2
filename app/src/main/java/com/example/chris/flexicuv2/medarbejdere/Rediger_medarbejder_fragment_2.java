@@ -49,7 +49,7 @@ public class Rediger_medarbejder_fragment_2 extends Fragment implements View.OnC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.opret_medarbejder_fragment_2, container, false);
+        View v = inflater.inflate(R.layout.rediger_medarbejder_fragment_2, container, false);
         presenter = new Opret_Medarbejdere_Fragment2_Presenter(this);
 
         singleton = Singleton.getInstance();
@@ -84,11 +84,11 @@ public class Rediger_medarbejder_fragment_2 extends Fragment implements View.OnC
 
                 if(altOK) {
                     //TODO Lav en ordentlig navigation
-                    dbManager.createMedarbejder(singleton.midlertidigMedarbejder);
+                    dbManager.updateMedarbejder(singleton.midlertidigMedarbejder);
                     //singleton.getBruger().addMedarbejdere(singleton.midlertidigMedarbejder);
                     singleton.midlertidigMedarbejder=null;
 
-                    Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "HURRA! Du redigerede informationer for en medarbejder", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     getActivity().recreate();
                 }
