@@ -1,19 +1,23 @@
 package com.example.chris.flexicuv2.startskærm.lej;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.hjælpeklasser.MultiSelectionSpinner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -42,6 +46,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private Button annuller;
     private Button nulstil;
 
+    private DatePickerDialog.OnDateSetListener datepickerListener;
+    private TextView startdatoET, slutdatoET;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lej_filtrer_fragment, container, false);
@@ -61,6 +68,12 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         annuller.setOnClickListener(this);
         nulstil = v.findViewById(R.id.nulstil_knap);
         nulstil.setOnClickListener(this);
+
+        startdatoET = v.findViewById(R.id.lej_filtrer_startdato_textview);
+        startdatoET.setOnClickListener(this);
+        slutdatoET = v.findViewById(R.id.lej_filtrer_slutdato_textview);
+        slutdatoET.setOnClickListener(this);
+
 
         opretSpinner();
         return v;
@@ -87,7 +100,46 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.nulstil_knap:
                 break;
+            case R.id.lej_filtrer_slutdato_textview:
+                findEnDato(false);
+                break;
+            case R.id.lej_filtrer_startdato_textview:
+                findEnDato(true);
+                break;
         }
 
     }
+
+    /**
+     * metoden starter en datepicker i dialog boks hvor der kan vælges datoer fra
+     * @param start : tilkendegiver om det er start eller slutdatoen -> hvis det er startdatoen så er start true
+     */
+    private void findEnDato(final boolean start) {
+
+        datepickerListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                month = month+1;
+                String s = " " + dayOfMonth + " / " + month + " / " + year + " ";
+                if(start)
+                    startdatoET.setText(s);
+                else
+                    slutdatoET.setText(s);
+
+            }
+        };
+
+
+        Calendar calendar = Calendar.getInstance();
+        final int år = calendar.get(Calendar.YEAR);
+        final int måned = calendar.get(Calendar.MONTH);
+        final int dag = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
+        datepickerdialog.show();
+
+    }
+
+
+
 }
