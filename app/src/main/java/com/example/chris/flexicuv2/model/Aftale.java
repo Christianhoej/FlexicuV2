@@ -11,7 +11,7 @@ public class Aftale {
     private int status;
     private String startDato;
     private String endDato;
-    private int pris;
+    private String pris;
     private String kommentar;
     private boolean egetVærktøj;
 
@@ -80,11 +80,11 @@ public class Aftale {
         this.endDato = endDato;
     }
 
-    public int getPris() {
+    public String getPris() {
         return pris;
     }
 
-    public void setPris(int pris) {
+    public void setPris(String pris) {
         this.pris = pris;
     }
 

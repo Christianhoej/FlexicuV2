@@ -22,6 +22,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.database.DBManager;
+import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
@@ -40,6 +42,9 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private Button anullerButton, opretUdlejningButton;
     private ArrayAdapter<String> adapter_medarbejderbeskrivelse;
     private Calendar c;
+    private Singleton singleton;
+    private DBManager dbManager;
+    private Medarbejder medarbejderValgt;
 
 
 
@@ -57,8 +62,12 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.udlej_fragment, container, false);
+        singleton = Singleton.getInstance();
+        dbManager = new DBManager();
         overskrift_TV = v.findViewById(R.id.aftaleudlejning_overskrift);
         overskrift_TV.setText("Giv mig en overskrift");
+        TextView udlejer = v.findViewById(R.id.udlejer_navn_textview);
+        udlejer.setText(singleton.getBruger().getVirksomhedsnavn());
         medarbejderSpinner = v.findViewById(R.id.udlejning_medarbejder_spinner);
         opretSpinner(medarbejderSpinner);
         medarbejderSpinner.setOnItemSelectedListener(this);
@@ -95,17 +104,19 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     }
     public void opretSpinner(View v){
         ArrayList<Medarbejder> temp = Singleton.getMedarbejdere();
-        ArrayList<Medarbejder> medarbejderStrings = new ArrayList<Medarbejder>();
-                Medarbejder spinneroverskrift = new Medarbejder();
-                spinneroverskrift.setNavn("Vælg medarbejder");
-                spinneroverskrift.setFødselsår(Calendar.getInstance().get(Calendar.YEAR));
-                medarbejderStrings.add(spinneroverskrift);
-                for(Medarbejder m : temp){
-                    medarbejderStrings.add(m);
-                }
-        adapter_medarbejderbeskrivelse = new Spinner_adapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, medarbejderStrings);
+        ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
+        Medarbejder spinneroverskrift = new Medarbejder();
+        spinneroverskrift.setNavn("Vælg medarbejder");
+        spinneroverskrift.setFødselsår(Calendar.getInstance().get(Calendar.YEAR));
+        medarbejdere.add(spinneroverskrift);
+        for(Medarbejder m : temp){
+            medarbejdere.add(m);
+        }
+        adapter_medarbejderbeskrivelse = new Spinner_adapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, medarbejdere);
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
-
+        //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
+        System.out.println(singleton.midlertidigMedarbejder.toString());
+        medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)-1);
     }
 
 
@@ -158,15 +169,29 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
             case R.id.udlejning_udlej_button:
                 //TODO henter man en string eller et dato-format for start og slutdato?
                 //TODO fyld medarbejderSpinner med objekterne
-                presenter.checkKorrektUdfyldtInformation(
-                        medarbejderSpinner.getSelectedItem().toString(),
+                int pris = 0;
+                if(!timeprisET.getText().toString().equals("")){
+                    pris = Integer.parseInt(timeprisET.getText().toString());
+                }
+                if (presenter.checkKorrektUdfyldtInformation(
                         startdatoET.getText().toString(),
                         slutdatoET.getText().toString(),
                         antalArbejdsdage_TV.getInputType(),
-                        timeprisET.getInputType(),
+                        pris,
                         egetVærktøj_switch.getText().toString(),
-                        kommentarET.getText().toString()
-                );
+                        kommentarET.getText().toString())
+                        ) {
+                    Aftale ledig = new Aftale();
+                    ledig.setKommentar(kommentarET.getText().toString());
+                    ledig.setStartDato(startdatoET.getText().toString());
+                    ledig.setEndDato(slutdatoET.getText().toString());
+                    ledig.setPris(timeprisET.getText().toString());
+                    ledig.setEgetVærktøj(egetVærktøj_switch.getShowText());
+                    ledig.setMedarbejder(singleton.midlertidigMedarbejder);
+                    ledig.setUdlejer(singleton.getBruger());
+                    singleton.addLedigeMedarbejder(ledig);
+                    dbManager.createUdlej(ledig);
+                }
 
                 break;
             case R.id.udlejning_annuller_button:
@@ -210,8 +235,6 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         final int måned = calendar.get(Calendar.MONTH);
         final int dag = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
-        System.out.println("Valgt er større end system: " + (c.getTimeInMillis()>System.currentTimeMillis()));
-        System.out.println(c.getTime());
 
         if(c.getTimeInMillis()>(System.currentTimeMillis()-1000)){
             datepickerdialog.getDatePicker().setMinDate(c.getTimeInMillis());
@@ -255,9 +278,8 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         //Metoder til valgt spinner listener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-/*        String s = adapter_medarbejderbeskrivelse.getItem(position).toString();
-        s = s.substring(0, s.indexOf(","));
-        ((TextView) parent.getChildAt(0)).setText(s);*/
+        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position-1);
+        System.out.println(singleton.midlertidigMedarbejder.getNavn());
     }
 
     @Override

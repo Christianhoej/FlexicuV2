@@ -161,9 +161,12 @@ public class DBManager {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Aftale udlej = snapshot.getValue(Aftale.class);
 
-                   // if(!udlej.getUdlejer().getBrugerID().equals(uid)){
-                        singleton.addMedarbejderTilUdlejning(udlej.getMedarbejder());
-                   // }
+                    if(!udlej.getUdlejer().getBrugerID().equals(uid)){
+                        singleton.addMedarbejderTilUdlejning(udlej);
+                    }
+                    else {
+                        singleton.addLedigeMedarbejder(udlej);
+                    }
                 }
                 signInSuccess.userSignInSuccess(true);
             }

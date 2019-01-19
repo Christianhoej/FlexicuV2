@@ -96,7 +96,7 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
 
     public void valgAfMedarbejder(View view, int i) {
-
+        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i+1);
         udlejning_af_medarbejder = new Udlejning_Janus();
         medarbejder_spinner = view.findViewById(R.id.udlejning_medarbejder_spinner);
         //TODO navnet skal føres med videre.
