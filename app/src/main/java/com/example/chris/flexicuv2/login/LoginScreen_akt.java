@@ -3,6 +3,8 @@ package com.example.chris.flexicuv2.login;
 
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -126,6 +128,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void loginErrorMessage(String message) {
         Toast.makeText(this, message,
                 Toast.LENGTH_LONG).show();
+        removeAnimation(loading_screen);
     }
 
     @Override
@@ -181,16 +184,25 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         fragmentTransaction.commit();
     }
 
-    public void setAnimation(android.support.v4.app.Fragment fragment) {
+    public void setAnimation(Fragment fragment) {
         //loginFrame.setVisibility(View.INVISIBLE);
         //loginFrame.removeAllViews();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.tilAnimation, fragment);
 
         //fragmentTransaction.addToBackStack(null);
         //this.getSupportFragmentManager().popBackStack();
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
+    }
+
+    public void removeAnimation(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.remove(fragment).commit();
+        //fragmentTransaction.addToBackStack(null);
+        //this.getSupportFragmentManager().popBackStack();
+ //       fragmentTransaction.addToBackStack("fragment");
+   //     fragmentTransaction.commit();
     }
 
 

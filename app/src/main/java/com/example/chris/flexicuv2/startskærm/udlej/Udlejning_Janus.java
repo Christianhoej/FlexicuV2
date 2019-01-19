@@ -39,6 +39,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private Switch egetVærktøj_switch;
     private Button anullerButton, opretUdlejningButton;
     private ArrayAdapter<String> adapter_medarbejderbeskrivelse;
+    private Calendar c;
 
 
 
@@ -61,11 +62,12 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         medarbejderSpinner = v.findViewById(R.id.udlejning_medarbejder_spinner);
         opretSpinner(medarbejderSpinner);
         medarbejderSpinner.setOnItemSelectedListener(this);
-
+        c = Calendar.getInstance();
         startdatoET = v.findViewById(R.id.udlejning_startdato_textview1);
         startdatoET.setOnClickListener(this);
         slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);
         slutdatoET.setOnClickListener(this);
+        slutdatoET.setEnabled(false);
         
         timeprisET = v.findViewById(R.id.udlejning_timepris_textview1);
         timeprisET.addTextChangedListener(prisTextWatch);
@@ -170,14 +172,13 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
             case R.id.udlejning_annuller_button:
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
-                case R.id.udlejning_slutdato_textview:
-                        findEnDato(false);
-                    break;
-            case R.id.udlejning_startdato_textview1:
-                        findEnDato(true);
-                break;
 
-                default:
+            case R.id.udlejning_slutdato_textview:
+                findEnDato(false);
+                break;
+            case R.id.udlejning_startdato_textview1:
+                findEnDato(true);
+                break;
         }
     }
 
@@ -186,18 +187,20 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
      * @param start : tilkendegiver om det er start eller slutdatoen -> hvis det er startdatoen så er start true
      */
     private void findEnDato(final boolean start) {
-
+        //final Calendar c = Calendar.getInstance();
         datepickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
                 month = month+1;
                 String s = " " + dayOfMonth + " / " + month + " / " + year + " ";
-                if(start)
+                if(start) {
                     startdatoET.setText(s);
-                else
+                    c.set(year,month-1,dayOfMonth);
+                    slutdatoET.setEnabled(true);
+                }
+                else {
                     slutdatoET.setText(s);
-
+                }
             }
         };
 
@@ -207,6 +210,16 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         final int måned = calendar.get(Calendar.MONTH);
         final int dag = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
+        System.out.println("Valgt er større end system: " + (c.getTimeInMillis()>System.currentTimeMillis()));
+        System.out.println(c.getTime());
+
+        if(c.getTimeInMillis()>(System.currentTimeMillis()-1000)){
+            datepickerdialog.getDatePicker().setMinDate(c.getTimeInMillis());
+        }
+        else{
+            datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        }
+
         datepickerdialog.show();
 
     }
