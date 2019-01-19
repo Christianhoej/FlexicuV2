@@ -157,9 +157,10 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:background="@drawable/flex_graa_rektangel"
+                    android:background="@drawable/flex_green_rektangel"
                     android:inputType="date"
-                    android:text=" dd / mm / yyyy "/>
+                    android:text=" dd / mm / yyyy "
+                    android:layout_marginBottom="2dp"/>
 
                 <TextView
                     android:id="@+id/udlejning_slutdato_textview"
@@ -167,7 +168,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:background="@drawable/flex_graa_rektangel"
+                    android:background="@drawable/flex_green_rektangel"
                     android:inputType="date"
                     android:text=" dd / mm / yyyy "/>
 
@@ -185,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/flex_graa_rektangel"
+                    android:background="@drawable/flex_green_rektangel"
                     android:gravity="center"
                     android:hint="timeprisen"
                     android:inputType="number"
@@ -246,7 +247,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/flex_graa_rektangel"
+                android:background="@drawable/flex_green_rektangel"
+                android:layout_marginBottom="2dp"
                 android:hint=" evt. en kommentar til medarbejderen \n eller lejer" />
 
 
@@ -267,6 +269,8 @@
                 android:id="@+id/udlejning_annuller_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_grey"
+                android:textColor="@color/hvid"
                 android:text="annuller" />
             <TextView
                 android:layout_width="0dp"
@@ -276,6 +280,8 @@
             <Button
                 android:id="@+id/udlejning_udlej_button"
                 android:layout_width="wrap_content"
+                android:textColor="@color/hvid"
+                android:background="@drawable/rounded_corners_blue"
                 android:layout_height="wrap_content"
                 android:text="Opret \nmedarbejderudbud" />
         </LinearLayout>

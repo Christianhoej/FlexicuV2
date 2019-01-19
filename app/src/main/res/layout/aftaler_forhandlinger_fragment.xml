@@ -18,6 +18,14 @@
         android:gravity="center"
         android:id="@+id/tv_forhandlinger"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vis_forhandling"
+            android:text="vis forhandling"
+            android:layout_gravity="center"/>
+
+
     <android.support.v7.widget.RecyclerView
         android:layout_marginVertical="5dp"
         android:layout_width="match_parent"
