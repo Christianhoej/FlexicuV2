@@ -68,7 +68,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
         test = new TestAfAftalerDB();
-        dbManager.createUdlej(test.getUdlej());
+        //dbManager.createUdlej(test.getUdlej());
         /**
          * Til at køre mellem fragments
          */

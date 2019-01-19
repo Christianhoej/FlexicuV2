@@ -3,6 +3,7 @@ package com.example.chris.flexicuv2.model;
 import android.app.Activity;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Singleton extends Activity {
 
@@ -13,7 +14,8 @@ public class Singleton extends Activity {
     public static Medarbejder midlertidigMedarbejder;
     public static String userID;
     public static Bruger midlertidigBruger;
-    public static ArrayList<Medarbejder> medarbejdereTilUdlejning;
+    public static ArrayList<Aftale> medarbejdereTilUdlejning;
+    public static ArrayList<Aftale> ledigeMedarbejder;
 
 
     private Singleton(){
@@ -26,23 +28,41 @@ public class Singleton extends Activity {
             medarbejdere = new ArrayList<>();
             medarbejdereTilUdlejning = new ArrayList<>();
             bruger = new Bruger();
+            ledigeMedarbejder = new ArrayList<>();
         }
         return singleInstance;
     }
 
-    public static ArrayList<Medarbejder> getMedarbejdereTilUdlejning() {
+
+    public static ArrayList<Aftale> getLedigeMedarbejder() {
+        return ledigeMedarbejder;
+    }
+
+    public static void setLedigeMedarbejder(ArrayList<Aftale> ledigeMedarbejder) {
+        Singleton.ledigeMedarbejder = ledigeMedarbejder;
+    }
+
+    public static void addLedigeMedarbejder(Aftale aftale){
+        Singleton.ledigeMedarbejder.add(aftale);
+    }
+
+    public static void removeLedigeMedarbejder(Aftale aftale){
+        Singleton.ledigeMedarbejder.add(aftale);
+    }
+
+    public static ArrayList<Aftale> getMedarbejdereTilUdlejning() {
         return medarbejdereTilUdlejning;
     }
 
-    public static void setMedarbejdereTilUdlejning(ArrayList<Medarbejder> medarbejdereTilUdlejning) {
+    public static void setMedarbejdereTilUdlejning(ArrayList<Aftale> medarbejdereTilUdlejning) {
         Singleton.medarbejdereTilUdlejning = medarbejdereTilUdlejning;
     }
 
-    public static void addMedarbejderTilUdlejning(Medarbejder medarbejderUdlejning){
+    public static void addMedarbejderTilUdlejning(Aftale medarbejderUdlejning){
         Singleton.medarbejdereTilUdlejning.add(medarbejderUdlejning);
     }
 
-    public static void removeMedarbejderTilUdlejning(Medarbejder medarbejderUdlejning){
+    public static void removeMedarbejderTilUdlejning(Aftale medarbejderUdlejning){
         Singleton.medarbejdereTilUdlejning.remove(medarbejderUdlejning);
     }
 

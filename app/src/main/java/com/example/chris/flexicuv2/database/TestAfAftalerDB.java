@@ -14,7 +14,7 @@ public class TestAfAftalerDB {
     }
 
 
-    public Aftale getUdlej(){
+    /*public Aftale getUdlej(){
         singleton.midlertidigMedarbejder = new Medarbejder();
       //  singleton.midlertidigMedarbejder.setVirksomhedsID(singleton.getBruger().getBrugerID());
         singleton.midlertidigMedarbejder.setArbejdsomraade("Smed");
@@ -34,11 +34,11 @@ public class TestAfAftalerDB {
         udlej.setUdlejer(singleton.getBruger());
         udlej.setEgetVærktøj(false);
         udlej.setEndDato("19/06-2019");
-        udlej.setPris(200);
+        udlej.setPris("200");
         udlej.setStartDato("15/3-2019");
         udlej.setKommentar("Har egen bil");
         udlej.setStatus(1);
         return udlej;
-    }
+    }*/
 
 }
