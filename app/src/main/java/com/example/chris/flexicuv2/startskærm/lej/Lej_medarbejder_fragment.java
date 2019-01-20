@@ -52,27 +52,27 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
         //Udlejer
         //Dato
-        TextView startDato_udlejerTV = v.findViewById(R.id.forhandling_startdato_udlejer_textview);
+        TextView startDato_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_startdato_udlejer_textview);
         startDato_udlejerTV.setText(singleton.midlertidigAftale.getStartDato());
-        TextView slutDato_udlejerTV = v.findViewById(R.id.forhandling_slutdato_udlejer_textview);
+        TextView slutDato_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_slutdato_udlejer_textview);
         slutDato_udlejerTV.setText(singleton.midlertidigAftale.getEndDato());
 
         //Arbejdsdage
-        TextView arbejdsdage_udlejerTV = v.findViewById(R.id.forhandling_timepris_udlejer_textview);
+        TextView arbejdsdage_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_timepris_udlejer_textview);
         arbejdsdage_udlejerTV.setText("MANGLER");
 
         //Prisen
-        TextView timepris_udlejerTV = v.findViewById(R.id.forhandling_timepris_udlejer_textview);
+        TextView timepris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_timepris_udlejer_textview);
         timepris_udlejerTV.setText(singleton.midlertidigAftale.getPris());
-        TextView subtotal_udlejerTV = v.findViewById(R.id.forhandling_subtotalen_excl_flexicuspris_udlejer_textview);
+        TextView subtotal_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_subtotalen_excl_flexicuspris_udlejer_textview);
         subtotal_udlejerTV.setText("MANGLER");
-        TextView flexicupris_udlejerTV = v.findViewById(R.id.forhandling_flexicu_pris_udlejer_textview);
+        TextView flexicupris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_flexicu_pris_udlejer_textview);
         flexicupris_udlejerTV.setText("MANGLER");
-        TextView totalpris_udlejerTV = v.findViewById(R.id.forhandling_total_pris_udlejer_textview);
+        TextView totalpris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_total_pris_udlejer_textview);
         totalpris_udlejerTV.setText("MANGLER");
 
         //Eget værktøj
-        TextView værktøj_udlejerTV = v.findViewById(R.id.forhandling_egetværktøj_udlejer_textview);
+        TextView værktøj_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_egetværktøj_udlejer_textview);
         if(singleton.midlertidigAftale.isEgetVærktøj()){
             værktøj_udlejerTV.setText("Ja");
         }
@@ -86,10 +86,10 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
         //Lejer
         //Dato
-        startdato_lejerTV = v.findViewById(R.id.forhandling_startdato_lejer_textview);
+        startdato_lejerTV = v.findViewById(R.id.forhandling_som_lejer_startdato_lejer_textview);
         startdato_lejerTV.setOnClickListener(this);
         startdato_lejerTV.setText(singleton.midlertidigAftale.getStartDato());
-        slutdato_lejerTV = v.findViewById(R.id.forhandling_slutdato_lejer_textview);
+        slutdato_lejerTV = v.findViewById(R.id.forhandling_som_lejer_slutdato_lejer_textview);
         slutdato_lejerTV.setOnClickListener(this);
         slutdato_lejerTV.setText(singleton.midlertidigAftale.getEndDato());
         //slutdato_lejerTV.setEnabled(false);
@@ -99,13 +99,13 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
       //  antalArbejdsdage_lejerTV.setText("MANGLER");
         // TODO : udregne antal arbejdsdage og sætte textView til det
         //Pris
-        timeprise_lejerET = v.findViewById(R.id.forhandling_timepris_lejer_editview);
+        timeprise_lejerET = v.findViewById(R.id.forhandling_som_lejer_timepris_lejer_editview);
         timeprise_lejerET.setText(singleton.midlertidigAftale.getPris());
        // presenter.udregnPriser(timeprise_lejerET.getText().toString(), antalArbejdsdage_lejerTV.getText().toString());
         timeprise_lejerET.addTextChangedListener(prisTextWatch);
-        subtotalen_lejerTV = v.findViewById(R.id.forhandling_subtotalen_excl_flexicuspris_lejer_textview);
-        flexicugebyr_lejerTV = v.findViewById(R.id.forhandling_flexicu_pris_lejer_textview);
-        totalprisen_TV = v.findViewById(R.id.forhandling_total_pris_lejer_textview);
+        subtotalen_lejerTV = v.findViewById(R.id.forhandling_som_lejer_subtotalen_excl_flexicuspris_lejer_textview);
+        flexicugebyr_lejerTV = v.findViewById(R.id.forhandling_som_lejer_flexicu_pris_lejer_textview);
+        totalprisen_TV = v.findViewById(R.id.forhandling_som_lejer_total_pris_lejer_textview);
         /*kommentarET = v.findViewById(R.id.udlejning_kommentar_edittext);
 
         kommentarET.setScroller(new Scroller(getActivity()));
@@ -116,7 +116,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         */
 
         //Eget værktøj
-        egetVærktøj_switch = v.findViewById(R.id.forhandling_egetværktøj_lejer_switch);
+        egetVærktøj_switch = v.findViewById(R.id.forhandling_som_lejer_egetværktøj_lejer_switch);
         egetVærktøj_switch.setOnCheckedChangeListener(this);
         anullerButton = v.findViewById(R.id.forhandling_annuller_button);
         anullerButton.setOnClickListener(this);

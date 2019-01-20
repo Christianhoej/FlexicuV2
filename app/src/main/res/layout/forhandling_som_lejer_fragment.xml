@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startskærm.indbakke.forhandling.Forhandling"
+    tools:context=".startskærm.indbakke.forhandling.Forhandling_som_lejer"
     android:background="@color/hvid"
     android:clickable="true">
 
@@ -196,7 +196,7 @@
                     android:text="Udlejer" />
 
                 <TextView
-                    android:id="@+id/forhandling_startdato_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_startdato_udlejer_textview"
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/flex_green"
                     android:layout_height="0dp"
@@ -206,7 +206,7 @@
                     android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/forhandling_slutdato_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_slutdato_udlejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -216,7 +216,7 @@
                     android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/forhandling_antal_arbejdsdage_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_antal_arbejdsdage_udlejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -224,7 +224,7 @@
                     android:text="antal arb. dage" />
 
                 <TextView
-                    android:id="@+id/forhandling_timepris_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_timepris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -234,7 +234,7 @@
                     android:inputType="number" />
 
                 <TextView
-                    android:id="@+id/forhandling_subtotalen_excl_flexicuspris_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_subtotalen_excl_flexicuspris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -242,7 +242,7 @@
                     android:text="subtotalen" />
 
                 <TextView
-                    android:id="@+id/forhandling_flexicu_pris_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_flexicu_pris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -250,7 +250,7 @@
                     android:text="flexicu gebyr" />
 
                 <TextView
-                    android:id="@+id/forhandling_total_pris_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_total_pris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -258,7 +258,7 @@
                     android:text="totalprisen" />
 
                 <TextView
-                    android:id="@+id/forhandling_egetværktøj_udlejer_textview"
+                    android:id="@+id/forhandling_som_lejer_egetværktøj_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -287,7 +287,7 @@
                     android:text="Lejer" />
 
                 <TextView
-                    android:id="@+id/forhandling_startdato_lejer_textview"
+                    android:id="@+id/forhandling_som_lejer_startdato_lejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -299,7 +299,7 @@
                     android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/forhandling_slutdato_lejer_textview"
+                    android:id="@+id/forhandling_som_lejer_slutdato_lejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -311,7 +311,7 @@
                     android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/forhandling_antal_arbejdsdage_lejer_textview"
+                    android:id="@+id/forhandling_som_lejer_antal_arbejdsdage_lejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -319,7 +319,7 @@
                     android:text="antal arb. dage" />
 
                 <EditText
-                    android:id="@+id/forhandling_timepris_lejer_editview"
+                    android:id="@+id/forhandling_som_lejer_timepris_lejer_editview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:background="@drawable/flex_green_rektangel"
@@ -332,7 +332,7 @@
                     android:inputType="number" />
 
                 <TextView
-                    android:id="@+id/forhandling_subtotalen_excl_flexicuspris_lejer_textview"
+                    android:id="@+id/forhandling_som_lejer_subtotalen_excl_flexicuspris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -340,7 +340,7 @@
                     android:text="subtotalen" />
 
                 <TextView
-                    android:id="@+id/forhandling_flexicu_pris_lejer_textview"
+                    android:id="@+id/forhandling_som_lejer_flexicu_pris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -348,7 +348,7 @@
                     android:text="flexicu gebyr" />
 
                 <TextView
-                    android:id="@+id/forhandling_total_pris_lejer_textview"
+                    android:id="@+id/forhandling_som_lejer_total_pris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -356,7 +356,7 @@
                     android:text="totalprisen" />
 
                 <Switch
-                    android:id="@+id/forhandling_egetværktøj_lejer_switch"
+                    android:id="@+id/forhandling_som_lejer_egetværktøj_lejer_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
