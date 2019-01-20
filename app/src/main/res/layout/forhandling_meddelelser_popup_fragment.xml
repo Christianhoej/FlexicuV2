@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/forhandling_meddelelser_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/linearLayout"
+        android:layout_alignParentTop="true">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true">
+
+
+        <EditText
+            android:id="@+id/skriv_kommentar_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flex_green_rektangel"
+            android:layout_marginLeft="2dp"
+            android:padding="8dp"
+            android:maxWidth="150dp"
+            android:maxHeight="50dp"
+            android:layout_weight="0.6"
+            android:layout_marginRight="2dp"
+            android:maxLines="5"
+            android:hint="Skriv kommentar her" />
+
+        <Button
+            android:id="@+id/gem_kommentar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:gravity="center"
+            android:text="Gem"
+            android:textColor="@color/hvid"
+            android:background="@drawable/rounded_corners_green"
+
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

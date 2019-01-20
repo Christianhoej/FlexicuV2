@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startskærm.indbakke.forhandling.Forhandling"
-    android:background="@color/hvid">
+    tools:context=".startskærm.indbakke.forhandling.Forhandling_som_udlejer"
+    android:background="@color/hvid"
+    android:clickable="true">
 
 
     <LinearLayout
@@ -58,7 +59,7 @@
                 android:text="Lejer:" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/lejer_navn_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="lejer navn" />
@@ -82,10 +83,11 @@
 
                 android:text="Medarbejder:" />
 
-            <Spinner
-                android:id="@+id/forhandling_medarbejder_spinner"
+            <TextView
+                android:id="@+id/forhandling_medarbejder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Medarbejder navn"
                  />
         </LinearLayout>
         <LinearLayout
@@ -99,6 +101,7 @@
                 android:id="@+id/forhandling_punktnavn_sublayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
@@ -106,68 +109,64 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
+                    android:layout_gravity="center_vertical"
                     android:text="Startdato:" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:text="Slutdato" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:text="arbejdsdage\ni perioden" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Timepris:"
-                    android:gravity="center"
-                    />
+                    android:gravity="left|center_vertical"/>
 
                 <TextView
                     android:id="@+id/forhandling_totalpris1_textview"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:text="subtotal\n(incl moms)" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:text="Flexicu pris\n(2,5%)" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:layout_marginRight="10dp"
                     android:text="Total:" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:text="Medbringer\neget værktøj?" />
@@ -183,7 +182,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/forhandling_redigerbare_felter_layout"
+                android:id="@+id/forhandling_faste_felter_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -191,50 +190,51 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/forhandling_rediger_navn_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:text="lejer_navn" />
+                    android:text="Lejer" />
 
-                <EditText
-                    android:id="@+id/forhandling_startdato_textview1"
+                <TextView
+                    android:id="@+id/forhandling_som_udlejer_startdato_lejer_textview"
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/flex_green"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:inputType="date" />
-
-                <EditText
-                    android:id="@+id/forhandling_slutdato_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/flex_green"
-                    android:gravity="center"
+                    android:text="start dato"
                     android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/forhandling_redigerbar_antal_arbejdsdage_textview1"
+                    android:id="@+id/forhandling_som_udlejer_slutdato_lejer_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/flex_green"
+                    android:gravity="center"
+                    android:text="slut dato"
+                    android:inputType="date" />
+
+                <TextView
+                    android:id="@+id/forhandling_som_udlejer_antal_arbejdsdage_lejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="antal arb. dage" />
 
-                <EditText
-                    android:id="@+id/forhandling_timepris_textview1"
+                <TextView
+                    android:id="@+id/forhandling_som_udlejer_timepris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:backgroundTint="@color/flex_green"
-                    android:hint="timeprisen"
+                    android:text="timepris"
                     android:inputType="number" />
 
                 <TextView
-                    android:id="@+id/forhandling_subtotalen_excl_flexicuspris_textview1"
+                    android:id="@+id/forhandling_som_udlejer_subtotalen_excl_flexicuspris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -242,7 +242,7 @@
                     android:text="subtotalen" />
 
                 <TextView
-                    android:id="@+id/forhandling_flexicu_pris_textview"
+                    android:id="@+id/forhandling_som_udlejer_flexicu_pris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -250,22 +250,20 @@
                     android:text="flexicu gebyr" />
 
                 <TextView
-                    android:id="@+id/forhandling_total_pris_textview1"
+                    android:id="@+id/forhandling_som_udlejer_total_pris_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="totalprisen" />
 
-                <Switch
-                    android:id="@+id/forhandling_egetværktøj_switch1"
+                <TextView
+                    android:id="@+id/forhandling_som_udlejer_egetværktøj_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="ja/nej"
-                    android:textOff="Nej"
-                    android:textOn="Ja" />
+                    android:text="ja/nej" />
             </LinearLayout>
 
             <View
@@ -275,7 +273,7 @@
                 android:background="@color/flex_green" />
 
             <LinearLayout
-                android:id="@+id/forhandling_anden_part_sublayout"
+                android:id="@+id/forhandling_lejer_sublayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -283,48 +281,58 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/forhandling_navn_textview2"
+                    android:id="@+id/forhandling_navn_lejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="udlNavn" />
+                    android:text="Udlejer" />
 
-                <EditText
-                    android:id="@+id/forhandling_startdato_textview2"
+                <TextView
+                    android:id="@+id/forhandling_som_udlejer_startdato_udlejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/flex_green"
+                    android:background="@drawable/flex_green_rektangel"
                     android:gravity="center"
-                    android:inputType="date" />
-
-                <EditText
-                    android:id="@+id/forhandling_slutdato_textview2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:backgroundTint="@color/flex_green"
+                    android:text=" dd / mm / yyyy "
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
                     android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/forhandling_redigerbar_antal_arbejdsdage_textview"
+                    android:id="@+id/forhandling_som_udlejer_slutdato_udlejer_textview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"                    android:text="antal arb. dage" />
+                    android:gravity="center"
+                    android:text=" dd / mm / yyyy "
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/flex_green_rektangel"
+                    android:inputType="date" />
 
-                <EditText
-                    android:id="@+id/forhandling_timepris_textview2"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/forhandling_som_udlejer_antal_arbejdsdage_udlejer_textview"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:backgroundTint="@color/flex_green"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:hint="timeprisen"
+                    android:text="antal arb. dage" />
+
+                <EditText
+                    android:id="@+id/forhandling_som_udlejer_timepris_udlejer_editview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/flex_green_rektangel"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint=" Timepris "
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:textSize="14sp"
                     android:inputType="number" />
 
                 <TextView
-                    android:id="@+id/forhandling_subtotalen_excl_flexicuspris_textview2"
+                    android:id="@+id/forhandling_som_udlejer_subtotalen_excl_flexicuspris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -332,7 +340,7 @@
                     android:text="subtotalen" />
 
                 <TextView
-                    android:id="@+id/forhandling_flexicu_pris_textview2"
+                    android:id="@+id/forhandling_som_udlejer_flexicu_pris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -340,7 +348,7 @@
                     android:text="flexicu gebyr" />
 
                 <TextView
-                    android:id="@+id/forhandling_total_pris_textview2"
+                    android:id="@+id/forhandling_som_udlejer_total_pris_udlejer_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -348,7 +356,7 @@
                     android:text="totalprisen" />
 
                 <Switch
-                    android:id="@+id/forhandling_egetværktøj_switch2"
+                    android:id="@+id/forhandling_som_udlejer_egetværktøj_udlejer_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"

@@ -45,9 +45,13 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private Button anvend;
     private Button annuller;
     private Button nulstil;
+    private Calendar c;
 
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private TextView startdatoET, slutdatoET;
+
+    private Afstand_koordinater afstand_koordinater;
+    double a;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +78,11 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         slutdatoET = v.findViewById(R.id.lej_filtrer_slutdato_textview);
         slutdatoET.setOnClickListener(this);
 
+        c = Calendar.getInstance();
+
+        afstand_koordinater = new Afstand_koordinater();
+        a= afstand_koordinater.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
+        System.out.println("ÆÆÆÆÆÆÆÆÆ " + a);
 
         opretSpinner();
         return v;
@@ -116,26 +125,39 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
      * @param start : tilkendegiver om det er start eller slutdatoen -> hvis det er startdatoen så er start true
      */
     private void findEnDato(final boolean start) {
-
+        //final Calendar c = Calendar.getInstance();
         datepickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
                 month = month+1;
                 String s = " " + dayOfMonth + " / " + month + " / " + year + " ";
-                if(start)
+                if(start) {
                     startdatoET.setText(s);
-                else
+                    c.set(year,month-1,dayOfMonth);
+                    slutdatoET.setEnabled(true);
+                }
+                else {
                     slutdatoET.setText(s);
-
+                }
             }
         };
+
+
         Calendar calendar = Calendar.getInstance();
         final int år = calendar.get(Calendar.YEAR);
         final int måned = calendar.get(Calendar.MONTH);
         final int dag = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
+
+        if(c.getTimeInMillis()>(System.currentTimeMillis()-1000)){
+            datepickerdialog.getDatePicker().setMinDate(c.getTimeInMillis());
+        }
+        else{
+            datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        }
+
         datepickerdialog.show();
+
     }
 
 

@@ -31,6 +31,7 @@ public class DBManager {
     private final String VIRKSOMHEDSID = "virksomhedsID";
     private final String AFTALE = "aftale";
     private final String LEDIG = "ledig";
+    private final String FORHANDLING = "forhandling";
     private Singleton singleton;
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
@@ -54,9 +55,11 @@ public class DBManager {
     public void createBruger(Bruger bruger) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
+        System.out.println("uid i createBruger: " + mAuth.getCurrentUser().getUid());
         String virkKey = mAuth.getCurrentUser().getUid();
         bruger.setBrugerID(virkKey);
         ref.child(BRUGER).child(virkKey).setValue(bruger);
+        createUserSuccess.userCreateSuccess(true);
     }
 
     public void createMedarbejder(Medarbejder medarbejder) {
@@ -86,8 +89,7 @@ public class DBManager {
         ref.child(MEDARBEJDER).child(medarbejder.getMedarbejderID()).setValue(medarbejder);
     }
 
-    public void readBruger(){
-        String uid = mAuth.getCurrentUser().getUid();
+    public void readBruger(String uid){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(BRUGER).child(uid);
 
@@ -148,6 +150,44 @@ public class DBManager {
         ref.child(MEDARBEJDER).child(udlej.getAftaleID()).setValue(udlej);
     }
 
+    public void createForhandling(Aftale forhandling){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        forhandling.getMedarbejder().setVirksomhedsID(uid);
+
+        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
+        forhandling.setAftaleID(forhandlingID);
+
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandlingID).setValue(forhandling);
+    }
+
+    public void readForhandling(){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(MEDARBEJDER);
+        System.out.println("UID: " + uid);
+        ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
+                    singleton.addMedarbejder(medarbejder);
+                }
+                readAlleUdlej();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+
     public void readAlleUdlej(){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -189,7 +229,7 @@ public class DBManager {
                             Log.d(TAG, "createUserWithEmail:success");
                             singleton.userID = mAuth.getCurrentUser().getUid();
                             System.out.println(singleton.userID);
-                            createUserSuccess.userCreateSuccess(true);
+                            createBruger(singleton.midlertidigBruger);
                             }
                             else {
                             // If sign in fails, display a message to the user.
@@ -214,7 +254,9 @@ public class DBManager {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            readBruger();
+
+                            readBruger(mAuth.getCurrentUser().getUid());
+
 
                         } else {
                             // If sign in fails, display a message to the user.

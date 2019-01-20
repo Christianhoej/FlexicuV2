@@ -38,8 +38,8 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
     private Singleton singleton;
     private static final String TAG = "recyclerView_adapter";
     private Udlejning_Janus udlejning_af_medarbejder;
-    FrameLayout udlejning_fragment_frame;
-    FrameLayout startskærmFrameTilDiverse;
+    private FrameLayout udlejning_fragment_frame;
+    private FrameLayout startskærmFrameTilDiverse;
     private Spinner medarbejder_spinner;
 
     public Udlejning_recyclerView_adapter(Context mContext) {
@@ -69,26 +69,18 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
         Log.d(TAG, "onBindViewHolder: called");
 
-            /*Kan implementere Glide for en bedre oplevelse
-
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(mMedarbjderBilleder.get(i)) */
-
-        //viewHolder.medarbejder_navn.setText(mMedarbejderNavn.get(i));
-        //viewHolder.medarbejder_arbejdsområde.setText(mMedarbejderArbejdsområde.get(i));
+        /*Kan implementere Glide for en bedre oplevelse
+            Glide.with(mContext).asBitmap().load(mMedarbjderBilleder.get(i)) */
         viewHolder.medarbejder_navn.setText(singleton.getMedarbejdere().get(i).getNavn());
         viewHolder.medarbejder_arbejdsområde.setText(singleton.getMedarbejdere().get(i).getArbejdsomraade());
 
-        viewHolder.medarbejder_recyclerview_listitems.setOnClickListener(new View.OnClickListener() {
+        viewHolder.medarbejder_recyclerview_listitems.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on " + singleton.getMedarbejdere().get(i).getNavn());
                 System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ:  " + singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i))+1);
 
-                valgAfMedarbejder(v,i);
-                //onButtonShowPopupWindowClick(v, i);
-                //Toast.makeText(mContext, mMedarbejderNavn.get(i), Toast.LENGTH_SHORT).show();
+                valgAfMedarbejder(v, i);
             }
         });
 
@@ -96,7 +88,7 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
 
     public void valgAfMedarbejder(View view, int i) {
-        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i+1);
+        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i/*+1*/);
         udlejning_af_medarbejder = new Udlejning_Janus();
         medarbejder_spinner = view.findViewById(R.id.udlejning_medarbejder_spinner);
         //TODO navnet skal føres med videre.
@@ -165,7 +157,6 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //medarbejder_billede = itemView.findViewById(R.id.medarbejder_billede_recycler);
             medarbejder_navn = itemView.findViewById(R.id.medarbejder_navn_recycler);
             medarbejder_arbejdsområde = itemView.findViewById(R.id.arbejdsområde_recycler);
             medarbejder_recyclerview_listitems = itemView.findViewById(R.id.medarbejder_recyclerview_listitems);

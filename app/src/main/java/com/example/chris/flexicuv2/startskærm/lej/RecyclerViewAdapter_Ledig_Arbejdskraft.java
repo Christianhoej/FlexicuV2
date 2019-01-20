@@ -2,15 +2,21 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
+import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_Janus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +25,8 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
 
     private Context mContext;
     private Singleton singleton;
+    private Lej_medarbejder_fragment lej_medarbejder_fragment;
+    private FrameLayout startskærmFrameTilDiverse;
 
     public RecyclerViewAdapter_Ledig_Arbejdskraft(Context mContext) {
         this.mContext = mContext;
@@ -28,22 +36,45 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
     @NonNull
     @Override
     public RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view;
-        view = LayoutInflater.from(mContext).inflate(R.layout.lej_ledig_arbejdskraft_listitem,viewGroup,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.lej_ledig_arbejdskraft_listitem,viewGroup,false);
+        RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder holder = new RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder(view);
+        startskærmFrameTilDiverse = viewGroup.findViewById(R.id.startskærm_frame_til_diverse);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         String loen = "Løn: " + Integer.toString(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getLoen());
         viewHolder.name.setText(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getNavn());
         viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.periode.setText(singleton.getMedarbejdereTilUdlejning().get(i).getStartDato() + " til " + singleton.getMedarbejdereTilUdlejning().get(i).getEndDato());
 
+        viewHolder.lej_recyclerview_listitems.setOnClickListener( new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                valgAfLedigArbejdskraft(v, i);
+            }
+        });
 
 
     }
 
+    public void valgAfLedigArbejdskraft(View view, int i) {
+        singleton.midlertidigAftale = singleton.getMedarbejdereTilUdlejning().get(i);
+        lej_medarbejder_fragment = new Lej_medarbejder_fragment();
+        setFragment(lej_medarbejder_fragment);
+
+    }
+
+    public void setFragment(Fragment fragment) {
+        //startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
 
     @Override
     public int getItemCount() {
@@ -60,6 +91,7 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
         private TextView salary;
         private TextView workfield;
         private TextView periode;
+        private RelativeLayout lej_recyclerview_listitems;
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -67,6 +99,7 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
             salary = itemView.findViewById(R.id.salary);
             periode = itemView.findViewById(R.id.periode);
             workfield = itemView.findViewById(R.id.workfield);
+            lej_recyclerview_listitems = itemView.findViewById(R.id.lej_ledig_arbejdskraft_listitem);
         }
     }
 }
