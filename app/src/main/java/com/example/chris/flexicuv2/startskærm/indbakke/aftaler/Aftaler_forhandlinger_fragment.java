@@ -53,12 +53,23 @@ public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnC
 
         fyldRecyclerViewIndlejninger(v);
         fyldRecyclerViewUdlejninger(v);
+
+        radioButtonIndlejninger.setChecked(true);
+
         return v;
     }
 
     @Override
     public void onClick(View v) {
-        setFragment(forhandlingFragment);
+        switch (v.getId()){
+            case R.id.vis_forhandling:
+                setFragment(forhandlingFragment);
+                break;
+            /*case R.id.radio_forhandlinger_indlejninger:
+                System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
+                break;*/
+        }
+
     }
 
     private void fyldRecyclerViewIndlejninger(View v){
@@ -89,6 +100,16 @@ public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnC
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        radioButtonUdlejninger.setError(null);
+        if (radioGroupForhandlinger.getCheckedRadioButtonId()== R.id.radio_forhandlinger_indlejninger){
+            recyclerViewUdlejninger.setVisibility(View.INVISIBLE);
+            recyclerViewIndlejninger.setVisibility(View.VISIBLE);
+            System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
+        }
+        else if(radioGroupForhandlinger.getCheckedRadioButtonId()== R.id.radio_forhandlinger_udlejninger){
+            recyclerViewIndlejninger.setVisibility(View.INVISIBLE);
+            recyclerViewUdlejninger.setVisibility(View.VISIBLE);
+            System.out.println("OOOOOOOOOOOOO________________________OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        }
+
     }
 }
