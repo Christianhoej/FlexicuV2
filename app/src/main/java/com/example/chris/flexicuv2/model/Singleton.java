@@ -14,6 +14,7 @@ public class Singleton extends Activity {
     public static String userID;
     public static Bruger midlertidigBruger;
     public static ArrayList<Aftale> medarbejdereTilUdlejning;
+    public static Aftale midlertidigAftale;
     public static ArrayList<Aftale> mineLedigeMedarbejdere;
 
 

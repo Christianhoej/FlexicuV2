@@ -189,7 +189,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/flex_green_rektangel"
                     android:gravity="center"
-                    android:hint="timeprisen"
+                    android:hint=" Timepris "
                     android:inputType="number"
                     android:textSize="14sp" />
 

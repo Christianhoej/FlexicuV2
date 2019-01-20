@@ -54,9 +54,11 @@ public class DBManager {
     public void createBruger(Bruger bruger) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
+        System.out.println("uid i createBruger: " + mAuth.getCurrentUser().getUid());
         String virkKey = mAuth.getCurrentUser().getUid();
         bruger.setBrugerID(virkKey);
         ref.child(BRUGER).child(virkKey).setValue(bruger);
+        createUserSuccess.userCreateSuccess(true);
     }
 
     public void createMedarbejder(Medarbejder medarbejder) {
@@ -86,8 +88,7 @@ public class DBManager {
         ref.child(MEDARBEJDER).child(medarbejder.getMedarbejderID()).setValue(medarbejder);
     }
 
-    public void readBruger(){
-        String uid = mAuth.getCurrentUser().getUid();
+    public void readBruger(String uid){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(BRUGER).child(uid);
 
@@ -189,7 +190,7 @@ public class DBManager {
                             Log.d(TAG, "createUserWithEmail:success");
                             singleton.userID = mAuth.getCurrentUser().getUid();
                             System.out.println(singleton.userID);
-                            createUserSuccess.userCreateSuccess(true);
+                            createBruger(singleton.midlertidigBruger);
                             }
                             else {
                             // If sign in fails, display a message to the user.
@@ -214,7 +215,9 @@ public class DBManager {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            readBruger();
+
+                            readBruger(mAuth.getCurrentUser().getUid());
+
 
                         } else {
                             // If sign in fails, display a message to the user.
