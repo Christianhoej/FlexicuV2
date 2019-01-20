@@ -1,10 +1,9 @@
 package com.example.chris.flexicuv2.model;
 
-import java.util.ArrayList;
-
 public class Aftale {
 
     private String aftaleID;
+    private String oprindeligUdlejID;
     private Bruger udlejer;
     private Bruger lejer;
     private Medarbejder medarbejder;
@@ -14,7 +13,26 @@ public class Aftale {
     private String pris;
     private String kommentar;
     private boolean egetVærktøj;
+    private Bruger sidstSendtAftale;
+    private boolean aktiv;
 
+
+
+    public String getOprindeligUdlejID() {
+        return oprindeligUdlejID;
+    }
+
+    public void setOprindeligUdlejID(String oprindeligUdlejID) {
+        this.oprindeligUdlejID = oprindeligUdlejID;
+    }
+
+    public boolean isAktiv() {
+        return aktiv;
+    }
+
+    public void setAktiv(boolean aktiv) {
+        this.aktiv = aktiv;
+    }
 
     public boolean isEgetVærktøj() {
         return egetVærktøj;
@@ -96,4 +114,11 @@ public class Aftale {
         this.kommentar = kommentar;
     }
 
+    public Bruger getSidstSendtAftale() {
+        return sidstSendtAftale;
+    }
+
+    public void setSidstSendtAftale(Bruger sidstSendtAftale) {
+        this.sidstSendtAftale = sidstSendtAftale;
+    }
 }

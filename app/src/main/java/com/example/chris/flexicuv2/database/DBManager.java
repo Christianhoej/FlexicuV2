@@ -31,6 +31,7 @@ public class DBManager {
     private final String VIRKSOMHEDSID = "virksomhedsID";
     private final String AFTALE = "aftale";
     private final String LEDIG = "ledig";
+    private final String FORHANDLING = "forhandling";
     private Singleton singleton;
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
@@ -148,6 +149,44 @@ public class DBManager {
         DatabaseReference ref = database.getReference();
         ref.child(MEDARBEJDER).child(udlej.getAftaleID()).setValue(udlej);
     }
+
+    public void createForhandling(Aftale forhandling){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        forhandling.getMedarbejder().setVirksomhedsID(uid);
+
+        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
+        forhandling.setAftaleID(forhandlingID);
+
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandlingID).setValue(forhandling);
+    }
+
+    public void readForhandling(){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(MEDARBEJDER);
+        System.out.println("UID: " + uid);
+        ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
+                    singleton.addMedarbejder(medarbejder);
+                }
+                readAlleUdlej();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
 
     public void readAlleUdlej(){
 
