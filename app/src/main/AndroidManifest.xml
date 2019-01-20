@@ -31,7 +31,8 @@
         <activity
             android:name="com.example.chris.flexicuv2.startskærm.Startskaerm_akt"
             android:screenOrientation="sensorPortrait"
-            tools:ignore="DuplicateActivity" />
+            tools:ignore="DuplicateActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt"
             android:screenOrientation="sensorPortrait"/>
 
