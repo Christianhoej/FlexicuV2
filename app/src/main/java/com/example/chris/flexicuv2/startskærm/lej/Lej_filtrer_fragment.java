@@ -50,6 +50,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private TextView startdatoET, slutdatoET;
 
+    private Afstand_koordinater afstand_koordinater;
+    double a;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lej_filtrer_fragment, container, false);
@@ -77,6 +80,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
         c = Calendar.getInstance();
 
+        afstand_koordinater = new Afstand_koordinater();
+        a= afstand_koordinater.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
+        System.out.println("ÆÆÆÆÆÆÆÆÆ " + a);
 
         opretSpinner();
         return v;
