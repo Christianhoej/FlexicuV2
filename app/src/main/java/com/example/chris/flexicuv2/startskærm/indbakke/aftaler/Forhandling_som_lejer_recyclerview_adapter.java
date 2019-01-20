@@ -62,7 +62,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
 
         //TODO setText for forhandling som lejer
 
-        //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er opsat i databasen
+        //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er sat helt op
 
         viewHolder.type.setText(typeARR.get(i).toString());
         viewHolder.navn.setText(navnARR.get(i).toString());
