@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/medarbejder_recyclerview_listitems"
+    android:layout_marginHorizontal="15dp"
     >
 
     <LinearLayout

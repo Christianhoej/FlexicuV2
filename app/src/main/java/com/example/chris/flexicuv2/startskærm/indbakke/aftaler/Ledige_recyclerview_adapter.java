@@ -10,21 +10,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
 
 
 public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_recyclerview_adapter.ViewHolder>{
 
     private Context mContext;
+    Singleton singleton;
 
     //TODO konstruktøren skal self have flere input når net er klar.
     public Ledige_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
+        singleton = Singleton.getInstance();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.aftaler_recyclerview_listitem, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.ledige_recyclerview_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -35,8 +38,12 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         //TODO setText
 
         //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
+        viewHolder.navn.setText("Navn: " + singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getNavn());
+        viewHolder.periode.setText("Periode: " + singleton.getMineLedigeMedarbejdere().get(i).getStartDato() + " - " + singleton.getMineLedigeMedarbejdere().get(i).getEndDato());
+        viewHolder.pris.setText("Timepris: " + singleton.getMineLedigeMedarbejdere().get(i).getPris() + "kr.");
+        viewHolder.værktøj.setText("Medbriges eget værktøj? " + egetVærktøj(i));
 
-        viewHolder.indbakke_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ledige_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO her skal fragmentet med hele aftalen vises.
@@ -44,10 +51,21 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         });
     }
 
+    public String egetVærktøj(int i){
+        String egetVærktøj;
+        if(singleton.getMineLedigeMedarbejdere().get(i).isEgetVærktøj()==false){
+            egetVærktøj="Nej";
+        }
+        else
+            egetVærktøj="Ja";
+
+        return egetVærktøj;
+    }
+
     @Override
     public int getItemCount() {
-        return 0;
-        //return singleton.getAftaler().size();
+        //return 0;
+        return singleton.getMineLedigeMedarbejdere().size();
     }
 
 
@@ -56,21 +74,20 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
      * Opretter ViewHolder
      */
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView type;
         TextView navn;
         TextView periode;
-        TextView virksomhed;
         TextView pris;
-        RelativeLayout indbakke_aftaler_listitems;
+        TextView værktøj;
+        RelativeLayout ledige_aftaler_listitems;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            type = (TextView) itemView.findViewById(R.id.indbakke_type);
-            navn = (TextView) itemView.findViewById(R.id.indbakke_navn);
-            periode = (TextView) itemView.findViewById(R.id.periode);
-            virksomhed = (TextView) itemView.findViewById(R.id.indbakke_virk);
-            pris = (TextView) itemView.findViewById(R.id.indbakke_pris);
-            indbakke_aftaler_listitems = (RelativeLayout) itemView.findViewById(R.id.indbakke_recyclerview_listitem);
+            navn = (TextView) itemView.findViewById(R.id.ledige_navn);
+            periode = (TextView) itemView.findViewById(R.id.ledige_periode);
+            pris = (TextView) itemView.findViewById(R.id.ledige_pris);
+            værktøj = itemView.findViewById(R.id.ledige_værktøj);
+            ledige_aftaler_listitems = (RelativeLayout) itemView.findViewById(R.id.ledige_recyclerview_listitem);
         }
     }
 }
