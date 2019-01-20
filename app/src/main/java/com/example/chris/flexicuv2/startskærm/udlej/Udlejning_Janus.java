@@ -47,12 +47,10 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private DBManager dbManager;
     private Medarbejder medarbejderValgt;
     private DatePickerDialog datepickerdialog;
-
-
-
     private DatePickerDialog.OnDateSetListener datepickerListener;
-
     private Udlejning_Presenter presenter;
+
+
     public Udlejning_Janus() {
         // Required empty public constructor
     }
@@ -175,8 +173,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
     @Override
     public void errorSlutdato(String errorMSG) {
-    slutdatoET.setError(errorMSG);
-
+        slutdatoET.setError(errorMSG);
     }
 
 
@@ -325,6 +322,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
         }
     };
+
     private TextWatcher arbDageTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -354,6 +352,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
             egetVærktøj_switch.setText("Nej");
 
     }
+
     private TextWatcher startDatoTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

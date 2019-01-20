@@ -22,7 +22,10 @@ import com.google.firebase.database.DatabaseError;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class DBManager {
 
@@ -139,7 +142,7 @@ public class DBManager {
         DatabaseReference ref = database.getReference();
         udlej.getMedarbejder().setVirksomhedsID(uid);
         String udlejID = ref.child(LEDIG).push().getKey();
-        udlej.setAftaleID(udlejID);
+        udlej.setOprindeligUdlejID(udlejID);
 
         ref.child(LEDIG).child(udlejID).setValue(udlej);
     }
@@ -147,7 +150,7 @@ public class DBManager {
     public void updateUdlej(Aftale udlej){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        ref.child(MEDARBEJDER).child(udlej.getAftaleID()).setValue(udlej);
+        ref.child(MEDARBEJDER).child(udlej.getOprindeligUdlejID()).setValue(udlej);
     }
 
     public void createForhandling(Aftale forhandling){
@@ -156,26 +159,34 @@ public class DBManager {
         DatabaseReference ref = database.getReference();
         forhandling.getMedarbejder().setVirksomhedsID(uid);
 
-        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
-        forhandling.setAftaleID(forhandlingID);
+        String aftaleID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
+        forhandling.setAftaleID(aftaleID);
+        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).push().getKey();
+        forhandling.setForhandlingID(forhandlingID);
 
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandlingID).setValue(forhandling);
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).setValue(forhandling);
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 
     public void readForhandling(){
         String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(MEDARBEJDER);
-        System.out.println("UID: " + uid);
-        ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference ref = database.getReference(FORHANDLING);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
-                    singleton.addMedarbejder(medarbejder);
+                    for(DataSnapshot snapshot1 :snapshot.getChildren()){
+                        Aftale forhandling = snapshot.getValue(Aftale.class);
+                        if(forhandling.getUdlejer().equals(singleton.getBruger())) {
+                            singleton.getMineUdlejForhandlinger().add(forhandling);
+                        }
+                        else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
+                            singleton.getMineLejForhandlinger().add(forhandling);
+                        }
+                    }
                 }
-                readAlleUdlej();
-
+                signInSuccess.userSignInSuccess(true);
             }
 
             @Override
@@ -208,6 +219,7 @@ public class DBManager {
                         singleton.addLedigeMedarbejder(udlej);
                     }
                 }
+                //readForhandling();
                 signInSuccess.userSignInSuccess(true);
             }
 
@@ -287,5 +299,18 @@ public class DBManager {
     public interface SignInSuccess{
         void userSignInSuccess(boolean success);
         void failureMesssage(String message);
+    }
+
+
+    public class YourModelClass {
+        //private fields
+        private Map<String, String> timestamp;
+
+        public YourModelClass() {}
+
+        //public setters and getters for the fields
+
+        public void setTimestamp(Map<String, String> timeStamp) {this.timestamp= timestamp;}
+        public Map<String, String> getTimestamp() {return timestamp;}
     }
 }
