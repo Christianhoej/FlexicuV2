@@ -16,6 +16,7 @@ public class Aftale {
     private boolean egetVærktøj;
     private Bruger sidstSendtAftale;
     private boolean aktiv;
+    private int timepris;
 
     public String getForhandlingID() {
         return forhandlingID;
@@ -23,6 +24,12 @@ public class Aftale {
 
     public void setForhandlingID(String forhandlingID) {
         this.forhandlingID = forhandlingID;
+    public int getTimepris() {
+        return timepris;
+    }
+
+    public void setTimepris(int timepris) {
+        this.timepris = timepris;
     }
 
     public String getOprindeligUdlejID() {

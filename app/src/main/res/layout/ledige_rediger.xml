@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".startskærm.udlej.Ledige_rediger"
+    android:background="@color/hvid"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ledige_overskrift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop ="5dp"
+            android:text="leje/udleje af arbejdskompetence"
+            android:gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:id="@+id/ledige_udlejer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Udlejer:" />
+
+            <TextView
+                android:id="@+id/ledige_udlejer_navn_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="udl navn" />
+        </LinearLayout>
+
+
+        <Spinner
+            android:id="@+id/ledig_medarbejder_spinner"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="11">
+
+            <LinearLayout
+                android:id="@+id/ledig_punktnavn_sublayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="2dp"
+
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:text="Startdato:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+
+                    android:text="Slutdato" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="arbejdsdage\ni perioden" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Timepris:"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/udlejning_totalpris1_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:text="subtotal\n(incl moms)" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:text="Flexicu pris\n(2,5%)" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:text="Total:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:text="Medbringer\neget værktøj?" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/udlejning_buffer_space"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/udlejning_redigerbare_felter_layout"
+                android:layout_width="wrap_content"
+                android:layout_marginVertical="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/ledig_startdato_textview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/flex_green_rektangel"
+                    android:inputType="date"
+                    android:text=" dd / mm / yyyy "
+                    android:layout_marginBottom="2dp"/>
+
+                <TextView
+                    android:id="@+id/ledig_slutdato_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/flex_green_rektangel"
+                    android:inputType="date"
+                    android:text=" dd / mm / yyyy "/>
+
+
+                <TextView
+                    android:id="@+id/ledig_redigerbar_antal_arbejdsdage_textview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="antal arb. dage" />
+
+                <EditText
+                    android:id="@+id/ledig_timepris_textview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/flex_green_rektangel"
+                    android:gravity="center"
+
+                    android:hint=" timepris "
+
+                    android:inputType="number"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/ledig_subtotalen_excl_flexicuspris_textview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="subtotalen" />
+
+                <TextView
+                    android:id="@+id/ledig_flexicu_pris_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="flexicu gebyr" />
+
+                <TextView
+                    android:id="@+id/ledig_total_pris_textview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="totalprisen" />
+
+                <Switch
+                    android:id="@+id/ledig_egetværktøj_switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textOff="Nej"
+                    android:textOn="Ja" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/udlejning_chat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:layout_weight="2.5"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/ledig_kommentar_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/flex_green_rektangel"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:hint=" evt. en kommentar om medarbejderen \n eller til lejer" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ledig_buttons_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/ledig_annuller_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_grey"
+                android:textColor="@color/hvid"
+                android:text="annuller" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/ledig_udlej_button"
+                android:layout_width="wrap_content"
+                android:textColor="@color/hvid"
+                android:background="@drawable/rounded_corners_blue"
+                android:layout_height="wrap_content"
+                android:text="Opret \nmedarbejderudbud" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
