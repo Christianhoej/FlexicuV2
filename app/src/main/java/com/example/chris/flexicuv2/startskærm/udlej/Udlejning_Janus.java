@@ -27,6 +27,7 @@ import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -41,10 +42,11 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private Switch egetVærktøj_switch;
     private Button anullerButton, opretUdlejningButton;
     private ArrayAdapter<String> adapter_medarbejderbeskrivelse;
-    private Calendar c;
+    private Calendar c1, c2;
     private Singleton singleton;
     private DBManager dbManager;
     private Medarbejder medarbejderValgt;
+    private DatePickerDialog datepickerdialog;
 
 
 
@@ -71,14 +73,24 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         medarbejderSpinner = v.findViewById(R.id.udlejning_medarbejder_spinner);
         opretSpinner(medarbejderSpinner);
         medarbejderSpinner.setOnItemSelectedListener(this);
-        c = Calendar.getInstance();
+        c1 = Calendar.getInstance();
+        c2 = Calendar.getInstance();
         startdatoET = v.findViewById(R.id.udlejning_startdato_textview1);
         startdatoET.setOnClickListener(this);
+        startdatoET.addTextChangedListener(startDatoTextWatcher); //TODO måske anvendes til at lave errorcheck på datoer
         slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);
         slutdatoET.setOnClickListener(this);
 
+        slutdatoET.addTextChangedListener(arbDageTextWatcher);
+        slutdatoET.addTextChangedListener(slutDatoTextWatcher);
+
+        c2 =Calendar.getInstance();
+        c1 =Calendar.getInstance();
+
+
         slutdatoET.setEnabled(false);
-        
+
+
         timeprisET = v.findViewById(R.id.udlejning_timepris_textview1);
         timeprisET.addTextChangedListener(prisTextWatch);
         kommentarET = v.findViewById(R.id.udlejning_kommentar_edittext);
@@ -94,6 +106,9 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         totalprisen_TV = v.findViewById(R.id.udlejning_total_pris_textview1);
         egetVærktøj_switch = v.findViewById(R.id.udlejning_egetværktøj_switch1);
         egetVærktøj_switch.setOnCheckedChangeListener(this);
+        egetVærktøj_switch.setChecked(false);
+        egetVærktøj_switch.setText("Nej");
+
         anullerButton = v.findViewById(R.id.udlejning_annuller_button);
         anullerButton.setOnClickListener(this);
         opretUdlejningButton = v.findViewById(R.id.udlejning_udlej_button);
@@ -124,23 +139,27 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     @Override
     public void opdaterSubtotal(double værdi) {
         timeprisET.setError(null);
-        subtotalen_TV.setText(""+værdi);
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        subtotalen_TV.setText(numberFormat.format(værdi)+ " dkk");
     }
 
     @Override
     public void opdaterFlexicufee(double værdi) {
-        flexicugebyr_TV.setText(""+værdi);
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+
+        flexicugebyr_TV.setText(numberFormat.format(værdi)+ " dkk");
 
     }
 
     @Override
     public void opdaterTotal(double værdi) {
-        totalprisen_TV.setText(""+værdi);
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        totalprisen_TV.setText(numberFormat.format(værdi) + " dkk");
 
     }
 
     @Override
-    public void opdaterAtalArbejdsdage(int dage) {
+    public void opdaterAntalArbejdsdage(int dage) {
         antalArbejdsdage_TV.setText(""+dage);
     }
 
@@ -157,11 +176,19 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     @Override
     public void errorSlutdato(String errorMSG) {
     slutdatoET.setError(errorMSG);
+
     }
+
 
     @Override
     public void errorTimepris(String errorMSG) {
     timeprisET.setError(errorMSG);
+    }
+
+    @Override
+    public void errorArbejdsdage(String errorMSG) {
+        antalArbejdsdage_TV.setError(errorMSG);
+        slutdatoET.setError(errorMSG);
     }
 
     @Override
@@ -174,14 +201,21 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                 if(!timeprisET.getText().toString().equals("")){
                     pris = Integer.parseInt(timeprisET.getText().toString());
                 }
+                int arbDage = 0;
+                if (antalArbejdsdage_TV.getText().equals("antal arb. dage")) {
+                        arbDage = 0;
+                }else
+                    arbDage = Integer.parseInt(antalArbejdsdage_TV.getText().toString());
+
                 if (presenter.checkKorrektUdfyldtInformation(
                         startdatoET.getText().toString(),
                         slutdatoET.getText().toString(),
-                        antalArbejdsdage_TV.getInputType(),
+                        arbDage,
                         pris,
                         egetVærktøj_switch.getText().toString(),
                         kommentarET.getText().toString())
                         ) {
+
                     Aftale ledig = new Aftale();
                     ledig.setKommentar(kommentarET.getText().toString());
                     ledig.setStartDato(startdatoET.getText().toString());
@@ -200,10 +234,14 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                 break;
 
             case R.id.udlejning_slutdato_textview:
-                findEnDato(false);
+                findEnDato(false, R.id.udlejning_slutdato_textview, c2);
+
+
                 break;
             case R.id.udlejning_startdato_textview1:
-                findEnDato(true);
+                findEnDato(true, R.id.udlejning_startdato_textview1, c1);
+
+
                 break;
         }
     }
@@ -212,33 +250,53 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
      * metoden starter en datepicker i dialog boks hvor der kan vælges datoer fra
      * @param start : tilkendegiver om det er start eller slutdatoen -> hvis det er startdatoen så er start true
      */
-    private void findEnDato(final boolean start) {
-        //final Calendar c = Calendar.getInstance();
+    private void findEnDato(final boolean start, int id, Calendar c) {
         datepickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                 month = month+1;
-                String s = " " + dayOfMonth + " / " + month + " / " + year + " ";
+                String måned = ""+month;
+                if(month < 10){
+
+                    måned = "0" + month;
+                }
+                String dag = ""+dayOfMonth;
+                if(dayOfMonth < 10){
+
+                    dag  = "0" + dayOfMonth ;
+                }
+
+                String s = " " + dag + " / " + måned + " / " + year + " ";
                 if(start) {
                     startdatoET.setText(s);
-                    c.set(year,month-1,dayOfMonth);
+                    c1.set(year,month-1,dayOfMonth);
                     slutdatoET.setEnabled(true);
                 }
                 else {
+                    c2.set(year, month-1,dayOfMonth);
                     slutdatoET.setText(s);
                 }
             }
         };
 
 
-        Calendar calendar = Calendar.getInstance();
-        final int år = calendar.get(Calendar.YEAR);
-        final int måned = calendar.get(Calendar.MONTH);
-        final int dag = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
 
-        if(c.getTimeInMillis()>(System.currentTimeMillis()-1000)){
-            datepickerdialog.getDatePicker().setMinDate(c.getTimeInMillis());
+
+
+        final int år = c.get(Calendar.YEAR);
+        final int måned = c.get(Calendar.MONTH);
+        final int dag = c.get(Calendar.DAY_OF_MONTH);
+        datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
+
+
+        if(c1.getTimeInMillis()>(System.currentTimeMillis()-1000)){
+            if(id != R.id.udlejning_startdato_textview1) {
+                datepickerdialog.getDatePicker().setMinDate(c1.getTimeInMillis());
+            }
+            else
+            datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         }
         else{
             datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -256,14 +314,34 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (s.length()>0){
-                presenter.udregnPriser(Integer.parseInt(s.toString()), antalArbejdsdage_TV.getInputType());
+            if (s.length()>0 && !(antalArbejdsdage_TV.getText().toString().equals("antal arb. dage"))){
+                presenter.udregnPriser(Integer.parseInt(s.toString()), Integer.parseInt(antalArbejdsdage_TV.getText().toString()), 7.4);
             }
+            //TODO skal også tjekke om der er værdier i de to datoer
         }
 
         @Override
         public void afterTextChanged(Editable s) {
 
+        }
+    };
+    private TextWatcher arbDageTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            presenter.udregnArbejdsdage(startdatoET.getText().toString(), slutdatoET.getText().toString());
+
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!(timeprisET.getText().toString().equals("")) )
+                presenter.udregnPriser(Integer.parseInt(timeprisET.getText().toString()),Integer.parseInt(antalArbejdsdage_TV.getText().toString()), 7.4);
         }
     };
 
@@ -276,6 +354,58 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
             egetVærktøj_switch.setText("Nej");
 
     }
+    private TextWatcher startDatoTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(!timeprisET.getText().toString().equals("") && !slutdatoET.getText().toString().equals(" dd / mm / yyyy ")) {
+                presenter.udregnArbejdsdage(startdatoET.getText().toString(), slutdatoET.getText().toString());
+                presenter.udregnPriser(Integer.parseInt(timeprisET.getText().toString()), Integer.parseInt(antalArbejdsdage_TV.getText().toString()), 7.4);
+            }
+            if(!slutdatoET.getText().toString().equals(" dd / mm / yyyy ")){
+                presenter.udregnArbejdsdage(startdatoET.getText().toString(), slutdatoET.getText().toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        startdatoET.setError(null);
+        }
+    };
+    private TextWatcher slutDatoTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //presenter.udregnArbejdsdage(startdatoET.getText().toString(), slutdatoET.getText().toString());
+            presenter.udregnArbejdsdage(startdatoET.getText().toString(), slutdatoET.getText().toString());
+
+            if(!timeprisET.getText().toString().equals("")) {
+                presenter.udregnPriser(Integer.parseInt(timeprisET.getText().toString()), Integer.parseInt(antalArbejdsdage_TV.getText().toString()), 7.4);
+            }
+
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!antalArbejdsdage_TV.getText().toString().equals("0")) {
+                slutdatoET.setError(null);
+                antalArbejdsdage_TV.setError(null);
+            }
+        }
+    };
+
+
+
+
         //Metoder til valgt spinner listener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

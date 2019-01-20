@@ -2,10 +2,7 @@ package com.example.chris.flexicuv2.hjælpeklasser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +21,7 @@ public class Arbejdsdage_Kalender {
     public static int findArbejdsdage(String dStart, String dSlut) {
         //
         int antalDageFraStart = checkDateIsOK(dStart, dSlut);
+        System.out.println(antalDageFraStart + "HHHHHHHHHHHHHHHHHHHHH");
 
         if (antalDageFraStart >= 0) {
 
@@ -80,21 +78,23 @@ public class Arbejdsdage_Kalender {
      * @param dSlut  String for slutdato på form "dd/MM/yyyy"
      * @return antallet af dage mellem de to datoer - returnerer -1 hvis datoformatet ikke kan parses
      */
-    private static int checkDateIsOK(String dStart, String dSlut) {
+    public static int checkDateIsOK(String dStart, String dSlut) {
         String[] start = dStart.split("/");
         String[] slut = dSlut.split("/");
+
 
         Calendar cal1 = new GregorianCalendar(Integer.parseInt(start[2]), (Integer.parseInt(start[1])-1), Integer.parseInt(start[0]));
         Date startDate = cal1.getTime();
         Calendar cal2 = new GregorianCalendar(Integer.parseInt(slut[2]), (Integer.parseInt(slut[1])-1), Integer.parseInt(slut[0]));
 
         Date slutDate = cal2.getTime();
-        int diffInDays = (int)( (startDate.getTime() - slutDate.getTime())
+        int diffInDays = (int)( (slutDate.getTime() - startDate.getTime())
                 / (1000 * 60 * 60 * 24) );
+        System.out.println(diffInDays + "diffindays");
 
         return diffInDays;
         }
-    
+
 
 
     public static class ArbejdsDage {
