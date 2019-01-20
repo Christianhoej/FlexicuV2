@@ -10,6 +10,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -166,18 +168,15 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
     }
 
 
-    public void setFragment(android.support.v4.app.Fragment fragment) {
-        //medarbejdereFrame.removeAllViews();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+    public void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.medarbejdere_frame, fragment);
-        //fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 
 
     @Override
     public int getItemCount() {
-        //return mMedarbejderNavn.size();
         return singleton.getMedarbejdere().size();
     }
 
