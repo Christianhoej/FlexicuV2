@@ -13,40 +13,66 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling;
+import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_lejer;
+
+import java.util.ArrayList;
 
 
-public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forhandling_recyclerview_adapter.ViewHolder>{
+public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Adapter<Forhandling_som_lejer_recyclerview_adapter.ViewHolder>{
 
     private Context mContext;
-    private Forhandling forhandlingFragment;
+    private Forhandling_som_lejer forhandlingSomlejerFragment;
 
     //TODO konstruktøren skal self have flere input når net er klar.
-    public Forhandling_recyclerview_adapter(Context mContext) {
+    public Forhandling_som_lejer_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
     }
+
+    private ArrayList typeARR;
+    private ArrayList navnARR;
+    private ArrayList virkARR;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.forhandlinger_recyclerview_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
-        forhandlingFragment = new Forhandling();
+        forhandlingSomlejerFragment = new Forhandling_som_lejer();
+
+        typeARR = new ArrayList();
+        navnARR = new ArrayList();
+        virkARR = new ArrayList();
+
+
+        typeARR.add("LEJER");
+        typeARR.add("HÅNDVÆRKER");
+        navnARR.add("Christian");
+        navnARR.add("Janus");
+        virkARR.add("0000000000");
+        virkARR.add("HANSEN COCO");
+
+
         return holder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull Forhandling_recyclerview_adapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull Forhandling_som_lejer_recyclerview_adapter.ViewHolder viewHolder, int i) {
         //TODO setText
 
-        //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
+        //TODO setText for forhandling som lejer
+
+        //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er opsat i databasen
+
+        viewHolder.type.setText(typeARR.get(i).toString());
+        viewHolder.navn.setText(navnARR.get(i).toString());
+        viewHolder.virksomhed.setText(virkARR.get(i).toString());
 
         viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO her skal fragmentet med hele aftalen vises.
-                setFragment(forhandlingFragment);
+                setFragment(forhandlingSomlejerFragment);
             }
         });
     }
@@ -61,7 +87,8 @@ public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forha
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 2;
+        //TODO retun forhandlingerSomLejer.size();
         //return singleton.getAftaler().size();
     }
 
@@ -80,6 +107,7 @@ public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forha
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            //Type skal nok væk
             type = (TextView) itemView.findViewById(R.id.forhandlinger_type);
             navn = (TextView) itemView.findViewById(R.id.forhandlinger_navn);
             periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
