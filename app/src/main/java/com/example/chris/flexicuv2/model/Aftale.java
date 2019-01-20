@@ -4,6 +4,7 @@ public class Aftale {
 
     private String aftaleID;
     private String oprindeligUdlejID;
+    private String forhandlingID;
     private Bruger udlejer;
     private Bruger lejer;
     private Medarbejder medarbejder;
@@ -17,6 +18,12 @@ public class Aftale {
     private boolean aktiv;
     private int timepris;
 
+    public String getForhandlingID() {
+        return forhandlingID;
+    }
+
+    public void setForhandlingID(String forhandlingID) {
+        this.forhandlingID = forhandlingID;
     public int getTimepris() {
         return timepris;
     }

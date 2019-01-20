@@ -1,6 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.lej;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -26,12 +28,12 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
-import com.example.chris.flexicuv2.medarbejdere.Rediger_medarbejder_fragment_1;
 import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_kommentar_recyclerview;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -41,12 +43,16 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
     private Singleton singleton;
     private DBManager dbManager;
-    private EditText timeprise_lejerET, kommentarET;
+    private EditText timepris_lejerET, kommentarET;
     private TextView antalArbejdsdage_lejerTV, subtotalen_lejerTV, flexicugebyr_lejerTV, totalprisen_TV, startdato_lejerTV, slutdato_lejerTV, overskrift_TV;
     private Switch egetVærktøj_switch;
     private Button anullerButton, opretUdlejningButton, kommentarButton;
     private Calendar c;
     private Lej_presenter presenter;
+    private TextView arbejdsdage_udlejerTV, totalpris_udlejerTV, flexicupris_udlejerTV, subtotal_udlejerTV;
+    private Calendar c1, c2;
+    private DatePickerDialog datepickerdialog;
+    private DatePickerDialog.OnDateSetListener datepickerListener;
 
 
     @Override
@@ -54,7 +60,9 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         View v = inflater.inflate(R.layout.forhandling_som_lejer_fragment, container, false);
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
-        c = Calendar.getInstance();
+        presenter = new Lej_presenter(this);
+        c1 = Calendar.getInstance();
+        c2 = Calendar.getInstance();
         overskrift_TV = v.findViewById(R.id.aftaleforhandling_overskrift);
         overskrift_TV.setText("Giv mig en overskrift");
         TextView udlejer = v.findViewById(R.id.udlejer_navn_textview);
@@ -74,19 +82,20 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         slutDato_udlejerTV.setText(singleton.midlertidigAftale.getEndDato());
 
         //Arbejdsdage
-        TextView arbejdsdage_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_timepris_udlejer_textview);
-        arbejdsdage_udlejerTV.setText("MANGLER");
+        arbejdsdage_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_antal_arbejdsdage_udlejer_textview);
+        presenter.udregnArbejdsdage(startDato_udlejerTV.getText().toString(), slutDato_udlejerTV.getText().toString(), false);
 
         //Prisen
         TextView timepris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_timepris_udlejer_textview);
         timepris_udlejerTV.setText(singleton.midlertidigAftale.getPris());
-        TextView subtotal_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_subtotalen_excl_flexicuspris_udlejer_textview);
+        subtotal_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_subtotalen_excl_flexicuspris_udlejer_textview);
         subtotal_udlejerTV.setText("MANGLER");
-        TextView flexicupris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_flexicu_pris_udlejer_textview);
+        flexicupris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_flexicu_pris_udlejer_textview);
         flexicupris_udlejerTV.setText("MANGLER");
-        TextView totalpris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_total_pris_udlejer_textview);
+        totalpris_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_total_pris_udlejer_textview);
         totalpris_udlejerTV.setText("MANGLER");
 
+        presenter.udregnPriser(Integer.parseInt(singleton.midlertidigAftale.getPris()), Integer.parseInt(arbejdsdage_udlejerTV.getText().toString()), 7.4, false);
         //Eget værktøj
         TextView værktøj_udlejerTV = v.findViewById(R.id.forhandling_som_lejer_egetværktøj_udlejer_textview);
         if(singleton.midlertidigAftale.isEgetVærktøj()){
@@ -98,7 +107,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
 
 
-        presenter = new Lej_presenter(this);
+
 
         //Lejer
         //Dato
@@ -108,28 +117,26 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         slutdato_lejerTV = v.findViewById(R.id.forhandling_som_lejer_slutdato_lejer_textview);
         slutdato_lejerTV.setOnClickListener(this);
         slutdato_lejerTV.setText(singleton.midlertidigAftale.getEndDato());
-        //slutdato_lejerTV.setEnabled(false);
+
+        startdato_lejerTV.addTextChangedListener(startDatoTextWatcher);
+        slutdato_lejerTV.addTextChangedListener(arbDageTextWatcher);
+        slutdato_lejerTV.addTextChangedListener(slutDatoTextWatcher);
 
         //Arbejdsdage
-     //   antalArbejdsdage_lejerTV = v.findViewById(R.id.udlejning_redigerbar_antal_arbejdsdage_textview1);
-      //  antalArbejdsdage_lejerTV.setText("MANGLER");
+        antalArbejdsdage_lejerTV = v.findViewById(R.id.forhandling_som_lejer_antal_arbejdsdage_lejer_textview);
+        antalArbejdsdage_lejerTV.setText(arbejdsdage_udlejerTV.getText().toString());
         // TODO : udregne antal arbejdsdage og sætte textView til det
         //Pris
-        timeprise_lejerET = v.findViewById(R.id.forhandling_som_lejer_timepris_lejer_editview);
-        timeprise_lejerET.setText(singleton.midlertidigAftale.getPris());
-       // presenter.udregnPriser(timeprise_lejerET.getText().toString(), antalArbejdsdage_lejerTV.getText().toString());
-        timeprise_lejerET.addTextChangedListener(prisTextWatch);
+        timepris_lejerET = v.findViewById(R.id.forhandling_som_lejer_timepris_lejer_editview);
+        timepris_lejerET.setText(timepris_udlejerTV.getText().toString());
+        timepris_lejerET.addTextChangedListener(prisTextWatch);
         subtotalen_lejerTV = v.findViewById(R.id.forhandling_som_lejer_subtotalen_excl_flexicuspris_lejer_textview);
+        subtotalen_lejerTV.setText(subtotal_udlejerTV.getText().toString()); ;
         flexicugebyr_lejerTV = v.findViewById(R.id.forhandling_som_lejer_flexicu_pris_lejer_textview);
+        flexicugebyr_lejerTV.setText(flexicupris_udlejerTV.getText().toString());
         totalprisen_TV = v.findViewById(R.id.forhandling_som_lejer_total_pris_lejer_textview);
-        /*kommentarET = v.findViewById(R.id.udlejning_kommentar_edittext);
-
-        kommentarET.setScroller(new Scroller(getActivity()));
-        kommentarET.setMaxLines(3);
-        kommentarET.setVerticalScrollBarEnabled(true);
-        kommentarET.setMovementMethod(new ScrollingMovementMethod());
-
-        */
+        totalprisen_TV.setText(totalpris_udlejerTV.getText().toString());
+        //presenter.udregnPriser(Integer.parseInt(singleton.midlertidigAftale.getPris()), Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString()), 7.4, true);
 
         //Eget værktøj
         egetVærktøj_switch = v.findViewById(R.id.forhandling_som_lejer_egetværktøj_lejer_switch);
@@ -150,16 +157,106 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.forhandling_send_eller_accepter_tilbud_button:
-                //TODO : Forbinde til databasen og tilføje til singleton
+                int pris = 0;
+                if(!timepris_lejerET.getText().toString().equals("")){
+                    pris = Integer.parseInt(timepris_lejerET.getText().toString());
+                }
+                int arbDage = 0;
+                if (antalArbejdsdage_lejerTV.getText().equals("antal arb. dage")) {
+                    arbDage = 0;
+                }else
+                    arbDage = Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString());
+
+                if (presenter.checkKorrektUdfyldtInformation(
+                        startdato_lejerTV.getText().toString(),
+                        slutdato_lejerTV.getText().toString(),
+                        pris,
+                        arbDage)) {
+
+                    Aftale forhandling = new Aftale();
+                    if(singleton.midlertidigAftale.getKommentar()!=null){
+                        forhandling.setKommentar(singleton.midlertidigAftale.getKommentar());
+                    }
+                 //   forhandling.setKommentar(kommentarET.getText().toString());
+                    forhandling.setStartDato(startdato_lejerTV.getText().toString());
+                    forhandling.setEndDato(slutdato_lejerTV.getText().toString());
+                    forhandling.setPris(timepris_lejerET.getText().toString());
+                    forhandling.setEgetVærktøj(egetVærktøj_switch.getShowText());
+                    forhandling.setMedarbejder(singleton.midlertidigAftale.getMedarbejder());
+                    forhandling.setLejer(singleton.getBruger());
+                    forhandling.setOprindeligUdlejID(singleton.midlertidigAftale.getOprindeligUdlejID());
+                    forhandling.setUdlejer(singleton.midlertidigAftale.getUdlejer());
+                    forhandling.setAktiv(true);
+                    singleton.addMineLejForhandlinger(forhandling);
+                    dbManager.createForhandling(forhandling);
+                }
                 break;
             case R.id.forhandling_annuller_button:
-                //TODO : popbackstack
+                getActivity().getSupportFragmentManager().popBackStack();
                 break;
             case R.id.forhandling_tilføj_besked_button:
                 onButtonShowPopupWindowClick(v);
+                break;
+            case R.id.forhandling_som_lejer_slutdato_lejer_textview:
+                findEnDato(false, R.id.forhandling_som_lejer_startdato_lejer_textview, c2);
+                break;
+            case R.id.forhandling_som_lejer_startdato_lejer_textview:
+                findEnDato(true, R.id.forhandling_som_lejer_startdato_lejer_textview, c1);
         }
     }
 
+    private void findEnDato(final boolean start, int id, Calendar c) {
+        datepickerListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                month = month+1;
+                String måned = ""+month;
+                if(month < 10){
+
+                    måned = "0" + month;
+                }
+                String dag = ""+dayOfMonth;
+                if(dayOfMonth < 10){
+
+                    dag  = "0" + dayOfMonth ;
+                }
+
+                String s = " " + dag + " / " + måned + " / " + year + " ";
+                if(start) {
+                    startdato_lejerTV.setText(s);
+                    c1.set(year,month-1,dayOfMonth);
+                    slutdato_lejerTV.setEnabled(true);
+                }
+                else {
+                    c2.set(year, month-1,dayOfMonth);
+                    slutdato_lejerTV.setText(s);
+                }
+            }
+        };
+
+
+        final int år = c.get(Calendar.YEAR);
+        final int måned = c.get(Calendar.MONTH);
+        final int dag = c.get(Calendar.DAY_OF_MONTH);
+        datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
+
+
+        if(c1.getTimeInMillis()>(System.currentTimeMillis()-1000)){
+            if(id != R.id.forhandling_som_lejer_startdato_lejer_textview) {
+                datepickerdialog.getDatePicker().setMinDate(c1.getTimeInMillis());
+            }
+            else
+                datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+        }
+        else{
+            datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        }
+
+        datepickerdialog.show();
+
+    }
 
     public void onButtonShowPopupWindowClick(View view) {
         //tilPopUp = (View) findViewById(R.id.tilPopUp);
@@ -242,8 +339,8 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (s.length()>0){
-                presenter.udregnPriser(s.toString(), antalArbejdsdage_lejerTV.getText().toString());
+            if (s.length()>0 && !(antalArbejdsdage_lejerTV.getText().toString().equals("antal arb. dage"))){
+                presenter.udregnPriser(Integer.parseInt(s.toString()), Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString()), 7.4, true);
             }
         }
 
@@ -253,7 +350,71 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         }
     };
 
-    @Override
+    private TextWatcher arbDageTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            presenter.udregnArbejdsdage(startdato_lejerTV.getText().toString(), slutdato_lejerTV.getText().toString(), true);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!(timepris_lejerET.getText().toString().equals("")) )
+                presenter.udregnPriser(Integer.parseInt(timepris_lejerET.getText().toString()),Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString()), 7.4, true);
+        }
+    };
+
+    private TextWatcher startDatoTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(!timepris_lejerET.getText().toString().equals("") && !slutdato_lejerTV.getText().toString().equals(" dd / mm / yyyy ")) {
+                presenter.udregnArbejdsdage(startdato_lejerTV.getText().toString(), slutdato_lejerTV.getText().toString(), true);
+                presenter.udregnPriser(Integer.parseInt(timepris_lejerET.getText().toString()), Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString()), 7.4, true);
+            }
+            if(!slutdato_lejerTV.getText().toString().equals(" dd / mm / yyyy ")){
+                presenter.udregnArbejdsdage(startdato_lejerTV.getText().toString(), slutdato_lejerTV.getText().toString(), true);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            startdato_lejerTV.setError(null);
+        }
+    };
+
+    private TextWatcher slutDatoTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            presenter.udregnArbejdsdage(startdato_lejerTV.getText().toString(), slutdato_lejerTV.getText().toString(), true);
+
+            if (!timepris_lejerET.getText().toString().equals("")) {
+                presenter.udregnPriser(Integer.parseInt(timepris_lejerET.getText().toString()), Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString()), 7.4, true);
+            }
+
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+        @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if(isChecked)
             egetVærktøj_switch.setText("Ja");
@@ -262,19 +423,24 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
     }
 
     @Override
-    public void opdaterSubtotal(double værdi) {
-        timeprise_lejerET.setError(null);
-        subtotalen_lejerTV.setText(""+værdi);
+    public void opdaterSubtotalLejer(double værdi) {
+        timepris_lejerET.setError(null);
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        subtotalen_lejerTV.setText(numberFormat.format(værdi)+ " dkk");
     }
 
     @Override
-    public void opdaterFlexicufee(double værdi) {
-        flexicugebyr_lejerTV.setText(""+værdi);
+    public void opdaterFlexicufeeLejer(double værdi) {
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+
+        flexicugebyr_lejerTV.setText(numberFormat.format(værdi)+ " dkk");
     }
 
     @Override
-    public void opdaterTotal(double værdi) {
-        totalprisen_TV.setText(""+værdi);
+    public void opdaterTotalLejer(double værdi) {
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        totalprisen_TV.setText(numberFormat.format(værdi) + " dkk");
+
     }
 
     @Override
@@ -289,6 +455,36 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
     @Override
     public void errorTimepris(String errorMSG) {
-        timeprise_lejerET.setText(errorMSG);
+        timepris_lejerET.setText(errorMSG);
+    }
+
+    @Override
+    public void errorArbejdsdage(String errorMSG) {
+        antalArbejdsdage_lejerTV.setError(errorMSG);
+    }
+
+    @Override
+    public void opdaterAntalArbejdsdageLejer(int dage) {
+        antalArbejdsdage_lejerTV.setText(""+dage);
+    }
+
+    @Override
+    public void opdaterAntalArbejdsdageUdlejer(int dage) {
+        arbejdsdage_udlejerTV.setText(""+dage);
+    }
+
+    @Override
+    public void opdaterSubtotalUdlejer(double værdi) {
+        subtotal_udlejerTV.setText(""+værdi);
+    }
+
+    @Override
+    public void opdaterFlexicufeeUdlejer(double værdi) {
+        flexicupris_udlejerTV.setText(""+værdi);
+    }
+
+    @Override
+    public void opdaterTotalUdlejer(double værdi) {
+        totalpris_udlejerTV.setText(""+værdi);
     }
 }

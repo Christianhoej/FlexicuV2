@@ -82,8 +82,6 @@ class Udlejning_Presenter {
         }
 
         boolean timeprisOK = timepris>0;
-        System.out.println(timepris);
-        System.out.println(timepris>0);
         if (!timeprisOK){
             updateUdlejning.errorTimepris(ERRORTIMEPRIS);
             errors++;
