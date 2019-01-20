@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startskærm.indbakke.forhandling.Forhandling">
+    tools:context=".startskærm.indbakke.forhandling.Forhandling"
+    android:background="@color/hvid">
 
 
     <LinearLayout
@@ -178,7 +179,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/forhandling_redigerbare_felter_layout"
@@ -198,6 +200,7 @@
                 <EditText
                     android:id="@+id/forhandling_startdato_textview1"
                     android:layout_width="match_parent"
+                    android:backgroundTint="@color/flex_green"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -208,6 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/flex_green"
                     android:gravity="center"
                     android:inputType="date" />
 
@@ -225,6 +229,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:backgroundTint="@color/flex_green"
                     android:hint="timeprisen"
                     android:inputType="number" />
 
@@ -267,7 +272,7 @@
                 android:id="@+id/separator"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/flex_green" />
 
             <LinearLayout
                 android:id="@+id/forhandling_anden_part_sublayout"
@@ -288,6 +293,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/flex_green"
                     android:gravity="center"
                     android:inputType="date" />
 
@@ -297,6 +303,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:backgroundTint="@color/flex_green"
                     android:inputType="date" />
 
                 <TextView
@@ -310,6 +317,7 @@
                     android:id="@+id/forhandling_timepris_textview2"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
+                    android:backgroundTint="@color/flex_green"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:hint="timeprisen"
@@ -367,8 +375,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
-
+                android:background="@drawable/rounded_corners_green"
+                android:textColor="@color/hvid"
                 android:text="Se meddelelser" />
 
 
@@ -388,6 +396,8 @@
                 android:id="@+id/forhandling_annuller_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_grey"
+                android:textColor="@color/hvid"
                 android:text="annuller" />
             <TextView
                 android:layout_width="0dp"
@@ -398,6 +408,8 @@
                 android:id="@+id/forhandling_send_eller_accepter_tilbud_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_blue"
+                android:textColor="@color/hvid"
                 android:text="send tilbud/accepter tilbud" />
         </LinearLayout>
 

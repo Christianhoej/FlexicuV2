@@ -21,6 +21,7 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
  * Fragment til den anden del af oprettelse af medarbejder.
  * Inkluderer Email, tlf, arbejdsområde og kommentar
  */
-public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment2_Presenter.UpdateOpretMedarbejderFrag {
+public class Rediger_medarbejder_fragment_2 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment2_Presenter.UpdateOpretMedarbejderFrag {
 
 
     private EditText medarbejder_email;
@@ -48,7 +49,7 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.opret_medarbejder_fragment_2, container, false);
+        View v = inflater.inflate(R.layout.rediger_medarbejder_fragment_2, container, false);
         presenter = new Opret_Medarbejdere_Fragment2_Presenter(this);
 
         singleton = Singleton.getInstance();
@@ -83,11 +84,11 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
 
                 if(altOK) {
                     //TODO Lav en ordentlig navigation
-                    dbManager.createMedarbejder(singleton.midlertidigMedarbejder);
+                    dbManager.updateMedarbejder(singleton.midlertidigMedarbejder);
                     //singleton.getBruger().addMedarbejdere(singleton.midlertidigMedarbejder);
                     singleton.midlertidigMedarbejder=null;
 
-                    Toast.makeText(getContext(), "HURRA! Du oprettede en ny medarbejder", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "HURRA! Du redigerede informationer for en medarbejder", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     getActivity().recreate();
                 }
@@ -191,7 +192,6 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         System.out.println(arbejdsområde);
         for(int i=0; i<array.length; i++){
             array[i] =array[i].trim();
-
         }
         arbejdsområde_spinner.setSelection(array);
     }

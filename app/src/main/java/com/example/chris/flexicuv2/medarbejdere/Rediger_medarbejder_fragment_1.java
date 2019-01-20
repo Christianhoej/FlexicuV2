@@ -1,13 +1,9 @@
-
 package com.example.chris.flexicuv2.medarbejdere;
-
-
 
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,18 +24,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+public class Rediger_medarbejder_fragment_1 extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, Rediger_medarbejder_fragment_1_presenter.UpdateOpretMedarbejderFrag {
 
-/**
- * A simple {@link Fragment} subclass.
- */public class Opret_medarbejder_fragment_1 extends Fragment implements View.OnClickListener, Opret_Medarbejdere_Fragment1_Presenter.UpdateOpretMedarbejderFrag, RadioGroup.OnCheckedChangeListener {
-
-    public Opret_medarbejder_fragment_1() {
+    public Rediger_medarbejder_fragment_1() {
     }
 
     private Spinner fødselsår_spinner;
     private EditText medarbejder_navn;
     private FrameLayout medarbejdereFrame;
-    private Opret_medarbejder_fragment_2 opretMedarbejderFragment2;
+    private Rediger_medarbejder_fragment_1_presenter presenter;
     private Button næste_medarbejdere;
     private Button tilbage1;
     ArrayAdapter<String> adapter_år;
@@ -49,7 +42,7 @@ import java.util.List;
     private RadioButton radio_kvinde;
     OpretMedarbejder_presenter opretMedarbejder_presenter;
 
-    private Opret_Medarbejdere_Fragment1_Presenter presenter;
+    private Rediger_medarbejder_fragment_2 rediger_medarbejder_fragment_2;
     private Singleton singleton;
 
     private EditText mVejnavn;
@@ -58,7 +51,7 @@ import java.util.List;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        presenter = new Opret_Medarbejdere_Fragment1_Presenter(this);
+        presenter = new Rediger_medarbejder_fragment_1_presenter(this);
         View v = inflater.inflate(R.layout.opret_medarbejder_fragment_1, container, false);
 
         //singleton.midlertidigMedarbejder = null;
@@ -69,7 +62,7 @@ import java.util.List;
         medarbejder_navn =  v.findViewById(R.id.editText_navn);
         //Bemærk denne er anderledes fra sidste side
         medarbejdereFrame =  v.findViewById(R.id.opret_medarbejder_frame_1);
-        opretMedarbejderFragment2 = new Opret_medarbejder_fragment_2();
+        rediger_medarbejder_fragment_2 = new Rediger_medarbejder_fragment_2();
         næste_medarbejdere =  v.findViewById(R.id.næste_medarbejdere);
         næste_medarbejdere.setOnClickListener(this);
         tilbage1 =  v.findViewById(R.id.tilbage_medarbejdere);
@@ -130,7 +123,7 @@ import java.util.List;
             case R.id.næste_medarbejdere:
                 boolean altOK = presenter.korrektUdfyldtInformationFrag1(medarbejder_navn.getText().toString(),getGender(), getBirthYearChosen(), mVejnavn.getText().toString(), mNummer.getText().toString(), mPostNr.getText().toString());
                 if(altOK){
-                    setFragment(opretMedarbejderFragment2);
+                    setFragment(rediger_medarbejder_fragment_2);
                     try {
                         goelocate(v);
                     } catch (IOException e) {
@@ -170,11 +163,11 @@ import java.util.List;
         if(radioGroupKoen.getCheckedRadioButtonId() == R.id.radio_mand) {
             return "mand";
         }
-            else if(radioGroupKoen.getCheckedRadioButtonId() == R.id.radio_kvinde){
-                return "kvinde";
+        else if(radioGroupKoen.getCheckedRadioButtonId() == R.id.radio_kvinde){
+            return "kvinde";
         }
-            else
-                return "";
+        else
+            return "";
     }
 
     public void opretSpinner(View v){
@@ -204,7 +197,7 @@ import java.util.List;
     public void errorKøn(String errorMsg) {
 
         if (!radio_kvinde.isChecked() && !radio_mand.isChecked())
-    radio_kvinde.setError(errorMsg);
+            radio_kvinde.setError(errorMsg);
     }
 
     @Override
@@ -287,7 +280,4 @@ import java.util.List;
     }
     //TODO Gemme en "lokal instans" af den medarbejder man er ved at oprette på singleton objekt
     //TODO indsætte værdierne fra medarbejderne i de valgte felter igen.
-
-
 }
-

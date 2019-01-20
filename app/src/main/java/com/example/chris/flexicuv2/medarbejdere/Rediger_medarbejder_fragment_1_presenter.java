@@ -5,7 +5,7 @@ package com.example.chris.flexicuv2.medarbejdere;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
-public class Opret_Medarbejdere_Fragment1_Presenter {
+public class Rediger_medarbejder_fragment_1_presenter {
 
     private UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag;
     private final String ERRORNAVN="Du skal indtaste et navn";
@@ -18,7 +18,7 @@ public class Opret_Medarbejdere_Fragment1_Presenter {
     private final String ERRORNUMMER1 = "Husnummeret skal være mellem 1 og 4 tal";
     private Singleton singleton;
 
-    public Opret_Medarbejdere_Fragment1_Presenter(UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag){
+    public Rediger_medarbejder_fragment_1_presenter(UpdateOpretMedarbejderFrag updateOpretMedarbejderFrag){
         this.updateOpretMedarbejderFrag = updateOpretMedarbejderFrag;
         singleton = Singleton.getInstance();
     }

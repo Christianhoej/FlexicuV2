@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startskærm.udlej.Udlejning_Janus">
+    tools:context=".startskærm.udlej.Udlejning_Janus"
+    android:background="@color/hvid"
+    android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:text="Medbringer\neget værktøj?" />
@@ -156,9 +158,10 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:background="@drawable/flex_graa_rektangel"
+                    android:background="@drawable/flex_green_rektangel"
                     android:inputType="date"
-                    android:text=" dd / mm / yyyy "/>
+                    android:text=" dd / mm / yyyy "
+                    android:layout_marginBottom="2dp"/>
 
                 <TextView
                     android:id="@+id/udlejning_slutdato_textview"
@@ -166,7 +169,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:background="@drawable/flex_graa_rektangel"
+                    android:background="@drawable/flex_green_rektangel"
                     android:inputType="date"
                     android:text=" dd / mm / yyyy "/>
 
@@ -184,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/flex_graa_rektangel"
+                    android:background="@drawable/flex_green_rektangel"
                     android:gravity="center"
                     android:hint="timeprisen"
                     android:inputType="number"
@@ -232,21 +235,23 @@
         <LinearLayout
             android:id="@+id/udlejning_chat_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="4dp"
             android:gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
             android:orientation="vertical">
 
 
             <EditText
                 android:id="@+id/udlejning_kommentar_edittext"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/flex_graa_rektangel"
-                android:hint=" evt. en kommentar til medarbejderen \n eller lejer" />
+                android:layout_height="match_parent"
+                android:background="@drawable/flex_green_rektangel"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:hint=" evt. en kommentar om medarbejderen eller til lejer" />
 
 
         </LinearLayout>
@@ -266,6 +271,8 @@
                 android:id="@+id/udlejning_annuller_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_grey"
+                android:textColor="@color/hvid"
                 android:text="annuller" />
             <TextView
                 android:layout_width="0dp"
@@ -275,6 +282,8 @@
             <Button
                 android:id="@+id/udlejning_udlej_button"
                 android:layout_width="wrap_content"
+                android:textColor="@color/hvid"
+                android:background="@drawable/rounded_corners_blue"
                 android:layout_height="wrap_content"
                 android:text="Opret \nmedarbejderudbud" />
         </LinearLayout>

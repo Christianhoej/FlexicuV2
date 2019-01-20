@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -58,7 +59,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         //TODO skal ikke tage egne medarbejdere, men
-        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext(), singleton.getMedarbejdere());
+        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext());
 
         recyclerView.setAdapter(mAdapter);
         //setUpspinner(v);
@@ -68,16 +69,17 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //setFragment(filtrer_fragment);
-        onButtonShowPopupWindowClick1(v);
+        setFragment(filtrer_fragment);
+        //onButtonShowPopupWindowClick1(v);
     }
 
 
 
     public void setFragment(Fragment fragment) {
-        lej_frame.removeAllViews();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.lej_fragment_frame, fragment);
+        //startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 

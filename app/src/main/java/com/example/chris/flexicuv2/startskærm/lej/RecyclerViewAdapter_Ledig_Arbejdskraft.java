@@ -10,19 +10,19 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Medarbejder;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter<RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder>{
 
-    private ArrayList<Medarbejder> mMedarbejder;
     private Context mContext;
+    private Singleton singleton;
 
-    public RecyclerViewAdapter_Ledig_Arbejdskraft(Context mContext, ArrayList<Medarbejder> mMedarbejder) {
-        this.mMedarbejder = mMedarbejder;
-        Collections.sort(mMedarbejder);
+    public RecyclerViewAdapter_Ledig_Arbejdskraft(Context mContext) {
         this.mContext = mContext;
+        singleton = Singleton.getInstance();
     }
 
     @NonNull
@@ -35,18 +35,24 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
-        viewHolder.name.setText(mMedarbejder.get(i).getNavn());
+        String loen = "Løn: " + Integer.toString(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getLoen());
+        viewHolder.name.setText(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getNavn());
         viewHolder.salary.setText(loen);
-        viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
+        viewHolder.workfield.setText(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getArbejdsomraade());
 
 
 
     }
 
+
     @Override
     public int getItemCount() {
-        return mMedarbejder.size();
+        if(singleton.getMedarbejdereTilUdlejning()!=null){
+            return singleton.getMedarbejdereTilUdlejning().size();
+        }
+        else{
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

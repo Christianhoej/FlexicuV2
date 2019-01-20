@@ -14,9 +14,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_afsluttede_fragment;
+import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_ledige_fragment;
 import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_forhandlinger_fragment;
-import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_nuvaerende_fragment;
 
 
 /**
@@ -35,9 +34,11 @@ public class Indbakke_fragment extends Fragment {
 
     private BottomNavigationView indbakke_nav;
     private FrameLayout til_aftaler_frame;
-    private Aftaler_afsluttede_fragment aftaler_afsluttede_fragment;
+    private Aftaler_ledige_fragment ledige_fragment;
     private Aftaler_forhandlinger_fragment aftaler_forhandlinger_fragment;
-    private Aftaler_nuvaerende_fragment aftaler_nuvaerende_fragment;
+
+
+    private String senesteFrag;
 
 
     @Override
@@ -49,53 +50,82 @@ public class Indbakke_fragment extends Fragment {
         //viewPager.setAdapter(pagerAdapter);
 
         til_aftaler_frame = (FrameLayout) v.findViewById(R.id.til_aftaler_frame);
-        aftaler_nuvaerende_fragment = new Aftaler_nuvaerende_fragment();
+
         aftaler_forhandlinger_fragment = new Aftaler_forhandlinger_fragment();
-        aftaler_afsluttede_fragment = new Aftaler_afsluttede_fragment();
+        ledige_fragment = new Aftaler_ledige_fragment();
 
         indbakke_nav = (BottomNavigationView) v.findViewById(R.id.indbakke_nav);
 
-
+        //senesteFrag = "nuværende";
+        //setFragment(getFragmentManager().findFragmentByTag(senesteFrag), senesteFrag);
         //TODO setfragment - er det den der skal komme, når vi åbner indbakke?
-        setFragment(aftaler_nuvaerende_fragment, "nuværende");
+        /*if (senesteFrag==null){
+            setFragment(aftaler_nuvaerende_fragment, "nuværende");
+        }
+        else {
+            setFragment(getFragmentManager().findFragmentByTag(senesteFrag), senesteFrag);
+        }*/
 
+        //fjernFragmenter1(aftaler_forhandlinger_fragment);
+        //fjernFragmenter1(aftaler_ledige_fragment);
+        setNavigation();
+        setFragment(aftaler_forhandlinger_fragment, "forhandlinger");
+        //indbakke_nav.getMenu().getItem(0).setChecked(true);
+        //onNavigationItemSelected(indbakke_nav.getMenu().findItem(R.id.indbakke_nuværende));
+
+        /*indbakke_nav.getMenu().getItem(0).setChecked(true);
+        indbakke_nav.setOnNavigationItemSelectedListener(BottomNavigationView);
+        onN*/
+        //TODO Når indbakke åbnes 2. gang skal det fragment der vises, også være det der highlightes
+        return v;
+    }
+
+
+    public void setNavigation(){
+        //indbakke_nav.getMenu().getItem(0).setChecked(true);
         indbakke_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                //onNavigationItemSelected(indbakke_nav.getMenu().getItem(0));
+                //setFragment(aftaler_nuvaerende_fragment, "nuværende");
                 switch (menuItem.getItemId()){
-                    case R.id.indbakke_afsluttede:
-                        if(!(getFragmentManager().findFragmentByTag("afsluttede") != null && getFragmentManager().findFragmentByTag("afsluttede").isVisible())) {
-                            //fjernFragmenter();
-                            setFragment(aftaler_afsluttede_fragment,"afsluttede" );
+                    case R.id.indbakke_ledige:
+                        if(!(getFragmentManager().findFragmentByTag("ledige") != null && getFragmentManager().findFragmentByTag("ledige").isVisible())) {
+                            senesteFrag = "ledige";
+
+                            fjernFragmenter1(aftaler_forhandlinger_fragment);
+                            setFragment(ledige_fragment,"ledige");
+
                         }
                         return true;
                     case R.id.indbakke_forhandlinger:
                         if(!(getFragmentManager().findFragmentByTag("forhandlinger") != null && getFragmentManager().findFragmentByTag("forhandlinger").isVisible())) {
-                            //fjernFragmenter();
+                            senesteFrag = "forhandlinger";
+                            //fjernFragmenter1();
+                            fjernFragmenter1(ledige_fragment);
                             setFragment(aftaler_forhandlinger_fragment,"forhandlinger" );
-                        }
-                        return true;
-                    case R.id.indbakke_nuværende:
-                        if(!(getFragmentManager().findFragmentByTag("nuværende") != null && getFragmentManager().findFragmentByTag("nuværende").isVisible())) {
-                            //fjernFragmenter();
-                            setFragment(aftaler_nuvaerende_fragment, "nuværende");
                         }
                         return true;
                     default:
                         return false;
                 }
             }
+
         });
 
-
-
-        return v;
     }
+
+
 
     public void fjernFragmenter(){
         for(Fragment fragment : getFragmentManager().getFragments()){
             getFragmentManager().beginTransaction().remove(fragment).commit();
         }
+    }
+
+    public void fjernFragmenter1(android.support.v4.app.Fragment fragment){
+        getFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
     public void setFragment(android.support.v4.app.Fragment fragment, String tag) {

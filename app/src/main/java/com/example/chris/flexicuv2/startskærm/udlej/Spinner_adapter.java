@@ -21,9 +21,9 @@ public class Spinner_adapter extends ArrayAdapter {
         super(context, resource, objects);
         this.mContext = context;
         this.list = objects;
-        for ( Medarbejder m : list)
-            System.out.println(m.toString());
+
     }
+
     @Override
     public boolean isEnabled(int position) {
         if (position == 0) {
@@ -58,4 +58,7 @@ public class Spinner_adapter extends ArrayAdapter {
     public Medarbejder getItem(int position){
         return list.get(position);
     }
+
+
+
 }

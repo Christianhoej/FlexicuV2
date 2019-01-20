@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 
 import com.example.chris.flexicuv2.database.DBManager;
+import com.example.chris.flexicuv2.database.TestAfAftalerDB;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.startskærm.hjem.Hjem_fragment;
@@ -53,6 +54,9 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
     private Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
     private DBManager dbManager;
     private Singleton singleton;
+    private TestAfAftalerDB test;
+
+    private FrameLayout startskærmFrameTilDiverse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         //dbManager = new DBManager();
         //dbManager.readBruger();
         singleton = Singleton.getInstance();
+        dbManager = new DBManager();
+        test = new TestAfAftalerDB();
+        //dbManager.createUdlej(test.getUdlej());
         /**
          * Til at køre mellem fragments
          */
@@ -71,6 +78,8 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         fragmentLej = new Lej_fragment();
         fragmentIndbakke = new Indbakke_fragment();
         fragmentHjem = new Hjem_fragment();
+
+        startskærmFrameTilDiverse = findViewById(R.id.startskærm_frame_til_diverse);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -132,6 +141,14 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
     public void openSkaerm(Class a){
         Intent intent = new Intent(this,a);
         startActivity(intent);
+    }
+
+    //DENHER
+    public void switchContent(int id, Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(id, fragment, fragment.toString());
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
     @Override

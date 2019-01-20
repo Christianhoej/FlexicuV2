@@ -13,33 +13,37 @@ class Udlejning_Presenter {
 
 
 
-    public void checkKorrektUdfyldtInformation(String medarbejder, String startdato, String slutdato, int arbejdsdage, int timepris, String egetVærktøj, String kommentar) {
+    public boolean checkKorrektUdfyldtInformation(String startdato, String slutdato, int arbejdsdage, int timepris, String egetVærktøj, String kommentar) {
 
         int errors = 0;
 
-        boolean medarbejderOK = !(medarbejder.equals("")); //TODO sæt tekst på spinneren til noget der kan genkendes
-        if(!medarbejderOK)
-        {
-            updateUdlejning.errorMedarbejder(ERRORMEDARBEJDER);
-            errors++;
-        }
-        boolean startdatoOK = startdato!=null || startdato!= "";
-        if(!startdatoOK){
+
+        boolean startdatoOK = startdato.equals(" dd / mm / yyyy ");
+        if(startdatoOK){
             updateUdlejning.errorStartdato(ERRORSTARTDATO);
             errors++;
         }
-        boolean slutdatoOK = slutdato!=null || startdato!= "";
-        if(!slutdatoOK){
+        boolean slutdatoOK = slutdato.equals(" dd / mm / yyyy ");
+        if(slutdatoOK){
             updateUdlejning.errorSlutdato(ERRORSLUTDATO);
             errors++;
         }
         boolean timeprisOK = timepris>0;
+        System.out.println(timepris);
+        System.out.println(timepris>0);
         if (!timeprisOK){
             updateUdlejning.errorTimepris(ERRORTIMEPRIS);
             errors++;
         }
 
-        if(errors==0){
+        if(errors>0) {
+            return false;
+        }
+        else {
+            updateUdlejning.errorSlutdato(null);
+            updateUdlejning.errorStartdato(null);
+            updateUdlejning.errorTimepris(null);
+            return true;
             //TODO opret udlejen/aftalen som objekt
             //TODO opret udlejen/aftalen på firebase
             //TODO evt. lav bekræftelsestoast eller returner boolean så der kan navigeres til en bekræftelsesside

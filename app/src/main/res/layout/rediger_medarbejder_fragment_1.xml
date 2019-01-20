@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".medarbejdere.Opret_medarbejder_fragment_1"
+    tools:context=".medarbejdere.Rediger_medarbejder_fragment_1"
     android:id="@+id/opret_medarbejder_frame_1"
     >
 
@@ -144,7 +144,7 @@
                 android:background="@drawable/rounded_corners_grey"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Tilbage"
+                android:text="Annuller"
                 android:id="@+id/tilbage_medarbejdere"/>
 
             <Space

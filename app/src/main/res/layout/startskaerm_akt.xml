@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".Startskaerm_akt">
 
+
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,10 +28,17 @@
 
         </android.support.design.widget.AppBarLayout>
 
+
         <include layout="@layout/startskaerm_content" />
 
 
     </android.support.design.widget.CoordinatorLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/startskærm_frame_til_diverse">
+    </FrameLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -40,5 +48,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/burger_menu_top"
         app:menu="@menu/startskaerm_burger_items" />
+
+
 
 </android.support.v4.widget.DrawerLayout>
