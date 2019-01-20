@@ -76,6 +76,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         startdatoET.setOnClickListener(this);
         slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);
         slutdatoET.setOnClickListener(this);
+
         slutdatoET.setEnabled(false);
         
         timeprisET = v.findViewById(R.id.udlejning_timepris_textview1);
