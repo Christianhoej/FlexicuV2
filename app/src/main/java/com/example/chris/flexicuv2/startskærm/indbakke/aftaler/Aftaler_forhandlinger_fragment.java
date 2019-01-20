@@ -103,12 +103,10 @@ public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnC
         if (radioGroupForhandlinger.getCheckedRadioButtonId()== R.id.radio_forhandlinger_indlejninger){
             recyclerViewUdlejninger.setVisibility(View.INVISIBLE);
             recyclerViewIndlejninger.setVisibility(View.VISIBLE);
-            System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
         }
         else if(radioGroupForhandlinger.getCheckedRadioButtonId()== R.id.radio_forhandlinger_udlejninger){
             recyclerViewIndlejninger.setVisibility(View.INVISIBLE);
             recyclerViewUdlejninger.setVisibility(View.VISIBLE);
-            System.out.println("OOOOOOOOOOOOO________________________OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         }
 
     }

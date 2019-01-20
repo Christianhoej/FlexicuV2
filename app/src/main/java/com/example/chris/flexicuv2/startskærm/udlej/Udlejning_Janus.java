@@ -109,7 +109,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         Medarbejder spinneroverskrift = new Medarbejder();
         spinneroverskrift.setNavn("Vælg medarbejder");
         spinneroverskrift.setFødselsår(Calendar.getInstance().get(Calendar.YEAR));
-        medarbejdere.add(spinneroverskrift);
+        //medarbejdere.add(spinneroverskrift);
         for(Medarbejder m : temp){
             medarbejdere.add(m);
         }

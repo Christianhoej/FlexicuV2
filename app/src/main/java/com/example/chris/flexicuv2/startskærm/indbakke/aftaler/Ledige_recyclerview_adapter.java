@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 
+import java.util.concurrent.TimeoutException;
+
 
 public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_recyclerview_adapter.ViewHolder>{
 
@@ -42,11 +44,12 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         viewHolder.periode.setText("Periode: " + singleton.getMineLedigeMedarbejdere().get(i).getStartDato() + " - " + singleton.getMineLedigeMedarbejdere().get(i).getEndDato());
         viewHolder.pris.setText("Timepris: " + singleton.getMineLedigeMedarbejdere().get(i).getPris() + "kr.");
         viewHolder.værktøj.setText("Medbriges eget værktøj? " + egetVærktøj(i));
+        viewHolder.arbejdsområder.setText("Arbejdsområder: " + singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getArbejdsomraade());
 
         viewHolder.ledige_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO her skal fragmentet med hele aftalen vises.
+                //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
             }
         });
     }
@@ -78,6 +81,7 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         TextView periode;
         TextView pris;
         TextView værktøj;
+        TextView arbejdsområder;
         RelativeLayout ledige_aftaler_listitems;
 
 
@@ -87,6 +91,7 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
             periode = (TextView) itemView.findViewById(R.id.ledige_periode);
             pris = (TextView) itemView.findViewById(R.id.ledige_pris);
             værktøj = itemView.findViewById(R.id.ledige_værktøj);
+            arbejdsområder = itemView.findViewById(R.id.ledige_arbejdsområder);
             ledige_aftaler_listitems = (RelativeLayout) itemView.findViewById(R.id.ledige_recyclerview_listitem);
         }
     }
