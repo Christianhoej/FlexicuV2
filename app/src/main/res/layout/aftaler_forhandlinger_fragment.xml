@@ -18,12 +18,45 @@
         android:gravity="center"
         android:id="@+id/tv_forhandlinger"/>
 
-        <Button
-            android:layout_width="wrap_content"
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vis_forhandling"
+        android:text="vis forhandling"
+        android:layout_gravity="center"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/vis_forhandling"
-            android:text="vis forhandling"
-            android:layout_gravity="center"/>
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/radioGroup_forhandlinger">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="30"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_forhandlinger_indlejninger"
+                android:text="Indlejninger"
+                android:layout_weight="20"
+                android:shadowColor="@color/flex_green"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="20"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_forhandlinger_udlejninger"
+                android:text="Udlejninger"
+                android:layout_weight="20"
+                android:shadowColor="@color/flex_green"/>
+        </RadioGroup>
 
 
     <android.support.v7.widget.RecyclerView
@@ -31,9 +64,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="4"
-        android:id="@+id/forhandlinger_recyclerview"
+        android:id="@+id/forhandlinger_recyclerview_indlejninger"
         android:layout_gravity="center">
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginVertical="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:id="@+id/forhandlinger_recyclerview_udlejninger"
+        android:layout_gravity="center">
+    </android.support.v7.widget.RecyclerView>
+
 
     </LinearLayout>
 

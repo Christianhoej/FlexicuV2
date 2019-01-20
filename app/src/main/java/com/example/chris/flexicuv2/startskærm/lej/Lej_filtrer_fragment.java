@@ -89,7 +89,6 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         arbejdsområder_spinner.setItems(arbejdsområde_listen);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -97,8 +96,10 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
                 //TODO Hvad skal knapperne gøre
                 break;
             case R.id.annuller_knap:
+                getActivity().onBackPressed();
                 break;
             case R.id.nulstil_knap:
+                //TODO Nulstil knap opsættes
                 break;
             case R.id.lej_filtrer_slutdato_textview:
                 findEnDato(false);
@@ -129,15 +130,12 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
             }
         };
-
-
         Calendar calendar = Calendar.getInstance();
         final int år = calendar.get(Calendar.YEAR);
         final int måned = calendar.get(Calendar.MONTH);
         final int dag = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
         datepickerdialog.show();
-
     }
 
 
