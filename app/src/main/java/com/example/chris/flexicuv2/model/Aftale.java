@@ -15,8 +15,15 @@ public class Aftale {
     private boolean egetVærktøj;
     private Bruger sidstSendtAftale;
     private boolean aktiv;
+    private int timepris;
 
+    public int getTimepris() {
+        return timepris;
+    }
 
+    public void setTimepris(int timepris) {
+        this.timepris = timepris;
+    }
 
     public String getOprindeligUdlejID() {
         return oprindeligUdlejID;

@@ -1,6 +1,5 @@
 package com.example.chris.flexicuv2.startskærm.udlej;
 
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,10 +30,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.UpdateUdlejning, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
+
+public class Ledige_rediger extends Fragment implements Udlejning_Presenter.UpdateUdlejning, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener{
 
     private Spinner medarbejderSpinner;
     private EditText timeprisET, kommentarET;
@@ -53,32 +50,32 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private DatePickerDialog.OnDateSetListener datepickerListener;
 
     private Udlejning_Presenter presenter;
-    public Udlejning_Janus() {
+
+
+    public Ledige_rediger() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.ledige_rediger, container, false);
 
-        View v = inflater.inflate(R.layout.udlej_fragment, container, false);
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
-        overskrift_TV = v.findViewById(R.id.aftaleudlejning_overskrift);
+        overskrift_TV = v.findViewById(R.id.ledige_overskrift);
         overskrift_TV.setText("Giv mig en overskrift");
-        TextView udlejer = v.findViewById(R.id.udlejer_navn_textview);
+        TextView udlejer = v.findViewById(R.id.ledige_udlejer_navn_textview);
         udlejer.setText(singleton.getBruger().getVirksomhedsnavn());
-        medarbejderSpinner = v.findViewById(R.id.udlejning_medarbejder_spinner);
+        medarbejderSpinner = v.findViewById(R.id.ledig_medarbejder_spinner);
         opretSpinner(medarbejderSpinner);
         medarbejderSpinner.setOnItemSelectedListener(this);
         c1 = Calendar.getInstance();
         c2 = Calendar.getInstance();
-        startdatoET = v.findViewById(R.id.udlejning_startdato_textview1);
+        startdatoET = v.findViewById(R.id.ledig_startdato_textview1);
         startdatoET.setOnClickListener(this);
         startdatoET.addTextChangedListener(startDatoTextWatcher); //TODO måske anvendes til at lave errorcheck på datoer
-        slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);
+        slutdatoET = v.findViewById(R.id.ledig_slutdato_textview);
         slutdatoET.setOnClickListener(this);
 
         slutdatoET.addTextChangedListener(arbDageTextWatcher);
@@ -91,33 +88,35 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         slutdatoET.setEnabled(false);
 
 
-        timeprisET = v.findViewById(R.id.udlejning_timepris_textview1);
+        timeprisET = v.findViewById(R.id.ledig_timepris_textview1);
         timeprisET.addTextChangedListener(prisTextWatch);
-        kommentarET = v.findViewById(R.id.udlejning_kommentar_edittext);
+        kommentarET = v.findViewById(R.id.ledig_kommentar_edittext);
 
         kommentarET.setScroller(new Scroller(getActivity()));
         kommentarET.setMaxLines(3);
         kommentarET.setVerticalScrollBarEnabled(true);
         kommentarET.setMovementMethod(new ScrollingMovementMethod());
 
-        antalArbejdsdage_TV = v.findViewById(R.id.udlejning_redigerbar_antal_arbejdsdage_textview1);
-        subtotalen_TV = v.findViewById(R.id.udlejning_subtotalen_excl_flexicuspris_textview1);
-        flexicugebyr_TV = v.findViewById(R.id.udlejning_flexicu_pris_textview);
-        totalprisen_TV = v.findViewById(R.id.udlejning_total_pris_textview1);
-        egetVærktøj_switch = v.findViewById(R.id.udlejning_egetværktøj_switch1);
+        antalArbejdsdage_TV = v.findViewById(R.id.ledig_redigerbar_antal_arbejdsdage_textview1);
+        subtotalen_TV = v.findViewById(R.id.ledig_subtotalen_excl_flexicuspris_textview1);
+        flexicugebyr_TV = v.findViewById(R.id.ledig_flexicu_pris_textview);
+        totalprisen_TV = v.findViewById(R.id.ledig_total_pris_textview1);
+        egetVærktøj_switch = v.findViewById(R.id.ledig_egetværktøj_switch1);
         egetVærktøj_switch.setOnCheckedChangeListener(this);
         egetVærktøj_switch.setChecked(false);
         egetVærktøj_switch.setText("Nej");
 
-        anullerButton = v.findViewById(R.id.udlejning_annuller_button);
+        anullerButton = v.findViewById(R.id.ledig_annuller_button);
         anullerButton.setOnClickListener(this);
-        opretUdlejningButton = v.findViewById(R.id.udlejning_udlej_button);
+        opretUdlejningButton = v.findViewById(R.id.ledig_udlej_button);
         opretUdlejningButton.setOnClickListener(this);
         presenter = new Udlejning_Presenter(this);
 
-
+        presenter.udfyldFelter();
         return v;
     }
+
+
     public void opretSpinner(View v){
         ArrayList<Medarbejder> temp = Singleton.getMedarbejdere();
         ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
@@ -131,7 +130,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         adapter_medarbejderbeskrivelse = new Spinner_adapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, medarbejdere);
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
         //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
-        System.out.println(singleton.midlertidigMedarbejder.toString());
+        //System.out.println(singleton.midlertidigMedarbejder.toString());
         medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
     }
 
@@ -175,14 +174,14 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
     @Override
     public void errorSlutdato(String errorMSG) {
-    slutdatoET.setError(errorMSG);
+        slutdatoET.setError(errorMSG);
 
     }
 
 
     @Override
     public void errorTimepris(String errorMSG) {
-    timeprisET.setError(errorMSG);
+        timeprisET.setError(errorMSG);
     }
 
     @Override
@@ -190,6 +189,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         antalArbejdsdage_TV.setError(errorMSG);
         slutdatoET.setError(errorMSG);
     }
+
 
     @Override
     public void setStartDato(String startDato) {
@@ -205,7 +205,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     public void setTimepris(int timepris) {
         timeprisET.setText(Integer.toString(timepris));
     }
-
+    //TODO der mangles at få værktøj, timepris og medarbejderen med over
     @Override
     public void setVærktøj(Boolean værktøj) {
         egetVærktøj_switch.setChecked(værktøj);
@@ -218,13 +218,13 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
     @Override
     public void setMedarbejder(Medarbejder medarbejder) {
-        //medarbejderSpinner.setSelection(medarbejder);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.udlejning_udlej_button:
+            case R.id.ledig_udlej_button:
                 //TODO henter man en string eller et dato-format for start og slutdato?
                 //TODO fyld medarbejderSpinner med objekterne
                 int pris = 0;
@@ -233,7 +233,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                 }
                 int arbDage = 0;
                 if (antalArbejdsdage_TV.getText().equals("antal arb. dage")) {
-                        arbDage = 0;
+                    arbDage = 0;
                 }else
                     arbDage = Integer.parseInt(antalArbejdsdage_TV.getText().toString());
 
@@ -263,12 +263,12 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
 
-            case R.id.udlejning_slutdato_textview:
+            case R.id.ledig_slutdato_textview:
                 findEnDato(false, R.id.udlejning_slutdato_textview, c2);
 
 
                 break;
-            case R.id.udlejning_startdato_textview1:
+            case R.id.ledig_startdato_textview1:
                 findEnDato(true, R.id.udlejning_startdato_textview1, c1);
 
 
@@ -325,7 +325,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                 datepickerdialog.getDatePicker().setMinDate(c1.getTimeInMillis());
             }
             else
-            datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         }
         else{
@@ -403,7 +403,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
         @Override
         public void afterTextChanged(Editable s) {
-        startdatoET.setError(null);
+            startdatoET.setError(null);
         }
     };
     private TextWatcher slutDatoTextWatcher = new TextWatcher() {
@@ -436,7 +436,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
 
 
-        //Metoder til valgt spinner listener
+    //Metoder til valgt spinner listener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position/*-1*/);
@@ -447,4 +447,6 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }
