@@ -10,12 +10,16 @@ public class Singleton extends Activity {
     public static ArrayList<Medarbejder> medarbejdere;
     private static ArrayList<Medarbejder> lånteMedarbejdere = new ArrayList<Medarbejder>();
     public static Bruger bruger;
-    public static Medarbejder midlertidigMedarbejder;
+
     public static String userID;
-    public static Bruger midlertidigBruger;
-    public static ArrayList<Aftale> medarbejdereTilUdlejning;
-    public static Aftale midlertidigAftale;
+    public static ArrayList<Aftale> mineUdlejForhandlinger;
+    public static ArrayList<Aftale> mineLejForhandlinger;
     public static ArrayList<Aftale> mineLedigeMedarbejdere;
+    public static ArrayList<Aftale> medarbejdereTilUdlejning;
+    public static Medarbejder midlertidigMedarbejder;
+    public static Bruger midlertidigBruger;
+    public static Aftale midlertidigAftale;
+
 
 
     private Singleton(){
@@ -29,8 +33,42 @@ public class Singleton extends Activity {
             medarbejdereTilUdlejning = new ArrayList<>();
             bruger = new Bruger();
             mineLedigeMedarbejdere = new ArrayList<>();
+            mineUdlejForhandlinger = new ArrayList<>();
+            mineLejForhandlinger = new ArrayList<>();
         }
         return singleInstance;
+    }
+
+    public static ArrayList<Aftale> getMineLejForhandlinger() {
+        return mineLejForhandlinger;
+    }
+
+    public static void setMineLejForhandlinger(ArrayList<Aftale> mineLejForhandlinger) {
+        Singleton.mineLejForhandlinger = mineLejForhandlinger;
+    }
+
+    public static void addMineLejForhandlinger(Aftale mineLejForhandlinger){
+        singleInstance.mineLejForhandlinger.add(mineLejForhandlinger);
+    }
+
+    public static void removeMineLejForhandlinger(Aftale mineLejForhandlinger){
+        singleInstance.mineLejForhandlinger.add(mineLejForhandlinger);
+    }
+
+    public static ArrayList<Aftale> getMineUdlejForhandlinger() {
+        return mineUdlejForhandlinger;
+    }
+
+    public static void setMineUdlejForhandlinger(ArrayList<Aftale> mineUdlejForhandlinger) {
+        Singleton.mineUdlejForhandlinger = mineUdlejForhandlinger;
+    }
+
+    public static void addMineUdlejForhandlinger(Aftale mineForhandlinger){
+        singleInstance.mineUdlejForhandlinger.add(mineForhandlinger);
+    }
+
+    public static void removeMineUdlejForhandlinger(Aftale mineForhandlinger){
+        singleInstance.mineUdlejForhandlinger.add(mineForhandlinger);
     }
 
 

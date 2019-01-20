@@ -4,6 +4,7 @@ public class Aftale implements Comparable<Aftale>{
 
     private String aftaleID;
     private String oprindeligUdlejID;
+    private String forhandlingID;
     private Bruger udlejer;
     private Bruger lejer;
     private Medarbejder medarbejder;
@@ -15,9 +16,25 @@ public class Aftale implements Comparable<Aftale>{
     private boolean egetVærktøj;
     private Bruger sidstSendtAftale;
     private boolean aktiv;
+
     int filterScore;
 
+    private int timepris;
 
+
+    public String getForhandlingID() {
+        return forhandlingID;
+    }
+
+    public void setForhandlingID(String forhandlingID) {
+        this.forhandlingID = forhandlingID;
+    public int getTimepris() {
+        return timepris;
+    }
+
+    public void setTimepris(int timepris) {
+        this.timepris = timepris;
+    }
 
     public String getOprindeligUdlejID() {
         return oprindeligUdlejID;
