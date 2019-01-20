@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.R;
@@ -39,6 +40,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private DBManager test;
     private Singleton singleton;
+    private Button filtrer, opretSøgeagent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +51,10 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         filtrer_fragment = new Lej_filtrer_fragment();
         lej_frame = (FrameLayout) v.findViewById(R.id.lej_fragment_frame);
 
-        Button filtrer = (Button) v.findViewById(R.id.filtrer_knap);
+        filtrer = (Button) v.findViewById(R.id.filtrer_knap);
         filtrer.setOnClickListener(this);
+        opretSøgeagent = v.findViewById(R.id.søgeagent);
+        opretSøgeagent.setOnClickListener(this);
 
         recyclerView = v.findViewById(R.id.ledig_arbejdskraft_recyclerview);
 
@@ -58,7 +62,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
         // Inflate the layout for this fragment
 
-        //TODO skal ikke tage egne medarbejdere, men
         RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext());
 
         recyclerView.setAdapter(mAdapter);
@@ -69,8 +72,15 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        setFragment(filtrer_fragment);
-        //onButtonShowPopupWindowClick1(v);
+        switch (v.getId()){
+            case R.id.filtrer_knap:
+                setFragment(filtrer_fragment);
+                break;
+            case R.id.søgeagent:
+                Toast.makeText(getContext(), "Dette er ikke lavet endnu",
+                        Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 
 
@@ -83,11 +93,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        test = new DBManager();
-    }
 
     /**
      * Metode til at vise et popupvindue af medarbejderen, med flere informationer om medarbejderen.
@@ -96,7 +101,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
      * @param view
      */
     public void onButtonShowPopupWindowClick1(View view) {
-        //tilPopUp = (View) findViewById(R.id.tilPopUp);
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.lej_filtrer_fragment, null);
@@ -110,14 +114,5 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-        /*// dismiss the popup window when touched
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                return true;
-            }
-        });*/
     }
 }

@@ -90,7 +90,6 @@ public class Opret_bruger_Presenter_Frag2 implements  com.example.chris.flexicuv
             System.out.println("2: " + singleton.midlertidigBruger.getBrugerensNavn());
             System.out.println("3: " + singleton.midlertidigBruger.getAdresse());
             dbManager.createUserAuth(context, email1, password);
-            dbManager.createBruger(singleton.midlertidigBruger);
             setMidlertidigBruger(email1, privatoplysninger);
             return true;
         }

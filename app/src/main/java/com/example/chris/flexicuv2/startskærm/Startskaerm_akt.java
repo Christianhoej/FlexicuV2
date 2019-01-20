@@ -55,6 +55,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
     private DBManager dbManager;
     private Singleton singleton;
     private TestAfAftalerDB test;
+    private TextView drawer_top;
 
     private FrameLayout startskærmFrameTilDiverse;
 
@@ -86,10 +87,13 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+        drawer_top = findViewById(R.id.left_menu_title);
+        //System.out.println(drawer_top.getText().toString());
+//        System.out.println(singleton.getBruger().getVirksomhedsnavn());
+        //drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
         toggle.syncState();
 
-        TextView drawer_top = findViewById(R.id.left_menu_title);
-//        drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -136,6 +140,8 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
                 }
             }
         });
+
+
     }
 
     public void openSkaerm(Class a){
