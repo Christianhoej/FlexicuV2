@@ -17,6 +17,17 @@ public class Medarbejder implements Comparable<Medarbejder>{
     private String latitude;
     private String longitude;
     private int løn;
+    private int VilligKørsel;
+
+
+    public int getVilligKørsel() {
+        return VilligKørsel;
+    }
+
+    public void setVilligKørsel(int villigKørsel) {
+        VilligKørsel = villigKørsel;
+    }
+
 
     public int getLoen() {
         return løn;
