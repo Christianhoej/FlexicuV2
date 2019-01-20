@@ -2,6 +2,8 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 
 import android.app.DatePickerDialog;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.hjælpeklasser.MultiSelectionSpinner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -157,6 +160,24 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         }
 
         datepickerdialog.show();
+
+    }
+
+    public void goelocate(View v) throws IOException {
+        String vejnavn = vej.getText().toString();
+        String nummer = this.nummer.getText().toString();
+        String postnr = this.postnr.getText().toString();
+
+        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
+
+        Geocoder gc = new Geocoder(getContext());
+        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
+        Address address = list.get(0);
+        String lokation = address.getLocality();
+
+        //singleton.midlertidigMedarbejder.setLatitude(Double.toString(add.getLatitude()));
+        //singleton.midlertidigMedarbejder.setLongitude(Double.toString(add.getLongitude()));
+
 
     }
 

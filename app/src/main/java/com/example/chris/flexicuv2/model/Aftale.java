@@ -1,6 +1,6 @@
 package com.example.chris.flexicuv2.model;
 
-public class Aftale {
+public class Aftale implements Comparable<Aftale>{
 
     private String aftaleID;
     private String oprindeligUdlejID;
@@ -15,6 +15,7 @@ public class Aftale {
     private boolean egetVærktøj;
     private Bruger sidstSendtAftale;
     private boolean aktiv;
+    int filterScore;
 
 
 
@@ -120,5 +121,16 @@ public class Aftale {
 
     public void setSidstSendtAftale(Bruger sidstSendtAftale) {
         this.sidstSendtAftale = sidstSendtAftale;
+    }
+
+    @Override
+    public int compareTo(Aftale o) {
+        if(this.filterScore > o.filterScore)
+            return 1;
+            else if(o.filterScore== this.filterScore)
+        return 0;
+            else
+                return -1;
+
     }
 }
