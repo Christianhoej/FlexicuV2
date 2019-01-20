@@ -76,6 +76,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         startdatoET.setOnClickListener(this);
         slutdatoET = v.findViewById(R.id.udlejning_slutdato_textview);
         slutdatoET.setOnClickListener(this);
+
         slutdatoET.setEnabled(false);
         
         timeprisET = v.findViewById(R.id.udlejning_timepris_textview1);
@@ -108,7 +109,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         Medarbejder spinneroverskrift = new Medarbejder();
         spinneroverskrift.setNavn("Vælg medarbejder");
         spinneroverskrift.setFødselsår(Calendar.getInstance().get(Calendar.YEAR));
-        medarbejdere.add(spinneroverskrift);
+        //medarbejdere.add(spinneroverskrift);
         for(Medarbejder m : temp){
             medarbejdere.add(m);
         }
@@ -116,7 +117,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
         //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
         System.out.println(singleton.midlertidigMedarbejder.toString());
-        medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)-1);
+        medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
     }
 
 
@@ -278,7 +279,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         //Metoder til valgt spinner listener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position-1);
+        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position/*-1*/);
         System.out.println(singleton.midlertidigMedarbejder.getNavn());
     }
 

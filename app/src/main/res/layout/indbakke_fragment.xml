@@ -22,7 +22,8 @@
             android:background="@color/hvid"
             app:itemIconTint="@color/nav_item_colors_green"
             app:itemTextColor="@color/nav_item_colors_green"
-            app:menu="@menu/indbakke_items">
+            app:menu="@menu/indbakke_items"
+            >
         </android.support.design.widget.BottomNavigationView>
 
         <View

@@ -3,7 +3,6 @@ package com.example.chris.flexicuv2.model;
 import android.app.Activity;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Singleton extends Activity {
 
@@ -15,8 +14,8 @@ public class Singleton extends Activity {
     public static String userID;
     public static Bruger midlertidigBruger;
     public static ArrayList<Aftale> medarbejdereTilUdlejning;
-    public static ArrayList<Aftale> ledigeMedarbejder;
     public static Aftale midlertidigAftale;
+    public static ArrayList<Aftale> mineLedigeMedarbejdere;
 
 
     private Singleton(){
@@ -29,26 +28,26 @@ public class Singleton extends Activity {
             medarbejdere = new ArrayList<>();
             medarbejdereTilUdlejning = new ArrayList<>();
             bruger = new Bruger();
-            ledigeMedarbejder = new ArrayList<>();
+            mineLedigeMedarbejdere = new ArrayList<>();
         }
         return singleInstance;
     }
 
 
-    public static ArrayList<Aftale> getLedigeMedarbejder() {
-        return ledigeMedarbejder;
+    public static ArrayList<Aftale> getMineLedigeMedarbejdere() {
+        return mineLedigeMedarbejdere;
     }
 
-    public static void setLedigeMedarbejder(ArrayList<Aftale> ledigeMedarbejder) {
-        Singleton.ledigeMedarbejder = ledigeMedarbejder;
+    public static void setMineLedigeMedarbejdere(ArrayList<Aftale> ledigeMedarbejder) {
+        Singleton.mineLedigeMedarbejdere = ledigeMedarbejder;
     }
 
     public static void addLedigeMedarbejder(Aftale aftale){
-        Singleton.ledigeMedarbejder.add(aftale);
+        Singleton.mineLedigeMedarbejdere.add(aftale);
     }
 
     public static void removeLedigeMedarbejder(Aftale aftale){
-        Singleton.ledigeMedarbejder.add(aftale);
+        Singleton.mineLedigeMedarbejdere.add(aftale);
     }
 
     public static ArrayList<Aftale> getMedarbejdereTilUdlejning() {

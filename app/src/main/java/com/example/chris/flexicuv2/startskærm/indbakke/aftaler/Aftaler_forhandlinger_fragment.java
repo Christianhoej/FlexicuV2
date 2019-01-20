@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling;
@@ -17,13 +19,16 @@ import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnClickListener {
+public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     public Aftaler_forhandlinger_fragment() {}
 
-    private RecyclerView recyclerView;
-    Forhandling_recyclerview_adapter adapter;
-
-    Button åben_forhandling;
+    private RecyclerView recyclerViewIndlejninger;
+    private RecyclerView recyclerViewUdlejninger;
+    private Forhandling_recyclerview_adapter adapter;
+    private Button åben_forhandling;
+    private RadioGroup radioGroupForhandlinger;
+    private RadioButton radioButtonIndlejninger;
+    private RadioButton radioButtonUdlejninger;
 
     Forhandling forhandlingFragment;
 
@@ -31,26 +36,55 @@ public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.aftaler_forhandlinger_fragment, container, false);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.forhandlinger_recyclerview);
-        recyclerView.setOnClickListener(this);
+        recyclerViewIndlejninger = (RecyclerView) v.findViewById(R.id.forhandlinger_recyclerview_indlejninger);
+        recyclerViewIndlejninger.setOnClickListener(this);
+        recyclerViewUdlejninger = (RecyclerView) v.findViewById(R.id.forhandlinger_recyclerview_udlejninger);
+        recyclerViewUdlejninger.setOnClickListener(this);
 
         åben_forhandling = v.findViewById(R.id.vis_forhandling);
         åben_forhandling.setOnClickListener(this);
 
+        radioGroupForhandlinger = v.findViewById(R.id.radioGroup_forhandlinger);
+        radioGroupForhandlinger.setOnCheckedChangeListener(this);
+        radioButtonIndlejninger = v.findViewById(R.id.radio_forhandlinger_indlejninger);
+        radioButtonUdlejninger = v.findViewById(R.id.radio_forhandlinger_udlejninger);
+
         forhandlingFragment = new Forhandling();
 
-        fyldRecyclerView(v);
+        fyldRecyclerViewIndlejninger(v);
+        fyldRecyclerViewUdlejninger(v);
+
+        radioButtonIndlejninger.setChecked(true);
+
         return v;
     }
 
     @Override
     public void onClick(View v) {
-        setFragment(forhandlingFragment);
+        switch (v.getId()){
+            case R.id.vis_forhandling:
+                setFragment(forhandlingFragment);
+                break;
+            /*case R.id.radio_forhandlinger_indlejninger:
+                System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
+                break;*/
+        }
+
     }
 
-    private void fyldRecyclerView(View v){
+    private void fyldRecyclerViewIndlejninger(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
-        RecyclerView recyclerView = v.findViewById(R.id.forhandlinger_recyclerview);
+        RecyclerView recyclerView = v.findViewById(R.id.forhandlinger_recyclerview_indlejninger);
+        adapter = new Forhandling_recyclerview_adapter(getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+
+    //TODO Skal måske have lavet sin egen adapter, det ser vi lige til.
+    private void fyldRecyclerViewUdlejninger(View v){
+        //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
+        RecyclerView recyclerView = v.findViewById(R.id.forhandlinger_recyclerview_udlejninger);
         adapter = new Forhandling_recyclerview_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -62,5 +96,18 @@ public class Aftaler_forhandlinger_fragment extends Fragment implements View.OnC
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (radioGroupForhandlinger.getCheckedRadioButtonId()== R.id.radio_forhandlinger_indlejninger){
+            recyclerViewUdlejninger.setVisibility(View.INVISIBLE);
+            recyclerViewIndlejninger.setVisibility(View.VISIBLE);
+        }
+        else if(radioGroupForhandlinger.getCheckedRadioButtonId()== R.id.radio_forhandlinger_udlejninger){
+            recyclerViewIndlejninger.setVisibility(View.INVISIBLE);
+            recyclerViewUdlejninger.setVisibility(View.VISIBLE);
+        }
+
     }
 }

@@ -29,7 +29,7 @@ public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forha
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.aftaler_recyclerview_listitem, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.forhandlinger_recyclerview_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         forhandlingFragment = new Forhandling();
         return holder;
@@ -42,7 +42,7 @@ public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forha
 
         //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
 
-        viewHolder.indbakke_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
+        viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO her skal fragmentet med hele aftalen vises.
@@ -76,16 +76,16 @@ public class Forhandling_recyclerview_adapter extends RecyclerView.Adapter<Forha
         TextView periode;
         TextView virksomhed;
         TextView pris;
-        RelativeLayout indbakke_aftaler_listitems;
+        RelativeLayout forhandlinger_aftaler_listitems;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            type = (TextView) itemView.findViewById(R.id.indbakke_type);
-            navn = (TextView) itemView.findViewById(R.id.indbakke_navn);
-            periode = (TextView) itemView.findViewById(R.id.periode);
-            virksomhed = (TextView) itemView.findViewById(R.id.indbakke_virk);
-            pris = (TextView) itemView.findViewById(R.id.indbakke_pris);
-            indbakke_aftaler_listitems = (RelativeLayout) itemView.findViewById(R.id.indbakke_recyclerview_listitem);
+            type = (TextView) itemView.findViewById(R.id.forhandlinger_type);
+            navn = (TextView) itemView.findViewById(R.id.forhandlinger_navn);
+            periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
+            virksomhed = (TextView) itemView.findViewById(R.id.forhandlinger_virk);
+            pris = (TextView) itemView.findViewById(R.id.forhandlinger_pris);
+            forhandlinger_aftaler_listitems = (RelativeLayout) itemView.findViewById(R.id.forhandlinger_recyclerview_listitem);
         }
     }
 }
