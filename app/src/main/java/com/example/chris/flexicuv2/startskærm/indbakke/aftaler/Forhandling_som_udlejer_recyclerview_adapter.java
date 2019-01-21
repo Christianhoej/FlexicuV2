@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Singleton;
+import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_lejer;
 import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_udlejer;
 
 import java.util.ArrayList;
@@ -22,10 +24,12 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
 
     private Context mContext;
     private Forhandling_som_udlejer forhandlingSomUdlejerFragment;
+    private Singleton singleton;
 
     //TODO konstruktøren skal self have flere input når net er klar.
     public Forhandling_som_udlejer_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
+        singleton = Singleton.getInstance();
     }
 
     private ArrayList typeARR;
@@ -65,9 +69,12 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
 
         //TODO setText for forhandling som udlejer
 
-        viewHolder.type.setText(typeARR.get(i).toString());
-        viewHolder.navn.setText(navnARR.get(i).toString());
-        viewHolder.virksomhed.setText(virkARR.get(i).toString());
+        viewHolder.type.setText(singleton.getMineUdlejForhandlinger().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.navn.setText(singleton.getMineUdlejForhandlinger().get(i).getMedarbejder().getNavn());
+        viewHolder.virksomhed.setText(singleton.getMineUdlejForhandlinger().get(i).getLejer().getVirksomhedsnavn());
+        viewHolder.periode.setText(singleton.getMineUdlejForhandlinger().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineUdlejForhandlinger().get(i).getEndDato().replace(" ", ""));
+        viewHolder.pris.setText(singleton.getMineUdlejForhandlinger().get(i).getPris());
+
 
         viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +95,13 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
 
     @Override
     public int getItemCount() {
-        return 2;
+        if(singleton.getMineUdlejForhandlinger()!=null){
+            return singleton.getMineUdlejForhandlinger().size();
+        }
+        else{
+            return 0;
+        }
+
         //TODO retun forhandlingerSomUdlejer.size();
         //return singleton.getAftaler().size();
     }
