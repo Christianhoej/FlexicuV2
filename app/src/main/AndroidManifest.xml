@@ -34,7 +34,8 @@
             tools:ignore="DuplicateActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".opret_bruger.Opret_bruger_akt"
             android:screenOrientation="sensorPortrait"/>

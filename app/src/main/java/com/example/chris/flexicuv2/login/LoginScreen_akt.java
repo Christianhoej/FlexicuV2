@@ -2,15 +2,21 @@
 package com.example.chris.flexicuv2.login;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -39,17 +45,28 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private FrameLayout flex_roter;
 
     private LoginPresenter presenter;
+    TextView tv;
+    ImageView ivX;
+    private Animation rotateAnim;
+    private ImageView logo;
+    private Fragment animfrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new LoginPresenter(this, this); //Evt. lav metode der kan sætte presenter på.
+        presenter = new LoginPresenter(this, this, loading_screen); //Evt. lav metode der kan sætte presenter på.
         dbManager = new DBManager();
-
+        //logo = findViewById(R.id.flexLogo);
         loading_screen = new Loading_screen();
         setContentView(R.layout.login_screen_akt);
         tilAnimation = (FrameLayout) findViewById(R.id.tilAnimation);
+
+        //animfrag = findViewById(R.id.fragment1);
+
+        tv = findViewById(R.id.loading_text2);
+        ivX = findViewById(R.id.x_logo);
+        rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotation);
 
         logIn = findViewById(R.id.logInBtn);
         logIn.setOnClickListener(this);
@@ -71,7 +88,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         new_user_fragment_1= new Opret_bruger_fragment_1();
         tilFragmenter = (FrameLayout) findViewById(R.id.tilFragmenter_frame);
 
-
+        setFragment(loading_screen);
     }
 
 
@@ -82,8 +99,18 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
           boolean erOK = presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
           if(erOK) {
               //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
+              ivX = findViewById(R.id.x_logo);
               //loginFrame.setAlpha();
-              setAnimation(loading_screen);
+              //setAnimation(loading_screen);
+              //logo = findViewById(R.id.x_logo);
+              //logo.setVisibility(View.INVISIBLE);
+
+              //Context context;
+              //v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotation));
+              ivX.startAnimation(rotateAnim);
+              //presenter.startAnim();
+              tv.setText("Loading...");
+
           }
       }
       else{

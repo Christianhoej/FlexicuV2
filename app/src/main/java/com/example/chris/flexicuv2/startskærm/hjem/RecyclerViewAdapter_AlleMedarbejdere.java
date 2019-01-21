@@ -37,7 +37,7 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
     public void onBindViewHolder(@NonNull RecyclerViewAdapter_AlleMedarbejdere.ViewHolder viewHolder, int i) {
         String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
-        viewHolder.salary.setText(loen);
+        //viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
     }
 
@@ -50,13 +50,13 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView name;
-        private TextView salary;
+        //private TextView salary;
         private TextView workfield;
 
         public ViewHolder(View itemView){
             super(itemView);
             name = itemView.findViewById(R.id.medarbejderNavn);
-            salary = itemView.findViewById(R.id.salary);
+            //salary = itemView.findViewById(R.id.salary);
             workfield = itemView.findViewById(R.id.workfield);
         }
     }

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.example.chris.flexicuv2.database.DBManager;
+import com.example.chris.flexicuv2.loadingscreen.Loading_screen;
 
 /**
  * @author Janus
@@ -21,8 +22,10 @@ public class LoginPresenter implements DBManager.SignInSuccess{
     private static final String TAG = "EmailPassword";
     private Context mContext;
     private String email, password;
+    startAnimation startAnimation;
 
-    public LoginPresenter(UpdateLoginScreen pres, Context mContext){
+    public LoginPresenter(UpdateLoginScreen pres, Context mContext, startAnimation start){
+        this.startAnimation = start;
         this.pres = pres;
         dbManager = new DBManager();
         this.mContext = mContext;
@@ -30,6 +33,10 @@ public class LoginPresenter implements DBManager.SignInSuccess{
     }
     public String setText(){
         return "Gunn rules";
+    }
+
+    public void startAnim(){
+        startAnimation.starAnimationMetode(true);
     }
 
     public boolean checkLoginCredentials(String email, String password, final Context context){
@@ -73,6 +80,10 @@ public class LoginPresenter implements DBManager.SignInSuccess{
     public void userSignInSuccess(boolean success) {
         pres.loginSuccess(success);
 
+    }
+
+    public interface startAnimation{
+        void starAnimationMetode(Boolean begynd);
     }
 
     @Override
