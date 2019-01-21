@@ -64,7 +64,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
 
         //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er sat helt op
 
-        viewHolder.type.setText(typeARR.get(i).toString());
+        viewHolder.arbejdsområder.setText(typeARR.get(i).toString());
         viewHolder.navn.setText(navnARR.get(i).toString());
         viewHolder.virksomhed.setText(virkARR.get(i).toString());
 
@@ -98,7 +98,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
      * Opretter ViewHolder
      */
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView type;
+        TextView arbejdsområder;
         TextView navn;
         TextView periode;
         TextView virksomhed;
@@ -108,7 +108,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Type skal nok væk
-            type = (TextView) itemView.findViewById(R.id.forhandlinger_type);
+            arbejdsområder = (TextView) itemView.findViewById(R.id.forhandlinger_arbejdsområder);
             navn = (TextView) itemView.findViewById(R.id.forhandlinger_navn);
             periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
             virksomhed = (TextView) itemView.findViewById(R.id.forhandlinger_virk);

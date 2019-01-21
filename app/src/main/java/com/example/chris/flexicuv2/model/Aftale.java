@@ -28,10 +28,16 @@ public class Aftale implements Comparable<Aftale>{
 
     public void setForhandlingID(String forhandlingID) {
         this.forhandlingID = forhandlingID;
+
     }
     public int getTimepris() {
         return timepris;
+
     }
+        public int getTimepris () {
+            return timepris;
+        }
+
 
     public void setTimepris(int timepris) {
         this.timepris = timepris;

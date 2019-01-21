@@ -4,6 +4,8 @@ package com.example.chris.flexicuv2.startskærm.udlej;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
@@ -253,6 +255,9 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                     ledig.setUdlejer(singleton.getBruger());
                     singleton.addLedigeMedarbejder(ledig);
                     dbManager.createUdlej(ledig);
+
+
+                    //setFragment(//TODO );
                 }
 
                 break;
@@ -271,6 +276,14 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
                 break;
         }
+    }
+
+    public void setFragment(Fragment fragment) {
+        //startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
     }
 
     /**
