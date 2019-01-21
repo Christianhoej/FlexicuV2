@@ -3,6 +3,7 @@ package com.example.chris.flexicuv2.startskærm.udlej;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Scroller;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -25,6 +27,8 @@ import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
+import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_forhandlinger_fragment;
+import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_ledige_fragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -44,6 +48,8 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
     private DBManager dbManager;
     private Medarbejder medarbejderValgt;
     private DatePickerDialog datepickerdialog;
+    private Aftaler_ledige_fragment forhandlinger_fragment;
+    private FrameLayout startskærmFrameTilDiverse;
 
 
 
@@ -63,8 +69,8 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
 
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
-        overskrift_TV = v.findViewById(R.id.ledige_overskrift);
-        overskrift_TV.setText("Giv mig en overskrift");
+        forhandlinger_fragment = new Aftaler_ledige_fragment();
+        startskærmFrameTilDiverse = getActivity().findViewById(R.id.startskærm_frame_til_diverse);
         TextView udlejer = v.findViewById(R.id.ledige_udlejer_navn_textview);
         udlejer.setText(singleton.getBruger().getVirksomhedsnavn());
         medarbejderSpinner = v.findViewById(R.id.ledig_medarbejder_spinner);
@@ -91,7 +97,7 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
         kommentarET = v.findViewById(R.id.ledig_kommentar_edittext);
 
         kommentarET.setScroller(new Scroller(getActivity()));
-        kommentarET.setMaxLines(3);
+        kommentarET.setMaxLines(4);
         kommentarET.setVerticalScrollBarEnabled(true);
         kommentarET.setMovementMethod(new ScrollingMovementMethod());
 
@@ -244,16 +250,36 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
                         kommentarET.getText().toString())
                         ) {
 
-                    Aftale ledig = new Aftale();
-                    ledig.setKommentar(kommentarET.getText().toString());
+                    int index = -1;
+                    for(Aftale aftale : singleton.getMineLedigeMedarbejdere()){
+                        if(aftale.getOprindeligUdlejID().equals(singleton.midlertidigAftale.getOprindeligUdlejID())){
+                            index = singleton.getMineLedigeMedarbejdere().indexOf(aftale);
+                        }
+                    }
+                    //int index = singleton.getMineLedigeMedarbejdere().indexOf(singleton.midlertidigMedarbejder);
+
+                    singleton.midlertidigAftale.setStartDato(startdatoET.getText().toString());
+                    singleton.midlertidigAftale.setEndDato(slutdatoET.getText().toString());
+                    singleton.midlertidigAftale.setPris(timeprisET.getText().toString());
+                    singleton.midlertidigAftale.setKommentar(kommentarET.getText().toString());
+                    singleton.midlertidigAftale.setEgetVærktøj(egetVærktøj_switch.isChecked());
+                    singleton.midlertidigAftale.setMedarbejder(singleton.midlertidigMedarbejder);
+                    /*edig.setKommentar(kommentarET.getText().toString());
                     ledig.setStartDato(startdatoET.getText().toString());
                     ledig.setEndDato(slutdatoET.getText().toString());
                     ledig.setPris(timeprisET.getText().toString());
-                    ledig.setEgetVærktøj(egetVærktøj_switch.getShowText());
+                    ledig.setEgetVærktøj(egetVærktøj_switch.isChecked());
                     ledig.setMedarbejder(singleton.midlertidigMedarbejder);
                     ledig.setUdlejer(singleton.getBruger());
-                    singleton.addLedigeMedarbejder(ledig);
-                    dbManager.createUdlej(ledig);
+                    ledig.setOprindeligUdlejID(singleton.midlertidigAftale.getOprindeligUdlejID());*/
+
+
+                    //singleton.addLedigeMedarbejder(ledig);
+
+                    singleton.getMineLedigeMedarbejdere().set(index,singleton.midlertidigAftale);
+                    dbManager.updateUdlej(singleton.midlertidigAftale);
+                   // getActivity().onBackPressed();
+                    setFragment(forhandlinger_fragment);
                 }
 
                 break;
@@ -272,6 +298,13 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
 
                 break;
         }
+    }
+
+    public void setFragment(Fragment fragment) {
+        startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.til_aftaler_frame, fragment);
+        fragmentTransaction.commit();
     }
 
     /**
@@ -437,7 +470,7 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
     //Metoder til valgt spinner listener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position/*-1*/);
+        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position);
         System.out.println(singleton.midlertidigMedarbejder.getNavn());
     }
 
