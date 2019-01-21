@@ -122,7 +122,7 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Type skal nok væk
-            type = (TextView) itemView.findViewById(R.id.forhandlinger_type);
+            type = (TextView) itemView.findViewById(R.id.forhandlinger_arbejdsområder);
             navn = (TextView) itemView.findViewById(R.id.forhandlinger_navn);
             periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
             virksomhed = (TextView) itemView.findViewById(R.id.forhandlinger_virk);

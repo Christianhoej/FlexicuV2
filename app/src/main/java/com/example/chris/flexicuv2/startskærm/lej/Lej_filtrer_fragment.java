@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.hjælpeklasser.MultiSelectionSpinner;
+import com.example.chris.flexicuv2.model.Singleton;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private Button annuller;
     private Button nulstil;
     private Calendar c;
+    private Singleton singleton;
 
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private TextView startdatoET, slutdatoET;
@@ -59,6 +61,8 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lej_filtrer_fragment, container, false);
+
+        singleton = Singleton.getInstance();
 
         arbejdsområder_spinner = (MultiSelectionSpinner)v.findViewById(R.id.filtrer_arbejdsområder);
         postnr = (EditText) v.findViewById(R.id.edit_postnr);
@@ -94,12 +98,36 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     public void opretSpinner(){
         List<String> arbejdsområde_listen = new ArrayList<String>();
         arbejdsområde_listen.add("Vælg arbejdsområde");
-        arbejdsområde_listen.add("Håndværker");
-        arbejdsområde_listen.add("Smed");
-        arbejdsområde_listen.add("Lagermand");
+        arbejdsområde_listen.add("Arbejdsmand");
+        arbejdsområde_listen.add("Butiksekspedition");
+        arbejdsområde_listen.add("Chauffør - over 3.5 ton");
+        arbejdsområde_listen.add("Chauffør - under 3.5 ton");
+        arbejdsområde_listen.add("Ejendomsservice");
         arbejdsområde_listen.add("Elektriker");
+        arbejdsområde_listen.add("Film og TV");
+        arbejdsområde_listen.add("Flyttemand");
+        arbejdsområde_listen.add("HR");
+        arbejdsområde_listen.add("IT");
+        arbejdsområde_listen.add("Jura");
+        arbejdsområde_listen.add("Kantinearbejde");
+        arbejdsområde_listen.add("Kontor- og sekretærarbejde");
+        arbejdsområde_listen.add("Lager");
+        arbejdsområde_listen.add("Maler");
+        arbejdsområde_listen.add("Maskinfører");
+        arbejdsområde_listen.add("Murer");
+        arbejdsområde_listen.add("Online marketing");
+        arbejdsområde_listen.add("Rengøring");
+        arbejdsområde_listen.add("Smed");
+        arbejdsområde_listen.add("Svejsning");
+        arbejdsområde_listen.add("Telemarketing");
+        arbejdsområde_listen.add("Tjener");
+        arbejdsområde_listen.add("Tolk");
+        arbejdsområde_listen.add("Tømrer");
+        arbejdsområde_listen.add("VVS");
+        arbejdsområde_listen.add("Økonomi");
         arbejdsområder_spinner.setItems(arbejdsområde_listen);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -175,8 +203,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         Address address = list.get(0);
         String lokation = address.getLocality();
 
-        //singleton.midlertidigMedarbejder.setLatitude(Double.toString(add.getLatitude()));
-        //singleton.midlertidigMedarbejder.setLongitude(Double.toString(add.getLongitude()));
+
+        singleton.søgeFiltrering.setLatitude(Double.toString(address.getLatitude()));
+        singleton.søgeFiltrering.setLongitude(Double.toString(address.getLongitude()));
 
 
     }
