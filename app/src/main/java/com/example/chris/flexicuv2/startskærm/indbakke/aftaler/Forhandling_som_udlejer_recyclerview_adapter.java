@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_lejer;
 import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_udlejer;
 
 import java.util.ArrayList;
@@ -110,7 +109,7 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Type skal nok væk
-            type = (TextView) itemView.findViewById(R.id.forhandlinger_type);
+            type = (TextView) itemView.findViewById(R.id.forhandlinger_arbejdsområder);
             navn = (TextView) itemView.findViewById(R.id.forhandlinger_navn);
             periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
             virksomhed = (TextView) itemView.findViewById(R.id.forhandlinger_virk);
