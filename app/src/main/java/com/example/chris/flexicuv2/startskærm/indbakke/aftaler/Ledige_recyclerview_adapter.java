@@ -46,11 +46,11 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         //TODO setText
 
         //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
-        viewHolder.navn.setText("Navn: " + singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getNavn());
-        viewHolder.periode.setText("Periode: " + singleton.getMineLedigeMedarbejdere().get(i).getStartDato() + " - " + singleton.getMineLedigeMedarbejdere().get(i).getEndDato());
-        viewHolder.pris.setText("Timepris: " + singleton.getMineLedigeMedarbejdere().get(i).getPris() + "kr.");
-        viewHolder.værktøj.setText("Medbriges eget værktøj? " + egetVærktøj(i));
-        viewHolder.arbejdsområder.setText("Arbejdsområder: " + singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.navn.setText(singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getNavn());
+        viewHolder.periode.setText(singleton.getMineLedigeMedarbejdere().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineLedigeMedarbejdere().get(i).getEndDato().replace(" ", ""));
+        viewHolder.pris.setText(singleton.getMineLedigeMedarbejdere().get(i).getPris() + "kr.");
+        viewHolder.værktøj.setText(egetVærktøj(i));
+        viewHolder.arbejdsområder.setText(singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getArbejdsomraade());
 
         viewHolder.ledige_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,6 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
 
     @Override
     public int getItemCount() {
-        //return 0;
         return singleton.getMineLedigeMedarbejdere().size();
     }
 
