@@ -2,6 +2,9 @@ package com.example.chris.flexicuv2.startskærm.indbakke.aftaler;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
+import com.example.chris.flexicuv2.startskærm.udlej.Ledige_rediger;
 
 import java.util.concurrent.TimeoutException;
 
@@ -19,6 +23,7 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
 
     private Context mContext;
     Singleton singleton;
+    Ledige_rediger ledige_rediger_fragment;
 
     //TODO konstruktøren skal self have flere input når net er klar.
     public Ledige_recyclerview_adapter(Context mContext) {
@@ -31,12 +36,13 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.ledige_recyclerview_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
+        ledige_rediger_fragment = new Ledige_rediger();
         return holder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull Ledige_recyclerview_adapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final Ledige_recyclerview_adapter.ViewHolder viewHolder, final int i) {
         //TODO setText
 
         //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
@@ -50,10 +56,13 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
             @Override
             public void onClick(View v) {
                 //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
+
+                        ledige_rediger_fragment = new Ledige_rediger();
+                        setFragment(ledige_rediger_fragment);
+                        singleton.midlertidigAftale = singleton.getMineLedigeMedarbejdere().get(i);
             }
         });
     }
-
     public String egetVærktøj(int i){
         String egetVærktøj;
         if(singleton.getMineLedigeMedarbejdere().get(i).isEgetVærktøj()==false){
@@ -70,6 +79,13 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         return singleton.getMineLedigeMedarbejdere().size();
     }
 
+    public void setFragment(Fragment fragment) {
+        //startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
+    }
 
     /**
      * Indre klasse

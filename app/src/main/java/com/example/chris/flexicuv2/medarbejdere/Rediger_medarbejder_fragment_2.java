@@ -1,7 +1,6 @@
 
 package com.example.chris.flexicuv2.medarbejdere;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

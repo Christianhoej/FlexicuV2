@@ -1,6 +1,9 @@
 package com.example.chris.flexicuv2.startskærm.udlej;
 
 import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
+import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Medarbejder;
+import com.example.chris.flexicuv2.model.Singleton;
 
 class Udlejning_Presenter {
     private final String ERRORKRONOLOGISKDATO = "Den valgte slutdato falder før startdatoen";
@@ -10,6 +13,8 @@ class Udlejning_Presenter {
     private final String ERRORSLUTDATO = "SLUTDATOFEJL";
     private final String ERRORTIMEPRIS = "TIMEPRISFEJL";
     private final String ERRORINGENARBEJDSDAGE = "Den valgte periode har ingen arbejdsdage";
+
+    private Singleton singleton;
 
     public Udlejning_Presenter(UpdateUdlejning updateUdlejning){
         this.updateUdlejning = updateUdlejning;
@@ -61,6 +66,13 @@ class Udlejning_Presenter {
                 updateUdlejning.errorSlutdato(ERRORKRONOLOGISKDATO);
                 errors++;
             }
+            if(singleton.midlertidigAftale==null) {
+                singleton.midlertidigAftale = new Aftale();
+            }
+            singleton.midlertidigAftale.setStartDato(startdato);
+            singleton.midlertidigAftale.setEndDato(slutdato);
+            singleton.midlertidigAftale.setTimepris(timepris);
+            singleton.midlertidigAftale.setKommentar(kommentar);
         }
 
         boolean arbejdsDageOK = (arbejdsdage>0);
@@ -118,6 +130,23 @@ class Udlejning_Presenter {
         void errorSlutdato(String errorMSG);
         void errorTimepris(String errorMSG);
         void errorArbejdsdage(String errorMSG);
+        void setStartDato(String startDato);
+        void setSlutDato(String slutDato);
+        void setTimepris(int timepris);
+        void setVærktøj(Boolean værktøj);
+        void setKommentar(String kommentar);
+        void setMedarbejder(Medarbejder medarbejder);
         //TODO evt. noget popup ved oprettelse eller andet.
+    }
+
+    public void udfyldFelter(){
+        if(singleton.midlertidigAftale!=null){
+            updateUdlejning.setStartDato(singleton.midlertidigAftale.getStartDato());
+            updateUdlejning.setSlutDato(singleton.midlertidigAftale.getEndDato());
+            updateUdlejning.setTimepris(singleton.midlertidigAftale.getTimepris());
+            updateUdlejning.setVærktøj(singleton.midlertidigAftale.isEgetVærktøj());
+            updateUdlejning.setKommentar(singleton.midlertidigAftale.getKommentar());
+            updateUdlejning.setMedarbejder(singleton.midlertidigAftale.getMedarbejder());
+        }
     }
 }
