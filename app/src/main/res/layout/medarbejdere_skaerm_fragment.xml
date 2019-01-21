@@ -10,14 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:weightSum="20">
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginVertical="5dp"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="2"
+            android:layout_marginTop="5dp"
             android:background="@drawable/flexicu_logo" />
 
         <TextView
@@ -25,19 +28,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Medarbejdere"
             android:textAlignment="center"
             android:textSize="30sp" />
 
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/flex_green"
+            android:layout_marginHorizontal="20dp">
+        </View>
 
         <android.support.v7.widget.RecyclerView
             android:layout_marginVertical="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="18"
             android:id="@+id/medarbejder_recyclerview"
             android:layout_gravity="center"
             android:layout_marginTop="0dp">
@@ -47,7 +55,7 @@
             android:id="@+id/opret_medarbejder_knap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
+            android:layout_weight="0.5"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"

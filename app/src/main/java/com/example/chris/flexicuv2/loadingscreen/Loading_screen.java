@@ -12,13 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.login.LoginPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Loading_screen extends Fragment {
+public class Loading_screen extends Fragment implements LoginPresenter.startAnimation {
 
-    TextView tv;
+    TextView tv2;
     ImageView ivX;
     private Animation rotateAnim;
 
@@ -34,17 +35,20 @@ public class Loading_screen extends Fragment {
 
         // Inflate the layout for this fragment
 
-        tv = v.findViewById(R.id.loading_text);
+        tv2 = v.findViewById(R.id.loading_text);
         ivX = v.findViewById(R.id.x_logo);
         /*rotateAnim =AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);//TODO link fragmentet til en "kontekst"
         ivX.startAnimation(rotateAnim);
         Log.d("anim","Kommer her");
         */
-
-        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
-        ivX.startAnimation(animation);
+        rotateAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
 
         return v;
     }
 
+    @Override
+    public void starAnimationMetode(Boolean begynd) {
+
+        ivX.startAnimation(rotateAnim);
+    }
 }

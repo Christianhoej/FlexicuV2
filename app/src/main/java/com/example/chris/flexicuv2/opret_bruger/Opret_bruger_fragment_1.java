@@ -62,11 +62,8 @@ public class Opret_bruger_fragment_1 extends Fragment implements Opret_bruger_Pr
         companyCity = v.findViewById(R.id.companyCity);
 
         contactName = v.findViewById(R.id.contactName);
-        contactName.setText("Gunn");
         contactPhone = v.findViewById(R.id.contactPhone);
-        contactPhone.setText("11111111");
         contactTitle = v.findViewById(R.id.contactTitle);
-        contactTitle.setText("CEO");
 
         createUserBtn = v.findViewById(R.id.createUserBtn);
         createUserBtn.setOnClickListener(this);
