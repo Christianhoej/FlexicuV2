@@ -177,7 +177,8 @@ public class DBManager {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     for(DataSnapshot snapshot1 :snapshot.getChildren()){
-                        Aftale forhandling = snapshot.getValue(Aftale.class);
+                        Aftale forhandling = snapshot1.getValue(Aftale.class);
+
                         if(forhandling.getUdlejer().equals(singleton.getBruger())) {
                             singleton.getMineUdlejForhandlinger().add(forhandling);
                         }
@@ -219,8 +220,8 @@ public class DBManager {
                         singleton.addLedigeMedarbejder(udlej);
                     }
                 }
-                //readForhandling();
-                signInSuccess.userSignInSuccess(true);
+                readForhandling();
+                //signInSuccess.userSignInSuccess(true);
             }
 
             @Override

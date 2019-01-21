@@ -113,19 +113,16 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         //Dato
         startdato_lejerTV = v.findViewById(R.id.forhandling_som_lejer_startdato_lejer_textview);
         startdato_lejerTV.setOnClickListener(this);
-        startdato_lejerTV.setText(singleton.midlertidigAftale.getStartDato());
+
         slutdato_lejerTV = v.findViewById(R.id.forhandling_som_lejer_slutdato_lejer_textview);
         slutdato_lejerTV.setOnClickListener(this);
-        slutdato_lejerTV.setText(singleton.midlertidigAftale.getEndDato());
 
-        startdato_lejerTV.addTextChangedListener(startDatoTextWatcher);
-        slutdato_lejerTV.addTextChangedListener(arbDageTextWatcher);
-        slutdato_lejerTV.addTextChangedListener(slutDatoTextWatcher);
+
 
         //Arbejdsdage
         antalArbejdsdage_lejerTV = v.findViewById(R.id.forhandling_som_lejer_antal_arbejdsdage_lejer_textview);
         antalArbejdsdage_lejerTV.setText(arbejdsdage_udlejerTV.getText().toString());
-        // TODO : udregne antal arbejdsdage og sætte textView til det
+
         //Pris
         timepris_lejerET = v.findViewById(R.id.forhandling_som_lejer_timepris_lejer_editview);
         timepris_lejerET.setText(timepris_udlejerTV.getText().toString());
@@ -137,6 +134,12 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         totalprisen_TV = v.findViewById(R.id.forhandling_som_lejer_total_pris_lejer_textview);
         totalprisen_TV.setText(totalpris_udlejerTV.getText().toString());
         //presenter.udregnPriser(Integer.parseInt(singleton.midlertidigAftale.getPris()), Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString()), 7.4, true);
+
+        slutdato_lejerTV.addTextChangedListener(arbDageTextWatcher);
+        slutdato_lejerTV.addTextChangedListener(slutDatoTextWatcher);
+        startdato_lejerTV.addTextChangedListener(startDatoTextWatcher);
+        startdato_lejerTV.setText(singleton.midlertidigAftale.getStartDato());
+        slutdato_lejerTV.setText(singleton.midlertidigAftale.getEndDato());
 
         //Eget værktøj
         egetVærktøj_switch = v.findViewById(R.id.forhandling_som_lejer_egetværktøj_lejer_switch);
@@ -161,12 +164,12 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
                 if(!timepris_lejerET.getText().toString().equals("")){
                     pris = Integer.parseInt(timepris_lejerET.getText().toString());
                 }
-                int arbDage = 0;
+                int arbDage;
                 if (antalArbejdsdage_lejerTV.getText().equals("antal arb. dage")) {
                     arbDage = 0;
                 }else
                     arbDage = Integer.parseInt(antalArbejdsdage_lejerTV.getText().toString());
-
+                System.out.println("Timepris: " + timepris_lejerET.getText().toString() + ", den anden pris: " + pris);
                 if (presenter.checkKorrektUdfyldtInformation(
                         startdato_lejerTV.getText().toString(),
                         slutdato_lejerTV.getText().toString(),
@@ -177,7 +180,6 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
                     if(singleton.midlertidigAftale.getKommentar()!=null){
                         forhandling.setKommentar(singleton.midlertidigAftale.getKommentar());
                     }
-                 //   forhandling.setKommentar(kommentarET.getText().toString());
                     forhandling.setStartDato(startdato_lejerTV.getText().toString());
                     forhandling.setEndDato(slutdato_lejerTV.getText().toString());
                     forhandling.setPris(timepris_lejerET.getText().toString());
@@ -189,7 +191,9 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
                     forhandling.setAktiv(true);
                     singleton.addMineLejForhandlinger(forhandling);
                     dbManager.createForhandling(forhandling);
+                    getActivity().getSupportFragmentManager().popBackStack();
                 }
+                System.out.println("timepris efter check: " + timepris_lejerET.getText().toString() + ", den anden pris: " + pris);
                 break;
             case R.id.forhandling_annuller_button:
                 getActivity().getSupportFragmentManager().popBackStack();
@@ -213,12 +217,10 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
                 month = month+1;
                 String måned = ""+month;
                 if(month < 10){
-
                     måned = "0" + month;
                 }
                 String dag = ""+dayOfMonth;
                 if(dayOfMonth < 10){
-
                     dag  = "0" + dayOfMonth ;
                 }
 
@@ -271,10 +273,9 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         int width = displaymetrics.widthPixels;
 
         // create the popup window
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = displaymetrics.heightPixels;
         boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
-        //popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        final PopupWindow popupWindow = new PopupWindow(popupView, (width-100), (height-200), focusable);
 
         //final PopupWindow popupWindowt = new PopupWindow();
         popupWindow.setContentView(popupView);
@@ -283,15 +284,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-        //  popupWindow.setOutsideTouchable(true);
-            /*// dismiss the popup window when touched
-            popupView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-            });*/
+
         final EditText kommentar = popupView.findViewById(R.id.skriv_kommentar_edittext);
 
         final Button gem = popupView.findViewById(R.id.gem_kommentar);
@@ -455,7 +448,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
 
     @Override
     public void errorTimepris(String errorMSG) {
-        timepris_lejerET.setText(errorMSG);
+        timepris_lejerET.setError(errorMSG);
     }
 
     @Override
