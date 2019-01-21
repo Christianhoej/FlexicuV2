@@ -14,40 +14,104 @@
         android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="5dp">
 
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ledige_navn"
-        android:textSize="18dp"
-        android:text="Medarbjederens navn"/>
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ledige_arbejdsområder"
-            android:textSize="18dp"
-            android:text="Medarbjederens arbejdsområder"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Navn: "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ledige_navn"
+                android:textSize="22dp"
+                android:text="Medarbjederens navn"/>
 
-        <TextView
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ledige_periode"
-            android:textSize="18dp"
-            android:text="02/01/19-18/01/19"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Arbejdsområder: "/>
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ledige_arbejdsområder"
+                android:textSize="18dp"
+                android:text=""/>
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ledige_pris"
-            android:textSize="18dp"
-            android:text="Samlet pris"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Periode: "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ledige_periode"
+                android:textSize="18dp"
+                android:text="02/01/19-18/01/19"/>
 
-        <TextView
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ledige_værktøj"
-            android:textSize="18dp"
-            android:text="Værktøj"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Timepris: "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ledige_pris"
+                android:textSize="18dp"
+                android:text="Samlet pris"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Medbringes eget værktøj? "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ledige_værktøj"
+                android:textSize="18dp"
+                android:text="Værktøj"/>
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

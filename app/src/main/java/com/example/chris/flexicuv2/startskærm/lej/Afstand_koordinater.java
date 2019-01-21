@@ -3,7 +3,7 @@ package com.example.chris.flexicuv2.startskærm.lej;
 import android.webkit.JavascriptInterface;
 
 public class Afstand_koordinater {
-//https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+    //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
     public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
     public double calculateDistanceInKilometer(double medarbejderLat, double medarbejderLng, double arbejdeLat, double arbejdeLng) {
 
