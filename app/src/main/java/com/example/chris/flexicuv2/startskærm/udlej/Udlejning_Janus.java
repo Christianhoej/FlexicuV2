@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.Bekraeftelse;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Aftale;
@@ -51,7 +52,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private DatePickerDialog datepickerdialog;
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private Udlejning_Presenter presenter;
-
+    private Bekraeftelse bekraeftelseFragment;
 
     public Udlejning_Janus() {
         // Required empty public constructor
@@ -115,6 +116,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         opretUdlejningButton.setOnClickListener(this);
         presenter = new Udlejning_Presenter(this);
 
+        bekraeftelseFragment = new Bekraeftelse();
 
         return v;
     }
@@ -258,7 +260,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                     dbManager.createUdlej(ledig);
 
 
-                    //setFragment(//TODO );
+                    setFragment(bekraeftelseFragment);
                 }
 
                 break;
@@ -283,7 +285,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         //startskærmFrameTilDiverse.removeAllViews();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
-        fragmentTransaction.addToBackStack("fragment");
+        //fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 

@@ -69,7 +69,15 @@ public class Indbakke_fragment extends Fragment {
         //fjernFragmenter1(aftaler_forhandlinger_fragment);
         //fjernFragmenter1(aftaler_ledige_fragment);
         setNavigation();
-        setFragment(aftaler_forhandlinger_fragment, "forhandlinger");
+
+
+
+        if(senesteFrag=="ledige"){
+            setFragment(ledige_fragment, "ledige");
+        }
+        else
+            setFragment(aftaler_forhandlinger_fragment, "forhandlinger");
+
         //indbakke_nav.getMenu().getItem(0).setChecked(true);
         //onNavigationItemSelected(indbakke_nav.getMenu().findItem(R.id.indbakke_nuværende));
 

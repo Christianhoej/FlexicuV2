@@ -163,6 +163,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            startskærmFrameTilDiverse.removeAllViews();
             super.onBackPressed();
         }
     }
