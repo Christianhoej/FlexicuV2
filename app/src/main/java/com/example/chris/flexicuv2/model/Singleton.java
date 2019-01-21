@@ -2,6 +2,8 @@ package com.example.chris.flexicuv2.model;
 
 import android.app.Activity;
 
+import com.example.chris.flexicuv2.startskærm.lej.Filter;
+
 import java.util.ArrayList;
 
 public class Singleton extends Activity {
@@ -19,6 +21,7 @@ public class Singleton extends Activity {
     public static Medarbejder midlertidigMedarbejder;
     public static Bruger midlertidigBruger;
     public static Aftale midlertidigAftale;
+    public static Filter søgeFiltrering;
 
 
 

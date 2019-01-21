@@ -16,40 +16,109 @@
         android:layout_marginHorizontal="5dp"
         >
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Udlejning eller indlejning"
-            android:textSize="18dp"
-            android:id="@+id/forhandlinger_type"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Navn: "
+                android:textSize="22dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forhandlinger_navn"
+                android:textSize="22dp"
+                android:text="Medarbjederens navn"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/forhandlinger_navn"
-            android:textSize="18dp"
-            android:text="Medarbjederens navn"/>
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/forhandlinger_periode"
-            android:textSize="18dp"
-            android:text="02/01/19-18/01/19"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arbejdsområder: "
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18dp"
+                android:id="@+id/forhandlinger_arbejdsområder"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/forhandlinger_virk"
-            android:textSize="18dp"
-            android:text="Hans Hansen APS"/>
+        </LinearLayout>
 
-        <TextView
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/forhandlinger_pris"
-            android:textSize="18dp"
-            android:text="Samlet pris"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Periode: "
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forhandlinger_periode"
+                android:textSize="18dp"
+                android:text="02/01/19-18/01/19"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Virksomhed: "
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forhandlinger_virk"
+                android:textSize="18dp"
+                android:text="Hans Hansen APS"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Timepris: "
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forhandlinger_pris"
+                android:textSize="18dp"
+                android:text="Samlet pris"/>
+
+        </LinearLayout>
+
+
 
 
 

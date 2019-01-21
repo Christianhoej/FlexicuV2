@@ -67,11 +67,13 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
 
         //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er sat helt op
 
+
         viewHolder.type.setText(singleton.getMineLejForhandlinger().get(i).getMedarbejder().getArbejdsomraade());
         viewHolder.navn.setText(singleton.getMineLejForhandlinger().get(i).getMedarbejder().getNavn());
         viewHolder.virksomhed.setText(singleton.getMineLejForhandlinger().get(i).getUdlejer().getVirksomhedsnavn());
         viewHolder.periode.setText(singleton.getMineLejForhandlinger().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineLejForhandlinger().get(i).getEndDato().replace(" ", ""));
         viewHolder.pris.setText(singleton.getMineLejForhandlinger().get(i).getPris());
+      
         viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +109,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
      * Opretter ViewHolder
      */
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView type;
+        TextView arbejdsområder;
         TextView navn;
         TextView periode;
         TextView virksomhed;
@@ -117,7 +119,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Type skal nok væk
-            type = (TextView) itemView.findViewById(R.id.forhandlinger_type);
+            arbejdsområder = (TextView) itemView.findViewById(R.id.forhandlinger_arbejdsområder);
             navn = (TextView) itemView.findViewById(R.id.forhandlinger_navn);
             periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
             virksomhed = (TextView) itemView.findViewById(R.id.forhandlinger_virk);
