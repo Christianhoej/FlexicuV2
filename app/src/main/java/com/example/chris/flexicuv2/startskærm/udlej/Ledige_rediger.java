@@ -85,11 +85,9 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
         c1 =Calendar.getInstance();
 
 
-        slutdatoET.setEnabled(false);
-
-
         timeprisET = v.findViewById(R.id.ledig_timepris_textview1);
         timeprisET.addTextChangedListener(prisTextWatch);
+
         kommentarET = v.findViewById(R.id.ledig_kommentar_edittext);
 
         kommentarET.setScroller(new Scroller(getActivity()));

@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class DBManager {
@@ -119,10 +120,12 @@ public class DBManager {
         ref.orderByChild(VIRKSOMHEDSID).equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Medarbejder medarbejder = snapshot.getValue(Medarbejder.class);
-                    singleton.addMedarbejder(medarbejder);
+                    medarbejdere.add(snapshot.getValue(Medarbejder.class));
+
                 }
+                singleton.setMedarbejdere(medarbejdere);
                 readAlleUdlej();
 
             }
@@ -190,6 +193,8 @@ public class DBManager {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Aftale> udlejForhandling = new ArrayList<>();
+                ArrayList<Aftale> lejForhandling = new ArrayList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     for(DataSnapshot snapshot1 :snapshot.getChildren()){
                         for(DataSnapshot snapshot2 : snapshot1.getChildren()){
@@ -197,15 +202,17 @@ public class DBManager {
 
                             Aftale forhandling = snapshot2.getValue(Aftale.class);
 
-                            if(forhandling.getUdlejer().equals(singleton.getBruger())) {
-                              singleton.getMineUdlejForhandlinger().add(forhandling);
+                            if(forhandling.getUdlejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())) {
+                                udlejForhandling.add(forhandling);
                             }
                             else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
-                                singleton.getMineLejForhandlinger().add(forhandling);
+                                lejForhandling.add(forhandling);
                             }
                         }
                     }
                 }
+                singleton.setMineUdlejForhandlinger(udlejForhandling);
+                singleton.setMineLejForhandlinger(lejForhandling);
                 signInSuccess.userSignInSuccess(true);
             }
 
@@ -228,17 +235,20 @@ public class DBManager {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String uid = mAuth.getCurrentUser().getUid();
-                System.out.println("dataSnapshot: " + dataSnapshot.getChildrenCount());
+                ArrayList<Aftale> mineUdlejninger = new ArrayList<>();
+                ArrayList<Aftale> andresUdlejninger = new ArrayList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Aftale udlej = snapshot.getValue(Aftale.class);
 
                     if(!udlej.getUdlejer().getBrugerID().equals(uid)){
-                        singleton.addMedarbejderTilUdlejning(udlej);
+                        mineUdlejninger.add(udlej);
                     }
                     else {
-                        singleton.addLedigeMedarbejder(udlej);
+                        andresUdlejninger.add(udlej);
                     }
                 }
+                singleton.setMineLedigeMedarbejdere(andresUdlejninger);
+                singleton.setMedarbejdereTilUdlejning(mineUdlejninger);
                 readForhandling();
                 //signInSuccess.userSignInSuccess(true);
             }
