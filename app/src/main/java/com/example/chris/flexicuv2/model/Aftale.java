@@ -32,11 +32,8 @@ public class Aftale implements Comparable<Aftale>{
 
 
     }
-    public int getTimepris() {
-        return timepris;
 
-    }
-        public int getTimepris () {
+    public int getTimepris () {
             return timepris;
         }
 
