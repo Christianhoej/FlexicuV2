@@ -177,13 +177,17 @@ public class DBManager {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     for(DataSnapshot snapshot1 :snapshot.getChildren()){
-                        Aftale forhandling = snapshot1.getValue(Aftale.class);
+                        for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                            System.out.println(snapshot2.getValue());
 
-                        if(forhandling.getUdlejer().equals(singleton.getBruger())) {
-                            singleton.getMineUdlejForhandlinger().add(forhandling);
-                        }
-                        else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
-                            singleton.getMineLejForhandlinger().add(forhandling);
+                            Aftale forhandling = snapshot2.getValue(Aftale.class);
+
+                            if(forhandling.getUdlejer().equals(singleton.getBruger())) {
+                              singleton.getMineUdlejForhandlinger().add(forhandling);
+                            }
+                            else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
+                                singleton.getMineLejForhandlinger().add(forhandling);
+                            }
                         }
                     }
                 }
