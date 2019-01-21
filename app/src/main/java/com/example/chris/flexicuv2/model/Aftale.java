@@ -24,6 +24,7 @@ public class Aftale {
 
     public void setForhandlingID(String forhandlingID) {
         this.forhandlingID = forhandlingID;
+    }
     public int getTimepris() {
         return timepris;
     }
