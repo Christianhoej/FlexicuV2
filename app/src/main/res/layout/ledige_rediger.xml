@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop ="5dp"
-            android:text="leje/udleje af arbejdskompetence"
+            android:text="Rediger udbud"
             android:gravity="center_horizontal"/>
 
         <LinearLayout
@@ -89,7 +89,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="arbejdsdage\ni perioden" />
+                    android:text="Arbejdsdage\ni perioden" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -252,6 +252,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/flex_green_rektangel"
+                android:gravity="bottom"
+                android:padding="8dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:hint=" evt. en kommentar om medarbejderen \n eller til lejer" />
@@ -288,7 +290,7 @@
                 android:textColor="@color/hvid"
                 android:background="@drawable/rounded_corners_blue"
                 android:layout_height="wrap_content"
-                android:text="Opret \nmedarbejderudbud" />
+                android:text="Rediger \nmedarbejderudbud" />
         </LinearLayout>
 
     </LinearLayout>

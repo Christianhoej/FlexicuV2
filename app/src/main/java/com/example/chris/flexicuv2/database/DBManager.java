@@ -153,7 +153,7 @@ public class DBManager {
     public void updateUdlej(Aftale udlej){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        ref.child(MEDARBEJDER).child(udlej.getOprindeligUdlejID()).setValue(udlej);
+        ref.child(LEDIG).child(udlej.getOprindeligUdlejID()).setValue(udlej);
     }
 
     public void createForhandling(Aftale forhandling){

@@ -59,6 +59,7 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
 
                         ledige_rediger_fragment = new Ledige_rediger();
                         singleton.midlertidigAftale = singleton.getMineLedigeMedarbejdere().get(i);
+                        singleton.midlertidigMedarbejder = singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder();
                         setFragment(ledige_rediger_fragment);
             }
         });

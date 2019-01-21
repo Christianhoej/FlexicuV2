@@ -66,13 +66,13 @@ class Udlejning_Presenter {
                 updateUdlejning.errorSlutdato(ERRORKRONOLOGISKDATO);
                 errors++;
             }
-            if(singleton.midlertidigAftale==null) {
+           /* if(singleton.midlertidigAftale==null) {
                 singleton.midlertidigAftale = new Aftale();
             }
             singleton.midlertidigAftale.setStartDato(startdato);
             singleton.midlertidigAftale.setEndDato(slutdato);
             singleton.midlertidigAftale.setTimepris(timepris);
-            singleton.midlertidigAftale.setKommentar(kommentar);
+            singleton.midlertidigAftale.setKommentar(kommentar);*/
         }
 
         boolean arbejdsDageOK = (arbejdsdage>0);
