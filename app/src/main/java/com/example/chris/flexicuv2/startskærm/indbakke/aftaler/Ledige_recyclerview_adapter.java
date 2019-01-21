@@ -58,8 +58,8 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
                 //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
 
                         ledige_rediger_fragment = new Ledige_rediger();
-                        setFragment(ledige_rediger_fragment);
                         singleton.midlertidigAftale = singleton.getMineLedigeMedarbejdere().get(i);
+                        setFragment(ledige_rediger_fragment);
             }
         });
     }

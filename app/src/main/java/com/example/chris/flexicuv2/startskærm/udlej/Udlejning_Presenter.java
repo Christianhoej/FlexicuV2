@@ -143,7 +143,7 @@ class Udlejning_Presenter {
         if(singleton.midlertidigAftale!=null){
             updateUdlejning.setStartDato(singleton.midlertidigAftale.getStartDato());
             updateUdlejning.setSlutDato(singleton.midlertidigAftale.getEndDato());
-            updateUdlejning.setTimepris(singleton.midlertidigAftale.getTimepris());
+            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigAftale.getPris()));
             updateUdlejning.setVærktøj(singleton.midlertidigAftale.isEgetVærktøj());
             updateUdlejning.setKommentar(singleton.midlertidigAftale.getKommentar());
             updateUdlejning.setMedarbejder(singleton.midlertidigAftale.getMedarbejder());

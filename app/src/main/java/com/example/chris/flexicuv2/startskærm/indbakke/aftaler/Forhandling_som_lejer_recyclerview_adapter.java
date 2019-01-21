@@ -68,7 +68,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
         //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er sat helt op
 
 
-        viewHolder.type.setText(singleton.getMineLejForhandlinger().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.arbejdsområder.setText(singleton.getMineLejForhandlinger().get(i).getMedarbejder().getArbejdsomraade());
         viewHolder.navn.setText(singleton.getMineLejForhandlinger().get(i).getMedarbejder().getNavn());
         viewHolder.virksomhed.setText(singleton.getMineLejForhandlinger().get(i).getUdlejer().getVirksomhedsnavn());
         viewHolder.periode.setText(singleton.getMineLejForhandlinger().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineLejForhandlinger().get(i).getEndDato().replace(" ", ""));

@@ -250,7 +250,8 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                     ledig.setStartDato(startdatoET.getText().toString());
                     ledig.setEndDato(slutdatoET.getText().toString());
                     ledig.setPris(timeprisET.getText().toString());
-                    ledig.setEgetVærktøj(egetVærktøj_switch.getShowText());
+                    ledig.setEgetVærktøj(egetVærktøj_switch.isChecked());
+                    System.out.println("Eget værktøj getshottext "+egetVærktøj_switch.isChecked());
                     ledig.setMedarbejder(singleton.midlertidigMedarbejder);
                     ledig.setUdlejer(singleton.getBruger());
                     singleton.addLedigeMedarbejder(ledig);
