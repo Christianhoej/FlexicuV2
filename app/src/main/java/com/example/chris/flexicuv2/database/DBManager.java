@@ -168,6 +168,21 @@ public class DBManager {
         ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 
+    public void addForhandling(Aftale forhandling){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        forhandling.getMedarbejder().setVirksomhedsID(uid);
+
+        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).push().getKey();
+
+        forhandling.setForhandlingID(forhandlingID);
+
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).setValue(forhandling);
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
+    }
+
+
     public void readForhandling(){
         String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
