@@ -147,14 +147,21 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.anvend_knap:
-                //TODO Hvad skal knapperne gøre
+                //navigation skal måske
+                getActivity().onBackPressed();
                 //TODO check
                 break;
             case R.id.annuller_knap:
+                singleton.søgeFiltrering = new Filter();
+                System.out.println(singleton.søgeFiltrering.getStartdato() + " Dette er startdato");
                 getActivity().onBackPressed();
                 break;
             case R.id.nulstil_knap:
-                //TODO Nulstil knap opsættes
+                singleton.søgeFiltrering = new Filter();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.startskærm_frame_til_diverse, new Lej_filtrer_fragment())
+                    .commit();
+
                 break;
             case R.id.lej_filtrer_slutdato_textview:
                 findEnDato(false);
