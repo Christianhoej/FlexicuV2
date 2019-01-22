@@ -34,7 +34,7 @@
             android:layout_weight="0.6"
             android:layout_marginRight="2dp"
             android:maxLines="5"
-            android:hint="Skriv kommentar her" />
+            android:hint="Skriv udlejKommentar her" />
 
         <Button
             android:id="@+id/gem_kommentar"

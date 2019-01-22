@@ -39,11 +39,11 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        String loen = "Løn: " + Integer.toString(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getLoen());
-        viewHolder.name.setText(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getNavn());
+        String loen = "Løn: " + Integer.toString(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getLoen());
+        viewHolder.name.setText(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getNavn());
         viewHolder.salary.setText(loen);
-        viewHolder.workfield.setText(singleton.getMedarbejdereTilUdlejning().get(i).getMedarbejder().getArbejdsomraade());
-        viewHolder.periode.setText(singleton.getMedarbejdereTilUdlejning().get(i).getStartDato() + " til " + singleton.getMedarbejdereTilUdlejning().get(i).getEndDato());
+        viewHolder.workfield.setText(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.periode.setText(singleton.getAndresMedarbejderUdbud().get(i).getStartDato() + " til " + singleton.getAndresMedarbejderUdbud().get(i).getSlutDato());
 
         viewHolder.lej_recyclerview_listitems.setOnClickListener( new View.OnClickListener(){
 
@@ -57,7 +57,7 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
     }
 
     public void valgAfLedigArbejdskraft(View view, int i) {
-        singleton.midlertidigForhandling = singleton.getMedarbejdereTilUdlejning().get(i);
+        singleton.midlertidigAftale = singleton.getAndresMedarbejderUdbud().get(i);
         lej_medarbejder_fragment = new Lej_medarbejder_fragment();
         setFragment(lej_medarbejder_fragment);
 
@@ -73,8 +73,8 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
 
     @Override
     public int getItemCount() {
-        if(singleton.getMedarbejdereTilUdlejning()!=null){
-            return singleton.getMedarbejdereTilUdlejning().size();
+        if(singleton.getAndresMedarbejderUdbud()!=null){
+            return singleton.getAndresMedarbejderUdbud().size();
         }
         else{
             return 0;

@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ledige_pris"
                 android:textSize="18dp"
-                android:text="Samlet pris"/>
+                android:text="Samlet udlejPris"/>
         </LinearLayout>
 
         <LinearLayout

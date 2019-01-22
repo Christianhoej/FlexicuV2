@@ -30,11 +30,11 @@ public class TestAfAftalerDB {
 
         udlej.setMedarbejder(singleton.midlertidigMedarbejder);
         udlej.setUdlejer(singleton.getBruger());
-        udlej.setEgetVærktøj(false);
-        udlej.setEndDato("19/06-2019");
-        udlej.setPris("200");
-        udlej.setStartDato("15/3-2019");
-        udlej.setKommentar("Har egen bil");
+        udlej.setUdlejEgetVærktøj(false);
+        udlej.setUdlejerSlutDato("19/06-2019");
+        udlej.setUdlejPris("200");
+        udlej.setUdlejerStartDato("15/3-2019");
+        udlej.setUdlejKommentar("Har egen bil");
         udlej.setStatus(1);
         return udlej;
     }*/

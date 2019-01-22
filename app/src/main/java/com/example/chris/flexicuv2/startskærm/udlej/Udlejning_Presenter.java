@@ -4,6 +4,8 @@ import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
+import java.util.ArrayList;
+
 class Udlejning_Presenter {
     private final String ERRORKRONOLOGISKDATO = "Den valgte slutdato falder før startdatoen";
     private UpdateUdlejning updateUdlejning;
@@ -68,10 +70,10 @@ class Udlejning_Presenter {
            /* if(singleton.midlertidigAftale==null) {
                 singleton.midlertidigAftale = new Aftale();
             }
-            singleton.midlertidigAftale.setStartDato(startdato);
-            singleton.midlertidigAftale.setEndDato(slutdato);
+            singleton.midlertidigAftale.setUdlejerStartDato(startdato);
+            singleton.midlertidigAftale.setUdlejerSlutDato(slutdato);
             singleton.midlertidigAftale.setTimepris(timepris);
-            singleton.midlertidigAftale.setKommentar(kommentar);*/
+            singleton.midlertidigAftale.setUdlejKommentar(kommentar);*/
         }
 
         boolean arbejdsDageOK = (arbejdsdage>0);
@@ -133,18 +135,18 @@ class Udlejning_Presenter {
         void setSlutDato(String slutDato);
         void setTimepris(int timepris);
         void setVærktøj(Boolean værktøj);
-        void setKommentar(String kommentar);
+        void setKommentar(ArrayList<String> kommentar);
         void setMedarbejder(Medarbejder medarbejder);
         //TODO evt. noget popup ved oprettelse eller andet.
     }
 
     public void udfyldFelter(){
         if(singleton.midlertidigForhandling !=null){
-            updateUdlejning.setStartDato(singleton.midlertidigForhandling.getStartDato());
-            updateUdlejning.setSlutDato(singleton.midlertidigForhandling.getEndDato());
-            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigForhandling.getPris()));
-            updateUdlejning.setVærktøj(singleton.midlertidigForhandling.isEgetVærktøj());
-            updateUdlejning.setKommentar(singleton.midlertidigForhandling.getKommentar());
+            updateUdlejning.setStartDato(singleton.midlertidigForhandling.getUdlejerStartDato());
+            updateUdlejning.setSlutDato(singleton.midlertidigForhandling.getUdlejerSlutDato());
+            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigForhandling.getUdlejPris()));
+            updateUdlejning.setVærktøj(singleton.midlertidigForhandling.isUdlejEgetVærktøj());
+            updateUdlejning.setKommentar(singleton.midlertidigForhandling.getUdlejKommentar());
             updateUdlejning.setMedarbejder(singleton.midlertidigForhandling.getMedarbejder());
         }
     }

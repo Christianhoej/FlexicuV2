@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.Bekraeftelse;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
-import com.example.chris.flexicuv2.model.Forhandling;
+import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
@@ -212,8 +212,8 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     }
 
     @Override
-    public void setKommentar(String kommentar) {
-        kommentarET.setText(kommentar);
+    public void setKommentar(ArrayList<String> kommentar) {
+        kommentarET.setText(kommentar.get(1));
     }
 
     @Override
@@ -246,20 +246,20 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                         kommentarET.getText().toString())
                         ) {
 
-                    Forhandling ledig = new Forhandling();
-                    ledig.setKommentar(kommentarET.getText().toString());
-                    ledig.setStartDato(startdatoET.getText().toString());
-                    ledig.setEndDato(slutdatoET.getText().toString());
-                    ledig.setPris(timeprisET.getText().toString());
-                    ledig.setEgetVærktøj(egetVærktøj_switch.isChecked());
-                    System.out.println("Eget værktøj getshottext "+egetVærktøj_switch.isChecked());
-                    ledig.setMedarbejder(singleton.midlertidigMedarbejder);
-                    ledig.setUdlejer(singleton.getBruger());
-                    //ledig.setTimestamp(Long.parseLong(ServerValue.TIMESTAMP.get("timestamp")));
-                    ledig.setAktiv(true);
-                    singleton.addLedigeMedarbejder(ledig);
-                    dbManager.createUdlej(ledig);
+                    singleton.midlertidigAftale = new Aftale();
+                    singleton.midlertidigAftale.setUdlejer(singleton.getBruger());
+                    singleton.midlertidigAftale.setAktiv(true);
+                    singleton.midlertidigAftale.setMedarbejder(singleton.midlertidigMedarbejder);
+                    singleton.midlertidigAftale.setEgetVærktøj(egetVærktøj_switch.isChecked());
+                    singleton.midlertidigAftale.setStartDato(startdatoET.getText().toString());
+                    singleton.midlertidigAftale.setSlutDato(slutdatoET.getText().toString());
+                    singleton.midlertidigAftale.setTimePris(timeprisET.getText().toString());
+                    singleton.midlertidigAftale.setKommentar(kommentarET.getText().toString());
+                    singleton.midlertidigAftale.setTimestamp(System.currentTimeMillis());
+                    singleton.addMineMedarbejderUdbud(singleton.midlertidigAftale);
 
+                    //singleton.addLedigeMedarbejder(singleton.midlertidigForhandling);
+                    dbManager.createUdbud(singleton.midlertidigAftale);
 
                     setFragment(bekraeftelseFragment);
                 }

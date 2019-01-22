@@ -215,21 +215,24 @@ public class Filter implements Filtrering {
             match +=100;
 
         //Hvis også har eget værktøj eller søgningen er ligeglad med om der er værktøj med
+
+        //if(a.isUdlejEgetVærktøj()==true){
         if(a.isEgetVærktøj()==true || egetVærktøj==false){
             match = match + 30;
         }
 
         int minPris = Integer.parseInt(this.minPris);
         //Hvis højere end minPris
-        if (Integer.parseInt(a.getPris()) > minPris){
+        if (Integer.parseInt(a.getUdlejPris()) > minPris){
             match = match + 20;
         }
         int maxPris = Integer.parseInt(this.maxPris);
         //hvis mindre end eller = maxPris
+//        if (Integer.parseInt(a.getUdlejPris())<=maxPris){
         if (Integer.parseInt(a.getPris())<=maxPris || maxPris==0){
             match = match + 100;
         }else{ // procentvise afvigelse fra maxPrisen * de 100
-            match = match +(int)(maxPris/a.getTimepris())*100;
+            match = match +(int)(maxPris/Integer.parseInt(a.getUdlejPris()))*100;
         }
 
 
@@ -241,13 +244,13 @@ public class Filter implements Filtrering {
 
         //Hvis der er angivet både start og slutdato
         int filtreringsArbejdsdage = Arbejdsdage_Kalender.findArbejdsdage(startdato, slutdato); //finder samlede antal arbejdsdage
-        int forskelslutDatoer = Arbejdsdage_Kalender.findArbejdsdage(a.getEndDato(), slutdato); //returnerer 0 eller et negativt tal, så falder "aftalens afslutning" efter filtreringens slutdato
+        int forskelslutDatoer = Arbejdsdage_Kalender.findArbejdsdage(a.getUdlejerSlutDato(), slutdato); //returnerer 0 eller et negativt tal, så falder "aftalens afslutning" efter filtreringens slutdato
         if(forskelslutDatoer<0)
             forskelslutDatoer=0;
-        int forskelstartDatoer = Arbejdsdage_Kalender.findArbejdsdage(startdato, a.getStartDato());// returnerer et negativt tal eller 0, så dækkes hele hele "starten af perioden"
+        int forskelstartDatoer = Arbejdsdage_Kalender.findArbejdsdage(startdato, a.getUdlejerStartDato());// returnerer et negativt tal eller 0, så dækkes hele hele "starten af perioden"
         if(forskelstartDatoer <0)
             forskelstartDatoer = 0;
-        int aftalens_arbejdsdage = Arbejdsdage_Kalender.findArbejdsdage(a.getStartDato(),a.getEndDato());
+        int aftalens_arbejdsdage = Arbejdsdage_Kalender.findArbejdsdage(a.getUdlejerStartDato(),a.getUdlejerSlutDato());
 
         if(forskelslutDatoer>=0 && forskelstartDatoer <=0)
         datoScore = 100;

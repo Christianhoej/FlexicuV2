@@ -13,8 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_lejer;
 import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_udlejer;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
     private ArrayList typeARR;
     private ArrayList navnARR;
     private ArrayList virkARR;
+    private int index=0;
 
     @NonNull
     @Override
@@ -68,12 +70,16 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
         //TODO setText
 
         //TODO setText for forhandling som udlejer
+        if(i <singleton.getMineUdlejAftalerMedForhandling().get(index).getForhandlinger().size()) {
+            viewHolder.type.setText(singleton.getMineUdlejAftalerMedForhandling().get(index).getMedarbejder().getArbejdsomraade());
+            viewHolder.navn.setText(singleton.getMineUdlejAftalerMedForhandling().get(index).getMedarbejder().getNavn());
+            viewHolder.virksomhed.setText(singleton.getMineUdlejAftalerMedForhandling().get(index).getForhandlinger().get(i).getLejer().getVirksomhedsnavn());
+            viewHolder.periode.setText(singleton.getMineUdlejAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getMineUdlejAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
+            viewHolder.pris.setText(singleton.getMineUdlejAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejPris());
+        } else {
+            index++;
+        }
 
-        viewHolder.type.setText(singleton.getMineUdlejForhandlinger().get(i).getMedarbejder().getArbejdsomraade());
-        viewHolder.navn.setText(singleton.getMineUdlejForhandlinger().get(i).getMedarbejder().getNavn());
-        viewHolder.virksomhed.setText(singleton.getMineUdlejForhandlinger().get(i).getLejer().getVirksomhedsnavn());
-        viewHolder.periode.setText(singleton.getMineUdlejForhandlinger().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineUdlejForhandlinger().get(i).getEndDato().replace(" ", ""));
-        viewHolder.pris.setText(singleton.getMineUdlejForhandlinger().get(i).getPris());
 
 
         viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
@@ -95,13 +101,13 @@ public class Forhandling_som_udlejer_recyclerview_adapter extends RecyclerView.A
 
     @Override
     public int getItemCount() {
-        if(singleton.getMineUdlejForhandlinger()!=null){
-            return singleton.getMineUdlejForhandlinger().size();
+        int antal=0;
+        for(Aftale aftale : singleton.getMineUdlejAftalerMedForhandling()){
+            for(Forhandling forhandling : aftale.getForhandlinger()){
+                antal++;
+            }
         }
-        else{
-            return 0;
-        }
-
+        return antal;
         //TODO retun forhandlingerSomUdlejer.size();
         //return singleton.getAftaler().size();
     }
