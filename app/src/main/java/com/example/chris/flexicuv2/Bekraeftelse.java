@@ -32,8 +32,8 @@ public class Bekraeftelse extends Fragment implements View.OnClickListener {
         afslut.setOnClickListener(this);
         singleton = Singleton.getInstance();
 
-        navn.setText(singleton.midlertidigMedarbejder.getNavn());
-        periode.setText(singleton.midlertidigForhandling.getStartDato().replace(" ", "") + " - " + singleton.midlertidigForhandling.getEndDato().replace(" ", ""));
+        navn.setText(singleton.midlertidigAftale.getMedarbejder().getNavn());
+        periode.setText(singleton.midlertidigAftale.getStartDato().replace(" ", "") + " - " + singleton.midlertidigAftale.getSlutDato().replace(" ", ""));
 
         return v;
     }

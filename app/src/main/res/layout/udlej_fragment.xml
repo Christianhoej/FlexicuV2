@@ -115,7 +115,7 @@
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
                     android:gravity="left"
-                    android:text="Flexicu pris\n(2,5%)" />
+                    android:text="Flexicu udlejPris\n(2,5%)" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -253,7 +253,7 @@
                 android:background="@drawable/flex_green_rektangel"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:hint=" evt. en kommentar om medarbejderen \n eller til lejer" />
+                android:hint=" evt. en udlejKommentar om medarbejderen \n eller til lejer" />
 
 
         </LinearLayout>

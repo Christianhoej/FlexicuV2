@@ -12,19 +12,19 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Singleton;
 
-import java.util.List;
-
 public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<Forhandling> forhandlingList;
+    private Forhandling forhandling;
     private Singleton singleton;
     private final int MODTAGER = 1;
     private final int SENDER = 2;
+    private int lejKommentarNr = 0;
+    private int udlejKommentarNr = 0;
 
-    public Forhandling_kommentar_recyclerview(Context mContext, List<Forhandling> forhandlingList){
+    public Forhandling_kommentar_recyclerview(Context mContext, Forhandling forhandling){
         this.mContext = mContext;
-        this.forhandlingList = forhandlingList;
+        this.forhandling = forhandling;;
         singleton = Singleton.getInstance();
     }
 
@@ -53,28 +53,35 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
 
         switch (viewHolder.getItemViewType()) {
             case SENDER:
-                ((SendtKommentarHolder)viewHolder).bind(forhandlingList.get(i));
+                lejKommentarNr++;
+                ((SendtKommentarHolder)viewHolder).bind(forhandling.getLejKommentar().get(lejKommentarNr));
                 break;
             case MODTAGER:
-                ((ModtagetKommentarHolder)viewHolder).bind(forhandlingList.get(i));
+                udlejKommentarNr++;
+                ((ModtagetKommentarHolder)viewHolder).bind(forhandling.getUdlejKommentar().get(udlejKommentarNr));
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        System.out.println("Aftalelist size: " + forhandlingList.size());
-        if(forhandlingList !=null){
-            return forhandlingList.size();
+        if(forhandling.getUdlejerSlutDato().equals("")) {
+            if (forhandling.getLejKommentar() != null) {
+                return forhandling.getUdlejKommentar().size();
+            } else {
+                return 0;
+            }
         }
-        else{
+        else if (forhandling.getLejKommentar() != null || forhandling.getUdlejKommentar() != null) {
+            return forhandling.getLejKommentar().size() + forhandling.getUdlejKommentar().size();
+        } else {
             return 0;
         }
     }
 
     @Override
     public int getItemViewType(int position){
-        if(singleton.getBruger().getBrugerID().equals(forhandlingList.get(position).getSidstSendtAftale().getBrugerID())){
+        if(singleton.getBruger().getBrugerID().equals(forhandling.getSidstSendtAftale().getBrugerID())){
             return SENDER;
         }
         else{
@@ -91,8 +98,8 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
             navnTV = itemView.findViewById(R.id.kommentarSender);
         }
 
-        void bind(Forhandling forhandling){
-            modtagetKommentarTV.setText(forhandling.getKommentar());
+        void bind(String kommentar){
+            modtagetKommentarTV.setText(kommentar);
             //navnTV.setText(aftale.get().getNavn());
         }
 
@@ -107,9 +114,8 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
             sendtKommentarTV = itemView.findViewById(R.id.kommentar_sendt);
         }
 
-        void bind(Forhandling forhandling){
-            System.out.println("aftale i binder: " + forhandling.getKommentar());
-            sendtKommentarTV.setText(forhandling.getKommentar());
+        void bind(String kommentar){
+            sendtKommentarTV.setText(kommentar);
         }
     }
 }

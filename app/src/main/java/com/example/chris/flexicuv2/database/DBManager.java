@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Medarbejder;
@@ -22,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -34,13 +34,14 @@ public class DBManager {
     private final String BRUGER = "bruger";
     private final String VIRKSOMHEDSID = "virksomhedsID";
     private final String AFTALE = "aftale";
-    private final String LEDIG = "ledig";
     private final String FORHANDLING = "forhandling";
+    private final String AKTIV = "aktiv";
     private Singleton singleton;
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
     private CreateUserSuccess createUserSuccess;
     private SignInSuccess signInSuccess;
+    private Map<String, Object> map;
 
 
     public DBManager() {
@@ -123,10 +124,9 @@ public class DBManager {
                 ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     medarbejdere.add(snapshot.getValue(Medarbejder.class));
-
                 }
                 singleton.setMedarbejdere(medarbejdere);
-                readAlleUdlej();
+                readAlleForhandling();
 
             }
 
@@ -137,127 +137,95 @@ public class DBManager {
         });
     }
 
-    public void createUdlej(Forhandling udlej){
+    public void createUdbud(Aftale medarbejderUdbud){
         //TestAfAftalerDB testAfAftalerDB = new TestAfAftalerDB();
         //Aftale udlej = testAfAftalerDB.getUdlej();
         String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        udlej.getMedarbejder().setVirksomhedsID(uid);
-        String udlejID = ref.child(LEDIG).push().getKey();
-        udlej.setOprindeligUdlejID(udlejID);
+        //medarbejderUdbud.getMedarbejder().setVirksomhedsID(uid);
+        String medarbejderUdbudID = ref.child(AFTALE).push().getKey();
+        medarbejderUdbud.setAftaleID(medarbejderUdbudID);
 
-        ref.child(LEDIG).child(udlejID).setValue(udlej);
+        ref.child(AFTALE).child(medarbejderUdbudID).setValue(medarbejderUdbud);
     }
 
-    public void updateUdlej(Forhandling udlej){
+    public void updateUdbud(Aftale aftale){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        ref.child(LEDIG).child(udlej.getOprindeligUdlejID()).setValue(udlej);
-    }
+        ref.child(AFTALE).child(aftale.getAftaleID()).child("kommentar").setValue(aftale.getKommentar());
+        ref.child(AFTALE).child(aftale.getAftaleID()).child("medarbejder").setValue(aftale.getMedarbejder());
+        ref.child(AFTALE).child(aftale.getAftaleID()).child("slutDato").setValue(aftale.getSlutDato());
+        ref.child(AFTALE).child(aftale.getAftaleID()).child("startDato").setValue(aftale.getStartDato());
+        ref.child(AFTALE).child(aftale.getAftaleID()).child("timePris").setValue(aftale.getTimePris());
+        ref.child(AFTALE).child(aftale.getAftaleID()).child("egetVærktøj").setValue(aftale.isEgetVærktøj());
 
-    public void createForhandling(Forhandling forhandling){
-        String uid = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
-        forhandling.getMedarbejder().setVirksomhedsID(uid);
-
-        String aftaleID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
-        forhandling.setAftaleID(aftaleID);
-        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).push().getKey();
-        forhandling.setForhandlingID(forhandlingID);
-
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).setValue(forhandling);
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 
     public void addForhandling(Forhandling forhandling){
-        String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        forhandling.getMedarbejder().setVirksomhedsID(uid);
-
-        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).push().getKey();
-
-        forhandling.setForhandlingID(forhandlingID);
-
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).setValue(forhandling);
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
+        String forhKey = ref.child(AFTALE).child(forhandling.getAftaleID()).push().getKey();
+        forhandling.setForhandlingID(forhKey);
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(forhKey).setValue(forhandling);
     }
 
 
-    public void readForhandling(){
-        String uid = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(FORHANDLING);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Forhandling> udlejForhandling = new ArrayList<>();
-                ArrayList<Forhandling> lejForhandling = new ArrayList<>();
-                ArrayList<ArrayList<Forhandling>> forhandlingerIUdlejAftale = new ArrayList<>();
-                ArrayList<ArrayList<Forhandling>> forhandlingerILejAftale = new ArrayList<>();
-                //Gemmenløber alle ledige
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    //Gennemløber alle aftaler omkring den ledige
-                    for(DataSnapshot snapshot1 :snapshot.getChildren()){
-                        //Gennemløber alle forhandlinger i aftale
-                        for(DataSnapshot snapshot2 : snapshot1.getChildren()){
-                            System.out.println(snapshot2.getValue());
-
-                            Forhandling forhandling = snapshot2.getValue(Forhandling.class);
-
-                            if(forhandling.getUdlejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())) {
-                                udlejForhandling.add(forhandling);
-                            }
-                            else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
-                                lejForhandling.add(forhandling);
-                            }
-                        }
-                        forhandlingerILejAftale.add(lejForhandling);
-                        forhandlingerIUdlejAftale.add(udlejForhandling);
-                    }
-                }
-                singleton.setMineUdlejForhandlinger(udlejForhandling);
-                singleton.setMineLejForhandlinger(lejForhandling);
-                signInSuccess.userSignInSuccess(true);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-
-
-    public void readAlleUdlej(){
+    public void readAlleForhandling(){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(LEDIG);
+        DatabaseReference ref = database.getReference(AFTALE);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String uid = mAuth.getCurrentUser().getUid();
-                ArrayList<Forhandling> mineUdlejninger = new ArrayList<>();
-                ArrayList<Forhandling> andresUdlejninger = new ArrayList<>();
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Forhandling udlej = snapshot.getValue(Forhandling.class);
+                ArrayList<Aftale> mineUdlejninger = new ArrayList<>();
+                ArrayList<Aftale> andresUdlejninger = new ArrayList<>();
+                ArrayList<Aftale> lejAftaleMedForhandling = new ArrayList<>();
+                ArrayList<Aftale> udlejAftaleMedForhandling = new ArrayList<>();
+                ArrayList<Aftale> afsluttedeAftaler = new ArrayList<>();
 
-                    if(!udlej.getUdlejer().getBrugerID().equals(uid)){
-                        mineUdlejninger.add(udlej);
-                    }
-                    else {
-                        andresUdlejninger.add(udlej);
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Aftale udlej = snapshot.getValue(Aftale.class);
+
+                    //Hvis aftalen er aktiv
+                    if (udlej.isAktiv() == true) {
+
+                        //Hvis udlejerID er lig med nuværende brugers ID
+                        if (udlej.getUdlejer().getBrugerID().equals(uid)) {
+                            mineUdlejninger.add(udlej);
+                            //Hvis der er nogle forhandlinger
+                            if (udlej.getForhandlinger() != null) {
+                                udlejAftaleMedForhandling.add(udlej);
+                            }
+                        } else {
+                            andresUdlejninger.add(udlej);
+                            if (udlej.getForhandlinger() != null) {
+                                for (Forhandling forhandling : udlej.getForhandlinger()) {
+                                    if (forhandling.getLejer().getBrugerID().equals(uid)) {
+                                        udlejAftaleMedForhandling.add(udlej);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        for(Forhandling forhandling : udlej.getForhandlinger()){
+                            if(!forhandling.isAftaleIndgået()){
+                                udlej.removeForhandlinger(forhandling);
+                            }
+                        }
+                        afsluttedeAftaler.add(udlej);
                     }
                 }
-                singleton.setMineLedigeMedarbejdere(andresUdlejninger);
-                singleton.setMedarbejdereTilUdlejning(mineUdlejninger);
-                readForhandling();
-                //signInSuccess.userSignInSuccess(true);
+                singleton.setMineLejAftalerMedForhandling(lejAftaleMedForhandling);
+                singleton.setMineUdlejAftalerMedForhandling(udlejAftaleMedForhandling);
+                singleton.setMineAfsluttedeAftaler(afsluttedeAftaler);
+                singleton.setMineMedarbejderUdbud(mineUdlejninger);
+                singleton.setAndresMedarbejderUdbud(andresUdlejninger);
+               // readForhandling();
+                signInSuccess.userSignInSuccess(true);
             }
 
             @Override
@@ -325,7 +293,81 @@ public class DBManager {
             }
         });
     }
+ /*  public void createForhandling(Forhandling forhandling){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        forhandling.getMedarbejder().setVirksomhedsID(uid);
 
+        String aftaleID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
+        forhandling.setAftaleID(aftaleID);
+        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).push().getKey();
+        forhandling.setForhandlingID(forhandlingID);
+
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).setValue(forhandling);
+        //ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
+    }
+
+    public void addForhandling(Forhandling forhandling){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        forhandling.getMedarbejder().setVirksomhedsID(uid);
+
+        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).push().getKey();
+
+        forhandling.setForhandlingID(forhandlingID);
+
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).setValue(forhandling);
+        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
+    }*/
+
+ /*  public void readForhandling(){
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(FORHANDLING);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Forhandling> udlejForhandling = new ArrayList<>();
+                ArrayList<Forhandling> lejForhandling = new ArrayList<>();
+                ArrayList<ArrayList<Forhandling>> forhandlingerIUdlejAftale = new ArrayList<>();
+                ArrayList<ArrayList<Forhandling>> forhandlingerILejAftale = new ArrayList<>();
+                //Gemmenløber alle ledige
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    //Gennemløber alle aftaler omkring den ledige
+                    for(DataSnapshot snapshot1 :snapshot.getChildren()){
+                        //Gennemløber alle forhandlinger i aftale
+                        for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                            System.out.println(snapshot2.getValue());
+
+                            Forhandling forhandling = snapshot2.getValue(Forhandling.class);
+
+                            if(forhandling.getUdlejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())) {
+                                udlejForhandling.add(forhandling);
+                            }
+                            else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
+                                lejForhandling.add(forhandling);
+                            }
+                        }
+                        forhandlingerILejAftale.add(lejForhandling);
+                        forhandlingerIUdlejAftale.add(udlejForhandling);
+                    }
+                }
+                singleton.setMineMedarbejderUdbud(udlejForhandling);
+                singleton.setMineLejForhandlinger(lejForhandling);
+                signInSuccess.userSignInSuccess(true);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+*/
 
 
     public interface CreateUserSuccess {
@@ -339,15 +381,13 @@ public class DBManager {
     }
 
 
-    public class YourModelClass {
-        //private fields
-        private Map<String, String> timestamp;
+   /* public Map<String, Object> setMap(ArrayList<Forhandling> forhandling){
+        this.map = new HashMap<String, Object>();
+        for(Forhandling f : forhandling){
+            map.put(f.get)
+        }
 
-        public YourModelClass() {}
 
-        //public setters and getters for the fields
+    }*/
 
-        public void setTimestamp(Map<String, String> timeStamp) {this.timestamp= timestamp;}
-        public Map<String, String> getTimestamp() {return timestamp;}
-    }
 }

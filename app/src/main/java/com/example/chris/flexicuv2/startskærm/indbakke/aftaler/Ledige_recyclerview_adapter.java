@@ -44,11 +44,11 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         //TODO setText
 
         //viewHolder.navn.setText(singleton.getMedarbejder().get(i).getNavn());
-        viewHolder.navn.setText(singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getNavn());
-        viewHolder.periode.setText(singleton.getMineLedigeMedarbejdere().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineLedigeMedarbejdere().get(i).getEndDato().replace(" ", ""));
-        viewHolder.pris.setText(singleton.getMineLedigeMedarbejdere().get(i).getPris() + "kr.");
+        viewHolder.navn.setText(singleton.getMineMedarbejderUdbud().get(i).getMedarbejder().getNavn());
+        viewHolder.periode.setText(singleton.getMineMedarbejderUdbud().get(i).getStartDato().replace(" ", "") + " - " + singleton.getMineMedarbejderUdbud().get(i).getSlutDato().replace(" ", ""));
+        viewHolder.pris.setText(singleton.getMineMedarbejderUdbud().get(i).getTimePris() + "kr.");
         viewHolder.værktøj.setText(egetVærktøj(i));
-        viewHolder.arbejdsområder.setText(singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.arbejdsområder.setText(singleton.getMineMedarbejderUdbud().get(i).getMedarbejder().getArbejdsomraade());
 
         viewHolder.ledige_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,15 +56,15 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
                 //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
 
                         ledige_rediger_fragment = new Ledige_rediger();
-                        singleton.midlertidigForhandling = singleton.getMineLedigeMedarbejdere().get(i);
-                        singleton.midlertidigMedarbejder = singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder();
+                        singleton.midlertidigAftale = singleton.getMineMedarbejderUdbud().get(i);
+                        singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i).getMedarbejder();
                         setFragment(ledige_rediger_fragment);
             }
         });
     }
     public String egetVærktøj(int i){
         String egetVærktøj;
-        if(singleton.getMineLedigeMedarbejdere().get(i).isEgetVærktøj()==false){
+        if(singleton.getMineMedarbejderUdbud().get(i).isEgetVærktøj()==false){
             egetVærktøj="Nej";
         }
         else
@@ -75,7 +75,7 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
 
     @Override
     public int getItemCount() {
-        return singleton.getMineLedigeMedarbejdere().size();
+        return singleton.getMineMedarbejderUdbud().size();
     }
 
     public void setFragment(Fragment fragment) {

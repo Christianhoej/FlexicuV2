@@ -1,26 +1,37 @@
 package com.example.chris.flexicuv2.model;
 
+import java.util.ArrayList;
+
 public class Forhandling implements Comparable<Forhandling>{
 
     private String aftaleID;
-    private String oprindeligUdlejID;
+//    private String oprindeligUdlejID;
     private String forhandlingID;
-    private Bruger udlejer;
+    //private Bruger udlejer;
     private Bruger lejer;
     private Medarbejder medarbejder;
-    private int status;
-    private String startDato;
-    private String endDato;
-    private String pris;
-    private String kommentar;
-    private boolean egetVærktøj;
-    private Bruger sidstSendtAftale;
     private boolean aktiv;
     private long timestamp;
-
+    private Bruger sidstSendtAftale;
     int filterScore;
+    private boolean aftaleIndgået = false;
 
-    private int timepris;
+    private String udlejerStartDato;
+    private String udlejerSlutDato;
+    private String udlejPris;
+    private ArrayList<String> udlejKommentar;
+    private boolean udlejEgetVærktøj;
+
+
+    private String lejerStartDato;
+    private String lejerSlutDato;
+    private String lejPris;
+    private ArrayList<String> lejKommentar;
+    private boolean lejEgetVærktøj;
+
+
+
+    //private int timepris;
 
 
     public String getForhandlingID() {
@@ -31,29 +42,12 @@ public class Forhandling implements Comparable<Forhandling>{
         this.forhandlingID = forhandlingID;
     }
 
-   /* public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public Long getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
-    }*/
-
-    public int getTimepris () {
-            return timepris;
-        }
-
-
-    public void setTimepris(int timepris) {
-        this.timepris = timepris;
     }
 
-    public String getOprindeligUdlejID() {
-        return oprindeligUdlejID;
-    }
-
-    public void setOprindeligUdlejID(String oprindeligUdlejID) {
-        this.oprindeligUdlejID = oprindeligUdlejID;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public boolean isAktiv() {
@@ -64,12 +58,12 @@ public class Forhandling implements Comparable<Forhandling>{
         this.aktiv = aktiv;
     }
 
-    public boolean isEgetVærktøj() {
-        return egetVærktøj;
+    public boolean isUdlejEgetVærktøj() {
+        return udlejEgetVærktøj;
     }
 
-    public void setEgetVærktøj(boolean egetVærktøj) {
-        this.egetVærktøj = egetVærktøj;
+    public void setUdlejEgetVærktøj(boolean udlejEgetVærktøj) {
+        this.udlejEgetVærktøj = udlejEgetVærktøj;
     }
 
     public String getAftaleID() {
@@ -80,12 +74,60 @@ public class Forhandling implements Comparable<Forhandling>{
         this.aftaleID = aftaleID;
     }
 
-    public Bruger getUdlejer() {
-        return udlejer;
+    public boolean isAftaleIndgået() {
+        return aftaleIndgået;
     }
 
-    public void setUdlejer(Bruger udlejer) {
-        this.udlejer = udlejer;
+    public void setAftaleIndgået(boolean aftaleIndgået) {
+        this.aftaleIndgået = aftaleIndgået;
+    }
+
+    public String getLejerStartDato() {
+        return lejerStartDato;
+    }
+
+    public void setLejerStartDato(String lejerStartDato) {
+        this.lejerStartDato = lejerStartDato;
+    }
+
+    public String getLejerSlutDato() {
+        return lejerSlutDato;
+    }
+
+    public void setLejerSlutDato(String lejerSlutDato) {
+        this.lejerSlutDato = lejerSlutDato;
+    }
+
+    public String getLejPris() {
+        return lejPris;
+    }
+
+    public void setLejPris(String lejPris) {
+        this.lejPris = lejPris;
+    }
+
+    public ArrayList<String> getLejKommentar() {
+        return lejKommentar;
+    }
+
+    public void setLejKommentar(ArrayList<String> lejKommentar) {
+        this.lejKommentar = lejKommentar;
+    }
+
+    public void addLejKommentar(String lejKommentar){
+        this.lejKommentar.add(lejKommentar);
+    }
+
+    public void removeLejKommentar(String lejKommentar){
+        this.lejKommentar.remove(lejKommentar);
+    }
+
+    public boolean isLejEgetVærktøj() {
+        return lejEgetVærktøj;
+    }
+
+    public void setLejEgetVærktøj(boolean lejEgetVærktøj) {
+        this.lejEgetVærktøj = lejEgetVærktøj;
     }
 
     public Bruger getLejer() {
@@ -103,45 +145,45 @@ public class Forhandling implements Comparable<Forhandling>{
     public void setMedarbejder(Medarbejder medarbejder) {
         this.medarbejder = medarbejder;
     }
-    
-    public int getStatus() {
-        return status;
+
+    public String getUdlejerStartDato() {
+        return udlejerStartDato;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setUdlejerStartDato(String udlejerStartDato) {
+        this.udlejerStartDato = udlejerStartDato;
     }
 
-    public String getStartDato() {
-        return startDato;
+    public String getUdlejerSlutDato() {
+        return udlejerSlutDato;
     }
 
-    public void setStartDato(String startDato) {
-        this.startDato = startDato;
+    public void setUdlejerSlutDato(String udlejerSlutDato) {
+        this.udlejerSlutDato = udlejerSlutDato;
     }
 
-    public String getEndDato() {
-        return endDato;
+    public String getUdlejPris() {
+        return udlejPris;
     }
 
-    public void setEndDato(String endDato) {
-        this.endDato = endDato;
+    public void setUdlejPris(String udlejPris) {
+        this.udlejPris = udlejPris;
     }
 
-    public String getPris() {
-        return pris;
+    public ArrayList<String> getUdlejKommentar() {
+        return udlejKommentar;
     }
 
-    public void setPris(String pris) {
-        this.pris = pris;
+    public void setUdlejKommentar(ArrayList<String> udlejKommentar) {
+        this.udlejKommentar = udlejKommentar;
     }
 
-    public String getKommentar() {
-        return kommentar;
+    public void addUdlejKommentar(String udlejKommentar){
+        this.udlejKommentar.add(udlejKommentar);
     }
 
-    public void setKommentar(String kommentar) {
-        this.kommentar = kommentar;
+    public void removeUdlejKommentar(String udlejKommentar){
+        this.udlejKommentar.remove(udlejKommentar);
     }
 
     public Bruger getSidstSendtAftale() {

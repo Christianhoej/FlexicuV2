@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
+import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
@@ -215,8 +216,8 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
     }
 
     @Override
-    public void setKommentar(String kommentar) {
-        kommentarET.setText(kommentar);
+    public void setKommentar(ArrayList<String> kommentar) {
+        kommentarET.setText(kommentar.get(kommentar.size()-1));
     }
 
     @Override
@@ -250,21 +251,20 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
                         ) {
 
                     int index = -1;
-                    for(Forhandling forhandling : singleton.getMineLedigeMedarbejdere()){
-                        if(forhandling.getOprindeligUdlejID().equals(singleton.midlertidigForhandling.getOprindeligUdlejID())){
-                            index = singleton.getMineLedigeMedarbejdere().indexOf(forhandling);
+                    for(Aftale aftale: singleton.getMineMedarbejderUdbud()){
+                        if(aftale.getAftaleID().equals(singleton.midlertidigAftale.getAftaleID())){
+                            index = singleton.getMineMedarbejderUdbud().indexOf(aftale);
                         }
                     }
 
-                    singleton.midlertidigForhandling.setStartDato(startdatoET.getText().toString());
-                    singleton.midlertidigForhandling.setEndDato(slutdatoET.getText().toString());
-                    singleton.midlertidigForhandling.setPris(timeprisET.getText().toString());
-                    singleton.midlertidigForhandling.setKommentar(kommentarET.getText().toString());
-                    singleton.midlertidigForhandling.setEgetVærktøj(egetVærktøj_switch.isChecked());
-                    singleton.midlertidigForhandling.setMedarbejder(singleton.midlertidigMedarbejder);
+                    singleton.getMineMedarbejderUdbud().get(index).setStartDato(startdatoET.getText().toString());
+                    singleton.getMineMedarbejderUdbud().get(index).setSlutDato(slutdatoET.getText().toString());
+                    singleton.getMineMedarbejderUdbud().get(index).setTimePris(timeprisET.getText().toString());
+                    singleton.getMineMedarbejderUdbud().get(index).setKommentar(kommentarET.getText().toString());
+                    singleton.getMineMedarbejderUdbud().get(index).setEgetVærktøj(egetVærktøj_switch.isChecked());
+                    singleton.getMineMedarbejderUdbud().get(index).setMedarbejder(singleton.midlertidigMedarbejder);
 
-                    singleton.getMineLedigeMedarbejdere().set(index,singleton.midlertidigForhandling);
-                    dbManager.updateUdlej(singleton.midlertidigForhandling);
+                    dbManager.updateUdbud(singleton.getMineMedarbejderUdbud().get(index));
                     setFragment(forhandlinger_fragment);
                 }
 

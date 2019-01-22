@@ -2,10 +2,8 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -17,13 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.R;
-
-//import com.example.chris.flexicuv2.Startskaerm;
-import com.example.chris.flexicuv2.model.Singleton;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +32,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     FrameLayout lej_frame;
     private RecyclerView recyclerView;
     private DBManager test;
-    private Singleton singleton;
     private Button filtrer, opretSøgeagent;
 
     @Override
@@ -47,7 +39,6 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.lej_fragment, container, false);
 
-        singleton = Singleton.getInstance();
         filtrer_fragment = new Lej_filtrer_fragment();
         lej_frame = (FrameLayout) v.findViewById(R.id.lej_fragment_frame);
 
