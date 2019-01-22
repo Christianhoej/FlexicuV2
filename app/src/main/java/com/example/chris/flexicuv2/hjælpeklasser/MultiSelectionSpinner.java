@@ -109,6 +109,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
 
     }
 
+
     public void setSelection(List<String> selection) {
         for (int i = 0; i < mSelection.length; i++) {
             mSelection[i] = false;

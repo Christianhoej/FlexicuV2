@@ -2,17 +2,22 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,11 +47,12 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private EditText by;
     private EditText vej;
     private EditText nummer;
+    private RadioGroup radioGroup;
     private RadioButton ja_værktøj;
     private RadioButton nej_værktøj;
     private EditText min_timepris;
     private EditText max_timepris;
-    private MultiSelectionSpinner arbejdsområder_spinner;
+    private static MultiSelectionSpinner arbejdsområder_spinner;
     private Button anvend;
     private Button annuller;
     private Button nulstil;
@@ -59,33 +65,53 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
     private Afstandsberegner afstandsberegner;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lej_filtrer_fragment, container, false);
 
         singleton = Singleton.getInstance();
+        Filter f = singleton.søgeFiltrering;
         presenter = new Lej_filtrer_Presenter(this);
 
-        arbejdsområder_spinner = (MultiSelectionSpinner)v.findViewById(R.id.filtrer_arbejdsområder);
+        arbejdsområder_spinner = v.findViewById(R.id.filtrer_arbejdsområder);
+        if(f.getArbejdsområder()!= null)
+        arbejdsområder_spinner.setSelection(f.getArbejdsområder());//Sæt valgte værdier
+        opretSpinner();
 
         postnr = (EditText) v.findViewById(R.id.edit_postnr);
+        postnr.setText(f.getPostNr());
         postnr.addTextChangedListener(adresseTextWatch);
 
         by = (EditText) v.findViewById(R.id.edit_by);
+        by.setText(f.getBy());
         by.addTextChangedListener(adresseTextWatch);
 
         vej = (EditText) v.findViewById(R.id.edit_vej);
+        vej.setText(f.getVej());
         vej.addTextChangedListener(adresseTextWatch);
 
         nummer = (EditText) v.findViewById(R.id.edit_nummer);
+        nummer.setText(f.getNummer());
         nummer.addTextChangedListener(adresseTextWatch);
 
 
+        radioGroup = v.findViewById(R.id.radioOptiosVærktøj);
 
         ja_værktøj = (RadioButton) v.findViewById(R.id.ja_værktøj);
         nej_værktøj = (RadioButton) v.findViewById(R.id.nej_værktøj);
+
+        if(f.isEgetVærktøj())
+            ja_værktøj.isChecked();
+        else
+            nej_værktøj.isChecked();
+
         min_timepris = (EditText)v.findViewById(R.id.min_timepris);
+        min_timepris.setText(f.getMinPris());
         max_timepris = (EditText) v.findViewById(R.id.max_timepris);
+        max_timepris.setText(f.getMaxPris());
+
+
         anvend = v.findViewById(R.id.anvend_knap);
         anvend.setOnClickListener(this);
         annuller = v.findViewById(R.id.annuller_knap);
@@ -95,8 +121,12 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
         startdatoET = v.findViewById(R.id.lej_filtrer_startdato_textview);
         startdatoET.setOnClickListener(this);
+        startdatoET.setText(f.getStartdato());
+
         startdatoET.addTextChangedListener(datoTextWatch);
         slutdatoET = v.findViewById(R.id.lej_filtrer_slutdato_textview);
+        slutdatoET.setText(f.getSlutdato());
+
         slutdatoET.setOnClickListener(this);
         slutdatoET.addTextChangedListener(datoTextWatch);
 
@@ -105,9 +135,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         afstandsberegner = new Afstandsberegner();
         //a= afstandsberegner.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
 
-        opretSpinner();
         return v;
     }
+
 
     public void opretSpinner(){
         List<String> arbejdsområde_listen = new ArrayList<String>();
@@ -142,14 +172,47 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         arbejdsområder_spinner.setItems(arbejdsområde_listen);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.anvend_knap:
                 //navigation skal måske
-                getActivity().onBackPressed();
-                //TODO check
+
+
+
+                if(radioGroup.getCheckedRadioButtonId() == R.id.ja_værktøj)
+                    singleton.søgeFiltrering.setEgetVærktøj(true);
+                else
+                    singleton.søgeFiltrering.setEgetVærktøj(false);
+                //Hvis ikke "ja" er tjekket af, så er det altid nej
+
+                if(!(min_timepris.getText().toString().length()>0))
+                    singleton.søgeFiltrering.setMinPris("0");
+                else
+                    singleton.søgeFiltrering.setMinPris(min_timepris.getText().toString());
+
+                if(!(max_timepris.getText().toString().length()>0))
+                    singleton.søgeFiltrering.setMaxPris("0");
+                else
+                    singleton.søgeFiltrering.setMaxPris(max_timepris.getText().toString());
+
+                //TODO arbejdsområdespinner
+                gemArbejdsområde();
+                //todo check for maxpris>minPris
+
+                Filter f = singleton.søgeFiltrering;
+                System.out.println(f.getStartdato());
+                System.out.println(f.getSlutdato());
+                System.out.println(f.getArbejdsområder());
+                System.out.println(f.getLatitude());
+                System.out.println(f.getLongitude());
+                System.out.println(f.getMaxPris());
+                System.out.println(f.getMinPris());
+                System.out.println(f.isEgetVærktøj());
+
+                if(!startdatoET.getText().toString().equals(" dd / mm / yyyy ") && !slutdatoET.getText().toString().equals(" dd / mm / yyyy "))
+                    getActivity().onBackPressed();
+
                 break;
             case R.id.annuller_knap:
                 singleton.søgeFiltrering = new Filter();
@@ -192,7 +255,7 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
                     dag  = "0" + dayOfMonth ;
                 }
-                String s = " " + dayOfMonth + " / " + måned + " / " + year + " ";
+                String s = " " + dag + " / " + måned + " / " + year + " ";
                 if(start) {
                     startdatoET.setText(s);
                     c.set(year,month-1,dayOfMonth);
@@ -203,6 +266,7 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
                 }
             }
         };
+
 
 
         Calendar calendar = Calendar.getInstance();
@@ -219,6 +283,14 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         }
 
         datepickerdialog.show();
+
+    }
+    private void gemArbejdsområde() {
+        String arb;
+        if(!arbejdsområder_spinner.getSelectedItem().toString().equals("Vælg arbejdsområde") ) {
+            arb = arbejdsområder_spinner.getSelectedItem().toString();
+            singleton.søgeFiltrering.setArbejdsområder(arb);
+        }
 
     }
 
