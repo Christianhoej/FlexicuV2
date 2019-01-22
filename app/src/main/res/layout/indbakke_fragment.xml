@@ -25,6 +25,8 @@
             app:menu="@menu/indbakke_items"
             >
         </android.support.design.widget.BottomNavigationView>
+        <!--app:itemTextAppearanceActive="@dimen/indbakke_design_bottom_navigation_active_text_size"
+        app:itemTextAppearanceInactive="@dimen/indbakke_design_bottom_navigation_text_size"-->
 
         <View
             android:layout_width="match_parent"

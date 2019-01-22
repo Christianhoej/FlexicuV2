@@ -4,10 +4,11 @@
 
     <item
         android:id="@+id/indbakke_forhandlinger"
-        android:title="Forhandlinger" />
+        android:title="Bud" />
 
     <item
         android:id="@+id/indbakke_ledige"
-        android:title="Ledige" />
+        android:title="Udbud"
+        />
 
 </menu>

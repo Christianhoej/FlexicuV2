@@ -19,6 +19,9 @@
             app:menu="@menu/navigation_items"
             app:labelVisibilityMode="labeled">
         </android.support.design.widget.BottomNavigationView>
+          <!--  app:itemTextAppearanceActive="@dimen/startskaerm_design_bottom_navigation_active_text_size"
+            app:itemTextAppearanceInactive="@dimen/startskaerm_design_bottom_navigation_text_size"-->
+
 
 
         <FrameLayout

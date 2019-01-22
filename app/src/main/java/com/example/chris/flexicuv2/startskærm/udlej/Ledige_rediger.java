@@ -256,7 +256,6 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
                             index = singleton.getMineLedigeMedarbejdere().indexOf(aftale);
                         }
                     }
-                    //int index = singleton.getMineLedigeMedarbejdere().indexOf(singleton.midlertidigMedarbejder);
 
                     singleton.midlertidigAftale.setStartDato(startdatoET.getText().toString());
                     singleton.midlertidigAftale.setEndDato(slutdatoET.getText().toString());
@@ -264,27 +263,15 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
                     singleton.midlertidigAftale.setKommentar(kommentarET.getText().toString());
                     singleton.midlertidigAftale.setEgetVærktøj(egetVærktøj_switch.isChecked());
                     singleton.midlertidigAftale.setMedarbejder(singleton.midlertidigMedarbejder);
-                    /*edig.setKommentar(kommentarET.getText().toString());
-                    ledig.setStartDato(startdatoET.getText().toString());
-                    ledig.setEndDato(slutdatoET.getText().toString());
-                    ledig.setPris(timeprisET.getText().toString());
-                    ledig.setEgetVærktøj(egetVærktøj_switch.isChecked());
-                    ledig.setMedarbejder(singleton.midlertidigMedarbejder);
-                    ledig.setUdlejer(singleton.getBruger());
-                    ledig.setOprindeligUdlejID(singleton.midlertidigAftale.getOprindeligUdlejID());*/
-
-
-                    //singleton.addLedigeMedarbejder(ledig);
 
                     singleton.getMineLedigeMedarbejdere().set(index,singleton.midlertidigAftale);
                     dbManager.updateUdlej(singleton.midlertidigAftale);
-                   // getActivity().onBackPressed();
                     setFragment(forhandlinger_fragment);
                 }
 
                 break;
-            case R.id.udlejning_annuller_button:
-                getActivity().getSupportFragmentManager().popBackStack();
+            case R.id.ledig_annuller_button:
+                getActivity().onBackPressed();
                 break;
 
             case R.id.ledig_slutdato_textview:
@@ -302,6 +289,7 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
 
     public void setFragment(Fragment fragment) {
         startskærmFrameTilDiverse.removeAllViews();
+        getFragmentManager().popBackStack();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.til_aftaler_frame, fragment);
         fragmentTransaction.commit();
