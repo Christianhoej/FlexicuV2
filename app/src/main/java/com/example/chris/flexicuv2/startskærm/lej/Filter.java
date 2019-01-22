@@ -1,5 +1,6 @@
 package com.example.chris.flexicuv2.startskærm.lej;
 
+import com.example.chris.flexicuv2.hjælpeklasser.Afstandsberegner;
 import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
 import com.example.chris.flexicuv2.model.Aftale;
 
@@ -26,7 +27,7 @@ public class Filter implements Filtrering {
     private String latitude, longitude;
     private boolean egetVærktøj;
     private int minPris, maxPris;
-    private Afstand_koordinater afstand = new Afstand_koordinater();
+    private Afstandsberegner afstand = new Afstandsberegner();
     private int maxMatchScore;
     private String startdato;
     private String slutdato;
@@ -103,8 +104,8 @@ public class Filter implements Filtrering {
         maxMatchScore = 100 + (20*arbejdsområder.length-1); //arbejdsområdeScoren
         maxMatchScore += 100; //Afstandsscoren
         maxMatchScore += 30; //eget værktøj score
-        maxMatchScore += 10; // højere end minPris score
-        maxMatchScore+=30; // lavere end maxPris score
+        maxMatchScore += 20; // højere end minPris score
+        maxMatchScore+=100; // lavere end maxPris score
         maxMatchScore+= 100; // datoscore % af peridoen dækket
 
 
@@ -153,17 +154,21 @@ public class Filter implements Filtrering {
             match = match + muligPointKørsel;
         }
 
-        //Hvis også har eget værktøj
-        if(a.isEgetVærktøj() == egetVærktøj){
+        //Hvis også har eget værktøj eller søgningen er ligeglad med om der er værktøj med
+        if(a.isEgetVærktøj()==true){
             match = match + 30;
         }
+
+
         //Hvis højere end minPris
         if (Integer.parseInt(a.getPris()) > minPris){
-            match = match + 10;
+            match = match + 20;
         }
-        //hvis mindre end minPris
-        if (Integer.parseInt(a.getPris())<maxPris){
-            match = match + 30;
+        //hvis mindre end eller = maxPris
+        if (Integer.parseInt(a.getPris())<=maxPris){
+            match = match + 100;
+        }else{ // procentvise afvigelse fra maxPrisen * de 100
+            match = match +(int)(maxPris/a.getTimepris())*100;
         }
 
 

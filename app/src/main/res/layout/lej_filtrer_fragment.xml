@@ -111,7 +111,8 @@
                    android:gravity="center"
                    android:background="@drawable/flex_green_rektangel"
                    android:inputType="date"
-                   android:text=" dd / mm / yyyy "/>
+                   android:text=" dd / mm / yyyy "
+                   />
            </LinearLayout>
 
            
@@ -130,6 +131,39 @@
                android:text="Arbejdets adresse"
                android:layout_marginVertical="10dp"
                />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginVertical="10dp"
+               android:orientation="horizontal"
+               android:weightSum="10">
+               
+
+
+               <EditText
+                   android:id="@+id/edit_vej"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="7"
+                   android:backgroundTint="@color/flex_green"
+                   android:gravity="center"
+                   android:hint="Vej"
+                   android:inputType="text"
+                   android:maxLength="100" />
+
+               <EditText
+                   android:id="@+id/edit_nummer"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="3"
+                   android:backgroundTint="@color/flex_green"
+                   android:gravity="center"
+                   android:hint="Nummer"
+                   android:inputType="text"
+                   android:maxLength="10" />
+
+           </LinearLayout>
 
            <LinearLayout
                android:layout_width="match_parent"
@@ -161,38 +195,6 @@
                android:gravity="center"
                android:maxLength="30"
                android:id="@+id/edit_by"/>
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="10"
-               android:layout_marginVertical="10dp">
-
-               <EditText
-                   android:layout_width="0dp"
-                   android:layout_weight="7"
-                   android:layout_height="wrap_content"
-                   android:backgroundTint="@color/flex_green"
-                   android:hint="Vej"
-                   android:inputType="text"
-                   android:gravity="center"
-                   android:maxLength="100"
-                   android:id="@+id/edit_vej"
-                   />
-
-               <EditText
-                   android:layout_width="0dp"
-                   android:layout_weight="3"
-                   android:layout_height="wrap_content"
-                   android:backgroundTint="@color/flex_green"
-                   android:hint="Nummer"
-                   android:inputType="text"
-                   android:gravity="center"
-                   android:maxLength="10"
-                   android:id="@+id/edit_nummer"/>
 
            </LinearLayout>
 

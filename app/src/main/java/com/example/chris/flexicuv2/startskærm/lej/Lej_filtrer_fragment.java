@@ -2,10 +2,10 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 
 import android.app.DatePickerDialog;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +14,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.hjælpeklasser.Afstandsberegner;
 import com.example.chris.flexicuv2.hjælpeklasser.MultiSelectionSpinner;
 import com.example.chris.flexicuv2.model.Singleton;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
  * @Author Christian
  * A simple {@link Fragment} subclass.
  */
-public class Lej_filtrer_fragment extends Fragment implements View.OnClickListener {
+public class Lej_filtrer_fragment extends Fragment implements View.OnClickListener, Lej_filtrer_Presenter.UpdateFiltrer {
 
     ArrayList<String> valgte_arbejdsområder = new ArrayList<>();
     //String[] arbejdsområder = {"Lagermand"};
@@ -51,24 +52,36 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private Button nulstil;
     private Calendar c;
     private Singleton singleton;
+    private Lej_filtrer_Presenter presenter;
 
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private TextView startdatoET, slutdatoET;
 
-    private Afstand_koordinater afstand_koordinater;
-    double a;
+    private Afstandsberegner afstandsberegner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lej_filtrer_fragment, container, false);
 
         singleton = Singleton.getInstance();
+        presenter = new Lej_filtrer_Presenter(this);
 
         arbejdsområder_spinner = (MultiSelectionSpinner)v.findViewById(R.id.filtrer_arbejdsområder);
+
         postnr = (EditText) v.findViewById(R.id.edit_postnr);
+        postnr.addTextChangedListener(adresseTextWatch);
+
         by = (EditText) v.findViewById(R.id.edit_by);
+        by.addTextChangedListener(adresseTextWatch);
+
         vej = (EditText) v.findViewById(R.id.edit_vej);
+        vej.addTextChangedListener(adresseTextWatch);
+
         nummer = (EditText) v.findViewById(R.id.edit_nummer);
+        nummer.addTextChangedListener(adresseTextWatch);
+
+
+
         ja_værktøj = (RadioButton) v.findViewById(R.id.ja_værktøj);
         nej_værktøj = (RadioButton) v.findViewById(R.id.nej_værktøj);
         min_timepris = (EditText)v.findViewById(R.id.min_timepris);
@@ -82,14 +95,15 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
         startdatoET = v.findViewById(R.id.lej_filtrer_startdato_textview);
         startdatoET.setOnClickListener(this);
+        startdatoET.addTextChangedListener(datoTextWatch);
         slutdatoET = v.findViewById(R.id.lej_filtrer_slutdato_textview);
         slutdatoET.setOnClickListener(this);
+        slutdatoET.addTextChangedListener(datoTextWatch);
 
         c = Calendar.getInstance();
 
-        afstand_koordinater = new Afstand_koordinater();
-        a= afstand_koordinater.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
-        System.out.println("ÆÆÆÆÆÆÆÆÆ " + a);
+        afstandsberegner = new Afstandsberegner();
+        //a= afstandsberegner.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
 
         opretSpinner();
         return v;
@@ -134,6 +148,7 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.anvend_knap:
                 //TODO Hvad skal knapperne gøre
+                //TODO check
                 break;
             case R.id.annuller_knap:
                 getActivity().onBackPressed();
@@ -156,12 +171,21 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
      * @param start : tilkendegiver om det er start eller slutdatoen -> hvis det er startdatoen så er start true
      */
     private void findEnDato(final boolean start) {
-        //final Calendar c = Calendar.getInstance();
         datepickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
-                String s = " " + dayOfMonth + " / " + month + " / " + year + " ";
+                String måned = ""+month;
+                if(month < 10){
+
+                    måned = "0" + month;
+                }
+                String dag = ""+dayOfMonth;
+                if(dayOfMonth < 10){
+
+                    dag  = "0" + dayOfMonth ;
+                }
+                String s = " " + dayOfMonth + " / " + måned + " / " + year + " ";
                 if(start) {
                     startdatoET.setText(s);
                     c.set(year,month-1,dayOfMonth);
@@ -191,25 +215,75 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
     }
 
-    public void goelocate(View v) throws IOException {
-        String vejnavn = vej.getText().toString();
-        String nummer = this.nummer.getText().toString();
-        String postnr = this.postnr.getText().toString();
 
-        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
+    private TextWatcher datoTextWatch = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            slutdatoET.setError(null);
+        }
 
-        Geocoder gc = new Geocoder(getContext());
-        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
-        Address address = list.get(0);
-        String lokation = address.getLocality();
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (!slutdatoET.getText().toString().equals(" dd / mm / yyyy ")){
+            if(!startdatoET.getText().toString().equals(" dd / mm / yyyy "))
+        presenter.checkDatoerErOK(startdatoET.getText().toString(),slutdatoET.getText().toString());
+        }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+    private TextWatcher adresseTextWatch = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            //hvis der er noget i alle felterne
+            String s1 = vej.getText().toString();
+            String s2  = nummer.getText().toString();
+            String s3 = postnr.getText().toString();
+            String s4 = by.getText().toString();
+            if(s1.length()>0 && s2.length()>0 && s3.length()>3 && s4.length()>0)
+                postnr.setError(null);
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-        singleton.søgeFiltrering.setLatitude(Double.toString(address.getLatitude()));
-        singleton.søgeFiltrering.setLongitude(Double.toString(address.getLongitude()));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String s1 = vej.getText().toString();
+            String s2  = nummer.getText().toString();
+            String s3 = postnr.getText().toString();
+            String s4 = by.getText().toString();
+            if(s1.length()>0 && s2.length()>0 && s3.length()>3 && s4.length()>0){
+                presenter.checkAdresse(getContext(),s1,s2,s3,s4);
+            }
+        }
+    };
 
 
+    @Override
+    public void errorKronologiskDato(String errorMSG) {
+        slutdatoET.setError(errorMSG);
     }
 
+    @Override
+    public void errorIngenArbejdsDage(String errorMSG) {
+        slutdatoET.setError(errorMSG);
+    }
 
+    @Override
+    public void errorAdresse(String errorMSG) {
+        postnr.setError(errorMSG);
+    }
 
+    @Override
+    public void sendToast(String msg) {
+        Toast.makeText(getContext(), msg,
+                Toast.LENGTH_LONG).show();
+    }
 }

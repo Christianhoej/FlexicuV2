@@ -72,7 +72,7 @@ public class Arbejdsdage_Kalender {
     }
 
     /**
-     * Metoden tjekker om datoen
+     * Metoden udregner forskellen mellem
      *
      * @param dStart String for datostarten på form "dd/MM/yyy"
      * @param dSlut  String for slutdato på form "dd/MM/yyyy"

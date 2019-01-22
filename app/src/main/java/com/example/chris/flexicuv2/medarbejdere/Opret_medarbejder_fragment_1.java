@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.hjælpeklasser.Afstandsberegner;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.io.IOException;
@@ -88,40 +89,8 @@ import java.util.List;
         return v;
     }
 
-    /*public void geolocate(View v) throws IOException {
-        //TODO der skal tjekkes for om info er korrekt
-        String vejnavn = mVejnavn.getText().toString();
-        String nummer = mNummer.getText().toString();
-        String postnr = mPostNr.getText().toString();
-
-        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
-
-        Geocoder gc = new Geocoder(getContext());
-        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
-        Address add = list.get(0);
-        String lokation = add.getLocality();
-
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
-    }*/
-
-    public void goelocate(View v) throws IOException {
-        String vejnavn = mVejnavn.getText().toString();
-        String nummer = mNummer.getText().toString();
-        String postnr = mPostNr.getText().toString();
-
-        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
-
-        Geocoder gc = new Geocoder(getContext());
-        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
-        Address add = list.get(0);
-        String lokation = add.getLocality();
-
-        singleton.midlertidigMedarbejder.setLatitude(Double.toString(add.getLatitude()));
-        singleton.midlertidigMedarbejder.setLongitude(Double.toString(add.getLongitude()));
 
 
-    }
 
 
     @Override
@@ -132,7 +101,10 @@ import java.util.List;
                 if(altOK){
                     setFragment(opretMedarbejderFragment2);
                     try {
-                        goelocate(v);
+                        String[] latiOgLongi = Afstandsberegner.geolocate(getContext(),mVejnavn.getText().toString(),mNummer.getText().toString(),mPostNr.getText().toString(), null).split(" ");
+
+                        singleton.midlertidigMedarbejder.setLatitude(latiOgLongi[0]);
+                        singleton.midlertidigMedarbejder.setLongitude(latiOgLongi[1]);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
