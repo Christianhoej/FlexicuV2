@@ -42,7 +42,7 @@ public class Loading_screen extends Fragment implements LoginPresenter.startAnim
         Log.d("anim","Kommer her");
         */
         rotateAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
-
+        ivX.startAnimation(rotateAnim);
         return v;
     }
 
