@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".startskærm.hjem.Startskaerm_Udlejede_medarbejder_fragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <TextView
@@ -12,12 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:layout_weight="0"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lej_medarbejder_recyclerview"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:scrollbars="none"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        android:layout_weight="0"/>
 
 </LinearLayout>
