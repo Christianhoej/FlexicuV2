@@ -129,7 +129,7 @@
                 android:text="JA, jeg har læst, forstået og \naccepterer betingelserne">
             </CheckBox>
 
-            <ImageView
+            <ImageButton
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/qmark"
