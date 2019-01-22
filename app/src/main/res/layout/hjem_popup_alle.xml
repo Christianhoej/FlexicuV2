@@ -74,15 +74,6 @@
             android:layout_marginTop="20dp"
             android:id="@+id/medarbejder_adresse"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rediger"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center"
-            android:id="@+id/rediger"
-            android:background="@drawable/rounded_corners_red"/>
-
     </LinearLayout>
 
 </FrameLayout>

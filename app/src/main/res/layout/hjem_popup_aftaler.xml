@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Medarbejderens navn"
-                android:id="@+id/medarbejder_navn"
+                android:id="@+id/aftaler_navn"
                 android:textSize="30dp"
                 android:textColor="@color/grey"/>
         </LinearLayout>
@@ -32,56 +32,68 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arbejdsområde: "
+            android:text="Arbejdsområder: "
             android:textSize="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/grey"
-            android:id="@+id/medarbejder_arbejdsområde"/>
+            android:id="@+id/aftaler_arbejdsområder"/>
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Periode: "
+        android:textSize="20dp"
+        android:textColor="@color/grey"
+        android:layout_marginTop="20dp"
+        android:id="@+id/aftaler_periode"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Køn: "
+            android:text="Antal arbejdsdage: "
             android:textSize="20dp"
             android:textColor="@color/grey"
             android:layout_marginTop="20dp"
-            android:id="@+id/medarbejder_køn"/>
+            android:id="@+id/aftaler_arbejdsdage"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alder: "
+            android:text="Virksomhed: "
             android:textSize="20dp"
             android:textColor="@color/grey"
             android:layout_marginTop="20dp"
-            android:id="@+id/medarbejder_alder"/>
+            android:id="@+id/aftaler_virksomhed"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email: "
+            android:text="Medbringes eget værktøj? "
             android:textSize="20dp"
             android:textColor="@color/grey"
             android:layout_marginTop="20dp"
-            android:id="@+id/medarbejder_email"/>
+            android:id="@+id/aftaler_værktøj"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adresse: "
+            android:text="Timepris: "
             android:textSize="20dp"
             android:textColor="@color/grey"
             android:layout_marginTop="20dp"
-            android:id="@+id/medarbejder_adresse"/>
+            android:id="@+id/aftaler_timepris"/>
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rediger"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center"
-            android:id="@+id/rediger"
-            android:background="@drawable/rounded_corners_red"/>
+            android:text="Totalpris: "
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:id="@+id/aftaler_totalpris"/>
+
+
+
 
     </LinearLayout>
 
