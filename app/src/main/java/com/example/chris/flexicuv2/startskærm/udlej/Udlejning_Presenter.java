@@ -1,7 +1,6 @@
 package com.example.chris.flexicuv2.startskærm.udlej;
 
 import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
-import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
@@ -140,13 +139,13 @@ class Udlejning_Presenter {
     }
 
     public void udfyldFelter(){
-        if(singleton.midlertidigAftale!=null){
-            updateUdlejning.setStartDato(singleton.midlertidigAftale.getStartDato());
-            updateUdlejning.setSlutDato(singleton.midlertidigAftale.getEndDato());
-            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigAftale.getPris()));
-            updateUdlejning.setVærktøj(singleton.midlertidigAftale.isEgetVærktøj());
-            updateUdlejning.setKommentar(singleton.midlertidigAftale.getKommentar());
-            updateUdlejning.setMedarbejder(singleton.midlertidigAftale.getMedarbejder());
+        if(singleton.midlertidigForhandling !=null){
+            updateUdlejning.setStartDato(singleton.midlertidigForhandling.getStartDato());
+            updateUdlejning.setSlutDato(singleton.midlertidigForhandling.getEndDato());
+            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigForhandling.getPris()));
+            updateUdlejning.setVærktøj(singleton.midlertidigForhandling.isEgetVærktøj());
+            updateUdlejning.setKommentar(singleton.midlertidigForhandling.getKommentar());
+            updateUdlejning.setMedarbejder(singleton.midlertidigForhandling.getMedarbejder());
         }
     }
 }

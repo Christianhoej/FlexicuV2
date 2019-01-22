@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.List;
@@ -17,14 +17,14 @@ import java.util.List;
 public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<Aftale> aftaleList;
+    private List<Forhandling> forhandlingList;
     private Singleton singleton;
     private final int MODTAGER = 1;
     private final int SENDER = 2;
 
-    public Forhandling_kommentar_recyclerview(Context mContext, List<Aftale> aftaleList){
+    public Forhandling_kommentar_recyclerview(Context mContext, List<Forhandling> forhandlingList){
         this.mContext = mContext;
-        this.aftaleList = aftaleList;
+        this.forhandlingList = forhandlingList;
         singleton = Singleton.getInstance();
     }
 
@@ -53,19 +53,19 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
 
         switch (viewHolder.getItemViewType()) {
             case SENDER:
-                ((SendtKommentarHolder)viewHolder).bind(aftaleList.get(i));
+                ((SendtKommentarHolder)viewHolder).bind(forhandlingList.get(i));
                 break;
             case MODTAGER:
-                ((ModtagetKommentarHolder)viewHolder).bind(aftaleList.get(i));
+                ((ModtagetKommentarHolder)viewHolder).bind(forhandlingList.get(i));
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        System.out.println("Aftalelist size: " + aftaleList.size());
-        if(aftaleList!=null){
-            return aftaleList.size();
+        System.out.println("Aftalelist size: " + forhandlingList.size());
+        if(forhandlingList !=null){
+            return forhandlingList.size();
         }
         else{
             return 0;
@@ -74,7 +74,7 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position){
-        if(singleton.getBruger().getBrugerID().equals(aftaleList.get(position).getSidstSendtAftale().getBrugerID())){
+        if(singleton.getBruger().getBrugerID().equals(forhandlingList.get(position).getSidstSendtAftale().getBrugerID())){
             return SENDER;
         }
         else{
@@ -91,8 +91,8 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
             navnTV = itemView.findViewById(R.id.kommentarSender);
         }
 
-        void bind(Aftale aftale){
-            modtagetKommentarTV.setText(aftale.getKommentar());
+        void bind(Forhandling forhandling){
+            modtagetKommentarTV.setText(forhandling.getKommentar());
             //navnTV.setText(aftale.get().getNavn());
         }
 
@@ -107,9 +107,9 @@ public class Forhandling_kommentar_recyclerview extends RecyclerView.Adapter {
             sendtKommentarTV = itemView.findViewById(R.id.kommentar_sendt);
         }
 
-        void bind(Aftale aftale){
-            System.out.println("aftale i binder: " + aftale.getKommentar());
-            sendtKommentarTV.setText(aftale.getKommentar());
+        void bind(Forhandling forhandling){
+            System.out.println("aftale i binder: " + forhandling.getKommentar());
+            sendtKommentarTV.setText(forhandling.getKommentar());
         }
     }
 }

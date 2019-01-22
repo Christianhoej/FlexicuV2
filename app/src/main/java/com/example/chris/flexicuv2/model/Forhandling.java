@@ -1,6 +1,6 @@
 package com.example.chris.flexicuv2.model;
 
-public class Aftale implements Comparable<Aftale>{
+public class Forhandling implements Comparable<Forhandling>{
 
     private String aftaleID;
     private String oprindeligUdlejID;
@@ -16,6 +16,7 @@ public class Aftale implements Comparable<Aftale>{
     private boolean egetVærktøj;
     private Bruger sidstSendtAftale;
     private boolean aktiv;
+    private long timestamp;
 
     int filterScore;
 
@@ -28,10 +29,15 @@ public class Aftale implements Comparable<Aftale>{
 
     public void setForhandlingID(String forhandlingID) {
         this.forhandlingID = forhandlingID;
-
-
-
     }
+
+   /* public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }*/
 
     public int getTimepris () {
             return timepris;
@@ -147,7 +153,7 @@ public class Aftale implements Comparable<Aftale>{
     }
 
     @Override
-    public int compareTo(Aftale o) {
+    public int compareTo(Forhandling o) {
         if(this.filterScore > o.filterScore)
             return 1;
             else if(o.filterScore== this.filterScore)

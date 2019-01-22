@@ -10,17 +10,19 @@ public class Singleton extends Activity {
 
     private static Singleton singleInstance;
     public static ArrayList<Medarbejder> medarbejdere;
-    private static ArrayList<Medarbejder> lånteMedarbejdere = new ArrayList<Medarbejder>();
+    private static ArrayList<Medarbejder> lånteMedarbejdere = new ArrayList<>();
     public static Bruger bruger;
 
     public static String userID;
-    public static ArrayList<Aftale> mineUdlejForhandlinger;
-    public static ArrayList<Aftale> mineLejForhandlinger;
-    public static ArrayList<Aftale> mineLedigeMedarbejdere;
-    public static ArrayList<Aftale> medarbejdereTilUdlejning;
+    public static ArrayList<ArrayList<Forhandling>> mineUdlejAftalerMedForhandling;
+    public static ArrayList<ArrayList<Forhandling>> mineLejAftalerMedForhandling;
+    public static ArrayList<Forhandling> mineUdlejForhandlinger;
+    public static ArrayList<Forhandling> mineLejForhandlinger;
+    public static ArrayList<Forhandling> mineLedigeMedarbejdere;
+    public static ArrayList<Forhandling> medarbejdereTilUdlejning;
     public static Medarbejder midlertidigMedarbejder;
     public static Bruger midlertidigBruger;
-    public static Aftale midlertidigAftale;
+    public static Forhandling midlertidigForhandling;
     public static Filter søgeFiltrering;
 
 
@@ -42,68 +44,109 @@ public class Singleton extends Activity {
         return singleInstance;
     }
 
-    public static ArrayList<Aftale> getMineLejForhandlinger() {
+    public static ArrayList<ArrayList<Forhandling>> getMineUdlejAftalerMedForhandling() {
+        return mineUdlejAftalerMedForhandling;
+    }
+
+    public static void setMineUdlejAftalerMedForhandling(ArrayList<ArrayList<Forhandling>> mineUdlejAftalerMedForhandling) {
+        Singleton.mineUdlejAftalerMedForhandling = mineUdlejAftalerMedForhandling;
+    }
+
+    public static void addMineUdejAftalerMedForhandling(ArrayList<Forhandling> mineUdlejAftalerMedForhandling){
+        Singleton.mineUdlejAftalerMedForhandling.add(mineUdlejAftalerMedForhandling);
+    }
+
+    public static void removeMineUdlejAftalerMedForhandling(ArrayList<Forhandling> mineUdlejAftalerMedForhandling){
+        Singleton.mineUdlejAftalerMedForhandling.remove(mineUdlejAftalerMedForhandling);
+    }
+
+    public static void addUdlejForhandlingTilAftale(Forhandling forhandling, int index){
+        Singleton.mineUdlejAftalerMedForhandling.get(index).add(forhandling);
+    }
+
+    public static ArrayList<ArrayList<Forhandling>> getMineLejAftalerMedForhandling() {
+        return mineLejAftalerMedForhandling;
+    }
+
+    public static void setMineLejAftalerMedForhandling(ArrayList<ArrayList<Forhandling>> mineLejAftalerMedForhandling) {
+        Singleton.mineLejAftalerMedForhandling = mineLejAftalerMedForhandling;
+    }
+
+    public static void addMineLejAftalerMedForhandling(ArrayList<Forhandling> mineLejAftalerMedForhandling){
+        Singleton.mineLejAftalerMedForhandling.add(mineLejAftalerMedForhandling);
+
+    }
+
+    public static void removeMineLejAftalerMedForhandling(ArrayList<Forhandling> mineLejAftalerMedForhandling){
+        Singleton.mineLejAftalerMedForhandling.remove(mineLejAftalerMedForhandling);
+    }
+
+    public static void addLejForhandlingTilAftale(Forhandling forhandling, int index){
+        Singleton.mineLejAftalerMedForhandling.get(index).add(forhandling);
+    }
+
+    public static ArrayList<Forhandling> getMineLejForhandlinger() {
         return mineLejForhandlinger;
     }
 
-    public static void setMineLejForhandlinger(ArrayList<Aftale> mineLejForhandlinger) {
+    public static void setMineLejForhandlinger(ArrayList<Forhandling> mineLejForhandlinger) {
         Singleton.mineLejForhandlinger = mineLejForhandlinger;
     }
 
-    public static void addMineLejForhandlinger(Aftale mineLejForhandlinger){
-        singleInstance.mineLejForhandlinger.add(mineLejForhandlinger);
+    public static void addMineLejForhandlinger(Forhandling mineLejForhandlinger){
+        Singleton.mineLejForhandlinger.add(mineLejForhandlinger);
     }
 
-    public static void removeMineLejForhandlinger(Aftale mineLejForhandlinger){
-        singleInstance.mineLejForhandlinger.add(mineLejForhandlinger);
+    public static void removeMineLejForhandlinger(Forhandling mineLejForhandlinger){
+        Singleton.mineLejForhandlinger.add(mineLejForhandlinger);
     }
 
-    public static ArrayList<Aftale> getMineUdlejForhandlinger() {
+    public static ArrayList<Forhandling> getMineUdlejForhandlinger() {
         return mineUdlejForhandlinger;
     }
 
-    public static void setMineUdlejForhandlinger(ArrayList<Aftale> mineUdlejForhandlinger) {
+    public static void setMineUdlejForhandlinger(ArrayList<Forhandling> mineUdlejForhandlinger) {
         Singleton.mineUdlejForhandlinger = mineUdlejForhandlinger;
     }
 
-    public static void addMineUdlejForhandlinger(Aftale mineForhandlinger){
-        singleInstance.mineUdlejForhandlinger.add(mineForhandlinger);
+    public static void addMineUdlejForhandlinger(Forhandling mineForhandlinger){
+        Singleton.mineUdlejForhandlinger.add(mineForhandlinger);
     }
 
-    public static void removeMineUdlejForhandlinger(Aftale mineForhandlinger){
-        singleInstance.mineUdlejForhandlinger.add(mineForhandlinger);
+    public static void removeMineUdlejForhandlinger(Forhandling mineForhandlinger){
+        Singleton.mineUdlejForhandlinger.add(mineForhandlinger);
     }
 
 
-    public static ArrayList<Aftale> getMineLedigeMedarbejdere() {
+    public static ArrayList<Forhandling> getMineLedigeMedarbejdere() {
         return mineLedigeMedarbejdere;
     }
 
-    public static void setMineLedigeMedarbejdere(ArrayList<Aftale> ledigeMedarbejder) {
+    public static void setMineLedigeMedarbejdere(ArrayList<Forhandling> ledigeMedarbejder) {
         Singleton.mineLedigeMedarbejdere = ledigeMedarbejder;
     }
 
-    public static void addLedigeMedarbejder(Aftale aftale){
-        Singleton.mineLedigeMedarbejdere.add(aftale);
+    public static void addLedigeMedarbejder(Forhandling forhandling){
+        Singleton.mineLedigeMedarbejdere.add(forhandling);
     }
 
-    public static void removeLedigeMedarbejder(Aftale aftale){
-        Singleton.mineLedigeMedarbejdere.add(aftale);
+    public static void removeLedigeMedarbejder(Forhandling forhandling){
+        Singleton.mineLedigeMedarbejdere.add(forhandling);
     }
 
-    public static ArrayList<Aftale> getMedarbejdereTilUdlejning() {
+    public static ArrayList<Forhandling> getMedarbejdereTilUdlejning() {
         return medarbejdereTilUdlejning;
     }
 
-    public static void setMedarbejdereTilUdlejning(ArrayList<Aftale> medarbejdereTilUdlejning) {
+    public static void setMedarbejdereTilUdlejning(ArrayList<Forhandling> medarbejdereTilUdlejning) {
         Singleton.medarbejdereTilUdlejning = medarbejdereTilUdlejning;
     }
 
-    public static void addMedarbejderTilUdlejning(Aftale medarbejderUdlejning){
+    public static void addMedarbejderTilUdlejning(Forhandling medarbejderUdlejning){
         Singleton.medarbejdereTilUdlejning.add(medarbejderUdlejning);
     }
 
-    public static void removeMedarbejderTilUdlejning(Aftale medarbejderUdlejning){
+    public static void removeMedarbejderTilUdlejning(Forhandling medarbejderUdlejning){
         Singleton.medarbejdereTilUdlejning.remove(medarbejderUdlejning);
     }
 

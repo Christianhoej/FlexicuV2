@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Bruger;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
@@ -137,7 +137,7 @@ public class DBManager {
         });
     }
 
-    public void createUdlej(Aftale udlej){
+    public void createUdlej(Forhandling udlej){
         //TestAfAftalerDB testAfAftalerDB = new TestAfAftalerDB();
         //Aftale udlej = testAfAftalerDB.getUdlej();
         String uid = mAuth.getCurrentUser().getUid();
@@ -150,13 +150,13 @@ public class DBManager {
         ref.child(LEDIG).child(udlejID).setValue(udlej);
     }
 
-    public void updateUdlej(Aftale udlej){
+    public void updateUdlej(Forhandling udlej){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         ref.child(LEDIG).child(udlej.getOprindeligUdlejID()).setValue(udlej);
     }
 
-    public void createForhandling(Aftale forhandling){
+    public void createForhandling(Forhandling forhandling){
         String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
@@ -171,7 +171,7 @@ public class DBManager {
         ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 
-    public void addForhandling(Aftale forhandling){
+    public void addForhandling(Forhandling forhandling){
         String uid = mAuth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
@@ -193,14 +193,19 @@ public class DBManager {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Aftale> udlejForhandling = new ArrayList<>();
-                ArrayList<Aftale> lejForhandling = new ArrayList<>();
+                ArrayList<Forhandling> udlejForhandling = new ArrayList<>();
+                ArrayList<Forhandling> lejForhandling = new ArrayList<>();
+                ArrayList<ArrayList<Forhandling>> forhandlingerIUdlejAftale = new ArrayList<>();
+                ArrayList<ArrayList<Forhandling>> forhandlingerILejAftale = new ArrayList<>();
+                //Gemmenløber alle ledige
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    //Gennemløber alle aftaler omkring den ledige
                     for(DataSnapshot snapshot1 :snapshot.getChildren()){
+                        //Gennemløber alle forhandlinger i aftale
                         for(DataSnapshot snapshot2 : snapshot1.getChildren()){
                             System.out.println(snapshot2.getValue());
 
-                            Aftale forhandling = snapshot2.getValue(Aftale.class);
+                            Forhandling forhandling = snapshot2.getValue(Forhandling.class);
 
                             if(forhandling.getUdlejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())) {
                                 udlejForhandling.add(forhandling);
@@ -209,6 +214,8 @@ public class DBManager {
                                 lejForhandling.add(forhandling);
                             }
                         }
+                        forhandlingerILejAftale.add(lejForhandling);
+                        forhandlingerIUdlejAftale.add(udlejForhandling);
                     }
                 }
                 singleton.setMineUdlejForhandlinger(udlejForhandling);
@@ -235,10 +242,10 @@ public class DBManager {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String uid = mAuth.getCurrentUser().getUid();
-                ArrayList<Aftale> mineUdlejninger = new ArrayList<>();
-                ArrayList<Aftale> andresUdlejninger = new ArrayList<>();
+                ArrayList<Forhandling> mineUdlejninger = new ArrayList<>();
+                ArrayList<Forhandling> andresUdlejninger = new ArrayList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Aftale udlej = snapshot.getValue(Aftale.class);
+                    Forhandling udlej = snapshot.getValue(Forhandling.class);
 
                     if(!udlej.getUdlejer().getBrugerID().equals(uid)){
                         mineUdlejninger.add(udlej);

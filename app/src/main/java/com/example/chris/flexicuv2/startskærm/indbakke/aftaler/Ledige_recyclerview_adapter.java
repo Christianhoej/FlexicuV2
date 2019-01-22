@@ -16,8 +16,6 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.startskærm.udlej.Ledige_rediger;
 
-import java.util.concurrent.TimeoutException;
-
 
 public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_recyclerview_adapter.ViewHolder>{
 
@@ -58,7 +56,7 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
                 //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
 
                         ledige_rediger_fragment = new Ledige_rediger();
-                        singleton.midlertidigAftale = singleton.getMineLedigeMedarbejdere().get(i);
+                        singleton.midlertidigForhandling = singleton.getMineLedigeMedarbejdere().get(i);
                         singleton.midlertidigMedarbejder = singleton.getMineLedigeMedarbejdere().get(i).getMedarbejder();
                         setFragment(ledige_rediger_fragment);
             }
