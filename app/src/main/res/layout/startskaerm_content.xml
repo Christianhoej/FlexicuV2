@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".startskærm.Startskaerm_akt"
-
-    >
+    tools:context=".startskærm.Startskaerm_akt"    >
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/startskaerm_nav"
@@ -23,30 +21,41 @@
           <!--  app:itemTextAppearanceActive="@dimen/startskaerm_design_bottom_navigation_active_text_size"
             app:itemTextAppearanceInactive="@dimen/startskaerm_design_bottom_navigation_text_size"-->
 
-
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/startskaermUdlejFrame">
-        </FrameLayout>
+            android:orientation="vertical"
+            android:weightSum="10">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/startskaermUdlejFrame"
-            android:id="@+id/startskaermLejFrame">
-        </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/startskaermUdlejFrame"
+                    android:layout_weight="4"
+                    >
+                </FrameLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/startskaermLejFrame"
-            android:id="@+id/startskaermAlleFrame">
-        </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/startskaermUdlejFrame"
+                    android:id="@+id/startskaermLejFrame"
+                    android:layout_weight="3">
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/startskaermLejFrame"
+                    android:layout_weight="3"
+                    android:id="@+id/startskaermAlleFrame">
+                </FrameLayout>
+        </LinearLayout>
+
+
 
 
         <FrameLayout

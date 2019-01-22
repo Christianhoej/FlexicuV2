@@ -116,13 +116,34 @@
         </RadioGroup>
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkFormalities"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:text="JA, jeg har læst, forstået og \naccepterer betingelserne">
-    </CheckBox>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/checkFormalities"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:text="JA, jeg har læst, forstået og \naccepterer betingelserne">
+            </CheckBox>
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/qmark"
+                android:layout_gravity="center"
+                android:id="@+id/qmark"
+                android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+
+        </LinearLayout>
+
+
+
 
 
 

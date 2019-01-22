@@ -162,6 +162,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
                 rediger_medarbejder_fragment_1 = new Rediger_medarbejder_fragment_1();
                 setFragment(rediger_medarbejder_fragment_1);
                 singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i);
+                //((AppCompatActivity)mContext).getSupportFragmentManager().popBackStack();
                 popupWindow.dismiss();
             }
         });
@@ -171,6 +172,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
     public void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.medarbejdere_frame, fragment);
+        fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 

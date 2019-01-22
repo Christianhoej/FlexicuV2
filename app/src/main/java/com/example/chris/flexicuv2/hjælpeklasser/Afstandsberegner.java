@@ -40,20 +40,14 @@ public class Afstandsberegner {
         if(bynavn == null)
         fuldAdresse = vejnavn + " " + husnummer + " " + postNr + ", DK";
         else
-            fuldAdresse= bynavn +" " + postNr + ", DK";
+            fuldAdresse= vejnavn + " " + husnummer +" " +bynavn +" " + postNr + ", DK";
 
 
         Geocoder gc = new Geocoder(context);
 
         List<Address> list = gc.getFromLocationName(fuldAdresse,1);
         Address address = list.get(0);
-        for(Address a : list){
-            System.out.println(a.getCountryCode());
-            System.out.println(a.getLocality());
-            System.out.println(a.getAddressLine(0));
-            System.out.println(a.getPostalCode());
-        }
-
+        System.out.println(address.getPostalCode() + " " + address.getLocality() + " Dette fandet jeg");
         return Double.toString(address.getLatitude()) + " " + Double.toString(address.getLongitude());
 
 

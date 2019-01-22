@@ -88,7 +88,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         new_user_fragment_1= new Opret_bruger_fragment_1();
         tilFragmenter = (FrameLayout) findViewById(R.id.tilFragmenter_frame);
 
-        setFragment(loading_screen);
+        //setFragment(loading_screen);
     }
 
 
@@ -99,17 +99,17 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
           boolean erOK = presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
           if(erOK) {
               //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
-              ivX = findViewById(R.id.x_logo);
+              //ivX = findViewById(R.id.x_logo);
               //loginFrame.setAlpha();
-              //setAnimation(loading_screen);
+              setAnimation(loading_screen);
               //logo = findViewById(R.id.x_logo);
               //logo.setVisibility(View.INVISIBLE);
 
               //Context context;
               //v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotation));
-              ivX.startAnimation(rotateAnim);
+              //ivX.startAnimation(rotateAnim);
               //presenter.startAnim();
-              tv.setText("Loading...");
+              //tv.setText("Loading...");
 
           }
       }

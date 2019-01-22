@@ -2,6 +2,7 @@ package com.example.chris.flexicuv2.opret_bruger;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
     private Bruger virksomhed;
     private DatabaseReference mDatabase;
     private Bruger bruger;
+    private ImageButton qmark1;
 
     Opret_bruger_fragment_1 new_user_fragment_1;
 
@@ -60,6 +64,8 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
         virksomhed = new Bruger();
         bruger = new Bruger();
 
+        qmark1 = v.findViewById(R.id.qmark);
+        qmark1.setOnClickListener(this);
         username = v.findViewById(R.id.logOnEmail);
         username.setText("123@123.dk");
         usernameRepeated = v.findViewById(R.id.logOnEmailRepeat);
@@ -89,7 +95,18 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
 
     @Override
     public void onClick(View v) {
+/*
+        qmark1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLL");
+                Intent i = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://portal.flexicu.com/betingelser/"));
+                startActivity(i);
+            }
 
+        });
+*/
         int selectedId = radioOptions.getCheckedRadioButtonId();
 
         if(selectedId == R.id.checkPrivate)
@@ -111,6 +128,13 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
         if(v.getId() == R.id.cancelBtn2){
             getActivity().onBackPressed();
             presenter.setMidlertidigBruger(username.getText().toString(), selectedId);
+        }
+
+        if(v.getId()==R.id.qmark){
+            System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLL");
+            Intent i = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://portal.flexicu.com/betingelser/"));
+            startActivity(i);
         }
     }
 
