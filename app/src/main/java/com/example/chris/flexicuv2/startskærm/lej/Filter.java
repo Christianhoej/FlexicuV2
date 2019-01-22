@@ -217,7 +217,7 @@ public class Filter implements Filtrering {
         //Hvis også har eget værktøj eller søgningen er ligeglad med om der er værktøj med
 
         //if(a.isUdlejEgetVærktøj()==true){
-        if(a.isEgetVærktøj()==true || egetVærktøj==false){
+        if(a.isLejEgetVærktøj()==true || egetVærktøj==false){
             match = match + 30;
         }
 
@@ -229,7 +229,7 @@ public class Filter implements Filtrering {
         int maxPris = Integer.parseInt(this.maxPris);
         //hvis mindre end eller = maxPris
 //        if (Integer.parseInt(a.getUdlejPris())<=maxPris){
-        if (Integer.parseInt(a.getPris())<=maxPris || maxPris==0){
+        if (Integer.parseInt(a.getLejPris())<=maxPris || maxPris==0){
             match = match + 100;
         }else{ // procentvise afvigelse fra maxPrisen * de 100
             match = match +(int)(maxPris/Integer.parseInt(a.getUdlejPris()))*100;
