@@ -1,7 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.lej;
 
 import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
-import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Forhandling;
 
 public class Filter implements Filtrering {
 
@@ -97,7 +97,7 @@ public class Filter implements Filtrering {
      * @return %match i form af double.
      */
     @Override
-    public int tildelMatchScore(Aftale a) {
+    public int tildelMatchScore(Forhandling a) {
 
         //Sætter Max match point
         maxMatchScore = 100 + (20*arbejdsområder.length-1); //arbejdsområdeScoren

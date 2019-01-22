@@ -14,12 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_Janus;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter<RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder>{
 
@@ -62,7 +57,7 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
     }
 
     public void valgAfLedigArbejdskraft(View view, int i) {
-        singleton.midlertidigAftale = singleton.getMedarbejdereTilUdlejning().get(i);
+        singleton.midlertidigForhandling = singleton.getMedarbejdereTilUdlejning().get(i);
         lej_medarbejder_fragment = new Lej_medarbejder_fragment();
         setFragment(lej_medarbejder_fragment);
 

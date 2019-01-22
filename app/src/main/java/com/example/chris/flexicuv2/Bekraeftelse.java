@@ -1,7 +1,5 @@
 package com.example.chris.flexicuv2;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,7 +33,7 @@ public class Bekraeftelse extends Fragment implements View.OnClickListener {
         singleton = Singleton.getInstance();
 
         navn.setText(singleton.midlertidigMedarbejder.getNavn());
-        periode.setText(singleton.midlertidigAftale.getStartDato().replace(" ", "") + " - " + singleton.midlertidigAftale.getEndDato().replace(" ", ""));
+        periode.setText(singleton.midlertidigForhandling.getStartDato().replace(" ", "") + " - " + singleton.midlertidigForhandling.getEndDato().replace(" ", ""));
 
         return v;
     }

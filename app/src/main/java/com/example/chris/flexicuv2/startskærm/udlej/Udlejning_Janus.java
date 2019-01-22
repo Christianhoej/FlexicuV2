@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
@@ -26,7 +25,7 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.Bekraeftelse;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
-import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
@@ -247,7 +246,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                         kommentarET.getText().toString())
                         ) {
 
-                    Aftale ledig = new Aftale();
+                    Forhandling ledig = new Forhandling();
                     ledig.setKommentar(kommentarET.getText().toString());
                     ledig.setStartDato(startdatoET.getText().toString());
                     ledig.setEndDato(slutdatoET.getText().toString());
@@ -256,6 +255,8 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                     System.out.println("Eget værktøj getshottext "+egetVærktøj_switch.isChecked());
                     ledig.setMedarbejder(singleton.midlertidigMedarbejder);
                     ledig.setUdlejer(singleton.getBruger());
+                    //ledig.setTimestamp(Long.parseLong(ServerValue.TIMESTAMP.get("timestamp")));
+                    ledig.setAktiv(true);
                     singleton.addLedigeMedarbejder(ledig);
                     dbManager.createUdlej(ledig);
 

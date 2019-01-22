@@ -1,7 +1,5 @@
 package com.example.chris.flexicuv2.database;
 
-import com.example.chris.flexicuv2.model.Aftale;
-import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 
 public class TestAfAftalerDB {
