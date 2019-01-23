@@ -15,8 +15,7 @@ import android.widget.FrameLayout;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_ledige_fragment;
-import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_forhandlinger_fragment;
-import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Forhandling_som_lejer_recyclerview_adapter;
+import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Forhandling_recyclerview;
 
 
 /**
@@ -36,14 +35,13 @@ public class Indbakke_fragment extends Fragment implements View.OnClickListener 
     private BottomNavigationView indbakke_nav;
     private FrameLayout til_aftaler_frame;
     private Aftaler_ledige_fragment ledige_fragment;
-    private Aftaler_forhandlinger_fragment aftaler_forhandlinger_fragment;
 
 
     private String senesteFrag;
 
 
     private RecyclerView recyclerViewIndlejninger;
-    private Forhandling_som_lejer_recyclerview_adapter adapter_lej;
+    private Forhandling_recyclerview adapter_lej;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -168,7 +166,7 @@ public class Indbakke_fragment extends Fragment implements View.OnClickListener 
     private void fyldRecyclerViewIndlejninger(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.forhandlinger_recyclerview_indlejninger);
-        adapter_lej = new Forhandling_som_lejer_recyclerview_adapter(getContext());
+        adapter_lej = new Forhandling_recyclerview(getContext());
         recyclerView.setAdapter(adapter_lej);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

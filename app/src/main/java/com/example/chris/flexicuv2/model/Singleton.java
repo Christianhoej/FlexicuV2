@@ -14,6 +14,7 @@ public class Singleton extends Activity {
     public static String userID;
     public static ArrayList<Aftale> mineUdlejAftalerMedForhandling;
     public static ArrayList<Aftale> mineLejAftalerMedForhandling;
+    public static ArrayList<Aftale> alleMineAftalerMedForhandling;
     public static ArrayList<Aftale> mineMedarbejderUdbud;
     public static ArrayList<Aftale> mineAfsluttedeAftaler;
   //  public static ArrayList<Forhandling> mineLejForhandlinger;
@@ -43,9 +44,25 @@ public class Singleton extends Activity {
             mineLejAftalerMedForhandling = new ArrayList<>();
             mineAfsluttedeAftaler = new ArrayList<>();
             søgeFiltrering = new Filter();
-
+            alleMineAftalerMedForhandling = new ArrayList<>();
         }
         return singleInstance;
+    }
+
+    public static ArrayList<Aftale> getAlleMineAftalerMedForhandling() {
+        return alleMineAftalerMedForhandling;
+    }
+
+    public static void setAlleMineAftalerMedForhandling(ArrayList<Aftale> alleMineAftalerMedForhandling) {
+        Singleton.alleMineAftalerMedForhandling = alleMineAftalerMedForhandling;
+    }
+
+    public static void addAlleMineAftalerMedForhandling(Aftale alleMineAftalerMedForhandling) {
+        Singleton.alleMineAftalerMedForhandling.add(alleMineAftalerMedForhandling);
+    }
+
+    public static void removeAlleMineAftalerMedForhandling(Aftale alleMineAftalerMedForhandling) {
+        Singleton.alleMineAftalerMedForhandling.remove(alleMineAftalerMedForhandling);
     }
 
     public static ArrayList<Aftale> getMineAfsluttedeAftaler() {
