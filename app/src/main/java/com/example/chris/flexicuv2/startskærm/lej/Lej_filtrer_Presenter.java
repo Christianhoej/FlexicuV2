@@ -10,6 +10,8 @@ import java.io.IOException;
 
 public class Lej_filtrer_Presenter {
 
+    private final String ERRORVÆLGSTARTDATO = "Vælg en startdato for at filtrere";
+    private final String ERRORVÆLGSLUTDATO = "Vælg en slutdato for at filtrere";
     private UpdateFiltrer updateFiltrer;
 
     private final String ERRORKRONOLOGISKDATO = "ERRORKRONOLOGISKDATO";
@@ -23,16 +25,28 @@ public class Lej_filtrer_Presenter {
     }
     public boolean checkDatoerErOK(String startDato, String slutDato){
         int errors = 0;
-        boolean kronologiskOK = Arbejdsdage_Kalender.checkDateIsOK(startDato.replace(" ",""),slutDato.replace(" ", ""))>=0;
-        if(!kronologiskOK){
-            updateFiltrer.errorKronologiskDato(ERRORKRONOLOGISKDATO);
+        if(startDato.contains("yyyy")){
+            updateFiltrer.errorVælgStartDato(ERRORVÆLGSTARTDATO);
             errors++;
         }
-        int arbDage = Arbejdsdage_Kalender.findArbejdsdage(startDato.replace(" ", ""), slutDato.replace(" ",""));
-        if(!(arbDage>0)){
-            updateFiltrer.errorIngenArbejdsDage(ERRORINGENARBEJDSDAGE);
-            errors ++;
+        if(slutDato.contains("yyyy")){
+            updateFiltrer.errorVælgSlutDato(ERRORVÆLGSLUTDATO);
+            errors++;
         }
+        if(errors == 0) {
+
+            boolean kronologiskOK = Arbejdsdage_Kalender.checkDateIsOK(startDato.replace(" ", ""), slutDato.replace(" ", "")) >= 0;
+            if (!kronologiskOK) {
+                updateFiltrer.errorKronologiskDato(ERRORKRONOLOGISKDATO);
+                errors++;
+            }
+            int arbDage = Arbejdsdage_Kalender.findArbejdsdage(startDato.replace(" ", ""), slutDato.replace(" ", ""));
+            if (!(arbDage > 0)) {
+                updateFiltrer.errorIngenArbejdsDage(ERRORINGENARBEJDSDAGE);
+                errors++;
+            }
+        }
+        System.out.println("Antal errors " + errors);
         if (errors>0)
             return false;
         else {
@@ -58,6 +72,8 @@ public class Lej_filtrer_Presenter {
     public interface UpdateFiltrer{
          void errorKronologiskDato(String errorMSG);
          void errorIngenArbejdsDage(String errorMSG);
+         void errorVælgSlutDato(String errorMSG);
+         void errorVælgStartDato(String errorMSG);
          void errorAdresse(String errorMSG);
          void sendToast(String msg);
          void setArbejdsområde(String[] arbejdsområde);
