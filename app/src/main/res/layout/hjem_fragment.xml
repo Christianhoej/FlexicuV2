@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     tools:context=".startskærm.hjem.Startskaerm_Udlejede_medarbejder_fragment"
     android:orientation="vertical"
+    android:layout_marginHorizontal="5dp"
     >
 
 
@@ -17,6 +18,7 @@
         android:layout_weight="0"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lej_medarbejder_recyclerview"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:scrollbars="none"
