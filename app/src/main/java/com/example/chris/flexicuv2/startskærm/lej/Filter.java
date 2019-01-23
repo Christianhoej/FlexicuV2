@@ -80,7 +80,7 @@ public class Filter implements Filtrering {
     }
 
     public void setArbejdsområder(String arbejdsområder) {
-        this.arbejdsområder = arbejdsområder.split(",");
+        this.arbejdsområder = arbejdsområder.split(", ");
     }
 
     public String getLatitude() {
