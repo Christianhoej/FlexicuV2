@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bekraeftelse_medarbejder_udbud_fragment"
+    android:background="@color/hvid"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="10dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:background="@drawable/flexicu_logo"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Din medarbejder er sat i udbud!"
+            android:textSize="30dp"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/tjek"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="Medarbejder"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="26dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bekræftelse_navn"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="26dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Periode"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="26dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bekræftelse_periode"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="26dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:id="@+id/bekræftelse_afslut_knap"
+            android:text="fortsæt"
+            android:background="@drawable/rounded_corners_blue"
+            android:layout_gravity="center"
+            android:textColor="@color/hvid"/>
+
+    </LinearLayout>
+
+</FrameLayout>
