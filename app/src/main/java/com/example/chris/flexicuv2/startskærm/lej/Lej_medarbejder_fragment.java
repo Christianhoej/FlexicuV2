@@ -213,9 +213,9 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
             case R.id.forhandling_annuller_button:
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
-            case R.id.forhandling_tilføj_besked_button:
+           /* case R.id.forhandling_tilføj_besked_button:
                 onButtonShowPopupWindowClick(v);
-                break;
+                break;*/
             case R.id.forhandling_slutdato_rediger_textview:
                 findEnDato(false, R.id.forhandling_startdato_rediger_textview, c2);
                 break;

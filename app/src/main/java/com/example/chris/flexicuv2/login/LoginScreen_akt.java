@@ -2,8 +2,8 @@
 package com.example.chris.flexicuv2.login;
 
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +25,9 @@ import com.example.chris.flexicuv2.loadingscreen.Loading_screen;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.opret_bruger.Opret_bruger_fragment_1;
 import com.example.chris.flexicuv2.opret_bruger.Opret_bruger_akt;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LoginScreen_akt extends AppCompatActivity implements View.OnClickListener, LoginPresenter.UpdateLoginScreen {
 
@@ -50,11 +52,22 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     private Animation rotateAnim;
     private ImageView logo;
     private Fragment animfrag;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+     //   boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+     //   if (!EMULATOR) {
+     //       Fabric.with(this, new Crashlytics());
+     //   }
+/*        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Gunn");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+*/
         presenter = new LoginPresenter(this, this, loading_screen); //Evt. lav metode der kan sætte presenter på.
         dbManager = new DBManager();
         //logo = findViewById(R.id.flexLogo);
@@ -101,6 +114,8 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
               //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
               //ivX = findViewById(R.id.x_logo);
               //loginFrame.setAlpha();
+              logIn.setEnabled(false);
+              newUser.setEnabled(false);
               setAnimation(loading_screen);
               //logo = findViewById(R.id.x_logo);
               //logo.setVisibility(View.INVISIBLE);
