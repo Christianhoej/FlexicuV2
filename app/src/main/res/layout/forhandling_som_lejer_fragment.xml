@@ -413,12 +413,12 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/forhandling_send_eller_accepter_tilbud_button"
+                android:id="@+id/forhandling_som_lejer_send_eller_accepter_tilbud_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corners_blue"
                 android:textColor="@color/hvid"
-                android:text="send tilbud/accepter tilbud" />
+                android:text="send tilbud" />
         </LinearLayout>
 
     </LinearLayout>

@@ -76,8 +76,8 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
 
         username = findViewById(R.id.emailInput);
         username.setHint("Indtast email");
-        username.setText("test@123.dk");
-
+        //username.setText("test@123.dk");
+        username.setText("123@123.dk");
         password = findViewById(R.id.passwordInput);
 
         //password.setText(presenter.setText());//TODO Her er eksempel på at bruge logik gennem presenter -> Det skal anvendes til at opdatere views

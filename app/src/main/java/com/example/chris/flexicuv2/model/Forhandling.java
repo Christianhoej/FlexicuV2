@@ -19,14 +19,14 @@ public class Forhandling implements Comparable<Forhandling>{
     private String udlejerStartDato;
     private String udlejerSlutDato;
     private String udlejPris;
-    private ArrayList<String> udlejKommentar;
+    private ArrayList<String> udlejKommentar = new ArrayList<>();
     private boolean udlejEgetVærktøj;
 
 
     private String lejerStartDato;
     private String lejerSlutDato;
     private String lejPris;
-    private ArrayList<String> lejKommentar;
+    private ArrayList<String> lejKommentar = new ArrayList<>();
     private boolean lejEgetVærktøj;
 
 

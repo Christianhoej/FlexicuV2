@@ -22,7 +22,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.chris.flexicuv2.Bekraeftelse;
+import com.example.chris.flexicuv2.Bekraeftelse_medarbejder_udbud_fragment;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Aftale;
@@ -51,7 +51,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private DatePickerDialog datepickerdialog;
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private Udlejning_Presenter presenter;
-    private Bekraeftelse bekraeftelseFragment;
+    private Bekraeftelse_medarbejder_udbud_fragment bekraeftelseFragment;
 
     public Udlejning_Janus() {
         // Required empty public constructor
@@ -115,7 +115,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         opretUdlejningButton.setOnClickListener(this);
         presenter = new Udlejning_Presenter(this);
 
-        bekraeftelseFragment = new Bekraeftelse();
+        bekraeftelseFragment = new Bekraeftelse_medarbejder_udbud_fragment();
 
         return v;
     }

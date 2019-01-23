@@ -14,7 +14,7 @@ public class Aftale {
     private String timePris;
     private String kommentar;
     private boolean egetVærktøj;
-    private ArrayList<Forhandling> forhandlinger;
+    private ArrayList<Forhandling> forhandlinger = new ArrayList<>();
     private long timestamp;
 
     public boolean isAktiv() {

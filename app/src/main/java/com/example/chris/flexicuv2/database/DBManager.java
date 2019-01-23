@@ -190,21 +190,26 @@ public class DBManager {
                     Aftale udlej = snapshot.getValue(Aftale.class);
 
                     //Hvis aftalen er aktiv
-                    if (udlej.isAktiv() == true) {
-
+                    System.out.println(udlej.isAktiv());
+                    if (udlej.isAktiv()) {
+                        System.out.println("kommet ind");
                         //Hvis udlejerID er lig med nuværende brugers ID
                         if (udlej.getUdlejer().getBrugerID().equals(uid)) {
+                            System.out.println("UdlejerID: " + udlej.getUdlejer().getBrugerID() + ", uid: " + uid);
                             mineUdlejninger.add(udlej);
                             //Hvis der er nogle forhandlinger
                             if (udlej.getForhandlinger() != null) {
                                 udlejAftaleMedForhandling.add(udlej);
                             }
                         } else {
+                            System.out.println(udlej.getForhandlinger().size());
                             andresUdlejninger.add(udlej);
                             if (udlej.getForhandlinger() != null) {
                                 for (Forhandling forhandling : udlej.getForhandlinger()) {
+                                    System.out.println("Forhandlinger er i aftale");
                                     if (forhandling.getLejer().getBrugerID().equals(uid)) {
-                                        udlejAftaleMedForhandling.add(udlej);
+                                        System.out.println("UdlejerID: " + forhandling.getLejer().getBrugerID() + ", uid: " + uid);
+                                        lejAftaleMedForhandling.add(udlej);
                                         break;
                                     }
                                 }

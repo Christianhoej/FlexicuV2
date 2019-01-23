@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -25,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.Bekraeftelse_bud_medarbejder_fragment;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Aftale;
@@ -55,14 +57,17 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private final String JA = "Ja";
     private final String NEJ = "Nej";
+    private Bekraeftelse_bud_medarbejder_fragment bekræftelse;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.forhandling_som_lejer_fragment, container, false);
+        bekræftelse = new Bekraeftelse_bud_medarbejder_fragment();
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
         presenter = new Lej_presenter(this);
+        singleton.midlertidigForhandling = new Forhandling();
         c1 = Calendar.getInstance();
         c2 = Calendar.getInstance();
         overskrift_TV = v.findViewById(R.id.aftaleforhandling_overskrift);
@@ -106,9 +111,6 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         }
 
 
-
-
-
         //Lejer
         //Dato
         startdato_lejerTV = v.findViewById(R.id.forhandling_som_lejer_startdato_lejer_textview);
@@ -146,7 +148,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         egetVærktøj_switch.setOnCheckedChangeListener(this);
         anullerButton = v.findViewById(R.id.forhandling_annuller_button);
         anullerButton.setOnClickListener(this);
-        opretUdlejningButton = v.findViewById(R.id.forhandling_send_eller_accepter_tilbud_button);
+        opretUdlejningButton = v.findViewById(R.id.forhandling_som_lejer_send_eller_accepter_tilbud_button);
         opretUdlejningButton.setOnClickListener(this);
 
         kommentarButton = v.findViewById(R.id.forhandling_tilføj_besked_button);
@@ -159,7 +161,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.forhandling_send_eller_accepter_tilbud_button:
+            case R.id.forhandling_som_lejer_send_eller_accepter_tilbud_button:
                 int pris = 0;
                 if(!timepris_lejerET.getText().toString().equals("")){
                     pris = Integer.parseInt(timepris_lejerET.getText().toString());
@@ -175,11 +177,11 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
                         pris,
                         arbDage)) {
 
-                    Forhandling forhandling = singleton.midlertidigForhandling;
-                    /*if(singleton.midlertidigForhandling.getLejKommentar()!=null){
+                    Forhandling forhandling = new Forhandling();
+                    if(singleton.midlertidigForhandling.getLejKommentar()!=null){
                         forhandling.setLejKommentar(singleton.midlertidigForhandling.getLejKommentar());
-                    }*/
-                    forhandling.addLejKommentar(kommentarET.getText().toString());
+                    }
+                    System.out.println("KOMMET HER TIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     forhandling.setLejerStartDato(startdato_lejerTV.getText().toString());
                     forhandling.setLejerSlutDato(slutdato_lejerTV.getText().toString());
                     forhandling.setLejPris(timepris_lejerET.getText().toString());
@@ -188,19 +190,26 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
                     forhandling.setLejer(singleton.getBruger());
                     forhandling.setAktiv(true);
                     forhandling.setTimestamp(System.currentTimeMillis());
-                    forhandling.setUdlejerSlutDato("");
-                    int index = 0;
-                    for(Aftale aftale : singleton.getMineLejAftalerMedForhandling()){
+                    forhandling.setAftaleID(singleton.midlertidigAftale.getAftaleID());
+                    forhandling.setUdlejerStartDato(singleton.midlertidigAftale.getStartDato());
+                    forhandling.setUdlejerSlutDato(singleton.midlertidigAftale.getSlutDato());
+                    forhandling.setUdlejEgetVærktøj(singleton.midlertidigAftale.isEgetVærktøj());
+                    if(singleton.midlertidigAftale.getKommentar()!=null) {
+                        forhandling.addUdlejKommentar(singleton.midlertidigAftale.getKommentar());
+                    }
+                    forhandling.setUdlejPris(singleton.midlertidigAftale.getTimePris());
+
+                    singleton.addMineLejAftalerMedForhandling(singleton.midlertidigAftale);
+                    /*for(Aftale aftale : singleton.getMineLejAftalerMedForhandling()){
                         if(aftale.getAftaleID().equals(singleton.midlertidigForhandling.getAftaleID())){
                             index = singleton.getMineLejAftalerMedForhandling().indexOf(forhandling);
                         }
-                    }
+                    }*/
 
-
-                    singleton.getMineLejAftalerMedForhandling().get(index);
-                    singleton.getMineLejAftalerMedForhandling().get(index).addForhandlinger(forhandling);
+                    singleton.getMineLejAftalerMedForhandling().get(singleton.getMineLejAftalerMedForhandling().size()-1).addForhandlinger(forhandling);
                     dbManager.addForhandling(forhandling);
-                    getActivity().getSupportFragmentManager().popBackStack();
+                    setFragment(bekræftelse);
+                    //getActivity().getSupportFragmentManager().popBackStack();
                 }
                 break;
             case R.id.forhandling_annuller_button:
@@ -215,6 +224,14 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
             case R.id.forhandling_som_lejer_startdato_lejer_textview:
                 findEnDato(true, R.id.forhandling_som_lejer_startdato_lejer_textview, c1);
         }
+    }
+
+    public void setFragment(Fragment fragment) {
+        //startskærmFrameTilDiverse.removeAllViews();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
+        //fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.commit();
     }
 
     private void findEnDato(final boolean start, int id, Calendar c) {
