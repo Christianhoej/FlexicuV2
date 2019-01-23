@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Aftale;
-import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Medarbejder;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_ledige_fragment;
@@ -290,7 +289,7 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
         startskærmFrameTilDiverse.removeAllViews();
         getFragmentManager().popBackStack();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.til_aftaler_frame, fragment);
+        fragmentTransaction.replace(R.id.til_udlej_frame, fragment);
         fragmentTransaction.commit();
     }
 

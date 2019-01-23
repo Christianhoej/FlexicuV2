@@ -13,36 +13,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/indbakke_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_alignParentBottom="true"
-            android:background="@color/hvid"
-            app:itemIconTint="@color/nav_item_colors_green"
-            app:itemTextColor="@color/nav_item_colors_green"
-            app:menu="@menu/indbakke_items"
-            >
-        </android.support.design.widget.BottomNavigationView>
         <!--app:itemTextAppearanceActive="@dimen/indbakke_design_bottom_navigation_active_text_size"
         app:itemTextAppearanceInactive="@dimen/indbakke_design_bottom_navigation_text_size"-->
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/flex_green"
-            >
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/grey"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:text="Forhandlinger"/>
 
-        </View>
-
-
-
-        <FrameLayout
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginVertical="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/til_aftaler_frame">
-        </FrameLayout>
+            android:layout_weight="4"
+            android:id="@+id/forhandlinger_recyclerview_indlejninger"
+            android:layout_gravity="center">
+        </android.support.v7.widget.RecyclerView>
+
+
+
     </LinearLayout>
 
 
