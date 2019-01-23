@@ -13,7 +13,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dette er forhandlinger"
         android:textSize="24dp"
         android:gravity="center"
         android:id="@+id/tv_forhandlinger"/>
@@ -41,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radio_forhandlinger_indlejninger"
-                android:text="Indlejninger"
+                android:text="Bud på andres \nmedarbejdere"
                 android:layout_weight="20"
                 android:shadowColor="@color/flex_green"/>
             <Space
@@ -53,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radio_forhandlinger_udlejninger"
-                android:text="Udlejninger"
+                android:text="Bud på mine \nmedarbejdere"
                 android:layout_weight="20"
                 android:shadowColor="@color/flex_green"/>
         </RadioGroup>

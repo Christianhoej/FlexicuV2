@@ -230,7 +230,7 @@ public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.
         //startskærmFrameTilDiverse.removeAllViews();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
-        //fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 

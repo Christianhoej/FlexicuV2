@@ -40,6 +40,6 @@ public class Bekraeftelse_medarbejder_udbud_fragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        getActivity().onBackPressed();
+        getFragmentManager().popBackStack("fragment", getFragmentManager().POP_BACK_STACK_INCLUSIVE);
     }
 }

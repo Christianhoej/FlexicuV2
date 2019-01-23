@@ -418,7 +418,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corners_blue"
                 android:textColor="@color/hvid"
-                android:text="send tilbud" />
+                android:text="Send tilbud" />
         </LinearLayout>
 
     </LinearLayout>
