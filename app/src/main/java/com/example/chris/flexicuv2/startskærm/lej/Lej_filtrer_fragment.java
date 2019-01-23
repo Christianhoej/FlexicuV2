@@ -56,10 +56,11 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private Button anvend;
     private Button annuller;
     private Button nulstil;
-    private Calendar c;
+    private Calendar c1,c2;
     private Singleton singleton;
     private Lej_filtrer_Presenter presenter;
 
+    private DatePickerDialog datePickerDialog;
     private DatePickerDialog.OnDateSetListener datepickerListener;
     private TextView startdatoET, slutdatoET;
 
@@ -82,7 +83,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
             for(String s : f.getArbejdsområder()){
                 System.out.println(s + " Dette er gemt");
             }
-        }
+        }else
+            arbejdsområder_spinner.setSelection(new String[]{"Vælg arbejdsområde"});
+
 
         postnr = (EditText) v.findViewById(R.id.edit_postnr);
         postnr.setText(f.getPostNr());
@@ -135,7 +138,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         slutdatoET.setOnClickListener(this);
         slutdatoET.addTextChangedListener(datoTextWatch);
 
-        c = Calendar.getInstance();
+        c1 = Calendar.getInstance();
+        c2 = Calendar.getInstance();
+
 
         afstandsberegner = new Afstandsberegner();
         //a= afstandsberegner.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
@@ -224,8 +229,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
                 System.out.println(f.getMinPris());
                 System.out.println(f.isEgetVærktøj());
 
-                if(!startdatoET.getText().toString().equals(" dd / mm / yyyy ") && !slutdatoET.getText().toString().equals(" dd / mm / yyyy "))
+                if(presenter.checkDatoerErOK(startdatoET.getText().toString(), slutdatoET.getText().toString()))
                     getActivity().onBackPressed();
+
 
                 break;
             case R.id.annuller_knap:
@@ -241,10 +247,10 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
                 break;
             case R.id.lej_filtrer_slutdato_textview:
-                findEnDato(false);
+                findEnDato(false , c1);
                 break;
             case R.id.lej_filtrer_startdato_textview:
-                findEnDato(true);
+                findEnDato(true, c2);
                 break;
         }
 
@@ -254,7 +260,7 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
      * metoden starter en datepicker i dialog boks hvor der kan vælges datoer fra
      * @param start : tilkendegiver om det er start eller slutdatoen -> hvis det er startdatoen så er start true
      */
-    private void findEnDato(final boolean start) {
+    private void findEnDato(final boolean start, Calendar c) {
         datepickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -272,31 +278,37 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
                 String s = " " + dag + " / " + måned + " / " + year + " ";
                 if(start) {
                     startdatoET.setText(s);
-                    c.set(year,month-1,dayOfMonth);
+                    c1.set(year,month-1,dayOfMonth);
                     slutdatoET.setEnabled(true);
                 }
                 else {
                     slutdatoET.setText(s);
+                    c2.set(year, month-1,dayOfMonth);
+
                 }
             }
         };
 
 
 
-        Calendar calendar = Calendar.getInstance();
-        final int år = calendar.get(Calendar.YEAR);
-        final int måned = calendar.get(Calendar.MONTH);
-        final int dag = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datepickerdialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
+        final int år = c.get(Calendar.YEAR);
+        final int måned = c.get(Calendar.MONTH);
+        final int dag = c.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(getContext(),datepickerListener,år,måned,dag );
 
-        if(c.getTimeInMillis()>(System.currentTimeMillis()-1000)){
-            datepickerdialog.getDatePicker().setMinDate(c.getTimeInMillis());
+        if(c1.getTimeInMillis()>(System.currentTimeMillis()-1000)){
+            if(!start) {
+                datePickerDialog.getDatePicker().setMinDate(c1.getTimeInMillis());
+            }
+            else
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         }
         else{
-            datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis());
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
         }
 
-        datepickerdialog.show();
+        datePickerDialog.show();
 
     }
     private void gemArbejdsområde() {
@@ -313,20 +325,25 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private TextWatcher datoTextWatch = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            slutdatoET.setError(null);
+
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (!slutdatoET.getText().toString().equals(" dd / mm / yyyy ")){
-            if(!startdatoET.getText().toString().equals(" dd / mm / yyyy "))
-        presenter.checkDatoerErOK(startdatoET.getText().toString(),slutdatoET.getText().toString());
-        }
+
+
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            if (!slutdatoET.getText().toString().equals(" dd / mm / yyyy "))
+                slutdatoET.setError(null);
+            if(!startdatoET.getText().toString().equals(" dd / mm / yyyy "))
+                startdatoET.setError(null);
+            if (!slutdatoET.getText().toString().equals(" dd / mm / yyyy ")) {
+                if (!startdatoET.getText().toString().equals(" dd / mm / yyyy "))
+                    presenter.checkDatoerErOK(startdatoET.getText().toString(), slutdatoET.getText().toString());
+            }
         }
     };
     private TextWatcher adresseTextWatch = new TextWatcher() {
@@ -368,6 +385,16 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     @Override
     public void errorIngenArbejdsDage(String errorMSG) {
         slutdatoET.setError(errorMSG);
+    }
+
+    @Override
+    public void errorVælgSlutDato(String errorMSG) {
+        slutdatoET.setError(errorMSG);
+    }
+
+    @Override
+    public void errorVælgStartDato(String errorMSG) {
+        startdatoET.setError(errorMSG);
     }
 
     @Override
