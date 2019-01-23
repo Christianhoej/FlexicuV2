@@ -165,9 +165,9 @@ public class DBManager {
     public void addForhandling(Forhandling forhandling){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-        String forhKey = ref.child(AFTALE).child(forhandling.getAftaleID()).push().getKey();
+        String forhKey = ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).push().getKey();
         forhandling.setForhandlingID(forhKey);
-        ref.child(AFTALE).child(forhandling.getAftaleID()).child(forhKey).setValue(forhandling);
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhKey).setValue(forhandling);
     }
 
 
@@ -188,6 +188,13 @@ public class DBManager {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Aftale udlej = snapshot.getValue(Aftale.class);
+
+
+                    for(DataSnapshot snapshotForhandling : snapshot.child(FORHANDLING).getChildren()) {
+                        Forhandling forhandling = snapshotForhandling.getValue(Forhandling.class);
+                        udlej.addForhandlinger(forhandling);
+                    }
+
 
                     //Hvis aftalen er aktiv
                     System.out.println(udlej.isAktiv());

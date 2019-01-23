@@ -10,12 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:gravity="center"
-        android:id="@+id/tv_forhandlinger"/>
 <!--
     <Button
         android:layout_width="wrap_content"
@@ -24,10 +18,12 @@
         android:text="vis forhandling"
         android:layout_gravity="center"/>
 -->
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:weightSum="100"
             android:layout_marginBottom="20dp"
             android:id="@+id/radioGroup_forhandlinger">
