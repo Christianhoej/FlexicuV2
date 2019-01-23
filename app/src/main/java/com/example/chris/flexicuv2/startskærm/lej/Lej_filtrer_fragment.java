@@ -75,9 +75,14 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         presenter = new Lej_filtrer_Presenter(this);
 
         arbejdsområder_spinner = v.findViewById(R.id.filtrer_arbejdsområder);
-        if(f.getArbejdsområder()!= null)
-        arbejdsområder_spinner.setSelection(f.getArbejdsområder());//Sæt valgte værdier
         opretSpinner();
+
+        if(f.getArbejdsområder()!= null) {
+            arbejdsområder_spinner.setSelection(f.getArbejdsområder());//Sæt valgte værdier
+            for(String s : f.getArbejdsområder()){
+                System.out.println(s + " Dette er gemt");
+            }
+        }
 
         postnr = (EditText) v.findViewById(R.id.edit_postnr);
         postnr.setText(f.getPostNr());
@@ -137,11 +142,20 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
         return v;
     }
+    @Override
+    public void setArbejdsområde(String []arbejdsområde) {
+        System.out.println(arbejdsområde);
+        for(int i=0; i<arbejdsområde.length; i++){
+            System.out.println(arbejdsområde[i] + "Dette er arbejdsområderne");
+
+        }
+        arbejdsområder_spinner.setSelection(arbejdsområde);
+    }
 
 
     public void opretSpinner(){
         List<String> arbejdsområde_listen = new ArrayList<String>();
-        arbejdsområde_listen.add("Vælg arbejdsområde");
+        //arbejdsområde_listen.add("Vælg arbejdsområde");
         arbejdsområde_listen.add("Arbejdsmand");
         arbejdsområde_listen.add("Butiksekspedition");
         arbejdsområde_listen.add("Chauffør - over 3.5 ton");
@@ -288,8 +302,9 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private void gemArbejdsområde() {
         String arb;
         if(!arbejdsområder_spinner.getSelectedItem().toString().equals("Vælg arbejdsområde") ) {
-            arb = arbejdsområder_spinner.getSelectedItem().toString();
+            arb = arbejdsområder_spinner.getSelectedItem().toString().trim();
             singleton.søgeFiltrering.setArbejdsområder(arb);
+            System.out.println(arb);
         }
 
     }

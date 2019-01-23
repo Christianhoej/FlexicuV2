@@ -60,6 +60,7 @@ public class Lej_filtrer_Presenter {
          void errorIngenArbejdsDage(String errorMSG);
          void errorAdresse(String errorMSG);
          void sendToast(String msg);
+         void setArbejdsområde(String[] arbejdsområde);
 
     }
 
