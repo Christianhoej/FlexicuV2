@@ -19,7 +19,7 @@
     <item
         android:id="@+id/nav_indbakke"
         android:icon="@drawable/ic_chat_black_24dp"
-        android:title="Indbakke" />
+        android:title="Bud/Udbud" />
 
 
 </menu>

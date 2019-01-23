@@ -4,11 +4,11 @@
 
     <item
         android:id="@+id/indbakke_forhandlinger"
-        android:title="Bud" />
+        android:title="Indkomne bud" />
 
     <item
         android:id="@+id/indbakke_ledige"
-        android:title="Udbud"
+        android:title="Mine udbud"
         />
 
 </menu>
