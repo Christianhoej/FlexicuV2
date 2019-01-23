@@ -19,7 +19,7 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical"
-           android:layout_marginLeft="5dp">
+           android:layout_marginHorizontal="10dp">
 
            <ImageView
                android:layout_width="210dp"
@@ -45,20 +45,27 @@
                android:text="Vælg ønskede arbejdsområde(r)"
                android:layout_marginVertical="10dp"/>
 
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/flex_green_rektangel">
+
            <com.example.chris.flexicuv2.hjælpeklasser.MultiSelectionSpinner
                android:id="@+id/filtrer_arbejdsområder"
                android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
+               android:layout_height="35dp"
                android:layout_margin="2dp"
-               android:layout_marginVertical="10dp"
+               android:gravity="center"
+               android:layout_marginHorizontal="5dp"
                />
-
+           <!-- android:background="@drawable/flex_green_rektangel"-->
+           </FrameLayout>
            <View
-               android:layout_width="350dp"
+               android:layout_width="match_parent"
                android:layout_gravity="center"
                android:layout_height="1dp"
                android:background="@color/flex_green"
-               android:layout_marginVertical="10dp"/>
+               android:layout_marginVertical="10dp" />
 
        <TextView
            android:layout_width="wrap_content"
@@ -83,8 +90,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
-               android:weightSum="5"
-               android:layout_marginHorizontal="15dp">
+               android:layout_marginHorizontal="5dp">
                <TextView
                    android:id="@+id/lej_filtrer_startdato_textview"
                    android:layout_width="wrap_content"
@@ -118,7 +124,7 @@
            
 
            <View
-               android:layout_width="350dp"
+               android:layout_width="fill_parent"
                android:layout_gravity="center"
                android:layout_height="1dp"
                android:background="@color/flex_green"
@@ -136,18 +142,19 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginVertical="10dp"
-               android:orientation="horizontal"
-               android:weightSum="10">
+               android:layout_marginHorizontal="5dp"
+               android:orientation="horizontal">
                
 
 
                <EditText
                    android:id="@+id/edit_vej"
                    android:layout_width="0dp"
-                   android:layout_height="wrap_content"
+                   android:layout_height="35dp"
                    android:layout_weight="7"
-                   android:backgroundTint="@color/flex_green"
+                   android:layout_marginRight="10dp"
                    android:gravity="center"
+                   android:background="@drawable/flex_green_rektangel"
                    android:hint="Vej"
                    android:inputType="text"
                    android:maxLength="100" />
@@ -155,12 +162,12 @@
                <EditText
                    android:id="@+id/edit_nummer"
                    android:layout_width="0dp"
-                   android:layout_height="wrap_content"
+                   android:layout_height="35dp"
                    android:layout_weight="3"
-                   android:backgroundTint="@color/flex_green"
                    android:gravity="center"
+                   android:background="@drawable/flex_green_rektangel"
                    android:hint="Nummer"
-                   android:inputType="text"
+                   android:inputType="number"
                    android:maxLength="10" />
 
            </LinearLayout>
@@ -169,17 +176,18 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
-               android:weightSum="10"
                android:layout_marginVertical="10dp"
+               android:layout_marginHorizontal="5dp"
                >
 
            <EditText
                android:layout_width="0dp"
                android:layout_weight="3"
-               android:layout_height="wrap_content"
-               android:backgroundTint="@color/flex_green"
+               android:layout_height="35dp"
+               android:background="@drawable/flex_green_rektangel"
                android:hint="Postnr."
                android:inputType="number"
+               android:layout_marginRight="10dp"
                android:gravity="center"
                android:maxLength="4"
                android:id="@+id/edit_postnr"
@@ -188,8 +196,8 @@
            <EditText
                android:layout_width="0dp"
                android:layout_weight="7"
-               android:layout_height="wrap_content"
-               android:backgroundTint="@color/flex_green"
+               android:layout_height="35dp"
+               android:background="@drawable/flex_green_rektangel"
                android:hint="By"
                android:inputType="text"
                android:gravity="center"
@@ -199,7 +207,7 @@
            </LinearLayout>
 
            <View
-               android:layout_width="350dp"
+               android:layout_width="match_parent"
                android:layout_gravity="center"
                android:layout_height="1dp"
                android:background="@color/flex_green"
@@ -247,7 +255,7 @@
            </RadioGroup>
 
            <View
-               android:layout_width="350dp"
+               android:layout_width="match_parent"
                android:layout_gravity="center"
                android:layout_height="1dp"
                android:background="@color/flex_green"
@@ -264,9 +272,7 @@
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="4"
-               android:layout_marginVertical="10dp">
+               android:orientation="horizontal">
 
                <Space
                    android:layout_width="wrap_content"
@@ -275,10 +281,10 @@
 
                <EditText
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
+                   android:layout_height="35dp"
                    android:inputType="number"
+                   android:background="@drawable/flex_green_rektangel"
                    android:id="@+id/min_timepris"
-                   android:backgroundTint="@color/flex_green"
                    android:gravity="center"
                    android:layout_weight="1"
                    android:hint="Min"/>
@@ -287,18 +293,24 @@
                    android:layout_width="15dp"
                    android:layout_gravity="center"
                    android:layout_height="1dp"
-                   android:background="@color/flex_green"
+                   android:layout_marginHorizontal="10dp"
+                   android:background="@android:color/black"
                    />
 
                <EditText
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:backgroundTint="@color/flex_green"
+                   android:layout_height="35dp"
+                   android:background="@drawable/flex_green_rektangel"
                    android:inputType="number"
                    android:layout_weight="1"
                    android:gravity="center"
                    android:id="@+id/max_timepris"
                    android:hint="Max"/>
+
+               <Space
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"/>
            </LinearLayout>
 
            <LinearLayout

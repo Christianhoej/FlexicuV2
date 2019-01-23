@@ -39,7 +39,7 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        String loen = "Løn: " + Integer.toString(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getLoen());
+        String loen = "Timepris: " + singleton.getAndresMedarbejderUdbud().get(i).getTimePris();
         viewHolder.name.setText(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getNavn());
         viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getArbejdsomraade());
