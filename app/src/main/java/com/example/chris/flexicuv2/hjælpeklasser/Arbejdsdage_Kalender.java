@@ -21,7 +21,6 @@ public class Arbejdsdage_Kalender {
     public static int findArbejdsdage(String dStart, String dSlut) {
         //
         int antalDageFraStart = checkDateIsOK(dStart, dSlut);
-        System.out.println(antalDageFraStart + "HHHHHHHHHHHHHHHHHHHHH");
 
         if (antalDageFraStart >= 0) {
 

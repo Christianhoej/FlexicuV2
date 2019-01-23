@@ -42,8 +42,8 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
         String loen = "Timepris: " + singleton.getAndresMedarbejderUdbud().get(i).getTimePris();
         viewHolder.name.setText(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getNavn());
         viewHolder.salary.setText(loen);
-        viewHolder.workfield.setText(singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getArbejdsomraade());
-        viewHolder.periode.setText(singleton.getAndresMedarbejderUdbud().get(i).getStartDato() + " til " + singleton.getAndresMedarbejderUdbud().get(i).getSlutDato());
+        viewHolder.workfield.setText("Arbejdsområder: " + singleton.getAndresMedarbejderUdbud().get(i).getMedarbejder().getArbejdsomraade());
+        viewHolder.periode.setText("Periode: " + singleton.getAndresMedarbejderUdbud().get(i).getStartDato().replace(" ", "") + " - " + singleton.getAndresMedarbejderUdbud().get(i).getSlutDato().replace(" ", ""));
 
         viewHolder.lej_recyclerview_listitems.setOnClickListener( new View.OnClickListener(){
 

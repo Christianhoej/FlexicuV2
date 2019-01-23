@@ -253,7 +253,7 @@
                 android:background="@drawable/flex_green_rektangel"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:hint=" evt. en udlejKommentar om medarbejderen \n eller til lejer" />
+                android:hint=" evt. en kommentar om medarbejderen \n eller til lejer" />
 
 
         </LinearLayout>

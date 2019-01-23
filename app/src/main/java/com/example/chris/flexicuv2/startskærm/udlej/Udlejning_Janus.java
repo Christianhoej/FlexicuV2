@@ -271,13 +271,10 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
 
             case R.id.udlejning_slutdato_textview:
                 findEnDato(false, R.id.udlejning_slutdato_textview, c2);
-
-
                 break;
+
             case R.id.udlejning_startdato_textview1:
                 findEnDato(true, R.id.udlejning_startdato_textview1, c1);
-
-
                 break;
         }
     }
@@ -286,7 +283,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         //startskærmFrameTilDiverse.removeAllViews();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
-        //fragmentTransaction.addToBackStack("fragment");
+        fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 

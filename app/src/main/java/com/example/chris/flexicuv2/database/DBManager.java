@@ -185,6 +185,7 @@ public class DBManager {
                 ArrayList<Aftale> lejAftaleMedForhandling = new ArrayList<>();
                 ArrayList<Aftale> udlejAftaleMedForhandling = new ArrayList<>();
                 ArrayList<Aftale> afsluttedeAftaler = new ArrayList<>();
+                ArrayList<Aftale> alleMineAftalerMedForhandling = new ArrayList<>();
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Aftale udlej = snapshot.getValue(Aftale.class);
@@ -200,7 +201,7 @@ public class DBManager {
                     System.out.println(udlej.isAktiv());
                     if (udlej.isAktiv()) {
                         System.out.println("kommet ind");
-                        //Hvis udlejerID er lig med nuværende brugers ID
+                        // Hvis jeg er udlejer
                         if (udlej.getUdlejer().getBrugerID().equals(uid)) {
                             System.out.println("UdlejerID: " + udlej.getUdlejer().getBrugerID() + ", uid: " + uid);
                             mineUdlejninger.add(udlej);
@@ -209,21 +210,23 @@ public class DBManager {
                                 udlejAftaleMedForhandling.add(udlej);
                             }
                         } else {
-                            System.out.println(udlej.getForhandlinger().size());
                             andresUdlejninger.add(udlej);
+                            // Hvis der er nogle udlejninger
                             if (udlej.getForhandlinger() != null) {
                                 for (Forhandling forhandling : udlej.getForhandlinger()) {
-                                    System.out.println("Forhandlinger er i aftale");
+                                    //Hvis jeg er lejer
                                     if (forhandling.getLejer().getBrugerID().equals(uid)) {
-                                        System.out.println("UdlejerID: " + forhandling.getLejer().getBrugerID() + ", uid: " + uid);
                                         lejAftaleMedForhandling.add(udlej);
                                         break;
                                     }
                                 }
                             }
                         }
+                        alleMineAftalerMedForhandling.add(udlej);
+
                     } else {
                         for(Forhandling forhandling : udlej.getForhandlinger()){
+                            //Hvis aftale ikke er aktiv, og den ikker er indåget
                             if(!forhandling.isAftaleIndgået()){
                                 udlej.removeForhandlinger(forhandling);
                             }
@@ -231,6 +234,7 @@ public class DBManager {
                         afsluttedeAftaler.add(udlej);
                     }
                 }
+                singleton.setAlleMineAftalerMedForhandling(alleMineAftalerMedForhandling);
                 singleton.setMineLejAftalerMedForhandling(lejAftaleMedForhandling);
                 singleton.setMineUdlejAftalerMedForhandling(udlejAftaleMedForhandling);
                 singleton.setMineAfsluttedeAftaler(afsluttedeAftaler);

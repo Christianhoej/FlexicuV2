@@ -16,26 +16,21 @@ import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_som_lejer;
-
-import java.util.ArrayList;
+import com.example.chris.flexicuv2.startskærm.indbakke.forhandling.Forhandling_indhold;
 
 
-public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Adapter<Forhandling_som_lejer_recyclerview_adapter.ViewHolder>{
+public class Forhandling_recyclerview extends RecyclerView.Adapter<Forhandling_recyclerview.ViewHolder>{
 
     private Context mContext;
-    private Forhandling_som_lejer forhandlingSomlejerFragment;
+    private Forhandling_indhold forhandling_indhold;
     private Singleton singleton;
 
     //TODO konstruktøren skal self have flere input når net er klar.
-    public Forhandling_som_lejer_recyclerview_adapter(Context mContext) {
+    public Forhandling_recyclerview(Context mContext) {
         this.mContext = mContext;
         singleton = Singleton.getInstance();
     }
 
-    private ArrayList typeARR;
-    private ArrayList navnARR;
-    private ArrayList virkARR;
     private int index = 0;
 
     @NonNull
@@ -43,39 +38,33 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.forhandlinger_recyclerview_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
-        forhandlingSomlejerFragment = new Forhandling_som_lejer();
-
-        typeARR = new ArrayList();
-        navnARR = new ArrayList();
-        virkARR = new ArrayList();
-
-
-        typeARR.add("LEJER");
-        typeARR.add("HÅNDVÆRKER");
-        navnARR.add("Christian");
-        navnARR.add("Janus");
-        virkARR.add("0000000000");
-        virkARR.add("HANSEN COCO");
-
+        forhandling_indhold = new Forhandling_indhold();
 
         return holder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull Forhandling_som_lejer_recyclerview_adapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull Forhandling_recyclerview.ViewHolder viewHolder, final int i) {
         //TODO setText
 
         //TODO setText for forhandling som lejer
 
         //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er sat helt op
 
-        if(i <singleton.getMineLejAftalerMedForhandling().get(index).getForhandlinger().size()) {
-            viewHolder.arbejdsområder.setText(singleton.getMineLejAftalerMedForhandling().get(index).getMedarbejder().getArbejdsomraade());
-            viewHolder.navn.setText(singleton.getMineLejAftalerMedForhandling().get(index).getMedarbejder().getNavn());
-            viewHolder.virksomhed.setText(singleton.getMineLejAftalerMedForhandling().get(index).getUdlejer().getVirksomhedsnavn());
-            viewHolder.periode.setText(singleton.getMineLejAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getMineLejAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
-            viewHolder.pris.setText(singleton.getMineLejAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejPris());
+        if(i <singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().size()) {
+            viewHolder.arbejdsområder.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getMedarbejder().getArbejdsomraade());
+            viewHolder.navn.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getMedarbejder().getNavn());
+            viewHolder.virksomhed.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getUdlejer().getVirksomhedsnavn());
+            viewHolder.periode.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
+            viewHolder.pris.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejPris());
+
+            if(singleton.getAlleMineAftalerMedForhandling().get(index).getUdlejer().getBrugerID().equals(singleton.getBruger().getBrugerID())){
+                viewHolder.type.setText("Jeg er udlejer");
+            }
+            else {
+                viewHolder.type.setText("Jeg er lejer");
+            }
         }
         else {
             index++;
@@ -83,13 +72,14 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
         viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO her skal fragmentet med hele aftalen vises.
-                setFragment(forhandlingSomlejerFragment);
+                setFragment(forhandling_indhold, i, index);
             }
         });
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, int i, int index) {
+        singleton.midlertidigAftale = singleton.getAlleMineAftalerMedForhandling().get(index);
+        singleton.midlertidigForhandling = singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i);
         //startskærmFrameTilDiverse.removeAllViews();
         FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
@@ -100,7 +90,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
     @Override
     public int getItemCount() {
         int antal=0;
-        for(Aftale aftale : singleton.getMineLejAftalerMedForhandling()){
+        for(Aftale aftale : singleton.getAlleMineAftalerMedForhandling()){
             for(Forhandling forhandling : aftale.getForhandlinger()){
                 antal++;
             }
@@ -121,6 +111,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
         TextView periode;
         TextView virksomhed;
         TextView pris;
+        TextView type;
         RelativeLayout forhandlinger_aftaler_listitems;
 
         public ViewHolder(@NonNull View itemView) {
@@ -131,6 +122,7 @@ public class Forhandling_som_lejer_recyclerview_adapter extends RecyclerView.Ada
             periode = (TextView) itemView.findViewById(R.id.forhandlinger_periode);
             virksomhed = (TextView) itemView.findViewById(R.id.forhandlinger_virk);
             pris = (TextView) itemView.findViewById(R.id.forhandlinger_pris);
+            type = itemView.findViewById(R.id.forhandlinger_type);
             forhandlinger_aftaler_listitems = (RelativeLayout) itemView.findViewById(R.id.forhandlinger_recyclerview_listitem);
         }
     }

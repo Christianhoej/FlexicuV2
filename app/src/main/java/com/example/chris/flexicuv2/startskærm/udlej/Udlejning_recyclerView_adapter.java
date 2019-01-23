@@ -101,7 +101,7 @@ public class Udlejning_recyclerView_adapter extends RecyclerView.Adapter<Udlejni
 
 
     public void setFragment(Fragment fragment) {
-        //startskærmFrameTilDiverse.removeAllViews();
+       // startskærmFrameTilDiverse.removeAllViews();
         FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.startskærm_frame_til_diverse, fragment);
         fragmentTransaction.addToBackStack("fragment");

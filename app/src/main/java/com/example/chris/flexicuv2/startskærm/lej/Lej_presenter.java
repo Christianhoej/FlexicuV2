@@ -5,7 +5,6 @@ import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
 public class Lej_presenter {
     private UpdateLej updateLej;
     private final String ERRORKRONOLOGISKDATO = "Den valgte slutdato falder før startdatoen";
-    private final String ERRORMEDARBEJDER = "MEDARBEJDERFEJL";
     private final String ERRORSTARTDATO = "STARTDATOFEJL";
     private final String ERRORSLUTDATO = "SLUTDATOFEJL";
     private final String ERRORTIMEPRIS = "TIMEPRISFEJL";
