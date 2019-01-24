@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.hjem;
-
+/**
+ * @Author Janus
+ */
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -80,11 +82,7 @@ public class RecyclerViewAdapter_Lej extends RecyclerView.Adapter<RecyclerViewAd
 
 
 
-/*       // String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
-        viewHolder.name.setText(mMedarbejder.get(i).getNavn());
-      //  viewHolder.salary.setText(loen);
-        viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
-*/
+
         viewHolder.hjem_lej_listItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,28 +185,18 @@ public class RecyclerViewAdapter_Lej extends RecyclerView.Adapter<RecyclerViewAd
         ((Activity)mContext).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int width = displaymetrics.widthPixels;
 
-        // create the popup window
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
-        //popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
 
-        //final PopupWindow popupWindowt = new PopupWindow();
+
+
         popupWindow.setContentView(popupView);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         popupWindow.setElevation(20);
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
+
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-        //  popupWindow.setOutsideTouchable(true);
-            /*// dismiss the popup window when touched
-            popupView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-            });*/
+
 
     }
 

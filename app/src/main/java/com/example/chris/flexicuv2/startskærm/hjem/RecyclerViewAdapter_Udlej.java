@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.hjem;
-
+/**
+ * @Author Gunn
+ */
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

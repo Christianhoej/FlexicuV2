@@ -14,6 +14,9 @@ import com.example.chris.flexicuv2.R;
 
 import java.util.ArrayList;
 
+/**
+ * @Author Christian
+ */
 public  class Medarbejder_Skaerm_fragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "Medarbejdere_skaerm_akt";

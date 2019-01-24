@@ -1,6 +1,8 @@
 package com.example.chris.flexicuv2.startskærm.indbakke.aftaler;
 
-
+/**
+ * @Author Gunn
+ */
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;

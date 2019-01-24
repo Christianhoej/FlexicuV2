@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.medarbejdere;
-
+/**
+ * @Author Gunn
+ */
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -81,22 +83,7 @@ public class Rediger_medarbejder_fragment_1 extends Fragment implements RadioGro
         return v;
     }
 
-    /*public void geolocate(View v) throws IOException {
-        //TODO der skal tjekkes for om info er korrekt
-        String vejnavn = mVejnavn.getText().toString();
-        String nummer = mNummer.getText().toString();
-        String postnr = mPostNr.getText().toString();
 
-        String fuldAdresse = vejnavn + " " + nummer + " " + postnr;
-
-        Geocoder gc = new Geocoder(getContext());
-        List<Address> list = gc.getFromLocationName(fuldAdresse,1);
-        Address add = list.get(0);
-        String lokation = add.getLocality();
-
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
-    }*/
 
     public void goelocate(View v) throws IOException {
         String vejnavn = mVejnavn.getText().toString();

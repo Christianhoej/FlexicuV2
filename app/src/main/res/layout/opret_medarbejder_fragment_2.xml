@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="78dp"
             android:ems="10"
-            android:hint="Evt. udlejKommentar"
+            android:hint="Evt. kommentar"
             android:inputType="textLongMessage"
             android:textAlignment="center"
             />

@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.opret_bruger;
-
+/**
+ * @Author Gunn
+ */
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

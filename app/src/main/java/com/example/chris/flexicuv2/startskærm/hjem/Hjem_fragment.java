@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.hjem;
-
+/**
+ * @Author Janus
+ */
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,7 +24,7 @@ public class Hjem_fragment extends Fragment {
     Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
     Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
     Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
-    //RelativeLayout udfyld_medarbejder;
+
     Udfyld_medarbejdere udfyld_medarbejdere;
     Udfyld_andet udfyld_andet;
     Udfyld_udlej udfyld_udlej;

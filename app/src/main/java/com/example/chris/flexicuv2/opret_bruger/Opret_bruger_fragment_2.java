@@ -1,6 +1,8 @@
 package com.example.chris.flexicuv2.opret_bruger;
 
-
+/**
+ * @Author Janus
+ */
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;

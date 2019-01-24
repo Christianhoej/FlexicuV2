@@ -1,7 +1,9 @@
 
 package com.example.chris.flexicuv2.medarbejdere;
 
-
+/**
+ * @Author Janus
+ */
 import com.example.chris.flexicuv2.database.DBManager;
 
 /**
@@ -23,7 +25,7 @@ public class OpretMedarbejder_presenter {
 
 
     interface UpdateOpretMedarbejderAkt{
-//TODO metode der opdaterer recyclerview
+
     }
 
 
