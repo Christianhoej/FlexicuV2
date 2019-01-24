@@ -170,6 +170,12 @@ public class DBManager {
         ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhKey).setValue(forhandling);
     }
 
+    public void updateForhandling(Forhandling forhandling){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling.getForhandlingID()).setValue(forhandling);
+    }
+
 
     public void readAlleForhandling(){
 
