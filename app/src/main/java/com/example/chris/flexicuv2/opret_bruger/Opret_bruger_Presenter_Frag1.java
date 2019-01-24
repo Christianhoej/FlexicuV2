@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.opret_bruger;
-
+/**
+ * @Author Gunn
+ */
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -177,14 +179,7 @@ public class Opret_bruger_Presenter_Frag1 {
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
-/*        cvr_opslag = new CVR_Opslag();
-        map = cvr_opslag.getResult(CVR);
 
-        updateNewUser.updateAdresse(map.get(cvr_opslag.getAdresseString()));
-        updateNewUser.updateVirksomhedsNavn(map.get(cvr_opslag.getVirksomhedsNavnString()));
-        updateNewUser.updatePostNr(map.get(cvr_opslag.getPostNrString()));
-        updateNewUser.updateBy(map.get(cvr_opslag.getByString()));
-*/
     }
 
     private class AsyncHentCVR extends AsyncTask<Void, Void, Void> {

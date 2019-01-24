@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.model;
-
+/**
+ * @Author Janus
+ */
 import java.util.Calendar;
 
 public class Medarbejder implements Comparable<Medarbejder>{

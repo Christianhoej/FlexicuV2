@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.model;
-
+/**
+ * @Author Janus
+ */
 import java.util.ArrayList;
 
 public class Forhandling implements Comparable<Forhandling>{

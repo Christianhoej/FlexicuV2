@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.hjem;
-
+/**
+ * @Author
+ */
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -95,8 +97,7 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
     }
 
     public void onButtonShowPopupWindowClick(View view, final int i) {
-        //tilPopUp = (View) findViewById(R.id.tilPopUp);
-        // inflate the layout of the popup window
+
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
         final View popupView = inflater.inflate(R.layout.hjem_popup_alle, null);
 
@@ -134,30 +135,9 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
         popupWindow.setContentView(popupView);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         popupWindow.setElevation(20);
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-        //  popupWindow.setOutsideTouchable(true);
-            /*// dismiss the popup window when touched
-            popupView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-            });*/
- /*       final Button rediger = popupView.findViewById(R.id.rediger);
-        rediger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rediger_medarbejder_fragment_1 = new Rediger_medarbejder_fragment_1();
-                openSkaerm(Medarbejdere_skaerm_akt.class);
 
-                singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i);
-                popupWindow.dismiss();
-            }
-        });
-*/
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
     }
     public void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();

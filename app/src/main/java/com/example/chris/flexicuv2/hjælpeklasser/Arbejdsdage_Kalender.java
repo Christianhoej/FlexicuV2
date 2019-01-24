@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
+ * @Author Janus
  * Klassen skal bruges som et opslag til antallet af arbejdsdage i en periode mellem to datoer
  */
 public class Arbejdsdage_Kalender {

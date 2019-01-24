@@ -2,6 +2,7 @@ package com.example.chris.flexicuv2.medarbejdere;
 
 /**
  * setFragment metode
+ * @Author Gunn
  * @param fragment
  */
 
@@ -76,14 +77,7 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
         singleton.midlertidigMedarbejder=null;
-            /*Kan implementere Glide for en bedre oplevelse
 
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(mMedarbjderBilleder.get(i)) */
-
-        //viewHolder.medarbejder_navn.setText(mMedarbejderNavn.get(i));
-        //viewHolder.medarbejder_arbejdsområde.setText(mMedarbejderArbejdsområde.get(i));
         viewHolder.medarbejder_navn.setText(singleton.getMedarbejdere().get(i).getNavn());
         viewHolder.medarbejder_arbejdsområde.setText(singleton.getMedarbejdere().get(i).getArbejdsomraade());
 
@@ -137,24 +131,13 @@ public class Medarbejder_recyclerView_adapter extends RecyclerView.Adapter<Medar
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
-        //popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
 
-        //final PopupWindow popupWindowt = new PopupWindow();
         popupWindow.setContentView(popupView);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         popupWindow.setElevation(20);
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
+
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-        //  popupWindow.setOutsideTouchable(true);
-            /*// dismiss the popup window when touched
-            popupView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-            });*/
+
         final Button rediger = popupView.findViewById(R.id.rediger);
         rediger.setOnClickListener(new View.OnClickListener() {
             @Override

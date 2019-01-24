@@ -1,6 +1,8 @@
 package com.example.chris.flexicuv2.opret_bruger;
 
-
+/**
+ * @Author Janus
+ */
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

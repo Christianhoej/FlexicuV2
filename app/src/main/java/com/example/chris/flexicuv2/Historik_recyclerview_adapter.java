@@ -22,7 +22,7 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
 
     private Context mContext;
     private Singleton singleton;
-    //private int index=0;
+    private int index=0;
 
     public Historik_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
