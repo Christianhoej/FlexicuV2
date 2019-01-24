@@ -49,9 +49,9 @@ public class RecyclerViewAdapter_Udlej extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
         singleton = Singleton.getInstance();
-        String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
+      //  String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
-        viewHolder.salary.setText(loen);
+      //  viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());
 
         viewHolder.hjemLejListItem.setOnClickListener(new View.OnClickListener() {

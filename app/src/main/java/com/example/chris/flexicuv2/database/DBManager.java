@@ -14,6 +14,7 @@ import com.example.chris.flexicuv2.model.Singleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -170,6 +171,28 @@ public class DBManager {
         ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhKey).setValue(forhandling);
     }
 
+    public void updateForhandling(Forhandling forhandling){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling.getForhandlingID()).setValue(forhandling);
+    }
+
+    public void updateIndgåetAftale(Aftale aftale, Forhandling forhandling){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling.getForhandlingID()).setValue(forhandling);
+        for(Forhandling forhandling1 : aftale.getForhandlinger()){
+            if(!forhandling.getForhandlingID().equals(forhandling1.getForhandlingID())){
+                forhandling1.setAktiv(false);
+                forhandling1.setAftaleIndgået(false);
+                ref.child(AFTALE).child(forhandling.getAftaleID()).child(AKTIV).setValue(false);
+                ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling1.getForhandlingID()).setValue(forhandling1);
+                singleton.getAlleMineAftalerMedForhandling().remove(forhandling1);
+
+            }
+        }
+    }
+
 
     public void readAlleForhandling(){
 
@@ -190,7 +213,6 @@ public class DBManager {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Aftale udlej = snapshot.getValue(Aftale.class);
 
-
                     for(DataSnapshot snapshotForhandling : snapshot.child(FORHANDLING).getChildren()) {
                         Forhandling forhandling = snapshotForhandling.getValue(Forhandling.class);
                         udlej.addForhandlinger(forhandling);
@@ -198,7 +220,7 @@ public class DBManager {
 
 
                     //Hvis aftalen er aktiv
-                    System.out.println(udlej.isAktiv());
+                    System.out.println("UDLEJ ER HVAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"+udlej.isAktiv());
                     if (udlej.isAktiv()) {
                         System.out.println("kommet ind");
                         // Hvis jeg er udlejer
@@ -225,17 +247,20 @@ public class DBManager {
                         alleMineAftalerMedForhandling.add(udlej);
 
                     } else {
-      /*                  for(int i=udlej.getForhandlinger().size()-1; i>=0; i--){
+
+                        /*for(int i=udlej.getForhandlinger().size()-1; i>=0; i--){
                             if(udlej.getForhandlinger().remove(i).isAftaleIndgået()){
                                 udlej.getForhandlinger().remove(i);
                             }
-                        }*/
-/*                        for(Forhandling forhandling : udlej.getForhandlinger()){
+                        }
+                       /* for(Forhandling forhandling : udlej.getForhandlinger()){
                             //Hvis aftale ikke er aktiv, og den ikker er indåget
-                            if(!forhandling.isAftaleIndgået()){
-                                udlej.removeForhandlinger(forhandling);
+                            if(forhandling.isAftaleIndgået()){
+
+
                             }
                         }*/
+                        System.out.println("DENNE ER INDGÅEET!!!");
                         afsluttedeAftaler.add(udlej);
                     }
                 }
