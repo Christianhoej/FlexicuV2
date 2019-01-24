@@ -32,7 +32,6 @@ public class CVR_Opslag {
     private final String POSTNR_STRING = "postnr";
     private final String BY_STRING = "city";
 
-
     /**
      * Klassen anvendes til at lave opslag gennem: https://cvrapi.dk/examples
      *  - Koden er også lånt fra hjemmesiden

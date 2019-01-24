@@ -247,6 +247,7 @@ public class DBManager {
                         alleMineAftalerMedForhandling.add(udlej);
 
                     } else {
+
                         /*for(int i=udlej.getForhandlinger().size()-1; i>=0; i--){
                             if(udlej.getForhandlinger().remove(i).isAftaleIndgået()){
                                 udlej.getForhandlinger().remove(i);
