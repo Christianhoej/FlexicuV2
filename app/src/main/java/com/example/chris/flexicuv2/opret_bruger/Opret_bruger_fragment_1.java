@@ -1,5 +1,8 @@
 package com.example.chris.flexicuv2.opret_bruger;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -47,7 +50,7 @@ public class Opret_bruger_fragment_1 extends Fragment implements Opret_bruger_Pr
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.new_user_fragment_1, container, false);
 
-        presenter = new Opret_bruger_Presenter_Frag1(this);
+        presenter = new Opret_bruger_Presenter_Frag1(this, getContext());
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         virksomhed = new Bruger();

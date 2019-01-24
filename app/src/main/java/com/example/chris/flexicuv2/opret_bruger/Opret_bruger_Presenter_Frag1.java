@@ -1,7 +1,11 @@
 package com.example.chris.flexicuv2.opret_bruger;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Bruger;
@@ -30,14 +34,18 @@ public class Opret_bruger_Presenter_Frag1 {
     private Map<String, String> map;
     private CVR_Opslag cvr_opslag;
     private Singleton singleton;
+    private Context mContext;
 
 
 
-    public Opret_bruger_Presenter_Frag1(Opret_bruger_Presenter_Frag1.UpdateNewUser_Frag1 updateNewUser){
+    public Opret_bruger_Presenter_Frag1(Opret_bruger_Presenter_Frag1.UpdateNewUser_Frag1 updateNewUser, Context mContext){
         this.updateNewUser = updateNewUser;
         dbManager = new DBManager();
         singleton = Singleton.getInstance();
+        this.mContext = mContext;
     }
+
+
 
     /**
      * Metoden skal anvendes til at kontrollere at alle informationer er blevet tastet "tilstrækkeligt ind".
@@ -145,6 +153,12 @@ public class Opret_bruger_Presenter_Frag1 {
 
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     /**
      * Metode skal hente CVR oplysningerne, virksomhedsnavn, virksomhedsadresse, by og postnr.
      * @param CVR: 8 cifret cvr string
@@ -153,8 +167,16 @@ public class Opret_bruger_Presenter_Frag1 {
         //TODO må ikke være i main thread
         cvr = CVR;
         System.out.println("Her kommer jeg"); //TODO
-        async = new AsyncHentCVR();
-        async.execute();
+
+        if(isNetworkAvailable()) {
+            async = new AsyncHentCVR();
+            async.execute();
+        }
+        else{
+            Toast toast = Toast.makeText(mContext, "Du har ingen internetforbindelse", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
 /*        cvr_opslag = new CVR_Opslag();
         map = cvr_opslag.getResult(CVR);
 

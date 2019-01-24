@@ -58,6 +58,8 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         medarbejder_tlf = (EditText) v.findViewById(R.id.editText_tlf);
 
         arbejdsområde_spinner=(MultiSelectionSpinner) v.findViewById(R.id.arbejdsområde);
+        opretSpinner();
+        arbejdsområde_spinner.setSelection(new String[]{"Vælg arbejdsområder"});
 
         medarbejdereFrame = (FrameLayout) v.findViewById(R.id.opret_medarbejder_frame_1);
         //Frame Layoutet for opret medarbejder 1
@@ -70,7 +72,7 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
         tilbage2 = (Button) v.findViewById(R.id.tilbage_medarbejdere2);
         tilbage2.setOnClickListener(this);
 
-        opretSpinner();
+
         presenter.udfyldFelter();
         return v;
     }
@@ -127,7 +129,7 @@ public class Opret_medarbejder_fragment_2 extends Fragment implements View.OnCli
      */
     public void opretSpinner(){
         List<String> arbejdsområde_liste = new ArrayList<String>();
-        arbejdsområde_liste.add("Vælg arbejdsområde");
+        //arbejdsområde_liste.add("Vælg arbejdsområde");
         arbejdsområde_liste.add("Arbejdsmand");
         arbejdsområde_liste.add("Butiksekspedition");
         arbejdsområde_liste.add("Chauffør - over 3.5 ton");

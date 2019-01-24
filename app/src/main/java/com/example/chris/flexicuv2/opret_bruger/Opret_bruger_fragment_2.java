@@ -67,13 +67,11 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
         qmark1 = v.findViewById(R.id.qmark);
         qmark1.setOnClickListener(this);
         username = v.findViewById(R.id.logOnEmail);
-        username.setText("123@123.dk");
         usernameRepeated = v.findViewById(R.id.logOnEmailRepeat);
-        usernameRepeated.setText("123@123.dk");
+
         password = v.findViewById(R.id.logOnPassword);
-        password.setText("123123");
+
         passwordRepeated = v.findViewById(R.id.logOnPasswordRepeat);
-        passwordRepeated.setText("123123");
 
         radioOptions = v.findViewById(R.id.radio_options);
         checkPrivate = v.findViewById(R.id.checkPrivate);
@@ -131,7 +129,6 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
         }
 
         if(v.getId()==R.id.qmark){
-            System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLL");
             Intent i = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://portal.flexicu.com/betingelser/"));
             startActivity(i);

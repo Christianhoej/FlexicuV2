@@ -17,16 +17,13 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.Bekraeftelse_aftale_indgået_fragment;
 import com.example.chris.flexicuv2.Bekraeftelse_bud_medarbejder_fragment;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Singleton;
-import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Forhandling_recyclerview;
-import com.example.chris.flexicuv2.startskærm.lej.Lej_presenter;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -39,6 +36,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
     private Singleton singleton;
     private DBManager dbManager;
     private Bekraeftelse_bud_medarbejder_fragment bekræftelse;
+    private Bekraeftelse_aftale_indgået_fragment bekræft_aftale;
     private Calendar c1;
     private Calendar c2;
     private DatePickerDialog.OnDateSetListener datepickerListener;
@@ -52,7 +50,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
     private TextView startdato_fastTV, slutdato_fastTV, antalArbejdsdage_fastTV, timePris_fastTV, subtotalen_fastTV, flexicugebyr_fastTV, totalprisen_fastTV;
     private TextView egetVærktøj_fast_switch;
 
-    private Button anullerButton, opretUdlejningButton, kommentarButton;
+    private Button anullerButton, accepter_sendTilbud_Button, kommentarButton;
     private Forhandling_presenter presenter;
 
     private TextView startdatoET, slutdatoET, timepris;
@@ -68,6 +66,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
         bekræftelse = new Bekraeftelse_bud_medarbejder_fragment();
+        bekræft_aftale = new Bekraeftelse_aftale_indgået_fragment();
         presenter = new Forhandling_presenter(this);
         c1 = Calendar.getInstance();
         c2 = Calendar.getInstance();
@@ -121,6 +120,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
         //Pris
         timepris_redigerET = v.findViewById(R.id.forhandling_timepris_rediger_editview);
         timepris_redigerET.addTextChangedListener(prisTextWatch);
+        timepris_redigerET.addTextChangedListener(erAltEnsTextWatcher);
         subtotalen_redigerTV = v.findViewById(R.id.forhandling_subtotalen_excl_flexicuspris_rediger_textview);
         flexicugebyr_redigerTV = v.findViewById(R.id.forhandling_flexicu_pris_rediger_textview);
         totalprisen_redigerTV = v.findViewById(R.id.forhandling_total_pris_rediger_textview);
@@ -128,15 +128,18 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
 
         slutdato_redigerTV.addTextChangedListener(arbDageTextWatcher);
         slutdato_redigerTV.addTextChangedListener(slutDatoTextWatcher);
+        slutdato_redigerTV.addTextChangedListener(erAltEnsTextWatcher);
+        startdato_redigerTV.addTextChangedListener(erAltEnsTextWatcher);
         startdato_redigerTV.addTextChangedListener(startDatoTextWatcher);
 
         //Eget værktøj
         egetVærktøj_rediger_switch = v.findViewById(R.id.forhandling_egetværktøj_rediger_switch);
         egetVærktøj_rediger_switch.setOnCheckedChangeListener(this);
+        egetVærktøj_rediger_switch.addTextChangedListener(erAltEnsTextWatcher);
         anullerButton = v.findViewById(R.id.forhandling_annuller_button);
         anullerButton.setOnClickListener(this);
-        opretUdlejningButton = v.findViewById(R.id.forhandling_send_eller_accepter_tilbud_button);
-        opretUdlejningButton.setOnClickListener(this);
+        accepter_sendTilbud_Button = v.findViewById(R.id.forhandling_send_eller_accepter_tilbud_button);
+        accepter_sendTilbud_Button.setOnClickListener(this);
 
         kommentarButton = v.findViewById(R.id.forhandling_tilføj_besked_button);
         kommentarButton.setOnClickListener(this);
@@ -167,6 +170,9 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
             titel_redigerTV.setText("Lejer");
             overskrift_TV.setText("Lej medarbejder");
         }
+
+        presenter.updateKnap(singleton.midlertidigForhandling.getLejerStartDato(), singleton.midlertidigForhandling.getLejerSlutDato(), singleton.midlertidigForhandling.getLejPris(), singleton.midlertidigForhandling.isLejEgetVærktøj(),
+                singleton.midlertidigForhandling.getUdlejerStartDato(), singleton.midlertidigForhandling.getUdlejerSlutDato(), singleton.midlertidigForhandling.getUdlejPris(), singleton.midlertidigForhandling.isUdlejEgetVærktøj());
 
     return v;
     }
@@ -210,17 +216,38 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
                         forhandling.setLejerSlutDato(slutdato_redigerTV.getText().toString());
                         forhandling.setLejerStartDato(startdato_redigerTV.getText().toString());
                     }
-                    int index = 0;
+                    forhandling.setSidstSendtAftale(singleton.getBruger());
+
+                    //Få index af aktuelle aftale
+                    int indexAftale = 0;
                     for(Aftale aftale : singleton.getAlleMineAftalerMedForhandling()){
                         if(aftale.getAftaleID().equals(forhandling.getAftaleID())){
-                            index = singleton.getAlleMineAftalerMedForhandling().indexOf(aftale);
+                            indexAftale = singleton.getAlleMineAftalerMedForhandling().indexOf(aftale);
                             break;
                         }
                     }
-                    singleton.getAlleMineAftalerMedForhandling().get(index).addForhandlinger(forhandling);
-                    dbManager.addForhandling(forhandling);
+                    int indexForhandling = 0;
+                    for(Forhandling forhandling1 : singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger()){
+                        if(forhandling1.getForhandlingID().equals(forhandling.getForhandlingID())){
+                            indexForhandling = singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().indexOf(forhandling1);
+                        }
+                    }
 
-                    setFragment(bekræftelse);
+                    if(accepter_sendTilbud_Button.getText().toString().equals("Godkend")){
+                        forhandling.setAftaleIndgået(true);
+                        forhandling.setAktiv(false);
+                        singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().set(indexForhandling, forhandling);
+                        dbManager.updateIndgåetAftale(singleton.getAlleMineAftalerMedForhandling().get(indexAftale),forhandling);
+                        setFragment(bekræft_aftale);
+                    }
+                    else {
+                        singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().set(indexForhandling, forhandling);
+                        forhandling.setAftaleIndgået(false);
+                        forhandling.setAktiv(false);
+                        dbManager.updateForhandling(forhandling);
+                        setFragment(bekræftelse);
+                    }
+
                 }
                 break;
 
@@ -395,6 +422,28 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
         }
     };
 
+    private TextWatcher erAltEnsTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(egetVærktøj_fast_switch.getText().toString().equals("JA")) {
+                presenter.updateKnap(startdato_fastTV.getText().toString(), slutdato_fastTV.getText().toString(), timePris_fastTV.getText().toString(), true, startdato_redigerTV.getText().toString(), slutdato_redigerTV.getText().toString(), timepris_redigerET.getText().toString(), egetVærktøj_rediger_switch.isChecked());
+            }
+            else {
+                presenter.updateKnap(startdato_fastTV.getText().toString(), slutdato_fastTV.getText().toString(), timePris_fastTV.getText().toString(), false, startdato_redigerTV.getText().toString(), slutdato_redigerTV.getText().toString(), timepris_redigerET.getText().toString(), egetVærktøj_rediger_switch.isChecked());
+            }
+        }
+    };
+
     @Override
     public void errorStartdato(String errorMSG) {
         startdato_redigerTV.setError(errorMSG);
@@ -507,6 +556,11 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
     @Override
     public void opdaterEgetVærktøjFast(String egetVærktøj) {
         egetVærktøj_fast_switch.setText(egetVærktøj);
+    }
+
+    @Override
+    public void opdaterKnap(String knapText) {
+        accepter_sendTilbud_Button.setText(knapText);
     }
 
     @Override

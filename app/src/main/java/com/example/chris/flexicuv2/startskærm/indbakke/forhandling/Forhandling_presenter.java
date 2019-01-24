@@ -138,6 +138,15 @@ public class Forhandling_presenter {
         }
     }
 
+    public void updateKnap(String startDatoFast, String slutDatoFast, String prisFast, boolean egetVærktøjFast, String startDatoRediger, String slutDatoRediger, String prisRediger, boolean egetVærktøjRediger){
+        if(startDatoFast.equals(startDatoRediger) && slutDatoFast.equals(slutDatoRediger) && prisFast.equals(prisRediger) && egetVærktøjFast == egetVærktøjRediger){
+            updateForhandling.opdaterKnap("Godkend");
+        }
+        else {
+            updateForhandling.opdaterKnap("Send modtilbud");
+        }
+    }
+
 
     interface UpdateForhandling{
         void errorStartdato(String errorMSG);
@@ -162,5 +171,7 @@ public class Forhandling_presenter {
         void opdaterSlutDatoFast(String slutdato);
         void opdaterTimePrisFast(String timepris);
         void opdaterEgetVærktøjFast(String egetVærktøj);
+
+        void opdaterKnap(String knapText);
     }
 }

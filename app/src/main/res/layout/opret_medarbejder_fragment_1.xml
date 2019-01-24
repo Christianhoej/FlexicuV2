@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:text="Næste"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_corners_green"
+                android:background="@drawable/rounded_corners_blue"
                 android:layout_gravity="center"
                 android:textColor="@color/hvid"
                 android:id="@+id/næste_medarbejdere"/>

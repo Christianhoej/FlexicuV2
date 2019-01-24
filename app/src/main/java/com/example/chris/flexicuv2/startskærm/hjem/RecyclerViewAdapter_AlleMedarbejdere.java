@@ -54,7 +54,7 @@ public class RecyclerViewAdapter_AlleMedarbejdere extends RecyclerView.Adapter<R
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter_AlleMedarbejdere.ViewHolder viewHolder, final int i) {
-        String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
+       // String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
         //viewHolder.salary.setText(loen);
         viewHolder.workfield.setText(mMedarbejder.get(i).getArbejdsomraade());

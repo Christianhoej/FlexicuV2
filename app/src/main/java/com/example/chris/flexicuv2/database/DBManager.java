@@ -14,6 +14,7 @@ import com.example.chris.flexicuv2.model.Singleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -25,7 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class DBManager {
@@ -170,6 +174,43 @@ public class DBManager {
         ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhKey).setValue(forhandling);
     }
 
+    public void updateForhandling(Forhandling forhandling){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling.getForhandlingID()).setValue(forhandling);
+    }
+
+    public void updateIndgåetAftale(Aftale aftale, Forhandling forhandling){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling.getForhandlingID()).setValue(forhandling);
+        for(Forhandling forhandling1 : aftale.getForhandlinger()){
+            if(!forhandling.getForhandlingID().equals(forhandling1.getForhandlingID())){
+                forhandling1.setAktiv(false);
+                forhandling1.setAftaleIndgået(false);
+                ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling1.getForhandlingID()).setValue(forhandling1);
+                singleton.getAlleMineAftalerMedForhandling().remove(forhandling1);
+
+            }
+        }
+    }
+
+    public void updateAfsluttetAftale(Aftale aftale, Forhandling forhandling){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling.getForhandlingID()).setValue(forhandling);
+        for(Forhandling forhandling1 : aftale.getForhandlinger()){
+            if(!forhandling.getForhandlingID().equals(forhandling1.getForhandlingID())){
+                forhandling1.setAktiv(false);
+                forhandling1.setAftaleIndgået(false);
+                ref.child(AFTALE).child(forhandling.getAftaleID()).child(AKTIV).setValue(false);
+                ref.child(AFTALE).child(forhandling.getAftaleID()).child(FORHANDLING).child(forhandling1.getForhandlingID()).setValue(forhandling1);
+                singleton.getAlleMineAftalerMedForhandling().remove(forhandling1);
+
+            }
+        }
+    }
+
 
     public void readAlleForhandling(){
 
@@ -185,22 +226,68 @@ public class DBManager {
                 ArrayList<Aftale> lejAftaleMedForhandling = new ArrayList<>();
                 ArrayList<Aftale> udlejAftaleMedForhandling = new ArrayList<>();
                 ArrayList<Aftale> afsluttedeAftaler = new ArrayList<>();
+                ArrayList<Aftale> lejIndgåedeMenIkkeAfsluttede = new ArrayList<>();
+                ArrayList<Aftale> udlejIndgåedeMenIkkeAfsluttede = new ArrayList<>();
                 ArrayList<Aftale> alleMineAftalerMedForhandling = new ArrayList<>();
+
+                long tidIdag = System.currentTimeMillis();
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Aftale udlej = snapshot.getValue(Aftale.class);
 
-
+                    //Tilføjer alle forhandlinger til aftalen
                     for(DataSnapshot snapshotForhandling : snapshot.child(FORHANDLING).getChildren()) {
                         Forhandling forhandling = snapshotForhandling.getValue(Forhandling.class);
                         udlej.addForhandlinger(forhandling);
                     }
 
+                    // Hvis aftalen ikke er aktiv
+                    if(!udlej.isAktiv()){
+                        afsluttedeAftaler.add(udlej);
+                        continue;
+                    }
+
+                    //Hvis aftalen er indgået
+
+
 
                     //Hvis aftalen er aktiv
-                    System.out.println(udlej.isAktiv());
+                    System.out.println("UDLEJ ER HVAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"+udlej.isAktiv());
                     if (udlej.isAktiv()) {
                         System.out.println("kommet ind");
+                        boolean indgået = false;
+                        for(Forhandling forhandling : udlej.getForhandlinger()) {
+                            if (forhandling.isAftaleIndgået()){
+                                indgået = true;
+                                try {
+                                    String dateString = forhandling.getLejerSlutDato().replace(" ", "");
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = sdf.parse(dateString);
+                                    long startDate = date.getTime();
+                                    //Hvis aftalen er indgået men ikke aktiv
+                                    if (tidIdag > startDate) {
+                                        udlej.setAktiv(false);
+                                        updateAfsluttetAftale(udlej, forhandling);
+                                        afsluttedeAftaler.add(udlej);
+                                        break;
+                                    } else {
+                                        if (forhandling.getLejer().getBrugerID().equals(uid)) {
+                                            lejIndgåedeMenIkkeAfsluttede.add(udlej);
+                                            break;
+                                        } else {
+                                            udlejIndgåedeMenIkkeAfsluttede.add(udlej);
+                                            break;
+                                        }
+                                    }
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        if(indgået){
+                            continue;
+                        }
                         // Hvis jeg er udlejer
                         if (udlej.getUdlejer().getBrugerID().equals(uid)) {
                             System.out.println("UdlejerID: " + udlej.getUdlejer().getBrugerID() + ", uid: " + uid);
@@ -224,16 +311,13 @@ public class DBManager {
                         }
                         alleMineAftalerMedForhandling.add(udlej);
 
-                    } else {
- /*                       for(Forhandling forhandling : udlej.getForhandlinger()){
-                            //Hvis aftale ikke er aktiv, og den ikker er indåget
-                            if(!forhandling.isAftaleIndgået()){
-                                udlej.removeForhandlinger(forhandling);
-                            }
-                        }*/
-                        afsluttedeAftaler.add(udlej);
-                    }
+                   }
+
                 }
+                singleton.setMineLejIndgåedeAftaler(lejIndgåedeMenIkkeAfsluttede);
+                singleton.setMineUdlejIndgåedeAftaler(udlejIndgåedeMenIkkeAfsluttede);
+                System.out.println("UdlejIndgået" + singleton.getMineUdlejIndgåedeAftaler().size());
+                System.out.println("LejIndgået" + singleton.getMineLejIndgåedeAftaler().size());
                 singleton.setAlleMineAftalerMedForhandling(alleMineAftalerMedForhandling);
                 singleton.setMineLejAftalerMedForhandling(lejAftaleMedForhandling);
                 singleton.setMineUdlejAftalerMedForhandling(udlejAftaleMedForhandling);
