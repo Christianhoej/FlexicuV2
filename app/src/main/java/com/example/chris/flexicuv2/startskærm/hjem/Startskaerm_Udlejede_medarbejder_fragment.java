@@ -48,11 +48,6 @@ public class Startskaerm_Udlejede_medarbejder_fragment extends Fragment {
 
         recyclerView.setAdapter(mAdapter_udlej);
 
-
-        RecyclerViewAdapter_Lej mAdapter_lej = new RecyclerViewAdapter_Lej(getContext(), singleton.getMedarbejdere());
-
-        recyclerView.setAdapter(mAdapter_lej);
-
         return v;
     }
 

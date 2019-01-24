@@ -20,7 +20,7 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
 
     private Context mContext;
     private Singleton singleton;
-
+    private int index=0;
 
     public Historik_recyclerview_adapter(Context mContext) {
         this.mContext = mContext;
@@ -35,7 +35,7 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
         return new ViewHolder(view);
     }
 
-    private int index=0;
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {

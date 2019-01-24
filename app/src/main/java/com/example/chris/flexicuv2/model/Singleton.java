@@ -47,6 +47,8 @@ public class Singleton extends Activity {
             mineAfsluttedeAftaler = new ArrayList<>();
             søgeFiltrering = new Filter();
             alleMineAftalerMedForhandling = new ArrayList<>();
+            mineLejIndgåedeAftaler = new ArrayList<>();
+            mineUdlejIndgåedeAftaler = new ArrayList<>();
         }
         return singleInstance;
     }
