@@ -310,7 +310,9 @@ public class DBManager {
                             }
                         }
                         alleMineAftalerMedForhandling.add(udlej);
+
                    }
+
                 }
                 singleton.setMineLejIndgåedeAftaler(lejIndgåedeMenIkkeAfsluttede);
                 singleton.setMineUdlejIndgåedeAftaler(udlejIndgåedeMenIkkeAfsluttede);
