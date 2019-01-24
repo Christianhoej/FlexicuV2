@@ -17,6 +17,10 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.R;
+import com.example.chris.flexicuv2.model.Aftale;
+import com.example.chris.flexicuv2.model.Singleton;
+
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,17 +31,20 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
     public Lej_fragment() {
         // Required empty public constructor
     }
-
+    RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter;
     Lej_filtrer_fragment filtrer_fragment;
     FrameLayout lej_frame;
     private RecyclerView recyclerView;
     private DBManager test;
     private Button filtrer, opretSøgeagent;
+    private Singleton singleton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.lej_fragment, container, false);
+        singleton = Singleton.getInstance();
+
 
         filtrer_fragment = new Lej_filtrer_fragment();
         lej_frame = (FrameLayout) v.findViewById(R.id.lej_fragment_frame);
@@ -52,8 +59,7 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         //TODO nødvendig?
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
         // Inflate the layout for this fragment
-
-        RecyclerViewAdapter_Ledig_Arbejdskraft mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext());
+        mAdapter = new RecyclerViewAdapter_Ledig_Arbejdskraft(getContext());
 
         recyclerView.setAdapter(mAdapter);
         //setUpspinner(v);
@@ -74,7 +80,27 @@ public class Lej_fragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //for(int i = 0; i<)
 
+
+
+
+     /*   for(Aftale a : singleton.getAndresMedarbejderUdbud()){
+            double r = singleton.søgeFiltrering.tildelMatchScore(a);
+            System.out.println("Score: " + r);
+            a.setScore(r);
+            System.out.println(a.getScore() + " HHHHHH");
+
+        }*/
+
+
+
+        Collections.sort(Singleton.getAndresMedarbejderUdbud());
+        mAdapter.notifyDataSetChanged();
+    }
 
     public void setFragment(Fragment fragment) {
         //startskærmFrameTilDiverse.removeAllViews();

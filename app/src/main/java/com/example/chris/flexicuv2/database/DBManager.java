@@ -225,12 +225,12 @@ public class DBManager {
                         alleMineAftalerMedForhandling.add(udlej);
 
                     } else {
-                        for(Forhandling forhandling : udlej.getForhandlinger()){
+ /*                       for(Forhandling forhandling : udlej.getForhandlinger()){
                             //Hvis aftale ikke er aktiv, og den ikker er indåget
                             if(!forhandling.isAftaleIndgået()){
                                 udlej.removeForhandlinger(forhandling);
                             }
-                        }
+                        }*/
                         afsluttedeAftaler.add(udlej);
                     }
                 }

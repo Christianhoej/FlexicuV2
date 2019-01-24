@@ -2,6 +2,7 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 import com.example.chris.flexicuv2.hjælpeklasser.Afstandsberegner;
 import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
+import com.example.chris.flexicuv2.model.Aftale;
 import com.example.chris.flexicuv2.model.Forhandling;
 
 import java.text.DateFormat;
@@ -38,6 +39,7 @@ public class Filter implements Filtrering {
         by = "";
         nummer = "";
         vej = "";
+        maxMatchScore = 0;
 
 
     }
@@ -153,18 +155,20 @@ public class Filter implements Filtrering {
      * @return %match i form af double.
      */
     @Override
-    public int tildelMatchScore(Forhandling a) {
+    public double tildelMatchScore(Aftale a) {
 
         //Sætter Max match point
-        maxMatchScore = 100 + (20*arbejdsområder.length-1); //arbejdsområdeScoren
-        maxMatchScore += 100; //Afstandsscoren
-        maxMatchScore += 30; //eget værktøj score
-        maxMatchScore += 20; // højere end minPris score
-        maxMatchScore+=100; // lavere end maxPris score
-        maxMatchScore+= 100; // datoscore % af peridoen dækket
+        maxMatchScore=0;
+        if(!(arbejdsområder == null))
+       this.maxMatchScore = 100 + (20*arbejdsområder.length-1); //arbejdsområdeScoren
+        this.maxMatchScore += 100; //Afstandsscoren
+        this.maxMatchScore += 30; //eget værktøj score
+        this.maxMatchScore += 20; // højere end minPris score
+        this.maxMatchScore+=100; // lavere end maxPris score
+        this.maxMatchScore+= 100; // datoscore % af peridoen dækket
 
 
-
+        System.out.println(maxMatchScore + "maxmatchscore");
 
         int match = 0;
         if(arbejdsområder!=null) { //Hvis der er valgt arbejdsområde, så fortsæt
@@ -179,8 +183,9 @@ public class Filter implements Filtrering {
                 }
             }
             //hvis ikke der er match på arbejdsområder, så er match = 0 %
-            if (!fortsætFiltrer)
+            if (!fortsætFiltrer) {
                 return 0;
+            }
             //tildeler score for matches i arbejdsområde
             //100 point hvis man matcher bare én profession og yderligere 20 for hver ekstra profession derudover
             match = 100 + (proffessionsOmråderMatches - 1) * 20;
@@ -191,6 +196,7 @@ public class Filter implements Filtrering {
 
         //check om der er angivet arbejdssted.
         if(!latitude.equals("0")) {
+            System.out.println("Kommer i latitude");
             //Hvis afstanden er inden for "Kørselsafstanden angivet for medarbejderen"
             // Score på 100 gives hvis personens "villig kørsel" dækker lokationen
             //25% forventes det at medarbejderen yderligere "kan være" villig til at køre.
@@ -211,59 +217,67 @@ public class Filter implements Filtrering {
                 }
                 match = match + muligPointKørsel;
             }
-        }else //hvis ikke der er angivvet arbejdssted +=100
-            match +=100;
+        }else { //hvis ikke der er angivvet arbejdssted +=100
+            match += 100;
+            System.out.println("Kommer IKKKKKKKKKKE i latitude");
+        }
 
         //Hvis også har eget værktøj eller søgningen er ligeglad med om der er værktøj med
 
         //if(a.isUdlejEgetVærktøj()==true){
-        if(a.isLejEgetVærktøj()==true || egetVærktøj==false){
+        if(a.isEgetVærktøj()==true || egetVærktøj==false){
+            System.out.println("værktøj");
             match = match + 30;
         }
 
-        int minPris = Integer.parseInt(this.minPris);
-        //Hvis højere end minPris
-        if (Integer.parseInt(a.getUdlejPris()) > minPris){
-            match = match + 20;
+        if(!minPris.equals("")) { //tjek om minPris er sat
+            int minPris = Integer.parseInt(this.minPris);
+            //Hvis højere end minPris
+            if (Integer.parseInt(a.getTimePris()) > minPris) {
+                match = match + 20;
+            }
         }
-        int maxPris = Integer.parseInt(this.maxPris);
-        //hvis mindre end eller = maxPris
+        if(!maxPris.equals("")) {
+            int maxPris = Integer.parseInt(this.maxPris);
+            //hvis mindre end eller = maxPris
 //        if (Integer.parseInt(a.getUdlejPris())<=maxPris){
-        if (Integer.parseInt(a.getLejPris())<=maxPris || maxPris==0){
-            match = match + 100;
-        }else{ // procentvise afvigelse fra maxPrisen * de 100
-            match = match +(int)(maxPris/Integer.parseInt(a.getUdlejPris()))*100;
+            if (Integer.parseInt(a.getTimePris()) <= maxPris || maxPris == 0) {
+                match = match + 100;
+            } else { // procentvise afvigelse fra maxPrisen * de 100
+                match = match + (int) (maxPris / Integer.parseInt(a.getTimePris())) * 100;
+            }
         }
 
 
         //Datoscore gives på baggrund af % af perioden der dækkes. angives der hverken start eller slutdato
-        int datoScore = 0;
-        //if (startdato.equals("0") && slutdato.equals("0")) //  -> får alt en score på 100
-        //datoScore=100;
-        //if slutdato != 0 && startdato = "0" -> check om start
+        if(!startdato.contains("yyyy"))
+        match += findDatoScore(a);
 
-        //Hvis der er angivet både start og slutdato
-        int filtreringsArbejdsdage = Arbejdsdage_Kalender.findArbejdsdage(startdato, slutdato); //finder samlede antal arbejdsdage
-        int forskelslutDatoer = Arbejdsdage_Kalender.findArbejdsdage(a.getUdlejerSlutDato(), slutdato); //returnerer 0 eller et negativt tal, så falder "aftalens afslutning" efter filtreringens slutdato
-        if(forskelslutDatoer<0)
-            forskelslutDatoer=0;
-        int forskelstartDatoer = Arbejdsdage_Kalender.findArbejdsdage(startdato, a.getUdlejerStartDato());// returnerer et negativt tal eller 0, så dækkes hele hele "starten af perioden"
-        if(forskelstartDatoer <0)
-            forskelstartDatoer = 0;
-        int aftalens_arbejdsdage = Arbejdsdage_Kalender.findArbejdsdage(a.getUdlejerStartDato(),a.getUdlejerSlutDato());
+//        System.out.println(a.getMedarbejder().getNavn() + " Dette scorede han " + match + "!!!!!!!!!!!!!");
+        //System.out.println("MAXMATCHSCORE: " + maxMatchScore);
+        //System.out.println((match/maxMatchScore)*100 +  " __________");
+        //int max = maxMatchScore;
+        double max = (double) maxMatchScore;
+        double sc = (double) match/max;
+        System.out.println("Max: " + max + ", sc" + sc);
+        return((double)match/(double)maxMatchScore*100);
+    }
 
-        if(forskelslutDatoer>=0 && forskelstartDatoer <=0)
-        datoScore = 100;
-        else{
-            int dageDækket = filtreringsArbejdsdage - forskelslutDatoer - forskelstartDatoer;
-            datoScore = (int)(dageDækket/filtreringsArbejdsdage*100);
-        }
-        match +=datoScore;
+    /**
+     * Metoden anvendes til at give score for dato
+     * @param a aftalen der tjekkes
+     * @return 50 hvis hele perioden dækkes og 0 hvis ikke det hele dækkes.
+     */
 
+    private int findDatoScore(Aftale a) {
 
-
-
-
-        return (int)(match/maxMatchScore*100);
+        int i1 = Arbejdsdage_Kalender.findArbejdsdage(a.getStartDato(),startdato.replace(" ", ""))-1; //Hvis  0 eller plus, så er filter sidst
+        int i2 = Arbejdsdage_Kalender.findArbejdsdage(slutdato,a.getSlutDato())-1; //Hvis 0 eller plus så er filter først
+        System.out.println(i1 + " i1");
+        System.out.println(i2 + " i2");
+        if(i1>=0 && i2>=0)
+        return 50;
+        else
+            return 0;
     }
 }

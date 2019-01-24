@@ -26,19 +26,19 @@ public class Arbejdsdage_Kalender {
 
 
             String[] startDato = dStart.split("/");
-            int startDag = Integer.parseInt(startDato[0]);
-            int startMåned = Integer.parseInt(startDato[1]);
-            int startÅr = Integer.parseInt(startDato[2]);
+            int startDag = Integer.parseInt(startDato[0].trim());
+            int startMåned = Integer.parseInt(startDato[1].trim());
+            int startÅr = Integer.parseInt(startDato[2].trim());
 
 
             String[] slutDato = dSlut.split("/");
-            int slutDag = Integer.parseInt(slutDato[0]);
-            int slutMåned = Integer.parseInt(slutDato[1]);
-            int slutÅr = Integer.parseInt(slutDato[2]);
+            int slutDag = Integer.parseInt(slutDato[0].trim());
+            int slutMåned = Integer.parseInt(slutDato[1].trim());
+            int slutÅr = Integer.parseInt(slutDato[2].trim());
 
             ArrayList<ArbejdsDage> år = new ArrayList<>();
-            int slut = Integer.parseInt(slutDato[2]);
-            for (int start = Integer.parseInt(startDato[2]); start <= slut; start++) { //Kører antal forskel på år
+            int slut = Integer.parseInt(slutDato[2].trim());
+            for (int start = Integer.parseInt(startDato[2].trim()); start <= slut; start++) { //Kører antal forskel på år
                 ArbejdsDage a = new ArbejdsDage(start);
                 år.add(a);
 
@@ -78,18 +78,21 @@ public class Arbejdsdage_Kalender {
      * @return antallet af dage mellem de to datoer - returnerer -1 hvis datoformatet ikke kan parses
      */
     public static int checkDateIsOK(String dStart, String dSlut) {
+        dSlut.replace(" ", "");
+        dStart.replace(" ", "");
         String[] start = dStart.split("/");
         String[] slut = dSlut.split("/");
 
 
-        Calendar cal1 = new GregorianCalendar(Integer.parseInt(start[2]), (Integer.parseInt(start[1])-1), Integer.parseInt(start[0]));
+
+        Calendar cal1 = new GregorianCalendar(Integer.parseInt(start[2].trim()), (Integer.parseInt(start[1].trim())-1), Integer.parseInt(start[0].trim()));
         Date startDate = cal1.getTime();
-        Calendar cal2 = new GregorianCalendar(Integer.parseInt(slut[2]), (Integer.parseInt(slut[1])-1), Integer.parseInt(slut[0]));
+        Calendar cal2 = new GregorianCalendar(Integer.parseInt(slut[2].trim()), (Integer.parseInt(slut[1].trim())-1), Integer.parseInt(slut[0].trim()));
 
         Date slutDate = cal2.getTime();
         int diffInDays = (int)( (slutDate.getTime() - startDate.getTime())
                 / (1000 * 60 * 60 * 24) );
-        System.out.println(diffInDays + "diffindays");
+        //System.out.println(diffInDays + "diffindays");
 
         return diffInDays;
         }

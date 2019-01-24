@@ -2,7 +2,7 @@ package com.example.chris.flexicuv2.model;
 
 import java.util.ArrayList;
 
-public class Aftale {
+public class Aftale implements Comparable<Aftale>{
 
 
     private boolean aktiv;
@@ -16,6 +16,7 @@ public class Aftale {
     private boolean egetVærktøj;
     private ArrayList<Forhandling> forhandlinger = new ArrayList<>();
     private long timestamp;
+    private double score; // skal anvendes til at filtrere med
 
     public boolean isAktiv() {
         return aktiv;
@@ -111,5 +112,27 @@ public class Aftale {
 
     public void removeForhandlinger(Forhandling forhandlinger) {
         this.forhandlinger.add(forhandlinger);
+    }
+
+    @Override
+    public int compareTo(Aftale o) {
+        System.out.println();
+        System.out.println(o.getMedarbejder().toString() + "Dette er o" + o.getScore());
+        System.out.println(getMedarbejder().toString() + "Dette er klassen " + score);
+        System.out.println();
+        if (o.getScore()>score)
+            return 1;
+        else if(o.getScore()<score)
+            return -1;
+
+        return 0;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 }

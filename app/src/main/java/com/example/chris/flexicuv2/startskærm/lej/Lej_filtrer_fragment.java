@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -65,12 +67,16 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
     private TextView startdatoET, slutdatoET;
 
     private Afstandsberegner afstandsberegner;
+    private Lej_fragment lej_fragment;
+    private FrameLayout startskaermFrame;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lej_filtrer_fragment, container, false);
 
+        lej_fragment = new Lej_fragment();
+        startskaermFrame = v.findViewById(R.id.startskaerm_frame);
         singleton = Singleton.getInstance();
         Filter f = singleton.søgeFiltrering;
         presenter = new Lej_filtrer_Presenter(this);
@@ -157,6 +163,22 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
         arbejdsområder_spinner.setSelection(arbejdsområde);
     }
 
+    public void fjernFragmenter(){
+        for(Fragment fragment : getFragmentManager().getFragments()){
+            getFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+    }
+
+    public void setFragment(Fragment fragment) {
+        //startskaermFrame.removeAllViews();
+        //getFragmentManager().popBackStack("fragment", getFragmentManager().POP_BACK_STACK_INCLUSIVE);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.startskaerm_frame, fragment);
+        fragmentTransaction.commit();
+
+    }
+
+
 
     public void opretSpinner(){
         List<String> arbejdsområde_listen = new ArrayList<String>();
@@ -229,9 +251,11 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
                 System.out.println(f.getMinPris());
                 System.out.println(f.isEgetVærktøj());
 
-                if(presenter.checkDatoerErOK(startdatoET.getText().toString(), slutdatoET.getText().toString()))
-                    getActivity().onBackPressed();
-
+                if(presenter.checkDatoerErOK(startdatoET.getText().toString(), slutdatoET.getText().toString())) {
+                    //getActivity().onBackPressed();
+                    fjernFragmenter();
+                    setFragment(lej_fragment);
+                }
 
                 break;
             case R.id.annuller_knap:

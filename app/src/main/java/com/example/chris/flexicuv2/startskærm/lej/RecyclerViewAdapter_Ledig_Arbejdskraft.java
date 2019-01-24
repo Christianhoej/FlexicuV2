@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 
+import java.util.Collections;
+
 public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter<RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder>{
 
     private Context mContext;
@@ -26,6 +28,11 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
     public RecyclerViewAdapter_Ledig_Arbejdskraft(Context mContext) {
         this.mContext = mContext;
         singleton = Singleton.getInstance();
+        for(int i=0; i<singleton.getAndresMedarbejderUdbud().size(); i++){
+            singleton.getAndresMedarbejderUdbud().get(i).setScore(singleton.søgeFiltrering.tildelMatchScore(singleton.getAndresMedarbejderUdbud().get(i)));
+            System.out.println(singleton.getAndresMedarbejderUdbud().get(i).getScore() + "HHHHhhhh");
+        }
+        Collections.sort(Singleton.getAndresMedarbejderUdbud());
     }
 
     @NonNull
@@ -97,4 +104,5 @@ public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter
             lej_recyclerview_listitems = itemView.findViewById(R.id.lej_ledig_arbejdskraft_listitem);
         }
     }
+    
 }
