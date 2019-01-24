@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.opret_bruger;
-
+/**
+ * @Author Janus
+ */
 import android.content.Context;
 import android.util.Patterns;
 

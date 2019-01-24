@@ -1,6 +1,8 @@
 package com.example.chris.flexicuv2.startskærm.indbakke;
 
-
+/**
+ * @Author Christian
+ */
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -55,95 +57,10 @@ public class Indbakke_fragment extends Fragment implements View.OnClickListener 
 
         fyldRecyclerViewIndlejninger(v);
 
-        //viewPager = (ViewPager) v.findViewById(R.id.indbakke_viewPager);
-        //pagerAdapter = new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
-        //viewPager.setAdapter(pagerAdapter);
 
-        /*til_aftaler_frame = (FrameLayout) v.findViewById(R.id.til_aftaler_frame);
-
-        aftaler_forhandlinger_fragment = new Aftaler_forhandlinger_fragment();
-        ledige_fragment = new Aftaler_ledige_fragment();
-
-        indbakke_nav = (BottomNavigationView) v.findViewById(R.id.indbakke_nav);*/
-
-        //senesteFrag = "nuværende";
-        //setFragment(getFragmentManager().findFragmentByTag(senesteFrag), senesteFrag);
-        //TODO setfragment - er det den der skal komme, når vi åbner indbakke?
-        /*if (senesteFrag==null){
-            setFragment(aftaler_nuvaerende_fragment, "nuværende");
-        }
-        else {
-            setFragment(getFragmentManager().findFragmentByTag(senesteFrag), senesteFrag);
-        }*/
-
-        //fjernFragmenter1(aftaler_forhandlinger_fragment);
-        //fjernFragmenter1(aftaler_ledige_fragment);
-        //setNavigation();
-
-
-/*
-        if(senesteFrag=="ledige"){
-            setFragment(ledige_fragment, "ledige");
-        }
-        else
-            setFragment(aftaler_forhandlinger_fragment, "forhandlinger");
-
-
-
-        TextView udbud = indbakke_nav.findViewById(R.id.indbakke_forhandlinger).findViewById(R.id.largeLabel);
-       // udbud.setTextSize(30);
-
-
-        TextView bud = indbakke_nav.findViewById(R.id.indbakke_ledige).findViewById(R.id.largeLabel);
-       // bud.setTextSize(30);
-
-        //indbakke_nav.getMenu().getItem(0).setChecked(true);
-        //onNavigationItemSelected(indbakke_nav.getMenu().findItem(R.id.indbakke_nuværende));
-
-        /*indbakke_nav.getMenu().getItem(0).setChecked(true);
-        indbakke_nav.setOnNavigationItemSelectedListener(BottomNavigationView);
-        onN*/
-        //TODO Når indbakke åbnes 2. gang skal det fragment der vises, også være det der highlightes
         return v;
     }
 
-/*
-    public void setNavigation(){
-        //indbakke_nav.getMenu().getItem(0).setChecked(true);
-
-        indbakke_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                //onNavigationItemSelected(indbakke_nav.getMenu().getItem(0));
-                //setFragment(aftaler_nuvaerende_fragment, "nuværende");
-                switch (menuItem.getItemId()){
-                    case R.id.indbakke_ledige:
-                        if(!(getFragmentManager().findFragmentByTag("ledige") != null && getFragmentManager().findFragmentByTag("ledige").isVisible())) {
-                            senesteFrag = "ledige";
-
-                            fjernFragmenter1(aftaler_forhandlinger_fragment);
-                            setFragment(ledige_fragment,"ledige");
-
-                        }
-                        return true;
-                    case R.id.indbakke_forhandlinger:
-                        if(!(getFragmentManager().findFragmentByTag("forhandlinger") != null && getFragmentManager().findFragmentByTag("forhandlinger").isVisible())) {
-                            senesteFrag = "forhandlinger";
-                            //fjernFragmenter1();
-                            fjernFragmenter1(ledige_fragment);
-                            setFragment(aftaler_forhandlinger_fragment,"forhandlinger" );
-                        }
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-        });
-
-    }
-*/
 
 
     public void fjernFragmenter(){
@@ -175,23 +92,4 @@ public class Indbakke_fragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
 
     }
-/*
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return new testIndbakke_fragment();
-        }
-
-        @Override
-        public int getCount() {
-            return antal_sider;
-        }
-    }
-*/
-
-
 }

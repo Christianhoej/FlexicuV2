@@ -16,6 +16,7 @@ import com.example.chris.flexicuv2.login.LoginPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @Author Christian
  */
 public class Loading_screen extends Fragment implements LoginPresenter.startAnimation {
 

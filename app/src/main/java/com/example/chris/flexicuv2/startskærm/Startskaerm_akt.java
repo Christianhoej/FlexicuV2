@@ -19,7 +19,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -28,7 +27,6 @@ import android.widget.Toast;
 
 import com.example.chris.flexicuv2.Historik;
 import com.example.chris.flexicuv2.database.DBManager;
-import com.example.chris.flexicuv2.database.TestAfAftalerDB;
 import com.example.chris.flexicuv2.login.LoginScreen_akt;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt;
 import com.example.chris.flexicuv2.R;
@@ -60,7 +58,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
     private Startskærm_akt_presenter presenter;
     private DBManager dbManager;
     private Singleton singleton;
-    private TestAfAftalerDB test;
+
     private TextView drawer_top;
 
     private FrameLayout startskærmFrameTilDiverse;
@@ -72,7 +70,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         presenter = new Startskærm_akt_presenter(this);
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
-        test = new TestAfAftalerDB();
         /**
          * Til at køre mellem fragments
          */

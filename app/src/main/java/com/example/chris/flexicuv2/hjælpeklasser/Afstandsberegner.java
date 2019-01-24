@@ -8,6 +8,9 @@ import android.webkit.JavascriptInterface;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @Author Christian
+ */
 public class Afstandsberegner {
     //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
     public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;

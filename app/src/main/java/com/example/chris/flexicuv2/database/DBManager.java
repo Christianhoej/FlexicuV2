@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * @Author Gunn
+ */
 public class DBManager {
 
     private final String MEDARBEJDER = "medarbejder";
@@ -393,81 +396,7 @@ public class DBManager {
             }
         });
     }
- /*  public void createForhandling(Forhandling forhandling){
-        String uid = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
-        forhandling.getMedarbejder().setVirksomhedsID(uid);
 
-        String aftaleID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).push().getKey();
-        forhandling.setAftaleID(aftaleID);
-        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).push().getKey();
-        forhandling.setForhandlingID(forhandlingID);
-
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).setValue(forhandling);
-        //ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(aftaleID).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
-    }
-
-    public void addForhandling(Forhandling forhandling){
-        String uid = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
-        forhandling.getMedarbejder().setVirksomhedsID(uid);
-
-        String forhandlingID = ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).push().getKey();
-
-        forhandling.setForhandlingID(forhandlingID);
-
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).setValue(forhandling);
-        ref.child(FORHANDLING).child(forhandling.getOprindeligUdlejID()).child(forhandling.getAftaleID()).child(forhandlingID).child("timestamp").setValue(ServerValue.TIMESTAMP);
-    }*/
-
- /*  public void readForhandling(){
-        String uid = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(FORHANDLING);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Forhandling> udlejForhandling = new ArrayList<>();
-                ArrayList<Forhandling> lejForhandling = new ArrayList<>();
-                ArrayList<ArrayList<Forhandling>> forhandlingerIUdlejAftale = new ArrayList<>();
-                ArrayList<ArrayList<Forhandling>> forhandlingerILejAftale = new ArrayList<>();
-                //Gemmenløber alle ledige
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    //Gennemløber alle aftaler omkring den ledige
-                    for(DataSnapshot snapshot1 :snapshot.getChildren()){
-                        //Gennemløber alle forhandlinger i aftale
-                        for(DataSnapshot snapshot2 : snapshot1.getChildren()){
-                            System.out.println(snapshot2.getValue());
-
-                            Forhandling forhandling = snapshot2.getValue(Forhandling.class);
-
-                            if(forhandling.getUdlejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())) {
-                                udlejForhandling.add(forhandling);
-                            }
-                            else if(forhandling.getLejer().getBrugerID().equals(mAuth.getCurrentUser().getUid())){
-                                lejForhandling.add(forhandling);
-                            }
-                        }
-                        forhandlingerILejAftale.add(lejForhandling);
-                        forhandlingerIUdlejAftale.add(udlejForhandling);
-                    }
-                }
-                singleton.setMineMedarbejderUdbud(udlejForhandling);
-                singleton.setMineLejForhandlinger(lejForhandling);
-                signInSuccess.userSignInSuccess(true);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-*/
 
 
     public interface CreateUserSuccess {
@@ -479,15 +408,4 @@ public class DBManager {
         void userSignInSuccess(boolean success);
         void failureMesssage(String message);
     }
-
-
-   /* public Map<String, Object> setMap(ArrayList<Forhandling> forhandling){
-        this.map = new HashMap<String, Object>();
-        for(Forhandling f : forhandling){
-            map.put(f.get)
-        }
-
-
-    }*/
-
 }

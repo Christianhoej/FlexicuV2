@@ -1,6 +1,9 @@
 
 package com.example.chris.flexicuv2.login;
 
+/**
+ * @Author gunn
+ */
 
 import android.content.Intent;
 import android.os.Build;
@@ -62,13 +65,6 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
             Fabric.with(this, new Crashlytics());
         }
 
-/*        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Gunn");
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-*/
 
         presenter = new LoginPresenter(this, this, loading_screen); //Evt. lav metode der kan sætte presenter på.
         dbManager = new DBManager();
@@ -114,28 +110,18 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
           boolean erOK = presenter.checkLoginCredentials(username.getText().toString().trim(), password.getText().toString(),this);
           if(erOK) {
               //TODO evt. sæt loading screen her, sammen med de andre metoder for at hente fra DB
-              //ivX = findViewById(R.id.x_logo);
-              //loginFrame.setAlpha();
+
               logIn.setEnabled(false);
               newUser.setEnabled(false);
               setAnimation(loading_screen);
 
-              //logo = findViewById(R.id.x_logo);
-              //logo.setVisibility(View.INVISIBLE);
 
-              //Context context;
-              //v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotation));
-              //ivX.startAnimation(rotateAnim);
-              //presenter.startAnim();
-              //tv.setText("Loading...");
 
           }
       }
       else{
           openFragmenterAktivitet();
-          //setFragment(new_user_fragment_1);
 
-          //openNewUserScreen();
       }
     }
 
@@ -144,8 +130,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         int count = getSupportFragmentManager().getBackStackEntryCount();
         if (count == 0) {
             super.onBackPressed();
-            //openloginScreen();
-            //getSupportFragmentManager().popBackStackImmediate();
+
             this.getSupportFragmentManager().popBackStack();
         } else {
             getSupportFragmentManager().popBackStack();
@@ -195,48 +180,23 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void setErrorMsgEmail(String error){
         username.setError(error);
     }
-/*
-    @Override
-    public void setLoadingScreen(String message) {
 
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.loading_screen_fragment, null);
-
-        //get width
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int width = displaymetrics.widthPixels;
-
-        // create the popup window
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = false; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, (width-20), height, focusable);
-        popupWindow.setContentView(popupView);
-
-        popupWindow.showAtLocation(logIn, Gravity.CENTER, 0, 0);
-    }
-
-*/
     public void setFragment(android.support.v4.app.Fragment fragment) {
-        //loginFrame.setVisibility(View.INVISIBLE);
-        //loginFrame.removeAllViews();
+
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.tilFragmenter_frame, fragment);
 
-        //fragmentTransaction.addToBackStack(null);
-        //this.getSupportFragmentManager().popBackStack();
+
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
 
     public void setAnimation(Fragment fragment) {
-        //loginFrame.setVisibility(View.INVISIBLE);
-        //loginFrame.removeAllViews();
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.tilAnimation, fragment);
 
-        //fragmentTransaction.addToBackStack(null);
-        //this.getSupportFragmentManager().popBackStack();
+
         fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.commit();
     }
@@ -244,10 +204,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
     public void removeAnimation(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.remove(fragment).commit();
-        //fragmentTransaction.addToBackStack(null);
-        //this.getSupportFragmentManager().popBackStack();
- //       fragmentTransaction.addToBackStack("fragment");
-   //     fragmentTransaction.commit();
+
     }
 
 

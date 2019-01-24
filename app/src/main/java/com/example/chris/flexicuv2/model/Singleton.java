@@ -1,5 +1,8 @@
 package com.example.chris.flexicuv2.model;
 
+/**
+ * @Author Gunn
+ */
 import android.app.Activity;
 
 import com.example.chris.flexicuv2.startskærm.lej.Filter;

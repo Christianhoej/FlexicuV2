@@ -14,6 +14,7 @@ import com.example.chris.flexicuv2.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @Author Christian
  */
 public class Medarbejder_popup_fragment extends Fragment {
 

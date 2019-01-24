@@ -1,7 +1,9 @@
 
 package com.example.chris.flexicuv2.medarbejdere;
 
-
+/**
+ * @Author Janus
+ */
 import android.util.Patterns;
 
 import com.example.chris.flexicuv2.model.Singleton;

@@ -1,5 +1,7 @@
 package com.example.chris.flexicuv2.startskærm.indbakke.aftaler;
-
+/**
+ * @Author Janus
+ */
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
