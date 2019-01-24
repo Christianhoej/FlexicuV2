@@ -1,6 +1,7 @@
 package com.example.chris.flexicuv2.startskærm;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
+import com.example.chris.flexicuv2.Historik;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.database.TestAfAftalerDB;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt;
@@ -185,14 +187,18 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             openSkaerm(Medarbejdere_skaerm_akt.class);
         } else if (id == R.id.søg) {
 
+
         } else if (id == R.id.indstillinger) {
 
         } else if (id == R.id.historik) {
+            openSkaerm(Historik.class);
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            Intent i = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://flexicu.com/sp%C3%B8rgsm%C3%A5l-og-svar/"));
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

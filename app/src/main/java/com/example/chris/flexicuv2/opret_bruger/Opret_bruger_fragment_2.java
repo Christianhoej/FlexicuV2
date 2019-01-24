@@ -131,7 +131,6 @@ public class Opret_bruger_fragment_2 extends Fragment implements Opret_bruger_Pr
         }
 
         if(v.getId()==R.id.qmark){
-            System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLL");
             Intent i = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://portal.flexicu.com/betingelser/"));
             startActivity(i);
