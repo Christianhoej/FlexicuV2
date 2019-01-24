@@ -132,7 +132,8 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         adapter_medarbejderbeskrivelse = new Spinner_adapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, medarbejdere);
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
         //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
-        System.out.println(singleton.midlertidigMedarbejder.toString());
+       // System.out.println(singleton.midlertidigMedarbejder.toString());
+        System.out.println("index spinner janus: " + medarbejdere.indexOf(singleton.midlertidigMedarbejder));
         medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
     }
 
@@ -212,8 +213,8 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     }
 
     @Override
-    public void setKommentar(ArrayList<String> kommentar) {
-        kommentarET.setText(kommentar.get(1));
+    public void setKommentar(String kommentar) {
+        kommentarET.setText(kommentar);
     }
 
     @Override
@@ -257,8 +258,6 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
                     singleton.midlertidigAftale.setKommentar(kommentarET.getText().toString());
                     singleton.midlertidigAftale.setTimestamp(System.currentTimeMillis());
                     singleton.addMineMedarbejderUdbud(singleton.midlertidigAftale);
-
-                    //singleton.addLedigeMedarbejder(singleton.midlertidigForhandling);
                     dbManager.createUdbud(singleton.midlertidigAftale);
 
                     setFragment(bekraeftelseFragment);
@@ -452,7 +451,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         //Metoder til valgt spinner listener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position/*-1*/);
+        singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(position);
         System.out.println(singleton.midlertidigMedarbejder.getNavn());
     }
 

@@ -38,12 +38,11 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
     }
 
 
-    private int index=0;
-    DecimalFormat numberFormat = new DecimalFormat("#.00");
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
 
         if(index<singleton.getMineAfsluttedeAftaler().size()) {
 
@@ -59,7 +58,7 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
                     viewHolder.name.setText(singleton.getMineAfsluttedeAftaler().get(index).getForhandlinger().get(i).getMedarbejder().getNavn());
                     viewHolder.virksomhed.setText(singleton.getMineAfsluttedeAftaler().get(index).getUdlejer().getVirksomhedsnavn());
                     viewHolder.periode.setText(singleton.getMineAfsluttedeAftaler().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getMineAfsluttedeAftaler().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
-                    viewHolder.totalpris.setText(numberFormat.format(Double.toString(loen)));
+                    viewHolder.totalpris.setText(numberFormat.format(loen));
 
                     if (singleton.getMineAfsluttedeAftaler().get(index).getUdlejer().getBrugerID().equals(singleton.getBruger().getBrugerID())) {
                         viewHolder.type.setText("Jeg er udlejer");
