@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    android:background="@drawable/flex_green_rektangel"
+    android:layout_marginRight="5dp"
+    android:id="@+id/hjem_udlej_listItem"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/medarbejderNavn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Søren"
+            android:textSize="18dp"
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/periode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Periode: 1/12-30/12"
+            android:layout_below="@+id/medarbejderNavn"/>
+        <TextView
+            android:id="@+id/salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Løn: 30.000"
+            android:layout_below="@+id/periode"/>
+        <TextView
+            android:id="@+id/workfield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Smed"
+            android:layout_below="@+id/salary"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
