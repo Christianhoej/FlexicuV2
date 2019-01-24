@@ -213,18 +213,34 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
                         forhandling.setLejerSlutDato(slutdato_redigerTV.getText().toString());
                         forhandling.setLejerStartDato(startdato_redigerTV.getText().toString());
                     }
-                    int index = 0;
+                    forhandling.setSidstSendtAftale(singleton.getBruger());
+
+                    //Få index af aktuelle aftale
+                    int indexAftale = 0;
                     for(Aftale aftale : singleton.getAlleMineAftalerMedForhandling()){
                         if(aftale.getAftaleID().equals(forhandling.getAftaleID())){
-                            index = singleton.getAlleMineAftalerMedForhandling().indexOf(aftale);
+                            indexAftale = singleton.getAlleMineAftalerMedForhandling().indexOf(aftale);
                             break;
                         }
                     }
-                    if(accepter_sendTilbud_Button.getText().toString().equals("Godkend")){
+                    int indexForhandling = 0;
+                    for(Forhandling forhandling1 : singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger()){
+                        if(forhandling1.getForhandlingID().equals(forhandling.getForhandlingID())){
+                            indexForhandling = singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().indexOf(forhandling1);
+                        }
+                    }
 
+                    if(accepter_sendTilbud_Button.getText().toString().equals("Godkend")){
+                        forhandling.setAftaleIndgået(true);
+                        forhandling.setAktiv(false);
+                        singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().set(indexForhandling, forhandling);
+                        dbManager.updateIndgåetAftale(singleton.getAlleMineAftalerMedForhandling().get(indexAftale),forhandling);
+                        setFragment(bekræftelse);
                     }
                     else {
-                        singleton.getAlleMineAftalerMedForhandling().get(index).addForhandlinger(forhandling);
+                        singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().set(indexForhandling, forhandling);
+                        forhandling.setAftaleIndgået(false);
+                        forhandling.setAktiv(false);
                         dbManager.updateForhandling(forhandling);
                         setFragment(bekræftelse);
                     }
