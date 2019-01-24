@@ -16,6 +16,8 @@ import com.example.chris.flexicuv2.model.Forhandling;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.startskærm.lej.Lej_medarbejder_fragment;
 
+import java.text.DecimalFormat;
+
 public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik_recyclerview_adapter.ViewHolder> {
 
     private Context mContext;
@@ -36,6 +38,8 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
     }
 
 
+    private int index=0;
+    DecimalFormat numberFormat = new DecimalFormat("#.00");
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
@@ -55,7 +59,7 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
                     viewHolder.name.setText(singleton.getMineAfsluttedeAftaler().get(index).getForhandlinger().get(i).getMedarbejder().getNavn());
                     viewHolder.virksomhed.setText(singleton.getMineAfsluttedeAftaler().get(index).getUdlejer().getVirksomhedsnavn());
                     viewHolder.periode.setText(singleton.getMineAfsluttedeAftaler().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getMineAfsluttedeAftaler().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
-                    viewHolder.totalpris.setText(Double.toString(loen));
+                    viewHolder.totalpris.setText(numberFormat.format(Double.toString(loen)));
 
                     if (singleton.getMineAfsluttedeAftaler().get(index).getUdlejer().getBrugerID().equals(singleton.getBruger().getBrugerID())) {
                         viewHolder.type.setText("Jeg er udlejer");

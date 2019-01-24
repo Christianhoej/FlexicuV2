@@ -3,6 +3,7 @@ package com.example.chris.flexicuv2.startskærm;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -18,14 +19,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.chris.flexicuv2.Historik;
 import com.example.chris.flexicuv2.database.DBManager;
 import com.example.chris.flexicuv2.database.TestAfAftalerDB;
+import com.example.chris.flexicuv2.login.LoginScreen_akt;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.startskærm.hjem.Hjem_fragment;
@@ -159,15 +163,47 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         ft.commit();
     }
 
+    /**
+     * Inspireret af: https://stackoverflow.com/questions/8430805/clicking-the-back-button-twice-to-exit-an-activity
+     */
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            startskærmFrameTilDiverse.removeAllViews();
-            super.onBackPressed();
         }
+        else if (count>0) {
+            System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
+            super.onBackPressed();
+
+        }
+        else {
+
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Tryk på tilbage igen for at lukke", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
+
+
+
+            //startskærmFrameTilDiverse.removeAllViews();
+            //super.onBackPressed();
+        }
+
+
     }
 
     public void setFragment(Fragment fragment, String tag) {
@@ -194,7 +230,10 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             openSkaerm(Historik.class);
 
         } else if (id == R.id.nav_share) {
-
+            //LoginScreen_akt log = new LoginScreen_akt();
+            //log.recreate();
+            openSkaerm(LoginScreen_akt.class);
+            finish();
         } else if (id == R.id.nav_send) {
             Intent i = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://flexicu.com/sp%C3%B8rgsm%C3%A5l-og-svar/"));

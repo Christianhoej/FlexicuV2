@@ -80,8 +80,12 @@
             android:text="Rediger"
             android:layout_marginTop="50dp"
             android:layout_gravity="center"
+            android:textColor="@color/red"
             android:id="@+id/rediger"
-            android:background="@drawable/rounded_corners_red"/>
+            android:textSize="20dp"
+            android:background="@color/hvid"
+            style="?android:attr/borderlessButtonStyle"
+            />
 
     </LinearLayout>
 

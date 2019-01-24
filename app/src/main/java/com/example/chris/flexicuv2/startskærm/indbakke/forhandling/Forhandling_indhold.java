@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.chris.flexicuv2.Bekraeftelse_aftale_indgået_fragment;
 import com.example.chris.flexicuv2.Bekraeftelse_bud_medarbejder_fragment;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.database.DBManager;
@@ -35,6 +36,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
     private Singleton singleton;
     private DBManager dbManager;
     private Bekraeftelse_bud_medarbejder_fragment bekræftelse;
+    private Bekraeftelse_aftale_indgået_fragment bekræft_aftale;
     private Calendar c1;
     private Calendar c2;
     private DatePickerDialog.OnDateSetListener datepickerListener;
@@ -64,6 +66,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
         bekræftelse = new Bekraeftelse_bud_medarbejder_fragment();
+        bekræft_aftale = new Bekraeftelse_aftale_indgået_fragment();
         presenter = new Forhandling_presenter(this);
         c1 = Calendar.getInstance();
         c2 = Calendar.getInstance();
@@ -235,7 +238,7 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
                         forhandling.setAktiv(false);
                         singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().set(indexForhandling, forhandling);
                         dbManager.updateIndgåetAftale(singleton.getAlleMineAftalerMedForhandling().get(indexAftale),forhandling);
-                        setFragment(bekræftelse);
+                        setFragment(bekræft_aftale);
                     }
                     else {
                         singleton.getAlleMineAftalerMedForhandling().get(indexAftale).getForhandlinger().set(indexForhandling, forhandling);
