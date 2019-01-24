@@ -34,7 +34,7 @@ public class CVR_Opslag {
 
 
     /**
-     * Klassen anvendes til at lave opslag gennem: https://cvrapi.dk/
+     * Klassen anvendes til at lave opslag gennem: https://cvrapi.dk/examples
      *  - Koden er også lånt fra hjemmesiden
      */
     public CVR_Opslag() {
