@@ -323,7 +323,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:hint=" Timepris "
-                    android:maxLength="6"
+                    android:maxLength="5"
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:textSize="14sp"
