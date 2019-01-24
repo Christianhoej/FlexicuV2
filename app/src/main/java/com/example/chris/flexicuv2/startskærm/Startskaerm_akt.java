@@ -175,7 +175,7 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (count>0) {
-            System.out.println("ÆÆÆÆÆÆÆÆÆÆÆÆÆÆ");
+
             super.onBackPressed();
 
         }

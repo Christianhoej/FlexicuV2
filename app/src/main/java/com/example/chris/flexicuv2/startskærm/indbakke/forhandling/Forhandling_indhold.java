@@ -141,8 +141,8 @@ public class Forhandling_indhold extends Fragment implements View.OnClickListene
         accepter_sendTilbud_Button = v.findViewById(R.id.forhandling_send_eller_accepter_tilbud_button);
         accepter_sendTilbud_Button.setOnClickListener(this);
 
-        kommentarButton = v.findViewById(R.id.forhandling_tilføj_besked_button);
-        kommentarButton.setOnClickListener(this);
+        //kommentarButton = v.findViewById(R.id.forhandling_tilføj_besked_button);
+        //kommentarButton.setOnClickListener(this);
 
 
 

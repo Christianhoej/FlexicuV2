@@ -375,7 +375,7 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-
+<!--
             <Button
                 android:id="@+id/forhandling_tilføj_besked_button"
                 android:layout_width="wrap_content"
@@ -385,7 +385,7 @@
                 android:textColor="@color/hvid"
                 android:text="Se meddelelser" />
 
-
+-->
         </LinearLayout>
 
         <LinearLayout

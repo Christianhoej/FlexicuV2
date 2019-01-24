@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     tools:context=".startskærm.hjem.Startskaerm_Udlejede_medarbejder_fragment"
     android:orientation="vertical"
-    android:layout_marginHorizontal="5dp"
+    android:layout_marginHorizontal="10dp"
     >
 
 
