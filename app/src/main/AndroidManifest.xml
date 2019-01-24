@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.chris.flexicuv2">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- To auto-complete the brugerEmail text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
 
     <application
         android:allowBackup="true"
@@ -16,31 +16,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.chris.flexicuv2.login.LoginScreen_akt"
+        <activity
+            android:name=".login.LoginScreen_akt"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="45f34176c28020a8298cd71c5c46d6d4b993c115"
-            />
+            android:value="45f34176c28020a8298cd71c5c46d6d4b993c115" />
+
         <activity
-            android:name="com.example.chris.flexicuv2.startskærm.Startskaerm_akt"
+            android:name=".startskærm.Startskaerm_akt"
             android:screenOrientation="sensorPortrait"
-            tools:ignore="DuplicateActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name="com.example.chris.flexicuv2.medarbejdere.Medarbejdere_skaerm_akt"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="DuplicateActivity" />
+        <activity
+            android:name=".medarbejdere.Medarbejdere_skaerm_akt"
             android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="adjustPan"/>
-
-        <activity android:name=".opret_bruger.Opret_bruger_akt"
-            android:screenOrientation="sensorPortrait"/>
-
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".opret_bruger.Opret_bruger_akt"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".Historik" />
+        <activity android:name=".Kontakt"></activity>
     </application>
 
 </manifest>
