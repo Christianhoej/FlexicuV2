@@ -47,13 +47,14 @@ public class RecyclerViewAdapter_Lej extends RecyclerView.Adapter<RecyclerViewAd
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
         view = LayoutInflater.from(mContext).inflate(R.layout.hjem_lej_listitem,viewGroup,false);
+        singleton = Singleton.getInstance();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
-        singleton = Singleton.getInstance();
+
        // String loen = "Løn: " + Integer.toString(mMedarbejder.get(i).getLoen());
         viewHolder.name.setText(mMedarbejder.get(i).getNavn());
       //  viewHolder.salary.setText(loen);

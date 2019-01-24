@@ -17,6 +17,8 @@ public class Singleton extends Activity {
     public static ArrayList<Aftale> alleMineAftalerMedForhandling;
     public static ArrayList<Aftale> mineMedarbejderUdbud;
     public static ArrayList<Aftale> mineAfsluttedeAftaler;
+    public static ArrayList<Aftale> mineLejIndgåedeAftaler;
+    public static ArrayList<Aftale> mineUdlejIndgåedeAftaler;
   //  public static ArrayList<Forhandling> mineLejForhandlinger;
     public static ArrayList<Aftale> andresMedarbejderUdbud;
     public static Medarbejder midlertidigMedarbejder;
@@ -47,6 +49,38 @@ public class Singleton extends Activity {
             alleMineAftalerMedForhandling = new ArrayList<>();
         }
         return singleInstance;
+    }
+
+    public static ArrayList<Aftale> getMineLejIndgåedeAftaler() {
+        return mineLejIndgåedeAftaler;
+    }
+
+    public static void setMineLejIndgåedeAftaler(ArrayList<Aftale> mineLejIndgåedeAftaler) {
+        Singleton.mineLejIndgåedeAftaler = mineLejIndgåedeAftaler;
+    }
+
+    public static void addMineLejIndgåedeAftaler(Aftale mineLejIndgåedeAftaler){
+        Singleton.mineLejIndgåedeAftaler.add(mineLejIndgåedeAftaler);
+    }
+
+    public static void removeMineLejIndgåedeAftaler(Aftale mineLejIndgåedeAftaler){
+        Singleton.mineLejIndgåedeAftaler.remove(mineLejIndgåedeAftaler);
+    }
+
+    public static ArrayList<Aftale> getMineUdlejIndgåedeAftaler() {
+        return mineUdlejIndgåedeAftaler;
+    }
+
+    public static void setMineUdlejIndgåedeAftaler(ArrayList<Aftale> mineUdlejIndgåedeAftaler) {
+        Singleton.mineUdlejIndgåedeAftaler = mineUdlejIndgåedeAftaler;
+    }
+
+    public static void addMineUdlejIndgåedeAftaler(Aftale mineUdlejIndgåedeAftaler){
+        Singleton.mineUdlejIndgåedeAftaler.add(mineUdlejIndgåedeAftaler);
+    }
+
+    public static void removeMineUdlejIndgåedeAftaler(Aftale mineUdlejIndgåedeAftaler){
+        Singleton.mineUdlejIndgåedeAftaler.remove(mineUdlejIndgåedeAftaler);
     }
 
     public static ArrayList<Aftale> getAlleMineAftalerMedForhandling() {
