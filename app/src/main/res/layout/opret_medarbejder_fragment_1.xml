@@ -111,7 +111,7 @@
             android:layout_gravity="center"
             android:backgroundTint="@color/flex_green"
             android:textSize="20dp"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:id="@+id/adresse_vejnavn" />
 
         <LinearLayout

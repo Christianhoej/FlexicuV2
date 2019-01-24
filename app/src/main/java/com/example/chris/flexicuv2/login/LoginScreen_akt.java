@@ -61,6 +61,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         if (!EMULATOR) {
             Fabric.with(this, new Crashlytics());
         }
+
 /*        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
@@ -68,6 +69,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 */
+
         presenter = new LoginPresenter(this, this, loading_screen); //Evt. lav metode der kan sætte presenter på.
         dbManager = new DBManager();
         //logo = findViewById(R.id.flexLogo);

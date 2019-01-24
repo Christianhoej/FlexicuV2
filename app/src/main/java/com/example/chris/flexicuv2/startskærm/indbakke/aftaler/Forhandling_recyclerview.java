@@ -51,23 +51,23 @@ public class Forhandling_recyclerview extends RecyclerView.Adapter<Forhandling_r
         //TODO setText for forhandling som lejer
 
         //TODO De to adaptere kan måske slås sammen, det kan undersøges når forhandlinger er sat helt op
+        if(index<singleton.getAlleMineAftalerMedForhandling().size()) {
 
-        if(i <singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().size()) {
-            viewHolder.arbejdsområder.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getMedarbejder().getArbejdsomraade());
-            viewHolder.navn.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getMedarbejder().getNavn());
-            viewHolder.virksomhed.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getUdlejer().getVirksomhedsnavn());
-            viewHolder.periode.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
-            viewHolder.pris.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejPris());
+            if (i < singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().size()) {
+                viewHolder.arbejdsområder.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getMedarbejder().getArbejdsomraade());
+                viewHolder.navn.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getMedarbejder().getNavn());
+                viewHolder.virksomhed.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getUdlejer().getVirksomhedsnavn());
+                viewHolder.periode.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerStartDato().replace(" ", "") + " - " + singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejerSlutDato().replace(" ", ""));
+                viewHolder.pris.setText(singleton.getAlleMineAftalerMedForhandling().get(index).getForhandlinger().get(i).getUdlejPris());
 
-            if(singleton.getAlleMineAftalerMedForhandling().get(index).getUdlejer().getBrugerID().equals(singleton.getBruger().getBrugerID())){
-                viewHolder.type.setText("Jeg er udlejer");
+                if (singleton.getAlleMineAftalerMedForhandling().get(index).getUdlejer().getBrugerID().equals(singleton.getBruger().getBrugerID())) {
+                    viewHolder.type.setText("Jeg er udlejer");
+                } else {
+                    viewHolder.type.setText("Jeg er lejer");
+                }
+            } else {
+                index++;
             }
-            else {
-                viewHolder.type.setText("Jeg er lejer");
-            }
-        }
-        else {
-            index++;
         }
         viewHolder.forhandlinger_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
