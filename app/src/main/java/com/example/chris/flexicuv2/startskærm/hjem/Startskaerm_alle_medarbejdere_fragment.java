@@ -36,7 +36,7 @@ public class Startskaerm_alle_medarbejdere_fragment extends Fragment {
         v = inflater.inflate(R.layout.hjem_fragment, container, false);
         recyclerView = v.findViewById(R.id.lej_medarbejder_recyclerview);
         TextView title = v.findViewById(R.id.statusAfMedarbejdere);
-        title.setText("Mine ansatte");
+        title.setText("Mine medarbejdere");
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false));
