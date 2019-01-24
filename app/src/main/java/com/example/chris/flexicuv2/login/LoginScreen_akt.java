@@ -119,6 +119,7 @@ public class LoginScreen_akt extends AppCompatActivity implements View.OnClickLi
               logIn.setEnabled(false);
               newUser.setEnabled(false);
               setAnimation(loading_screen);
+
               //logo = findViewById(R.id.x_logo);
               //logo.setVisibility(View.INVISIBLE);
 

@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -45,7 +46,6 @@
             android:name=".opret_bruger.Opret_bruger_akt"
             android:screenOrientation="sensorPortrait" />
         <activity android:name=".Historik" />
-        <activity android:name=".Kontakt"></activity>
     </application>
 
 </manifest>

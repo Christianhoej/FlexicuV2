@@ -10,18 +10,21 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.startskærm.udlej.Ledige_rediger;
+import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_Janus;
 
 
 public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_recyclerview_adapter.ViewHolder>{
 
     private Context mContext;
-    Singleton singleton;
-    Ledige_rediger ledige_rediger_fragment;
+    private Singleton singleton;
+    private Ledige_rediger ledige_rediger_fragment;
+    private Spinner medarbejder_spinner;
 
     //TODO konstruktøren skal self have flere input når net er klar.
     public Ledige_recyclerview_adapter(Context mContext) {
@@ -55,13 +58,29 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
             public void onClick(View v) {
                 //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
 
-                        ledige_rediger_fragment = new Ledige_rediger();
+                        //ledige_rediger_fragment = new Ledige_rediger();
                         singleton.midlertidigAftale = singleton.getMineMedarbejderUdbud().get(i);
-                        singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i).getMedarbejder();
-                        setFragment(ledige_rediger_fragment);
+                        //singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i).getMedarbejder();
+                        valgAfMedarbejder(v, i);
+                        //setFragment(ledige_rediger_fragment);
             }
         });
     }
+
+    public void valgAfMedarbejder(View view, int i) {
+        singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i/*+1*/).getMedarbejder();
+        //udlejning_af_medarbejder = new Udlejning_Janus();
+        ledige_rediger_fragment = new Ledige_rediger();
+        medarbejder_spinner = view.findViewById(R.id.ledig_medarbejder_spinner);
+        //TODO navnet skal føres med videre.
+        //singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i);
+        //medarbejder_spinner.setSelection(singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i)));
+
+        //setFragment(udlejning_af_medarbejder);
+        setFragment(ledige_rediger_fragment);
+    }
+
+
     public String egetVærktøj(int i){
         String egetVærktøj;
         if(singleton.getMineMedarbejderUdbud().get(i).isEgetVærktøj()==false){
