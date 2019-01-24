@@ -18,6 +18,11 @@ import com.example.chris.flexicuv2.startskærm.lej.Lej_medarbejder_fragment;
 
 import java.text.DecimalFormat;
 
+/**
+ *
+ * @Author Christian
+ */
+
 public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik_recyclerview_adapter.ViewHolder> {
 
     private Context mContext;
@@ -70,25 +75,6 @@ public class Historik_recyclerview_adapter extends RecyclerView.Adapter<Historik
                 }
             }
         }
-
-
-       /*
-        int arbejdsdage = udregnArbejdsdage(singleton.getMineAfsluttedeAftaler().get(i).getStartDato().toString(), singleton.getMineAfsluttedeAftaler().get(i).getSlutDato().toString());
-        int timeloen = Integer.parseInt(singleton.getMineAfsluttedeAftaler().get(i).getTimePris());
-        double loen = udregnPriser(timeloen,arbejdsdage, 7.4) ;
-        viewHolder.name.setText(singleton.getMineAfsluttedeAftaler().get(i).getMedarbejder().getNavn());
-        viewHolder.totalpris.setText(Double.toString(loen));
-        viewHolder.workfield.setText(singleton.getMineAfsluttedeAftaler().get(i).getMedarbejder().getArbejdsomraade());
-        viewHolder.periode.setText(singleton.getMineAfsluttedeAftaler().get(i).getStartDato().replace(" ", "" + " - " + singleton.getMineAfsluttedeAftaler().get(i).getSlutDato().replace(" ", "")));
-        viewHolder.virksomhed.setText(singleton.getMineAfsluttedeAftaler().get(i).getUdlejer().getVirksomhedsnavn());
-
-
-        if (singleton.getMineAfsluttedeAftaler().get(i).getUdlejer().getBrugerID().equals(singleton.getBruger().getBrugerID())) {
-            viewHolder.type.setText("Jeg er udlejer");
-        } else {
-            viewHolder.type.setText("Jeg er lejer");
-        }
-*/
 
         viewHolder.historik_listitem.setOnClickListener(new View.OnClickListener() {
 

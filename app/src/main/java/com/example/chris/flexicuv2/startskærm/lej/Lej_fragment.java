@@ -23,6 +23,8 @@ import com.example.chris.flexicuv2.model.Singleton;
 import java.util.Collections;
 
 /**
+ *
+ * @Author Gunn
  * A simple {@link Fragment} subclass.
  */
 public class Lej_fragment extends Fragment implements View.OnClickListener {

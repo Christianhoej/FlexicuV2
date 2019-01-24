@@ -18,6 +18,8 @@ import com.example.chris.flexicuv2.startskærm.indbakke.aftaler.Aftaler_ledige_f
 
 
 /**
+ *
+ * @Author Janus
  * A simple {@link Fragment} subclass.
  */
 public class Udlej_Fragment extends Fragment implements View.OnClickListener{
@@ -77,14 +79,11 @@ public class Udlej_Fragment extends Fragment implements View.OnClickListener{
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                //onNavigationItemSelected(indbakke_nav.getMenu().getItem(0));
-                //setFragment(aftaler_nuvaerende_fragment, "nuværende");
                 switch (menuItem.getItemId()){
                     case R.id.indbakke_ledige:
                         if(!(getFragmentManager().findFragmentByTag("ledige") != null && getFragmentManager().findFragmentByTag("ledige").isVisible())) {
                             senesteFrag = "ledige";
 
-                            //fjernFragmenter1(aftaler_forhandlinger_fragment);
                             setFragment(udlej_mine_medarbejdere,"ledige");
 
                         }
@@ -92,8 +91,6 @@ public class Udlej_Fragment extends Fragment implements View.OnClickListener{
                     case R.id.indbakke_forhandlinger:
                         if(!(getFragmentManager().findFragmentByTag("forhandlinger") != null && getFragmentManager().findFragmentByTag("forhandlinger").isVisible())) {
                             senesteFrag = "forhandlinger";
-                            //fjernFragmenter1();
-                            //fjernFragmenter1(ledige_fragment);
                             setFragment(aftaler_ledige_fragment,"forhandlinger" );
                         }
                         return true;
@@ -105,8 +102,6 @@ public class Udlej_Fragment extends Fragment implements View.OnClickListener{
         });
 
     }
-
-
 
     @Override
     public void onClick(View v) {

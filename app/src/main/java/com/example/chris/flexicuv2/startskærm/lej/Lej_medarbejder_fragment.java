@@ -38,6 +38,11 @@ import java.util.Calendar;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+
+/**
+ * @Author Christian
+ *
+ */
 public class Lej_medarbejder_fragment extends Fragment implements Lej_presenter.UpdateLej, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Singleton singleton;

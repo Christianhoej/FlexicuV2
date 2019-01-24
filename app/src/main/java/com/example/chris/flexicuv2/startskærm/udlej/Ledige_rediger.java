@@ -33,7 +33,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
+/**
+ *
+ * @Gunn
+ */
 public class Ledige_rediger extends Fragment implements Udlejning_Presenter.UpdateUdlejning, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener{
 
     private Spinner medarbejderSpinner;
@@ -45,7 +48,6 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
     private Calendar c1, c2;
     private Singleton singleton;
     private DBManager dbManager;
-    private Medarbejder medarbejderValgt;
     private DatePickerDialog datepickerdialog;
     private Aftaler_ledige_fragment forhandlinger_fragment;
     private FrameLayout startskærmFrameTilDiverse;
@@ -126,17 +128,13 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
         Medarbejder spinneroverskrift = new Medarbejder();
         spinneroverskrift.setNavn("Vælg medarbejder");
         spinneroverskrift.setFødselsår(Calendar.getInstance().get(Calendar.YEAR));
-        //medarbejdere.add(spinneroverskrift);
         for(Medarbejder m : temp){
             medarbejdere.add(m);
         }
         adapter_medarbejderbeskrivelse = new Spinner_adapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, medarbejdere);
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
-        //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
-        //System.out.println(singleton.midlertidigMedarbejder.toString());
         System.out.println("Index spinner: " + medarbejdere.indexOf(singleton.midlertidigMedarbejder));
-       // medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
-        medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
+        medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder));
     }
 
 

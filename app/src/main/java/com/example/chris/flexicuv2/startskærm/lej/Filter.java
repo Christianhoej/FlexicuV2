@@ -9,6 +9,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ *
+ * @Author Janus
+ */
 public class Filter implements Filtrering {
 
     private String[]arbejdsområder;
@@ -31,8 +35,6 @@ public class Filter implements Filtrering {
         minPris = "";
         maxPris = "";
         arbejdsområder = null;
-        //System.out.println(new SimpleDateFormat("dd/MMM/yyyy").format(cal));
-        //hvis ingen startdato er angivet er det den nuværende
         startdato = " dd / mm / yyyy ";
         slutdato = " dd / mm / yyyy ";
         postNr = "";
@@ -252,11 +254,6 @@ public class Filter implements Filtrering {
         //Datoscore gives på baggrund af % af perioden der dækkes. angives der hverken start eller slutdato
         if(!startdato.contains("yyyy"))
         match += findDatoScore(a);
-
-//        System.out.println(a.getMedarbejder().getNavn() + " Dette scorede han " + match + "!!!!!!!!!!!!!");
-        //System.out.println("MAXMATCHSCORE: " + maxMatchScore);
-        //System.out.println((match/maxMatchScore)*100 +  " __________");
-        //int max = maxMatchScore;
         double max = (double) maxMatchScore;
         double sc = (double) match/max;
         System.out.println("Max: " + max + ", sc" + sc);

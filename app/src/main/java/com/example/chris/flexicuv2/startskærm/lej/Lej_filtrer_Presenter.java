@@ -8,6 +8,11 @@ import com.example.chris.flexicuv2.model.Singleton;
 
 import java.io.IOException;
 
+/**
+ *
+ * @Author Janus
+ */
+
 public class Lej_filtrer_Presenter {
 
     private final String ERRORVÆLGSTARTDATO = "Vælg en startdato for at filtrere";

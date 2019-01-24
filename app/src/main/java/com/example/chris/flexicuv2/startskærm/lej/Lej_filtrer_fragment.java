@@ -149,7 +149,6 @@ public class Lej_filtrer_fragment extends Fragment implements View.OnClickListen
 
 
         afstandsberegner = new Afstandsberegner();
-        //a= afstandsberegner.calculateDistanceInKilometer(55.779292, 12.521402,55.753635  ,12.452214);
 
         return v;
     }

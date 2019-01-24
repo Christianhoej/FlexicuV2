@@ -12,7 +12,11 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.model.Singleton;
 
-
+/**
+ *
+ * @Author Janus
+ *
+ */
 public class Bekraeftelse_bud_medarbejder_fragment extends Fragment implements View.OnClickListener {
 
     private TextView navn, periode, løn;
@@ -45,8 +49,5 @@ public class Bekraeftelse_bud_medarbejder_fragment extends Fragment implements V
     @Override
     public void onClick(View v) {
         getFragmentManager().popBackStack("fragment", getFragmentManager().POP_BACK_STACK_INCLUSIVE);
-        //getFragmentManager().popBackStack();
-       // startskærmFrameTilDiverse.removeAllViews();
-        //getActivity().onBackPressed();
     }
 }

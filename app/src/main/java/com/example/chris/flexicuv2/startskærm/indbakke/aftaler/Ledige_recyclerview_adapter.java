@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.example.chris.flexicuv2.startskærm.udlej.Ledige_rediger;
-import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_Janus;
 
 
 public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_recyclerview_adapter.ViewHolder>{

@@ -34,9 +34,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
+ * @Author Janus
  * A simple {@link Fragment} subclass.
  */
-public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.UpdateUdlejning, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
+public class Udlejning_indhold extends Fragment implements Udlejning_Presenter.UpdateUdlejning, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
     private Spinner medarbejderSpinner;
     private EditText timeprisET, kommentarET;
@@ -53,7 +54,7 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
     private Udlejning_Presenter presenter;
     private Bekraeftelse_medarbejder_udbud_fragment bekraeftelseFragment;
 
-    public Udlejning_Janus() {
+    public Udlejning_indhold() {
         // Required empty public constructor
     }
 
@@ -125,14 +126,11 @@ public class Udlejning_Janus extends Fragment implements Udlejning_Presenter.Upd
         Medarbejder spinneroverskrift = new Medarbejder();
         spinneroverskrift.setNavn("Vælg medarbejder");
         spinneroverskrift.setFødselsår(Calendar.getInstance().get(Calendar.YEAR));
-        //medarbejdere.add(spinneroverskrift);
         for(Medarbejder m : temp){
             medarbejdere.add(m);
         }
         adapter_medarbejderbeskrivelse = new Spinner_adapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, medarbejdere);
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
-        //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
-       // System.out.println(singleton.midlertidigMedarbejder.toString());
         System.out.println("index spinner janus: " + medarbejdere.indexOf(singleton.midlertidigMedarbejder));
         medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
     }
