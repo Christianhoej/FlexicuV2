@@ -6,6 +6,10 @@ import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.ArrayList;
 
+
+/**
+ * @Athour Janus
+ */
 class Udlejning_Presenter {
     private final String ERRORKRONOLOGISKDATO = "Den valgte slutdato falder før startdatoen";
     private UpdateUdlejning updateUdlejning;

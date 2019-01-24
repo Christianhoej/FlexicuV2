@@ -18,6 +18,10 @@ import com.example.chris.flexicuv2.model.Singleton;
 
 import java.util.Collections;
 
+/**
+ *
+ * @Author Gunn
+ */
 public class RecyclerViewAdapter_Ledig_Arbejdskraft extends RecyclerView.Adapter<RecyclerViewAdapter_Ledig_Arbejdskraft.ViewHolder>{
 
     private Context mContext;

@@ -13,6 +13,11 @@ import com.example.chris.flexicuv2.model.Medarbejder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @Author Christian
+ *
+ */
 public class Spinner_adapter extends ArrayAdapter {
     List<Medarbejder> list ;
     private Context mContext;
@@ -26,13 +31,6 @@ public class Spinner_adapter extends ArrayAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        /*if (position == 0) {
-            // Disable the first item from Spinner
-            // First item will be use for hint
-            return false;
-        } else {
-            return true;
-        }*/
         return true;
     }
     @Override
@@ -40,26 +38,10 @@ public class Spinner_adapter extends ArrayAdapter {
                                 ViewGroup parent) {
         View view = super.getDropDownView(position, convertView, parent);
         TextView tv = (TextView) view;
-        /*if (position == 0) {
-            // Set the hint text color gray
-            tv.setTextColor(Color.GRAY);
-        } else {
-            tv.setTextColor(Color.BLACK);
-        }*/
         return view;
     }
 
-    /*@Override
-    public Medarbejder getItem(int position) {
-        if(position>0)
-            return (Medarbejder)super.getItem(position);
-        else
-            return null;
-    }*/
     public Medarbejder getItem(int position){
         return list.get(position);
     }
-
-
-
 }

@@ -7,6 +7,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.chris.flexicuv2.startskærm.lej.RecyclerViewAdapter_Ledig_Arbejdskraft;
 
+/**
+ * @Author Christian
+ */
+
 public class Historik extends AppCompatActivity {
 
     private RecyclerView recyclerView;

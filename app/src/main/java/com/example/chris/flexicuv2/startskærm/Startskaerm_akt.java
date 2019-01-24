@@ -42,6 +42,11 @@ import com.example.chris.flexicuv2.startskærm.udlej.Udlej_Fragment;
 import com.example.chris.flexicuv2.model.Singleton;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ *
+ * @Author Gunn
+ *
+ */
 public class Startskaerm_akt extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Startskærm_akt_presenter.UpdateStartskærm {
 
     private BottomNavigationView startskaermNav;
@@ -53,11 +58,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
     private Hjem_fragment fragmentHjem;
 
     private Startskærm_akt_presenter presenter;
-    private FirebaseAuth mAuth;
-
-    private Startskaerm_Udlejede_medarbejder_fragment fragmentUdlejedeMed;
-    private Startskaerm_lejede_Medarbejdere_fragment fragmentLejedeMed;
-    private Startskaerm_alle_medarbejdere_fragment fragmentAlleMed;
     private DBManager dbManager;
     private Singleton singleton;
     private TestAfAftalerDB test;
@@ -70,12 +70,9 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startskaerm_akt);
         presenter = new Startskærm_akt_presenter(this);
-        //dbManager = new DBManager();
-        //dbManager.readBruger();
         singleton = Singleton.getInstance();
         dbManager = new DBManager();
         test = new TestAfAftalerDB();
-        //dbManager.createUdbud(test.getUdlej());
         /**
          * Til at køre mellem fragments
          */
@@ -94,9 +91,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         drawer_top = findViewById(R.id.left_menu_title);
-        //System.out.println(drawer_top.getText().toString());
-//        System.out.println(singleton.getBruger().getVirksomhedsnavn());
-        //drawer_top.setText(singleton.getBruger().getVirksomhedsnavn());
         toggle.syncState();
 
 
@@ -114,28 +108,28 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        //fragmentHjem = (Hjem_fragment) getSupportFragmentManager().findFragmentByTag("hjem");
+
                         if(!(getSupportFragmentManager().findFragmentByTag("hjem") != null && getSupportFragmentManager().findFragmentByTag("hjem").isVisible())) {
                             fjernFragmenter();
                             setFragment(fragmentHjem, "hjem");
                         }
                         return true;
                     case R.id.nav_udlej:
-                       // fragmentUdlej = (Udlej_Fragment) getSupportFragmentManager().findFragmentByTag("udlej");
+
                         if(!(getSupportFragmentManager().findFragmentByTag("udlej") != null && getSupportFragmentManager().findFragmentByTag("udlej").isVisible())) {
                             fjernFragmenter();
                             setFragment(fragmentUdlej, "udlej");
                         }
                         return true;
                     case R.id.nav_lej:
-                        //fragmentLej = (Lej_fragment) getSupportFragmentManager().findFragmentByTag("lej");
+
                         if(!(getSupportFragmentManager().findFragmentByTag("lej") != null && getSupportFragmentManager().findFragmentByTag("lej").isVisible())) {
                             fjernFragmenter();
                             setFragment(fragmentLej, "lej");
                         }
                         return true;
                     case R.id.nav_indbakke:
-                        //fragmentIndbakke = (Indbakke_fragment) getSupportFragmentManager().findFragmentByTag("indbakke");
+
                         if(!(getSupportFragmentManager().findFragmentByTag("indbakke") != null && getSupportFragmentManager().findFragmentByTag("indbakke").isVisible())) {
                             fjernFragmenter();
                             setFragment(fragmentIndbakke, "indbakke");
@@ -155,13 +149,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
         startActivity(intent);
     }
 
-    //DENHER
-    public void switchContent(int id, Fragment fragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(id, fragment, fragment.toString());
-        ft.addToBackStack(null);
-        ft.commit();
-    }
 
     /**
      * Inspireret af: https://stackoverflow.com/questions/8430805/clicking-the-back-button-twice-to-exit-an-activity
@@ -197,10 +184,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
                 }
             }, 2000);
 
-
-
-            //startskærmFrameTilDiverse.removeAllViews();
-            //super.onBackPressed();
         }
 
 
@@ -230,8 +213,6 @@ public class Startskaerm_akt extends AppCompatActivity implements NavigationView
             openSkaerm(Historik.class);
 
         } else if (id == R.id.nav_share) {
-            //LoginScreen_akt log = new LoginScreen_akt();
-            //log.recreate();
             openSkaerm(LoginScreen_akt.class);
             finish();
         } else if (id == R.id.nav_send) {

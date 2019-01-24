@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.model.Singleton;
 
-
+/**
+ *
+ * @Author Christian
+ */
 public class Bekraeftelse_aftale_indgået_fragment extends Fragment implements View.OnClickListener {
 
     TextView navn, periode;
@@ -41,8 +44,6 @@ public class Bekraeftelse_aftale_indgået_fragment extends Fragment implements V
 
     @Override
     public void onClick(View v) {
-        //getActivity().getSupportFragmentManager().popBackStack();
-        //getFragmentManager().popBackStack();
         getFragmentManager().popBackStack("fragment", getFragmentManager().POP_BACK_STACK_INCLUSIVE);
     }
 }

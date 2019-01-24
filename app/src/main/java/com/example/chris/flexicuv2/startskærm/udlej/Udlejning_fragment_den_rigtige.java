@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import com.example.chris.flexicuv2.R;
 import com.example.chris.flexicuv2.medarbejdere.Medarbejder_recyclerView_adapter;
 
+/**
+ * @Author Christian
+ */
 
 public class Udlejning_fragment_den_rigtige extends Fragment implements View.OnClickListener {
 
@@ -42,9 +45,8 @@ public class Udlejning_fragment_den_rigtige extends Fragment implements View.OnC
     }
 
     private void fyldRecyclerView(View v){
-        //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.udlejning_recyclerview);
-        adapter = new Medarbejder_recyclerView_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
+        adapter = new Medarbejder_recyclerView_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

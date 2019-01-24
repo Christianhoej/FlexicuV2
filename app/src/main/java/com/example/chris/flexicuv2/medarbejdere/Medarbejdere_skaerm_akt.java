@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.example.chris.flexicuv2.R;
-import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_Janus;
+import com.example.chris.flexicuv2.startskærm.udlej.Udlejning_indhold;
 
 
 /**
@@ -21,7 +21,7 @@ public class Medarbejdere_skaerm_akt extends AppCompatActivity {
     Medarbejder_Skaerm_fragment fragment;
 
 
-    Udlejning_Janus ud;
+    Udlejning_indhold ud;
 
 
     //Til test færdigt
@@ -38,7 +38,7 @@ public class Medarbejdere_skaerm_akt extends AppCompatActivity {
 
         fragment = new Medarbejder_Skaerm_fragment();
 
-        ud = new Udlejning_Janus();
+        ud = new Udlejning_indhold();
         setFragment(fragment);
         //setFragment(ud);
     }

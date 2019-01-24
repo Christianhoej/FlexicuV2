@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.example.chris.flexicuv2.R;
 
 /**
+ *
+ * @Author Gunn
  * A simple {@link Fragment} subclass.
  */
 public class Udlej_mine_medarbejdere extends Fragment implements View.OnClickListener {
@@ -42,7 +44,7 @@ public class Udlej_mine_medarbejdere extends Fragment implements View.OnClickLis
     private void fyldRecyclerView(View v){
         //Log.d(TAG, "fyldRecyclerView: Fylder Recyclerview");
         RecyclerView recyclerView = v.findViewById(R.id.udlejning_recyclerview);
-        adapter = new Udlejning_recyclerView_adapter(getContext()/*, navneTest, arbejdsområderTest*/);
+        adapter = new Udlejning_recyclerView_adapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

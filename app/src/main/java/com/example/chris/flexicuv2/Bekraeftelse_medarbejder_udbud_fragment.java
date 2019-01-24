@@ -11,6 +11,12 @@ import android.widget.TextView;
 
 import com.example.chris.flexicuv2.model.Singleton;
 
+/**
+ *
+ * @Author Gunn
+ *
+ */
+
 
 public class Bekraeftelse_medarbejder_udbud_fragment extends Fragment implements View.OnClickListener {
 
@@ -41,8 +47,6 @@ public class Bekraeftelse_medarbejder_udbud_fragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        //getActivity().getSupportFragmentManager().popBackStack();
-        //getFragmentManager().popBackStack();
         getFragmentManager().popBackStack("fragment", getFragmentManager().POP_BACK_STACK_INCLUSIVE);
     }
 }

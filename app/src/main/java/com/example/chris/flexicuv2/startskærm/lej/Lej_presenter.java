@@ -2,6 +2,10 @@ package com.example.chris.flexicuv2.startskærm.lej;
 
 import com.example.chris.flexicuv2.hjælpeklasser.Arbejdsdage_Kalender;
 
+/**
+ *
+ * @Author Christian
+ */
 public class Lej_presenter {
     private UpdateLej updateLej;
     private final String ERRORKRONOLOGISKDATO = "Den valgte slutdato falder før startdatoen";
