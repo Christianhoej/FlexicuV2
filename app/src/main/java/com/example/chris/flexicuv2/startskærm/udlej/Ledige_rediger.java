@@ -134,6 +134,8 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
         medarbejderSpinner.setAdapter(adapter_medarbejderbeskrivelse);
         //medarbejderSpinner.setSelection((ArrayAdapter)medarbejderSpinner.getAdapter().getP.(singleton.midlertidigMedarbejder.toString()));
         //System.out.println(singleton.midlertidigMedarbejder.toString());
+        System.out.println("Index spinner: " + medarbejdere.indexOf(singleton.midlertidigMedarbejder));
+       // medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
         medarbejderSpinner.setSelection(medarbejdere.indexOf(singleton.midlertidigMedarbejder)/*-1*/);
     }
 
@@ -215,8 +217,8 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
     }
 
     @Override
-    public void setKommentar(ArrayList<String> kommentar) {
-        kommentarET.setText(kommentar.get(kommentar.size()-1));
+    public void setKommentar(String kommentar) {
+        kommentarET.setText(kommentar);
     }
 
     @Override
@@ -464,6 +466,4 @@ public class Ledige_rediger extends Fragment implements Udlejning_Presenter.Upda
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-
 }

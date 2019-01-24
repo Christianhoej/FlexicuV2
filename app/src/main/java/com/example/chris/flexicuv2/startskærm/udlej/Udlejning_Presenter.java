@@ -19,6 +19,7 @@ class Udlejning_Presenter {
 
     public Udlejning_Presenter(UpdateUdlejning updateUdlejning){
         this.updateUdlejning = updateUdlejning;
+        singleton = Singleton.getInstance();
     }
 
     /**
@@ -135,19 +136,18 @@ class Udlejning_Presenter {
         void setSlutDato(String slutDato);
         void setTimepris(int timepris);
         void setVærktøj(Boolean værktøj);
-        void setKommentar(ArrayList<String> kommentar);
+        void setKommentar(String kommentar);
         void setMedarbejder(Medarbejder medarbejder);
-        //TODO evt. noget popup ved oprettelse eller andet.
     }
 
     public void udfyldFelter(){
-        if(singleton.midlertidigForhandling !=null){
-            updateUdlejning.setStartDato(singleton.midlertidigForhandling.getUdlejerStartDato());
-            updateUdlejning.setSlutDato(singleton.midlertidigForhandling.getUdlejerSlutDato());
-            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigForhandling.getUdlejPris()));
-            updateUdlejning.setVærktøj(singleton.midlertidigForhandling.isUdlejEgetVærktøj());
-            updateUdlejning.setKommentar(singleton.midlertidigForhandling.getUdlejKommentar());
-            updateUdlejning.setMedarbejder(singleton.midlertidigForhandling.getMedarbejder());
+        if(singleton.midlertidigAftale !=null){
+            updateUdlejning.setStartDato(singleton.midlertidigAftale.getStartDato());
+            updateUdlejning.setSlutDato(singleton.midlertidigAftale.getSlutDato());
+            updateUdlejning.setTimepris(Integer.parseInt(singleton.midlertidigAftale.getTimePris()));
+            updateUdlejning.setVærktøj(singleton.midlertidigAftale.isEgetVærktøj());
+            updateUdlejning.setKommentar(singleton.midlertidigAftale.getKommentar());
+            //updateUdlejning.setMedarbejder(singleton.midlertidigMedarbejder);
         }
     }
 }

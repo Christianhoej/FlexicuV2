@@ -56,28 +56,13 @@ public class Ledige_recyclerview_adapter extends RecyclerView.Adapter<Ledige_rec
         viewHolder.ledige_aftaler_listitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO her skal fragmentet med hele aftalen vises, muligvis med mulighed for at kunne redigere.
-
-                        //ledige_rediger_fragment = new Ledige_rediger();
-                        singleton.midlertidigAftale = singleton.getMineMedarbejderUdbud().get(i);
-                        //singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i).getMedarbejder();
-                        valgAfMedarbejder(v, i);
-                        //setFragment(ledige_rediger_fragment);
+                singleton.midlertidigAftale = singleton.getMineMedarbejderUdbud().get(i);
+                singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i).getMedarbejder();
+                ledige_rediger_fragment = new Ledige_rediger();
+                medarbejder_spinner = v.findViewById(R.id.ledig_medarbejder_spinner);
+                setFragment(ledige_rediger_fragment);
             }
         });
-    }
-
-    public void valgAfMedarbejder(View view, int i) {
-        singleton.midlertidigMedarbejder = singleton.getMineMedarbejderUdbud().get(i/*+1*/).getMedarbejder();
-        //udlejning_af_medarbejder = new Udlejning_Janus();
-        ledige_rediger_fragment = new Ledige_rediger();
-        medarbejder_spinner = view.findViewById(R.id.ledig_medarbejder_spinner);
-        //TODO navnet skal føres med videre.
-        //singleton.midlertidigMedarbejder = singleton.getMedarbejdere().get(i);
-        //medarbejder_spinner.setSelection(singleton.getMedarbejdere().indexOf(singleton.getMedarbejdere().get(i)));
-
-        //setFragment(udlejning_af_medarbejder);
-        setFragment(ledige_rediger_fragment);
     }
 
 
