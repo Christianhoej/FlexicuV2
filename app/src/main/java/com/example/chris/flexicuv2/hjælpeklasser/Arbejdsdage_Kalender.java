@@ -231,6 +231,7 @@ public class Arbejdsdage_Kalender {
         }
 
         /**
+         * Lånt fra: https://stackoverflow.com/questions/26022233/calculate-the-date-of-easter-sunday
          * metoden returnerer enten dag eller måned for påskedag, boolean måned angiver om man vil have måned eller dag
          *
          * @param år    året påskedag skal findes for
